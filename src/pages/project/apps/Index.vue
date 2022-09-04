@@ -11,12 +11,6 @@ import { renderComponent } from "../../../libs/helper/component";
 
 const route = useRoute()
 const apps = ref<any>([])
-const currentApp = ref();
-
-const handleAppClick = async(app: any) => {
-    renderComponent(AppDetail, { value: app })
-}
-
 const { showModal, visible, handleOk } = useModal()
 const listRefresh = () => {
     useApps({ pid: route.params.pid }).then((res) => {
@@ -24,6 +18,9 @@ const listRefresh = () => {
         visible.value = false
         console.log(1111);
     });
+}
+const handleAppClick = async(app: any) => {
+    renderComponent(AppDetail, { value: app }, listRefresh)
 }
 
 onMounted(listRefresh)
@@ -94,8 +91,6 @@ const columns = [
                 </template>
             </template>
         </a-table>
-
-        <!-- <AppDetail v-model="currentApp" v-model:visible="drawerVisible" @done="listRefresh"></AppDetail> -->
     </div>
 </template>
 

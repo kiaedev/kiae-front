@@ -10,8 +10,13 @@ const props = defineProps({
 
 const { env,name} = props.app||{}
 const { gql, variables } = useGraphPods(`kiae-app-${env}`, name)
-const { result } = useSubscription(gql, variables)
+const { result, onError } = useSubscription(gql, variables)
 const pods = computed(() => result.value?.pods)
+
+onError(error => {
+  console.log(error);
+})
+
 const columns = [
     {
         title: '容器名称',

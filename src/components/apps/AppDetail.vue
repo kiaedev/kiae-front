@@ -1,12 +1,12 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { useAppOperation } from '../../hooks/app_op';
 
 export default defineComponent({
     props: {
         value: Object,
         onClose: Function,
-        handleAppDelete: Function
     },
     setup(props) {
         console.log(props);
@@ -15,10 +15,12 @@ export default defineComponent({
             visible.value = false
             props.onClose && props.onClose()
         }
-        
+        const { handleAppDelete } = useAppOperation()
+
         return {
             visible,
-            handleClose
+            handleClose,
+            handleAppDelete
         }
     },
 })
@@ -48,7 +50,7 @@ export default defineComponent({
                             <a href="javascript:;">停止运行</a>
                         </a-menu-item>
                         <a-menu-item>
-                            <a href="javascript:;" @click="handleAppDelete(value, () => $emit('done'))">删除</a>
+                            <a href="javascript:;" @click="handleAppDelete(value, handleClose)">删除</a>
                         </a-menu-item>
                     </a-menu>
                 </template>

@@ -5,13 +5,18 @@ import "ant-design-vue/dist/antd.css";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { buildApolloClient } from "./graph";
 
-export const renderComponent = function (component: any, props: any) {
+export const renderComponent = function (
+  component: any,
+  props: any,
+  callback: Function
+) {
   let el = document.createElement("div");
   el.setAttribute("id", "tmpcomponent");
   document.body.appendChild(el);
 
   let app: any = null;
   props.onClose = () => {
+    callback();
     setTimeout(() => {
       app.unmount();
       document.body.removeChild(el);
