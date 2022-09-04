@@ -1,7 +1,7 @@
 
 <script lang="ts">
-import { defineComponent, reactive, ref, defineEmits } from 'vue';
-import { useEnvs, useImages } from '../../hooks/project';
+import { defineComponent, reactive, ref, defineEmits, onMounted } from 'vue';
+import { useEnvs, useImages, useProjectOperator } from '../../hooks/project';
 import { useAppOperation } from "../../hooks/app_op"
 import { useRoute } from 'vue-router';
 interface Port {
@@ -51,7 +51,14 @@ export default defineComponent({
                 port: 8000,
             });
         };
-        const { images } = useImages()
+        const  images  = ref<any>([])
+        const {currentPid,projectGet} = useProjectOperator()
+        onMounted(async () => {
+            const proj = await projectGet(currentPid())
+            console.log(proj);
+
+            images.value = proj?.images
+        })
         const { envs } = useEnvs()
         return {
             envType,
@@ -69,8 +76,7 @@ export default defineComponent({
 
 <template>
     <a-form :model="formState" name="basic" :label-col="{ span: 5 }" :wrapper-col="{ span: 16 }" autocomplete="off"
-        @finish="() => { handleAppCreate(formState, () => $emit('done')); }"
-        @finishFailed="onFinishFailed">
+        @finish="() => { handleAppCreate(formState, () => $emit('done')); }" @finishFailed="onFinishFailed">
         <a-form-item label="环境类型">
             <a-radio-group v-model:value="envType">
                 <a-radio-button value="std">常规环境</a-radio-button>

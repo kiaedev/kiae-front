@@ -77,6 +77,12 @@ export interface AppApplication {
     'size'?: AppSize;
     /**
      * 
+     * @type {number}
+     * @memberof AppApplication
+     */
+    'replicas'?: number;
+    /**
+     * 
      * @type {Array<ProjectConfiguration>}
      * @memberof AppApplication
      */
@@ -235,6 +241,12 @@ export interface InlineObject {
     'size'?: AppSize;
     /**
      * 
+     * @type {number}
+     * @memberof InlineObject
+     */
+    'replicas'?: number;
+    /**
+     * 
      * @type {Array<ProjectConfiguration>}
      * @memberof InlineObject
      */
@@ -314,6 +326,12 @@ export interface InlineObject1 {
     'size'?: AppSize;
     /**
      * 
+     * @type {number}
+     * @memberof InlineObject1
+     */
+    'replicas'?: number;
+    /**
+     * 
      * @type {Array<ProjectConfiguration>}
      * @memberof InlineObject1
      */
@@ -369,10 +387,10 @@ export interface InlineObject2 {
     'git'?: string;
     /**
      * 
-     * @type {string}
+     * @type {Array<ProjectImage>}
      * @memberof InlineObject2
      */
-    'image'?: string;
+    'images'?: Array<ProjectImage>;
     /**
      * 
      * @type {Array<ProjectPort>}
@@ -442,10 +460,10 @@ export interface InlineObject3 {
     'git'?: string;
     /**
      * 
-     * @type {string}
+     * @type {Array<ProjectImage>}
      * @memberof InlineObject3
      */
-    'image'?: string;
+    'images'?: Array<ProjectImage>;
     /**
      * 
      * @type {Array<ProjectPort>}
@@ -550,6 +568,43 @@ export interface ProjectConfiguration {
 /**
  * 
  * @export
+ * @interface ProjectImage
+ */
+export interface ProjectImage {
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectImage
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectImage
+     */
+    'image'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectImage
+     */
+    'latest'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectImage
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectImage
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
  * @interface ProjectListResponse
  */
 export interface ProjectListResponse {
@@ -642,10 +697,10 @@ export interface ProjectProject {
     'git'?: string;
     /**
      * 
-     * @type {string}
+     * @type {Array<ProjectImage>}
      * @memberof ProjectProject
      */
-    'image'?: string;
+    'images'?: Array<ProjectImage>;
     /**
      * 
      * @type {Array<ProjectPort>}
@@ -1220,6 +1275,39 @@ export const ProjectServiceApiAxiosParamCreator = function (configuration?: Conf
         /**
          * 
          * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectServiceRead: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projectServiceRead', 'id', id)
+            const localVarPath = `/api/v1/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
          * @param {InlineObject2} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1338,6 +1426,16 @@ export const ProjectServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectServiceRead(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectServiceRead(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
          * @param {InlineObject2} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1393,6 +1491,15 @@ export const ProjectServiceApiFactory = function (configuration?: Configuration,
          */
         projectServiceList(name?: string, options?: any): AxiosPromise<ProjectListResponse> {
             return localVarFp.projectServiceList(name, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectServiceRead(id: string, options?: any): AxiosPromise<ProjectProject> {
+            return localVarFp.projectServiceRead(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1455,6 +1562,17 @@ export class ProjectServiceApi extends BaseAPI {
      */
     public projectServiceList(name?: string, options?: AxiosRequestConfig) {
         return ProjectServiceApiFp(this.configuration).projectServiceList(name, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectServiceApi
+     */
+    public projectServiceRead(id: string, options?: AxiosRequestConfig) {
+        return ProjectServiceApiFp(this.configuration).projectServiceRead(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -1,8 +1,8 @@
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { useImages } from '../../../hooks/project';
-const { images } = useImages()
+import { onMounted, ref } from 'vue';
+import {  useProjectOperator } from '../../../hooks/project';
+const dataSource = ref<any>([]);
 const columns = [
     {
         title: '名称',
@@ -14,24 +14,33 @@ const columns = [
     },
     {
         title: '最近版本',
-        dataIndex: 'latest_tag',
+        dataIndex: 'latest',
     },
     {
         title: '最近更新',
-        dataIndex: 'updated',
+        dataIndex: 'updatedAt',
     },
     {
         title: '创建时间',
-        dataIndex: 'created',
+        dataIndex: 'createdAt',
     },
 ]
+
+const {currentPid,projectGet} = useProjectOperator()
+
+onMounted(async () => {
+    const proj = await projectGet(currentPid())
+    console.log(proj);
+
+    dataSource.value = proj?.images
+})
 
 </script>
     
 <template>
     <div>
     </div>
-    <a-table :dataSource="images" :columns="columns" />
+    <a-table :dataSource="dataSource" :columns="columns" />
 </template>
 
 <style>

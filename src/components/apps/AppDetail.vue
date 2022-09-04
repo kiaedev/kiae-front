@@ -28,7 +28,7 @@ export default defineComponent({
 
 <template>
     <a-drawer v-model:visible="visible" @close="handleClose" :destroyOnClose="true" class="custom-class"
-        :title="`应用 - ${value?.name}`" placement="bottom" size="large">
+        :title="`应用：${value?.name}`" placement="bottom" size="large">
         <template #extra>
             <a-dropdown>
                 <a class="ant-dropdown-link" @click.prevent>
@@ -59,11 +59,11 @@ export default defineComponent({
         <div>
             <a-descriptions bordered size="small" :column="2" style="width: 60%">
                 <a-descriptions-item label="状态">
-                    <a-tag color="success">Running</a-tag>
+                    <a-tag color="success">{{value?.status}}</a-tag>
                 </a-descriptions-item>
                 <a-descriptions-item label="当前版本">v1.0.0</a-descriptions-item>
-                <a-descriptions-item label="实例配置">1C2G</a-descriptions-item>
-                <a-descriptions-item label="实例数量">2</a-descriptions-item>
+                <a-descriptions-item label="实例配置">{{value?.size}}</a-descriptions-item>
+                <a-descriptions-item label="实例数量">{{ value?.replicas }}</a-descriptions-item>
                 <a-descriptions-item label="负载均衡">轮询</a-descriptions-item>
                 <a-descriptions-item label="访问控制">
                     <a-tag>未启用</a-tag>

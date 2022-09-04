@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import { useRoute } from "vue-router";
 import { Configuration, AppServiceApi, ProjectServiceApi } from "../libs/kiae";
 
 const cfg = new Configuration({ basePath: "//localhost:5173" });
@@ -10,27 +11,17 @@ export const useProject = async () => {
   return { items, total };
 };
 
-export const useImages = () => {
+export const useProjectOperator = () => {
+  const route = useRoute();
+  const cli = new ProjectServiceApi(cfg);
   return {
-    images: ref([
-      {
-        id: 10001,
-        name: "zpan",
-        image: "saltbo/zpan",
-        latest_tag: "v0.1.0",
-        created: "2022-02-11 10:30:11",
-        updated: "2022-02-11 10:30:11",
-      },
+    currentPid: () => {
+      return route.params.pid.toString();
+    },
 
-      {
-        id: 10002,
-        name: "rslocal",
-        image: "registry.kiae.dev/saltbo/rslocal",
-        latest_tag: "v0.1.0",
-        created: "2022-02-11 10:30:11",
-        updated: "2022-02-11 10:30:11",
-      },
-    ]),
+    projectGet: async (id: string) => {
+      return (await cli.projectServiceRead(id)).data;
+    },
   };
 };
 
