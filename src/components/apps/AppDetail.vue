@@ -1,25 +1,32 @@
-<script lang="ts" setup>
-import { defineProps, watch } from "vue";
-import { useAppOperation } from "../../hooks/app_op"
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 
-const props = defineProps({
-    modelValue: Object,
-    visible: Boolean
+export default defineComponent({
+    props: {
+        value: Object,
+        onClose: Function,
+        handleAppDelete: Function
+    },
+    setup(props) {
+        console.log(props);
+        const visible = ref(true)
+        const handleClose = ()=>{
+            visible.value = false
+            props.onClose && props.onClose()
+        }
+        
+        return {
+            visible,
+            handleClose
+        }
+    },
 })
-
-const emit = defineEmits(["update:visible"])
-watch(() => props.visible, (v) => {
-    emit("update:visible", v)
-})
-
-const { handleAppDelete } = useAppOperation()
 </script>
 
 <template>
-    <a-drawer v-if="modelValue" v-model:visible="visible" class="custom-class" :title="`应用 - ${modelValue.name}`"
-        placement="bottom" size="large">
-
+    <a-drawer v-model:visible="visible" @close="handleClose" :destroyOnClose="true" class="custom-class"
+        :title="`应用 - ${value?.name}`" placement="bottom" size="large">
         <template #extra>
             <a-dropdown>
                 <a class="ant-dropdown-link" @click.prevent>
@@ -41,7 +48,7 @@ const { handleAppDelete } = useAppOperation()
                             <a href="javascript:;">停止运行</a>
                         </a-menu-item>
                         <a-menu-item>
-                            <a href="javascript:;" @click="handleAppDelete(modelValue, () => $emit('done'))">删除</a>
+                            <a href="javascript:;" @click="handleAppDelete(value, () => $emit('done'))">删除</a>
                         </a-menu-item>
                     </a-menu>
                 </template>
@@ -71,7 +78,7 @@ const { handleAppDelete } = useAppOperation()
         </div>
         <a-tabs default-active-key="1">
             <a-tab-pane key="instance" tab="实例">
-                <Instances></Instances>
+                <Instances v-model:app="value"></Instances>
             </a-tab-pane>
             <a-tab-pane key="event" tab="事件">
                 <Events></Events>
@@ -80,7 +87,7 @@ const { handleAppDelete } = useAppOperation()
                 <Middlewares></Middlewares>
             </a-tab-pane>
             <a-tab-pane key="configs" tab="配置文件">
-                <Configs v-model:configs="modelValue.configs"></Configs>
+                <Configs v-model:configs="value.configs"></Configs>
             </a-tab-pane>
             <a-tab-pane key="envs" tab="环境变量">
                 <Environments></Environments>

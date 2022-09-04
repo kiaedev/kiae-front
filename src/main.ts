@@ -1,14 +1,12 @@
-import { createApp } from 'vue';
-import Antd from 'ant-design-vue';
-import App from './App.vue';
+import { createApp } from "vue";
+import Antd from "ant-design-vue";
+import App from "./App.vue";
 import router from "./router";
-import 'ant-design-vue/dist/antd.css';
-import * as dayjs from 'dayjs'
-
+import "ant-design-vue/dist/antd.css";
+import * as dayjs from "dayjs";
 
 const app = createApp(App);
-
-app.config.globalProperties.$dayjs = dayjs
-app.use(Antd)
-app.use(router)
-app.mount('#app');
+app.config.globalProperties.$dayjs = dayjs;
+app.use(Antd);
+app.use(router);
+app.mount("#app");

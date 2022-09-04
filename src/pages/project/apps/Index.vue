@@ -1,19 +1,20 @@
 
 <script lang="ts" setup>
 import { ref } from "@vue/reactivity";
-import { onMounted, watch } from "@vue/runtime-core";
+import { getCurrentInstance, onMounted, onUnmounted, watch } from "@vue/runtime-core";
 import { useRoute, useRouter } from "vue-router";
 import { useModal } from '../../../hooks/modal'
 import AppCreation from "../../../components/apps/AppCreation.vue";
+import AppDetail from '../../../components/apps/AppDetail.vue'
 import { useApps } from "../../../hooks/project";
+import { renderComponent } from "../../../libs/helper/component";
 
 const route = useRoute()
 const apps = ref<any>([])
 const currentApp = ref();
-const drawerVisible = ref<boolean>(false)
-const handleAppClick = (app: any) => {
-    currentApp.value = app
-    drawerVisible.value = true
+
+const handleAppClick = async(app: any) => {
+    renderComponent(AppDetail, { value: app })
 }
 
 const { showModal, visible, handleOk } = useModal()
@@ -21,7 +22,6 @@ const listRefresh = () => {
     useApps({ pid: route.params.pid }).then((res) => {
         apps.value = res.items
         visible.value = false
-        drawerVisible.value = false
         console.log(1111);
     });
 }
@@ -95,7 +95,7 @@ const columns = [
             </template>
         </a-table>
 
-        <AppDetail v-model="currentApp" v-model:visible="drawerVisible" @done="listRefresh"></AppDetail>
+        <!-- <AppDetail v-model="currentApp" v-model:visible="drawerVisible" @done="listRefresh"></AppDetail> -->
     </div>
 </template>
 

@@ -7,8 +7,7 @@ import { viteCommonjs } from "@originjs/vite-plugin-commonjs";
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
-    alias: {
-    },
+    alias: {},
   },
   server: {
     proxy: {
@@ -41,4 +40,3 @@ export default defineConfig({
 function __dirname(__dirname: any, arg1: string) {
   throw new Error("Function not implemented.");
 }
-
