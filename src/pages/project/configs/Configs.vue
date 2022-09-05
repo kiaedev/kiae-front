@@ -1,7 +1,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import { useProjectOperator } from '../../../hooks/project';
+import { useProject } from '../../../hooks/project';
 const dataSource = ref<any>([]);
 const columns = [
     {
@@ -18,7 +18,7 @@ const columns = [
     },
 ]
 
-const {currentPid,projectGet} = useProjectOperator()
+const {currentPid,projectGet} = useProject()
 onMounted(async () => {
     const proj = await projectGet(currentPid())
     console.log(proj);

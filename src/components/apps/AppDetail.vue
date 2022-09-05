@@ -1,7 +1,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useAppOperation } from '../../hooks/app_op';
+import { useApplication } from '../../hooks/app_op';
 
 export default defineComponent({
     props: {
@@ -15,7 +15,7 @@ export default defineComponent({
             visible.value = false
             props.onClose && props.onClose()
         }
-        const { handleAppDelete } = useAppOperation()
+        const { handleAppDelete } = useApplication()
 
         return {
             visible,

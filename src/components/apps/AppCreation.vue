@@ -1,8 +1,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, defineEmits, onMounted } from 'vue';
-import { useEnvs, useImages, useProjectOperator } from '../../hooks/project';
-import { useAppOperation } from "../../hooks/app_op"
+import { useEnvs, useImages, useProject } from '../../hooks/project';
+import { useApplication } from "../../hooks/app_op"
 import { useRoute } from 'vue-router';
 interface Port {
     protocol: string;
@@ -34,7 +34,7 @@ export default defineComponent({
             remember: true,
         });
         console.log(formState);
-        const { handleAppCreate } = useAppOperation()
+        const { handleAppCreate } = useApplication()
         const onFinishFailed = (errorInfo: any) => {
             console.log('Failed:', errorInfo);
         };
@@ -52,7 +52,7 @@ export default defineComponent({
             });
         };
         const  images  = ref<any>([])
-        const {currentPid,projectGet} = useProjectOperator()
+        const {currentPid,projectGet} = useProject()
         onMounted(async () => {
             const proj = await projectGet(currentPid())
             console.log(proj);

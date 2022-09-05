@@ -6,14 +6,15 @@ import { useRoute, useRouter } from "vue-router";
 import { useModal } from '../../../hooks/modal'
 import AppCreation from "../../../components/apps/AppCreation.vue";
 import AppDetail from '../../../components/apps/AppDetail.vue'
-import { useApps } from "../../../hooks/project";
+import { useApplication } from "../../../hooks/app_op";
 import { renderComponent } from "../../../libs/helper/component";
 
 const route = useRoute()
 const apps = ref<any>([])
 const { showModal, visible, handleOk } = useModal()
+const { listApps } = useApplication()
 const listRefresh = () => {
-    useApps({ pid: route.params.pid }).then((res) => {
+    listApps({ pid: route.params.pid }).then((res) => {
         apps.value = res.items
         visible.value = false
         console.log(1111);

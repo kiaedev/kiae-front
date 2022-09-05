@@ -25,7 +25,13 @@ globalAxios.interceptors.response.use(
 
 const appSvc = new AppServiceApi(kiaeCfg);
 
-export const useAppOperation = () => {
+export const useApplication = () => {
+  const listApps = async (params: any) => {
+    const ret = await appSvc.appServiceList(params.pid);
+    const { items, total } = ret.data;
+    return { items, total };
+  };
+
   const handleAppCreate = async (app: AppApplication, callback: Function) => {
     await appSvc.appServiceCreate(app);
     message.success("创建成功");
@@ -52,6 +58,7 @@ export const useAppOperation = () => {
   };
 
   return {
+    listApps,
     handleAppCreate,
     handleAppDelete,
   };

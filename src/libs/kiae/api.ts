@@ -89,6 +89,24 @@ export interface AppApplication {
     'configs'?: Array<ProjectConfiguration>;
     /**
      * 
+     * @type {Array<ProjectMiddleware>}
+     * @memberof AppApplication
+     */
+    'middlewares'?: Array<ProjectMiddleware>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AppApplication
+     */
+    'livenessProbeEnabled'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AppApplication
+     */
+    'readinessProbeEnabled'?: boolean;
+    /**
+     * 
      * @type {string}
      * @memberof AppApplication
      */
@@ -253,6 +271,24 @@ export interface InlineObject {
     'configs'?: Array<ProjectConfiguration>;
     /**
      * 
+     * @type {Array<ProjectMiddleware>}
+     * @memberof InlineObject
+     */
+    'middlewares'?: Array<ProjectMiddleware>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineObject
+     */
+    'livenessProbeEnabled'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineObject
+     */
+    'readinessProbeEnabled'?: boolean;
+    /**
+     * 
      * @type {string}
      * @memberof InlineObject
      */
@@ -338,6 +374,24 @@ export interface InlineObject1 {
     'configs'?: Array<ProjectConfiguration>;
     /**
      * 
+     * @type {Array<ProjectMiddleware>}
+     * @memberof InlineObject1
+     */
+    'middlewares'?: Array<ProjectMiddleware>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineObject1
+     */
+    'livenessProbeEnabled'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineObject1
+     */
+    'readinessProbeEnabled'?: boolean;
+    /**
+     * 
      * @type {string}
      * @memberof InlineObject1
      */
@@ -411,6 +465,18 @@ export interface InlineObject2 {
     'middlewares'?: Array<ProjectMiddleware>;
     /**
      * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject2
+     */
+    'livenessProbe'?: ProjectHealthProbe;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject2
+     */
+    'readinessProbe'?: ProjectHealthProbe;
+    /**
+     * 
      * @type {string}
      * @memberof InlineObject2
      */
@@ -482,6 +548,18 @@ export interface InlineObject3 {
      * @memberof InlineObject3
      */
     'middlewares'?: Array<ProjectMiddleware>;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject3
+     */
+    'livenessProbe'?: ProjectHealthProbe;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject3
+     */
+    'readinessProbe'?: ProjectHealthProbe;
     /**
      * 
      * @type {string}
@@ -564,6 +642,55 @@ export interface ProjectConfiguration {
      * @memberof ProjectConfiguration
      */
     'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ProjectHealthProbe
+ */
+export interface ProjectHealthProbe {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProjectHealthProbe
+     */
+    'port'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectHealthProbe
+     */
+    'path'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProjectHealthProbe
+     */
+    'periodSeconds'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProjectHealthProbe
+     */
+    'timeoutSeconds'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProjectHealthProbe
+     */
+    'successThreshold'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProjectHealthProbe
+     */
+    'failureThreshold'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProjectHealthProbe
+     */
+    'initialDelaySeconds'?: number;
 }
 /**
  * 
@@ -719,6 +846,18 @@ export interface ProjectProject {
      * @memberof ProjectProject
      */
     'middlewares'?: Array<ProjectMiddleware>;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof ProjectProject
+     */
+    'livenessProbe'?: ProjectHealthProbe;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof ProjectProject
+     */
+    'readinessProbe'?: ProjectHealthProbe;
     /**
      * 
      * @type {string}

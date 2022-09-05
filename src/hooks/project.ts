@@ -1,26 +1,32 @@
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { Configuration, AppServiceApi, ProjectServiceApi } from "../libs/kiae";
+import {
+  Configuration,
+  AppServiceApi,
+  ProjectServiceApi,
+  ProjectProject,
+} from "../libs/kiae";
 
 const cfg = new Configuration({ basePath: "//localhost:5173" });
 
-export const useProject = async () => {
-  const cli = new ProjectServiceApi(cfg);
-  const ret = await cli.projectServiceList();
-  const { items, total } = ret.data;
-  return { items, total };
-};
-
-export const useProjectOperator = () => {
+export const useProject = () => {
   const route = useRoute();
   const cli = new ProjectServiceApi(cfg);
   return {
     currentPid: () => {
       return route.params.pid.toString();
     },
-
+    projectList: async () => {
+      const cli = new ProjectServiceApi(cfg);
+      const ret = await cli.projectServiceList();
+      const { items, total } = ret.data;
+      return { items, total };
+    },
     projectGet: async (id: string) => {
       return (await cli.projectServiceRead(id)).data;
+    },
+    projectCreate: async (proj: ProjectProject) => {
+      return await cli.projectServiceCreate(proj);
     },
   };
 };
@@ -58,11 +64,4 @@ export const useEnvs = () => {
       },
     ]),
   };
-};
-
-export const useApps = async (params: any) => {
-  const appService = new AppServiceApi(cfg);
-  const ret = await appService.appServiceList(params.pid);
-  const { items, total } = ret.data;
-  return { items, total };
 };
