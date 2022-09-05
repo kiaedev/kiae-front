@@ -3,11 +3,11 @@
 import { ref } from "@vue/reactivity";
 import { getCurrentInstance, onMounted, onUnmounted, watch } from "@vue/runtime-core";
 import { useRoute, useRouter } from "vue-router";
-import { useModal } from '../../../hooks/modal'
-import AppCreation from "../../../components/apps/AppCreation.vue";
-import AppDetail from '../../../components/apps/AppDetail.vue'
-import { useApplication } from "../../../hooks/app_op";
-import { renderComponent } from "../../../libs/helper/component";
+import { useModal } from '@/hooks/modal'
+import AppCreation from "@/components/apps/AppCreation.vue";
+import AppDetail from '@/components/apps/AppDetail.vue'
+import { useApplication } from "@/hooks/app_op";
+import { renderComponent } from "@/libs/helper/component";
 
 const route = useRoute()
 const apps = ref<any>([])
@@ -20,7 +20,7 @@ const listRefresh = () => {
         console.log(1111);
     });
 }
-const handleAppClick = async(app: any) => {
+const handleAppClick = async (app: any) => {
     renderComponent(AppDetail, { value: app }, listRefresh)
 }
 

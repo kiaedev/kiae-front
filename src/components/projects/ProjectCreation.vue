@@ -18,26 +18,26 @@
 </template>
   <script lang="ts">
   import { defineComponent, reactive } from 'vue';
-import { useProject } from '../../hooks/project';
+  import { useProject } from '@/hooks/project';
   
   interface FormState {
-    git: string;
+      git: string;
       name: string;
       intro: string;
   }
   export default defineComponent({
-    emits:["done"],
+      emits: ["done"],
       setup(props, ctx) {
           const formState = reactive<FormState>({
               git: '',
               name: '',
               intro: '',
           });
-          
-          const {projectCreate} = useProject()
+  
+          const { projectCreate } = useProject()
           const onFinish = async (values: any) => {
-            await projectCreate(values)
-            ctx.emit("done")
+              await projectCreate(values)
+              ctx.emit("done")
           };
   
           const onFinishFailed = (errorInfo: any) => {

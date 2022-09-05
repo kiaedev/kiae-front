@@ -1,7 +1,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useApplication } from '../../hooks/app_op';
+import { useApplication } from '@/hooks/app_op';
 
 export default defineComponent({
     props: {
@@ -11,7 +11,7 @@ export default defineComponent({
     setup(props) {
         console.log(props);
         const visible = ref(true)
-        const handleClose = ()=>{
+        const handleClose = () => {
             visible.value = false
             props.onClose && props.onClose()
         }
@@ -59,10 +59,10 @@ export default defineComponent({
         <div>
             <a-descriptions bordered size="small" :column="2" style="width: 60%">
                 <a-descriptions-item label="状态">
-                    <a-tag color="success">{{value?.status}}</a-tag>
+                    <a-tag color="success">{{ value?.status }}</a-tag>
                 </a-descriptions-item>
                 <a-descriptions-item label="当前版本">v1.0.0</a-descriptions-item>
-                <a-descriptions-item label="实例配置">{{value?.size}}</a-descriptions-item>
+                <a-descriptions-item label="实例配置">{{ value?.size }}</a-descriptions-item>
                 <a-descriptions-item label="实例数量">{{ value?.replicas }}</a-descriptions-item>
                 <a-descriptions-item label="负载均衡">轮询</a-descriptions-item>
                 <a-descriptions-item label="访问控制">

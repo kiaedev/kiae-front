@@ -1,18 +1,18 @@
 
   <script lang="ts">
   import { computed, defineComponent, onMounted, reactive, ref } from 'vue';
-import { useProject } from '../../../hooks/project';
-
+  import { useProject } from '@/hooks/project';
+  
   export default defineComponent({
       setup() {
           const formState = ref<any>({});
-          const {currentPid,projectGet} = useProject()
-            onMounted(async () => {
-                const proj = await projectGet(currentPid())
-                console.log(proj);
-
-                formState.value = proj
-            })
+          const { currentPid, projectGet } = useProject()
+          onMounted(async () => {
+              const proj = await projectGet(currentPid())
+              console.log(proj);
+  
+              formState.value = proj
+          })
           return {
               formState,
           };
@@ -64,7 +64,7 @@ import { useProject } from '../../../hooks/project';
     </a-card> -->
     <br>
     <div>
-        <a-row :gutter="[16,16]">
+        <a-row :gutter="[16, 16]">
             <a-col :span="12">
                 <a-card title="存活探测">
                     <HealthProbe v-model:value="formState.livenessProbe"></HealthProbe>

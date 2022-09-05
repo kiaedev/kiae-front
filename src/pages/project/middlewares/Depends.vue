@@ -1,13 +1,13 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import { useProject } from '../../../hooks/project';
+import { useProject } from '@/hooks/project';
 const dataSource = ref<any>([]);
 const columns = [
     {
         title: '名称',
         dataIndex: 'name',
-    },  
+    },
     {
         title: '类型',
         dataIndex: 'type',
@@ -19,14 +19,14 @@ const columns = [
 ]
 
 
-const {currentPid,projectGet} = useProject()
+const { currentPid, projectGet } = useProject()
 onMounted(async () => {
     const proj = await projectGet(currentPid())
     console.log(proj);
 
     dataSource.value = proj?.middlewares
 })
-    
+
 </script>
     
 <template>

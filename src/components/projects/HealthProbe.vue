@@ -5,11 +5,11 @@ export default defineComponent({
     props: {
         value: Object,
     },
-    emits:["value"],
+    emits: ["value"],
     setup(props) {
         console.log(props);
         const formState = ref<any>({})
-        watch(()=>props.value, (v)=>{
+        watch(() => props.value, (v) => {
             formState.value = v
         })
         return {

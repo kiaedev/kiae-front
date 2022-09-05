@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from "@vue/reactivity"
 import ConfigEditor from "./ConfigEditor.vue"
-import { useModal, useSelect } from "../../hooks/modal";
+import { useModal, useSelect } from "@/hooks/modal";
 
 const { showModal, visible, handleOk } = useModal()
 const { currentSelect, handleSelect } = useSelect()

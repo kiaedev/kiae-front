@@ -1,8 +1,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, defineEmits, onMounted } from 'vue';
-import { useEnvs, useImages, useProject } from '../../hooks/project';
-import { useApplication } from "../../hooks/app_op"
+import { useEnvs, useImages, useProject } from '@/hooks/project';
+import { useApplication } from "@/hooks/app_op"
 import { useRoute } from 'vue-router';
 interface Port {
     protocol: string;
@@ -51,8 +51,8 @@ export default defineComponent({
                 port: 8000,
             });
         };
-        const  images  = ref<any>([])
-        const {currentPid,projectGet} = useProject()
+        const images = ref<any>([])
+        const { currentPid, projectGet } = useProject()
         onMounted(async () => {
             const proj = await projectGet(currentPid())
             console.log(proj);

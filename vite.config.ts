@@ -3,11 +3,17 @@ import vue from "@vitejs/plugin-vue";
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 import { viteCommonjs } from "@originjs/vite-plugin-commonjs";
+import { resolve } from "path";
+const pathSrc = resolve(__dirname, 'src')
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  
   resolve: {
-    alias: {},
+    alias: {
+      '@/': `${pathSrc}/`,
+      'vue': 'vue/dist/vue.esm-bundler.js',
+    },
   },
   server: {
     proxy: {
@@ -37,6 +43,3 @@ export default defineConfig({
     }),
   ],
 });
-function __dirname(__dirname: any, arg1: string) {
-  throw new Error("Function not implemented.");
-}

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted, watch } from "vue";
 import { useSubscription } from '@vue/apollo-composable'
-import { useGraphPods } from "../../hooks/graphqls"
+import { useGraphPods } from "@/hooks/graphqls"
 
 const activeKey = ref('0')
 const props = defineProps({

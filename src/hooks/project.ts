@@ -5,7 +5,7 @@ import {
   AppServiceApi,
   ProjectServiceApi,
   ProjectProject,
-} from "../libs/kiae";
+} from "@/libs/kiae";
 
 const cfg = new Configuration({ basePath: "//localhost:5173" });
 

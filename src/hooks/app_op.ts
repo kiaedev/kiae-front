@@ -1,6 +1,6 @@
 import { message, Modal, notification } from "ant-design-vue";
-import { kiaeCfg } from "../libs/config/kiae";
-import { AppApplication, AppServiceApi } from "../libs/kiae";
+import { kiaeCfg } from "@/libs/config/kiae";
+import { AppApplication, AppServiceApi } from "@/libs/kiae";
 import globalAxios from "axios";
 
 globalAxios.interceptors.response.use(
