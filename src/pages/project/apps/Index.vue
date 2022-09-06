@@ -82,11 +82,10 @@ const columns = [
                 </template>
                 <template v-else-if="column.key === 'action'">
                     <span>
-                        <a>版本发布</a>
+                        <a>编辑</a>
                         <a-divider type="vertical" />
                         <a class="ant-dropdown-link">
-                            更多操作
-                            <down-outlined />
+                            <AppOp :value="record" @done="listRefresh" @deleted="listRefresh">更多操作</AppOp>
                         </a>
                     </span>
                 </template>

@@ -4,15 +4,14 @@ import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 import { viteCommonjs } from "@originjs/vite-plugin-commonjs";
 import { resolve } from "path";
-const pathSrc = resolve(__dirname, 'src')
+const pathSrc = resolve(__dirname, "src");
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  
   resolve: {
     alias: {
-      '@/': `${pathSrc}/`,
-      'vue': 'vue/dist/vue.esm-bundler.js',
+      "@/": `${pathSrc}/`,
+      vue: "vue/dist/vue.esm-bundler.js",
     },
   },
   server: {
@@ -31,6 +30,13 @@ export default defineConfig({
     vue(),
     viteCommonjs(),
     Components({
+      dts: "src/components.d.ts",
+      types: [
+        {
+          from: "vue-router",
+          names: ["RouterLink", "RouterView"],
+        },
+      ],
       // allow auto load markdown components under `./src/components/`
       extensions: ["vue", "md"],
       // allow auto import and register components used in markdown

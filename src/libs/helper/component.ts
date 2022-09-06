@@ -5,11 +5,11 @@ import "ant-design-vue/dist/antd.css";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { buildApolloClient } from "./graph";
 
-export const renderComponent = function (
+export const renderComponent = (
   component: any,
   props: any,
   callback: Function
-) {
+) => {
   let el = document.createElement("div");
   el.setAttribute("id", "tmpcomponent");
   document.body.appendChild(el);

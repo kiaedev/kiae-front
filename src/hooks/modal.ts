@@ -1,26 +1,41 @@
-import { ref } from "vue";
+import exp from "constants";
+import { reactive, ref } from "vue";
 
 export const useModal = () => {
-  const loading = ref<boolean>(false);
   const visible = ref<boolean>(false);
 
-  const showModal = () => {
+  const modalOpen = () => {
     visible.value = true;
   };
 
-  const handleOk = () => {
-    loading.value = true;
-    setTimeout(() => {
-      loading.value = false;
-      visible.value = false;
-    }, 2000);
-  };
-
-  const handleCancel = () => {
+  const modalClose = () => {
     visible.value = false;
   };
 
-  return { visible, showModal, handleCancel, handleOk };
+  return { visible, modalOpen, modalClose };
+};
+
+export const useLoading = () => {
+  const loading = ref<boolean>(false);
+  const loadStart = () => {
+    loading.value = true;
+  };
+  const loadDone = () => {
+    loading.value = true;
+  };
+
+  return { loading, loadStart, loadDone };
+};
+
+export const useFormSubmiter = (values: any, service: Function) => {
+  const formState = reactive(values);
+  const formSubmit = () => {
+    service(formState);
+  };
+  return {
+    formState,
+    formSubmit,
+  };
 };
 
 export const useSelect = () => {

@@ -1,6 +1,6 @@
 import { message, Modal, notification } from "ant-design-vue";
 import { kiaeCfg } from "@/libs/config/kiae";
-import { AppApplication, AppServiceApi } from "@/libs/kiae";
+import { AppApplication, AppServiceApi, AppStatus } from "@/libs/kiae";
 import globalAxios from "axios";
 
 globalAxios.interceptors.response.use(
@@ -38,28 +38,46 @@ export const useApplication = () => {
     callback();
   };
 
-  const handleAppDelete = (app: AppApplication, callback: Function) => {
+  const handleAppRestart = (app: AppApplication, callback: Function) => {
+    return appOp("应用重启", `确定要重启应用 ${app.name} 吗？`, () => {
+      appSvc.appServiceUpdate2(app.id, { status: AppStatus.Running });
+    });
+  };
+
+  const handleAppStop = (app: AppApplication, callback: Function) => {
+    return appOp("应用停止", `确定要停止应用 ${app.name} 吗？`, () => {
+      appSvc
+        .appServiceUpdate2(app.id, { status: AppStatus.Stopped })
+        .then(() => callback());
+    });
+  };
+
+  const handleAppDelete = async (app: AppApplication, callback: Function) => {
+    return appOp("应用删除", `确定要删除应用 ${app.name} 吗？`, () => {
+      appSvc.appServiceDelete(app.id).then(() => callback());
+    });
+  };
+
+  const handleAppInstanceSettings = (values: any) => {
+    appSvc.appServiceUpdate2(values.id, values);
+  };
+
+  const appOp = (title: string, tips: string, opFn: Function) => {
     Modal.confirm({
-      title: "删除应用",
-      content: `确定要删除应用 ${app.name} 吗？`,
+      title: title,
+      content: tips,
       okText: "确定",
       cancelText: "取消",
-      onOk: async () => {
-        if (!app.id) {
-          message.error("BUG: 应用ID不能为空");
-          return;
-        }
-
-        await appSvc.appServiceDelete(app.id);
-        message.success("删除成功");
-        callback();
-      },
+      onOk: () => opFn(),
     });
   };
 
   return {
     listApps,
     handleAppCreate,
+    handleAppRestart,
+    handleAppStop,
     handleAppDelete,
+    handleAppInstanceSettings,
   };
 };

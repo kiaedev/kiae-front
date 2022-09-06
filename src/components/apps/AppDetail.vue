@@ -1,7 +1,6 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useApplication } from '@/hooks/app_op';
 
 export default defineComponent({
     props: {
@@ -11,50 +10,23 @@ export default defineComponent({
     setup(props) {
         console.log(props);
         const visible = ref(true)
-        const handleClose = () => {
+        const close = () => {
             visible.value = false
             props.onClose && props.onClose()
         }
-        const { handleAppDelete } = useApplication()
-
         return {
             visible,
-            handleClose,
-            handleAppDelete
+            close,
         }
     },
 })
 </script>
 
 <template>
-    <a-drawer v-model:visible="visible" @close="handleClose" :destroyOnClose="true" class="custom-class"
+    <a-drawer v-model:visible="visible" @close="close" :destroyOnClose="true" class="custom-class"
         :title="`应用：${value?.name}`" placement="bottom" size="large">
         <template #extra>
-            <a-dropdown>
-                <a class="ant-dropdown-link" @click.prevent>
-                    操作
-                    <DownOutlined />
-                </a>
-                <template #overlay>
-                    <a-menu>
-                        <a-menu-item>
-                            <a href="javascript:;">版本发布</a>
-                        </a-menu-item>
-                        <a-menu-item>
-                            <a href="javascript:;">实例调整</a>
-                        </a-menu-item>
-                        <a-menu-item>
-                            <a href="javascript:;">重新启动</a>
-                        </a-menu-item>
-                        <a-menu-item>
-                            <a href="javascript:;">停止运行</a>
-                        </a-menu-item>
-                        <a-menu-item>
-                            <a href="javascript:;" @click="handleAppDelete(value, handleClose)">删除</a>
-                        </a-menu-item>
-                    </a-menu>
-                </template>
-            </a-dropdown>
+            <AppOp v-model:value="value" @deleted="close">操作</AppOp>
         </template>
         <div>
             <a-descriptions bordered size="small" :column="2" style="width: 60%">
