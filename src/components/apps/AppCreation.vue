@@ -5,8 +5,9 @@ import { useEnvs, useImages, useProject } from '@/hooks/project';
 import { useApplication } from "@/hooks/app_op"
 import { useRoute } from 'vue-router';
 interface Port {
-    protocol: string;
     port: number;
+    protocol: string,
+    appProtocol: string;
 }
 interface FormState {
     pid: string;
@@ -27,8 +28,9 @@ export default defineComponent({
             image: undefined,
             ports: [
                 {
-                    protocol: 'http',
                     port: 8000,
+                    protocol: 'TCP',
+                    appProtocol: 'http',
                 },
             ],
             remember: true,
@@ -47,8 +49,9 @@ export default defineComponent({
         };
         const addPort = () => {
             formState.ports.push({
-                protocol: 'http',
                 port: 8000,
+                protocol: 'TCP',
+                appProtocol: 'http',
             });
         };
         const images = ref<any>([])
@@ -102,7 +105,7 @@ export default defineComponent({
             :rules="[{ required: true, message: 'Please input your password!' }]">
             <a-input-number v-model:value="port.port" style="width: 230px">
                 <template #addonAfter>
-                    <a-select v-model:value="port.protocol" style="width: 80px">
+                    <a-select v-model:value="port.appProtocol" style="width: 80px">
                         <a-select-option value=".com">http</a-select-option>
                         <a-select-option value=".jp">http2</a-select-option>
                         <a-select-option value=".cn">tcp</a-select-option>

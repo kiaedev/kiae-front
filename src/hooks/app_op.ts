@@ -44,6 +44,14 @@ export const useApplication = () => {
     });
   };
 
+  const handleAppStart = (app: AppApplication, callback: Function) => {
+    return appOp("应用启动", `确定要启动应用 ${app.name} 吗？`, () => {
+      appSvc
+        .appServiceUpdate2(app.id, { status: AppStatus.Running })
+        .then(() => callback());
+    });
+  };
+
   const handleAppStop = (app: AppApplication, callback: Function) => {
     return appOp("应用停止", `确定要停止应用 ${app.name} 吗？`, () => {
       appSvc
@@ -75,8 +83,9 @@ export const useApplication = () => {
   return {
     listApps,
     handleAppCreate,
-    handleAppRestart,
+    handleAppStart,
     handleAppStop,
+    handleAppRestart,
     handleAppDelete,
     handleAppInstanceSettings,
   };

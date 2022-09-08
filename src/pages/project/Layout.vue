@@ -4,6 +4,7 @@
       <a-menu v-model:selectedKeys="selectedKeys" v-model:openKeys="openKeys" mode="inline" @click="handleClick"
         style="height: 100%">
         <a-menu-item key="apps">应用管理</a-menu-item>
+        <a-menu-item key="deployments">部署管理</a-menu-item>
         <a-menu-item key="images">镜像管理</a-menu-item>
         <a-menu-item key="configs">配置中心</a-menu-item>
         <a-menu-item key="middlewares">中间件</a-menu-item>

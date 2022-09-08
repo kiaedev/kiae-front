@@ -45,8 +45,8 @@ export default defineComponent({
         <a-form :model="formState" name="size" :label-col="{ span: 5 }" :wrapper-col="{ span: 16 }" autocomplete="off">
             <a-form-item label="实例规格" name="size" :rules="[{ required: true, message: '请选择实例配置' }]">
                 <a-select v-model:value="formState.size" placeholder="请选择您的应用镜像">
-                    <a-select-option v-for="(key, value) in AppSize" :key="key" :value="value">
-                        {{ key }}
+                    <a-select-option v-for="(key, value) in AppSize" :key="value" :value="key">
+                        {{ value }}
                     </a-select-option>
                 </a-select>
             </a-form-item>
