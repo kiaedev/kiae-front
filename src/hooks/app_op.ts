@@ -1,6 +1,10 @@
 import { message, Modal, notification } from "ant-design-vue";
 import { kiaeCfg } from "@/libs/config/kiae";
-import { AppApplication, AppServiceApi, AppStatus } from "@/libs/kiae";
+import {
+  AppApplication,
+  AppServiceApi,
+  ActionPayloadAction,
+} from "@/libs/kiae";
 import globalAxios from "axios";
 
 globalAxios.interceptors.response.use(
@@ -32,6 +36,10 @@ export const useApplication = () => {
     return { items, total };
   };
 
+  const readApp = async (id: string) => {
+    return (await appSvc.appServiceRead(id)).data;
+  };
+
   const handleAppCreate = async (app: AppApplication, callback: Function) => {
     await appSvc.appServiceCreate(app);
     message.success("创建成功");
@@ -40,14 +48,16 @@ export const useApplication = () => {
 
   const handleAppRestart = (app: AppApplication, callback: Function) => {
     return appOp("应用重启", `确定要重启应用 ${app.name} 吗？`, () => {
-      appSvc.appServiceUpdate2(app.id, { status: AppStatus.Running });
+      appSvc.appServiceDoAction(app.id, {
+        action: ActionPayloadAction.Restart,
+      });
     });
   };
 
   const handleAppStart = (app: AppApplication, callback: Function) => {
     return appOp("应用启动", `确定要启动应用 ${app.name} 吗？`, () => {
       appSvc
-        .appServiceUpdate2(app.id, { status: AppStatus.Running })
+        .appServiceDoAction(app.id, { action: ActionPayloadAction.Start })
         .then(() => callback());
     });
   };
@@ -55,7 +65,7 @@ export const useApplication = () => {
   const handleAppStop = (app: AppApplication, callback: Function) => {
     return appOp("应用停止", `确定要停止应用 ${app.name} 吗？`, () => {
       appSvc
-        .appServiceUpdate2(app.id, { status: AppStatus.Stopped })
+        .appServiceDoAction(app.id, { action: ActionPayloadAction.Stop })
         .then(() => callback());
     });
   };
@@ -66,8 +76,8 @@ export const useApplication = () => {
     });
   };
 
-  const handleAppInstanceSettings = (values: any) => {
-    appSvc.appServiceUpdate2(values.id, values);
+  const handleAppInstanceSettings = (values: any, callback: Function) => {
+    appSvc.appServiceUpdate2(values.id, values).then(() => callback());
   };
 
   const appOp = (title: string, tips: string, opFn: Function) => {
@@ -82,6 +92,7 @@ export const useApplication = () => {
 
   return {
     listApps,
+    readApp,
     handleAppCreate,
     handleAppStart,
     handleAppStop,

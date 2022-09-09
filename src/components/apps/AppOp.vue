@@ -30,10 +30,12 @@ export default defineComponent({
                     <a href="javascript:;">版本发布</a>
                 </a-menu-item>
                 <a-menu-item>
-                    <InstanceSettings v-model:value="value">实例调整</InstanceSettings>
+                    <InstanceSettings v-model:value="value" @done="$emit('done')">实例调整
+                    </InstanceSettings>
                 </a-menu-item>
                 <a-menu-item>
-                    <a v-if="value?.status=='STATUS_STOPPED'" href="javascript:;" @click="handleAppStart(value, () => $emit('done'))">启动</a>
+                    <a v-if="value?.status == 'STATUS_STOPPED'" href="javascript:;"
+                        @click="handleAppStart(value, () => $emit('done'))">启动</a>
                     <a v-else href="javascript:;" @click="handleAppStop(value, () => $emit('done'))">停止</a>
                 </a-menu-item>
                 <a-menu-item>

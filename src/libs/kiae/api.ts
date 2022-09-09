@@ -24,6 +24,21 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @enum {string}
+ */
+
+export const ActionPayloadAction = {
+    Start: 'START',
+    Stop: 'STOP',
+    Restart: 'RESTART'
+} as const;
+
+export type ActionPayloadAction = typeof ActionPayloadAction[keyof typeof ActionPayloadAction];
+
+
+/**
+ * 
+ * @export
  * @interface AppApplication
  */
 export interface AppApplication {
@@ -65,10 +80,10 @@ export interface AppApplication {
     'ports'?: Array<ProjectPort>;
     /**
      * 
-     * @type {AppStatus}
+     * @type {AppApplicationStatus}
      * @memberof AppApplication
      */
-    'status'?: AppStatus;
+    'status'?: AppApplicationStatus;
     /**
      * 
      * @type {AppSize}
@@ -83,16 +98,10 @@ export interface AppApplication {
     'replicas'?: number;
     /**
      * 
-     * @type {Array<ProjectConfiguration>}
+     * @type {{ [key: string]: string; }}
      * @memberof AppApplication
      */
-    'configs'?: Array<ProjectConfiguration>;
-    /**
-     * 
-     * @type {Array<ProjectMiddleware>}
-     * @memberof AppApplication
-     */
-    'middlewares'?: Array<ProjectMiddleware>;
+    'annotations'?: { [key: string]: string; };
     /**
      * 
      * @type {boolean}
@@ -105,6 +114,18 @@ export interface AppApplication {
      * @memberof AppApplication
      */
     'readinessProbeEnabled'?: boolean;
+    /**
+     * 
+     * @type {Array<ProjectConfiguration>}
+     * @memberof AppApplication
+     */
+    'configs'?: Array<ProjectConfiguration>;
+    /**
+     * 
+     * @type {Array<ProjectMiddleware>}
+     * @memberof AppApplication
+     */
+    'middlewares'?: Array<ProjectMiddleware>;
     /**
      * 
      * @type {string}
@@ -130,6 +151,21 @@ export interface AppApplication {
      */
     'updatedBy'?: string;
 }
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const AppApplicationStatus = {
+    Created: 'CREATED',
+    Running: 'RUNNING',
+    Stopped: 'STOPPED'
+} as const;
+
+export type AppApplicationStatus = typeof AppApplicationStatus[keyof typeof AppApplicationStatus];
+
+
 /**
  * 
  * @export
@@ -172,21 +208,6 @@ export type AppSize = typeof AppSize[keyof typeof AppSize];
 /**
  * 
  * @export
- * @enum {string}
- */
-
-export const AppStatus = {
-    Pending: 'STATUS_PENDING',
-    Running: 'STATUS_RUNNING',
-    Stopped: 'STATUS_STOPPED'
-} as const;
-
-export type AppStatus = typeof AppStatus[keyof typeof AppStatus];
-
-
-/**
- * 
- * @export
  * @interface GooglerpcStatus
  */
 export interface GooglerpcStatus {
@@ -217,100 +238,10 @@ export interface GooglerpcStatus {
 export interface InlineObject {
     /**
      * 
-     * @type {string}
+     * @type {ActionPayloadAction}
      * @memberof InlineObject
      */
-    'pid'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject
-     */
-    'env'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject
-     */
-    'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject
-     */
-    'image'?: string;
-    /**
-     * 
-     * @type {Array<ProjectPort>}
-     * @memberof InlineObject
-     */
-    'ports'?: Array<ProjectPort>;
-    /**
-     * 
-     * @type {AppStatus}
-     * @memberof InlineObject
-     */
-    'status'?: AppStatus;
-    /**
-     * 
-     * @type {AppSize}
-     * @memberof InlineObject
-     */
-    'size'?: AppSize;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineObject
-     */
-    'replicas'?: number;
-    /**
-     * 
-     * @type {Array<ProjectConfiguration>}
-     * @memberof InlineObject
-     */
-    'configs'?: Array<ProjectConfiguration>;
-    /**
-     * 
-     * @type {Array<ProjectMiddleware>}
-     * @memberof InlineObject
-     */
-    'middlewares'?: Array<ProjectMiddleware>;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineObject
-     */
-    'livenessProbeEnabled'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineObject
-     */
-    'readinessProbeEnabled'?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject
-     */
-    'createdAt'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject
-     */
-    'createdBy'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject
-     */
-    'updatedAt'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject
-     */
-    'updatedBy'?: string;
+    'action'?: ActionPayloadAction;
 }
 /**
  * 
@@ -350,10 +281,10 @@ export interface InlineObject1 {
     'ports'?: Array<ProjectPort>;
     /**
      * 
-     * @type {AppStatus}
+     * @type {AppApplicationStatus}
      * @memberof InlineObject1
      */
-    'status'?: AppStatus;
+    'status'?: AppApplicationStatus;
     /**
      * 
      * @type {AppSize}
@@ -368,16 +299,10 @@ export interface InlineObject1 {
     'replicas'?: number;
     /**
      * 
-     * @type {Array<ProjectConfiguration>}
+     * @type {{ [key: string]: string; }}
      * @memberof InlineObject1
      */
-    'configs'?: Array<ProjectConfiguration>;
-    /**
-     * 
-     * @type {Array<ProjectMiddleware>}
-     * @memberof InlineObject1
-     */
-    'middlewares'?: Array<ProjectMiddleware>;
+    'annotations'?: { [key: string]: string; };
     /**
      * 
      * @type {boolean}
@@ -390,6 +315,18 @@ export interface InlineObject1 {
      * @memberof InlineObject1
      */
     'readinessProbeEnabled'?: boolean;
+    /**
+     * 
+     * @type {Array<ProjectConfiguration>}
+     * @memberof InlineObject1
+     */
+    'configs'?: Array<ProjectConfiguration>;
+    /**
+     * 
+     * @type {Array<ProjectMiddleware>}
+     * @memberof InlineObject1
+     */
+    'middlewares'?: Array<ProjectMiddleware>;
     /**
      * 
      * @type {string}
@@ -426,31 +363,67 @@ export interface InlineObject2 {
      * @type {string}
      * @memberof InlineObject2
      */
+    'pid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject2
+     */
+    'env'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject2
+     */
     'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject2
      */
-    'intro'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject2
-     */
-    'git'?: string;
-    /**
-     * 
-     * @type {Array<ProjectImage>}
-     * @memberof InlineObject2
-     */
-    'images'?: Array<ProjectImage>;
+    'image'?: string;
     /**
      * 
      * @type {Array<ProjectPort>}
      * @memberof InlineObject2
      */
     'ports'?: Array<ProjectPort>;
+    /**
+     * 
+     * @type {AppApplicationStatus}
+     * @memberof InlineObject2
+     */
+    'status'?: AppApplicationStatus;
+    /**
+     * 
+     * @type {AppSize}
+     * @memberof InlineObject2
+     */
+    'size'?: AppSize;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineObject2
+     */
+    'replicas'?: number;
+    /**
+     * 
+     * @type {{ [key: string]: string; }}
+     * @memberof InlineObject2
+     */
+    'annotations'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineObject2
+     */
+    'livenessProbeEnabled'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineObject2
+     */
+    'readinessProbeEnabled'?: boolean;
     /**
      * 
      * @type {Array<ProjectConfiguration>}
@@ -463,18 +436,6 @@ export interface InlineObject2 {
      * @memberof InlineObject2
      */
     'middlewares'?: Array<ProjectMiddleware>;
-    /**
-     * 
-     * @type {ProjectHealthProbe}
-     * @memberof InlineObject2
-     */
-    'livenessProbe'?: ProjectHealthProbe;
-    /**
-     * 
-     * @type {ProjectHealthProbe}
-     * @memberof InlineObject2
-     */
-    'readinessProbe'?: ProjectHealthProbe;
     /**
      * 
      * @type {string}
@@ -582,6 +543,91 @@ export interface InlineObject3 {
      * 
      * @type {string}
      * @memberof InlineObject3
+     */
+    'updatedBy'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject4
+ */
+export interface InlineObject4 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject4
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject4
+     */
+    'intro'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject4
+     */
+    'git'?: string;
+    /**
+     * 
+     * @type {Array<ProjectImage>}
+     * @memberof InlineObject4
+     */
+    'images'?: Array<ProjectImage>;
+    /**
+     * 
+     * @type {Array<ProjectPort>}
+     * @memberof InlineObject4
+     */
+    'ports'?: Array<ProjectPort>;
+    /**
+     * 
+     * @type {Array<ProjectConfiguration>}
+     * @memberof InlineObject4
+     */
+    'configs'?: Array<ProjectConfiguration>;
+    /**
+     * 
+     * @type {Array<ProjectMiddleware>}
+     * @memberof InlineObject4
+     */
+    'middlewares'?: Array<ProjectMiddleware>;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject4
+     */
+    'livenessProbe'?: ProjectHealthProbe;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject4
+     */
+    'readinessProbe'?: ProjectHealthProbe;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject4
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject4
+     */
+    'createdBy'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject4
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject4
      */
     'updatedBy'?: string;
 }
@@ -791,6 +837,12 @@ export interface ProjectPort {
      * @memberof ProjectPort
      */
     'protocol'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectPort
+     */
+    'appProtocol'?: string;
 }
 /**
  * 
@@ -968,7 +1020,6 @@ export const AppServiceApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @summary rpc Start (AppStatusRequest) returns (AppStatusReply) {        option (google.api.http) = {            patch: \"/api/v1/apps/{id}/status\"            body: \"*\"        };    }    rpc Stop (AppStatusRequest) returns (AppStatusReply) {        option (google.api.http) = {            patch: \"/api/v1/apps/{id}/status\"            body: \"*\"        };    }
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -994,6 +1045,45 @@ export const AppServiceApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appServiceDoAction: async (id: string, body: InlineObject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('appServiceDoAction', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('appServiceDoAction', 'body', body)
+            const localVarPath = `/api/v1/apps/{id}/actions`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1037,17 +1127,51 @@ export const AppServiceApiAxiosParamCreator = function (configuration?: Configur
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appServiceUpdate: async (id: string, body: InlineObject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        appServiceRead: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('appServiceUpdate', 'id', id)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('appServiceUpdate', 'body', body)
+            assertParamExists('appServiceRead', 'id', id)
             const localVarPath = `/api/v1/apps/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} payloadId 
+         * @param {InlineObject1} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appServiceUpdate: async (payloadId: string, payload: InlineObject1, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'payloadId' is not null or undefined
+            assertParamExists('appServiceUpdate', 'payloadId', payloadId)
+            // verify required parameter 'payload' is not null or undefined
+            assertParamExists('appServiceUpdate', 'payload', payload)
+            const localVarPath = `/api/v1/apps/{payload.id}`
+                .replace(`{${"payload.id"}}`, encodeURIComponent(String(payloadId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1059,6 +1183,10 @@ export const AppServiceApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (updateMask !== undefined) {
+                localVarQueryParameter['updateMask'] = updateMask;
+            }
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1066,7 +1194,7 @@ export const AppServiceApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(payload, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1075,18 +1203,19 @@ export const AppServiceApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @param {string} id 
-         * @param {InlineObject1} body 
+         * @param {string} payloadId 
+         * @param {InlineObject2} payload 
+         * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appServiceUpdate2: async (id: string, body: InlineObject1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('appServiceUpdate2', 'id', id)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('appServiceUpdate2', 'body', body)
-            const localVarPath = `/api/v1/apps/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+        appServiceUpdate2: async (payloadId: string, payload: InlineObject2, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'payloadId' is not null or undefined
+            assertParamExists('appServiceUpdate2', 'payloadId', payloadId)
+            // verify required parameter 'payload' is not null or undefined
+            assertParamExists('appServiceUpdate2', 'payload', payload)
+            const localVarPath = `/api/v1/apps/{payload.id}`
+                .replace(`{${"payload.id"}}`, encodeURIComponent(String(payloadId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1098,6 +1227,10 @@ export const AppServiceApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (updateMask !== undefined) {
+                localVarQueryParameter['updateMask'] = updateMask;
+            }
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1105,7 +1238,7 @@ export const AppServiceApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(payload, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1134,13 +1267,23 @@ export const AppServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary rpc Start (AppStatusRequest) returns (AppStatusReply) {        option (google.api.http) = {            patch: \"/api/v1/apps/{id}/status\"            body: \"*\"        };    }    rpc Stop (AppStatusRequest) returns (AppStatusReply) {        option (google.api.http) = {            patch: \"/api/v1/apps/{id}/status\"            body: \"*\"        };    }
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async appServiceDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.appServiceDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async appServiceDoAction(id: string, body: InlineObject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppApplication>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.appServiceDoAction(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1156,23 +1299,35 @@ export const AppServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async appServiceUpdate(id: string, body: InlineObject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppApplication>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.appServiceUpdate(id, body, options);
+        async appServiceRead(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppApplication>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.appServiceRead(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {string} id 
-         * @param {InlineObject1} body 
+         * @param {string} payloadId 
+         * @param {InlineObject1} payload 
+         * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async appServiceUpdate2(id: string, body: InlineObject1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppApplication>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.appServiceUpdate2(id, body, options);
+        async appServiceUpdate(payloadId: string, payload: InlineObject1, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppApplication>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.appServiceUpdate(payloadId, payload, updateMask, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} payloadId 
+         * @param {InlineObject2} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async appServiceUpdate2(payloadId: string, payload: InlineObject2, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppApplication>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.appServiceUpdate2(payloadId, payload, updateMask, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -1196,13 +1351,22 @@ export const AppServiceApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @summary rpc Start (AppStatusRequest) returns (AppStatusReply) {        option (google.api.http) = {            patch: \"/api/v1/apps/{id}/status\"            body: \"*\"        };    }    rpc Stop (AppStatusRequest) returns (AppStatusReply) {        option (google.api.http) = {            patch: \"/api/v1/apps/{id}/status\"            body: \"*\"        };    }
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         appServiceDelete(id: string, options?: any): AxiosPromise<object> {
             return localVarFp.appServiceDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appServiceDoAction(id: string, body: InlineObject, options?: any): AxiosPromise<AppApplication> {
+            return localVarFp.appServiceDoAction(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1216,22 +1380,33 @@ export const AppServiceApiFactory = function (configuration?: Configuration, bas
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appServiceUpdate(id: string, body: InlineObject, options?: any): AxiosPromise<AppApplication> {
-            return localVarFp.appServiceUpdate(id, body, options).then((request) => request(axios, basePath));
+        appServiceRead(id: string, options?: any): AxiosPromise<AppApplication> {
+            return localVarFp.appServiceRead(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} id 
-         * @param {InlineObject1} body 
+         * @param {string} payloadId 
+         * @param {InlineObject1} payload 
+         * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appServiceUpdate2(id: string, body: InlineObject1, options?: any): AxiosPromise<AppApplication> {
-            return localVarFp.appServiceUpdate2(id, body, options).then((request) => request(axios, basePath));
+        appServiceUpdate(payloadId: string, payload: InlineObject1, updateMask?: string, options?: any): AxiosPromise<AppApplication> {
+            return localVarFp.appServiceUpdate(payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} payloadId 
+         * @param {InlineObject2} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appServiceUpdate2(payloadId: string, payload: InlineObject2, updateMask?: string, options?: any): AxiosPromise<AppApplication> {
+            return localVarFp.appServiceUpdate2(payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1256,7 +1431,6 @@ export class AppServiceApi extends BaseAPI {
 
     /**
      * 
-     * @summary rpc Start (AppStatusRequest) returns (AppStatusReply) {        option (google.api.http) = {            patch: \"/api/v1/apps/{id}/status\"            body: \"*\"        };    }    rpc Stop (AppStatusRequest) returns (AppStatusReply) {        option (google.api.http) = {            patch: \"/api/v1/apps/{id}/status\"            body: \"*\"        };    }
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1264,6 +1438,18 @@ export class AppServiceApi extends BaseAPI {
      */
     public appServiceDelete(id: string, options?: AxiosRequestConfig) {
         return AppServiceApiFp(this.configuration).appServiceDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {InlineObject} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AppServiceApi
+     */
+    public appServiceDoAction(id: string, body: InlineObject, options?: AxiosRequestConfig) {
+        return AppServiceApiFp(this.configuration).appServiceDoAction(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1280,25 +1466,38 @@ export class AppServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AppServiceApi
      */
-    public appServiceUpdate(id: string, body: InlineObject, options?: AxiosRequestConfig) {
-        return AppServiceApiFp(this.configuration).appServiceUpdate(id, body, options).then((request) => request(this.axios, this.basePath));
+    public appServiceRead(id: string, options?: AxiosRequestConfig) {
+        return AppServiceApiFp(this.configuration).appServiceRead(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {string} id 
-     * @param {InlineObject1} body 
+     * @param {string} payloadId 
+     * @param {InlineObject1} payload 
+     * @param {string} [updateMask] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AppServiceApi
      */
-    public appServiceUpdate2(id: string, body: InlineObject1, options?: AxiosRequestConfig) {
-        return AppServiceApiFp(this.configuration).appServiceUpdate2(id, body, options).then((request) => request(this.axios, this.basePath));
+    public appServiceUpdate(payloadId: string, payload: InlineObject1, updateMask?: string, options?: AxiosRequestConfig) {
+        return AppServiceApiFp(this.configuration).appServiceUpdate(payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} payloadId 
+     * @param {InlineObject2} payload 
+     * @param {string} [updateMask] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AppServiceApi
+     */
+    public appServiceUpdate2(payloadId: string, payload: InlineObject2, updateMask?: string, options?: AxiosRequestConfig) {
+        return AppServiceApiFp(this.configuration).appServiceUpdate2(payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -1447,11 +1646,11 @@ export const ProjectServiceApiAxiosParamCreator = function (configuration?: Conf
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject2} body 
+         * @param {InlineObject3} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate: async (id: string, body: InlineObject2, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectServiceUpdate: async (id: string, body: InlineObject3, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectServiceUpdate', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -1486,11 +1685,11 @@ export const ProjectServiceApiAxiosParamCreator = function (configuration?: Conf
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject3} body 
+         * @param {InlineObject4} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate2: async (id: string, body: InlineObject3, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectServiceUpdate2: async (id: string, body: InlineObject4, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectServiceUpdate2', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -1575,22 +1774,22 @@ export const ProjectServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject2} body 
+         * @param {InlineObject3} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectServiceUpdate(id: string, body: InlineObject2, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
+        async projectServiceUpdate(id: string, body: InlineObject3, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.projectServiceUpdate(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject3} body 
+         * @param {InlineObject4} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectServiceUpdate2(id: string, body: InlineObject3, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
+        async projectServiceUpdate2(id: string, body: InlineObject4, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.projectServiceUpdate2(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1643,21 +1842,21 @@ export const ProjectServiceApiFactory = function (configuration?: Configuration,
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject2} body 
+         * @param {InlineObject3} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate(id: string, body: InlineObject2, options?: any): AxiosPromise<ProjectProject> {
+        projectServiceUpdate(id: string, body: InlineObject3, options?: any): AxiosPromise<ProjectProject> {
             return localVarFp.projectServiceUpdate(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject3} body 
+         * @param {InlineObject4} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate2(id: string, body: InlineObject3, options?: any): AxiosPromise<ProjectProject> {
+        projectServiceUpdate2(id: string, body: InlineObject4, options?: any): AxiosPromise<ProjectProject> {
             return localVarFp.projectServiceUpdate2(id, body, options).then((request) => request(axios, basePath));
         },
     };
@@ -1717,24 +1916,24 @@ export class ProjectServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject2} body 
+     * @param {InlineObject3} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectServiceApi
      */
-    public projectServiceUpdate(id: string, body: InlineObject2, options?: AxiosRequestConfig) {
+    public projectServiceUpdate(id: string, body: InlineObject3, options?: AxiosRequestConfig) {
         return ProjectServiceApiFp(this.configuration).projectServiceUpdate(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject3} body 
+     * @param {InlineObject4} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectServiceApi
      */
-    public projectServiceUpdate2(id: string, body: InlineObject3, options?: AxiosRequestConfig) {
+    public projectServiceUpdate2(id: string, body: InlineObject4, options?: AxiosRequestConfig) {
         return ProjectServiceApiFp(this.configuration).projectServiceUpdate2(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 }

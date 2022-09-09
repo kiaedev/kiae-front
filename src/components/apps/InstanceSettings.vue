@@ -14,7 +14,8 @@ export default defineComponent({
     props: {
         value: Object,
     },
-    setup(props) {
+    emits: ["done"],
+    setup(props, ctx) {
         const { visible, modalOpen, modalClose } = useModal()
         const { handleAppInstanceSettings } = useApplication()
         const { formState, formSubmit } = useFormSubmiter({
@@ -23,8 +24,10 @@ export default defineComponent({
             replicas: props.value?.replicas,
         }, (values: any) => {
             console.log("111", values);
-            handleAppInstanceSettings(values)
-            modalClose()
+            handleAppInstanceSettings(values, () => {
+                ctx.emit("done")
+                modalClose()
+            })
         })
 
         return {
