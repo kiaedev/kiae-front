@@ -80,10 +80,10 @@ export interface AppApplication {
     'ports'?: Array<ProjectPort>;
     /**
      * 
-     * @type {AppApplicationStatus}
+     * @type {AppStatus}
      * @memberof AppApplication
      */
-    'status'?: AppApplicationStatus;
+    'status'?: AppStatus;
     /**
      * 
      * @type {AppSize}
@@ -154,21 +154,6 @@ export interface AppApplication {
 /**
  * 
  * @export
- * @enum {string}
- */
-
-export const AppApplicationStatus = {
-    Created: 'CREATED',
-    Running: 'RUNNING',
-    Stopped: 'STOPPED'
-} as const;
-
-export type AppApplicationStatus = typeof AppApplicationStatus[keyof typeof AppApplicationStatus];
-
-
-/**
- * 
- * @export
  * @interface AppListResponse
  */
 export interface AppListResponse {
@@ -203,6 +188,21 @@ export const AppSize = {
 } as const;
 
 export type AppSize = typeof AppSize[keyof typeof AppSize];
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const AppStatus = {
+    Created: 'STATUS_CREATED',
+    Running: 'STATUS_RUNNING',
+    Stopped: 'STATUS_STOPPED'
+} as const;
+
+export type AppStatus = typeof AppStatus[keyof typeof AppStatus];
 
 
 /**
@@ -281,10 +281,10 @@ export interface InlineObject1 {
     'ports'?: Array<ProjectPort>;
     /**
      * 
-     * @type {AppApplicationStatus}
+     * @type {AppStatus}
      * @memberof InlineObject1
      */
-    'status'?: AppApplicationStatus;
+    'status'?: AppStatus;
     /**
      * 
      * @type {AppSize}
@@ -390,10 +390,10 @@ export interface InlineObject2 {
     'ports'?: Array<ProjectPort>;
     /**
      * 
-     * @type {AppApplicationStatus}
+     * @type {AppStatus}
      * @memberof InlineObject2
      */
-    'status'?: AppApplicationStatus;
+    'status'?: AppStatus;
     /**
      * 
      * @type {AppSize}
