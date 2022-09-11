@@ -30,7 +30,8 @@ export default defineComponent({
                     <a href="javascript:;">版本发布</a>
                 </a-menu-item>
                 <a-menu-item>
-                    <InstanceSettings v-model:value="value" @done="$emit('done')">实例调整
+                    <InstanceSettings v-model:value="value" @done="$emit('done')">
+                        实例调整
                     </InstanceSettings>
                 </a-menu-item>
                 <a-menu-item>

@@ -208,6 +208,100 @@ export type AppStatus = typeof AppStatus[keyof typeof AppStatus];
 /**
  * 
  * @export
+ * @interface EntryEntry
+ */
+export interface EntryEntry {
+    /**
+     * 
+     * @type {string}
+     * @memberof EntryEntry
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EntryEntry
+     */
+    'appid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EntryEntry
+     */
+    'gateway'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EntryEntry
+     */
+    'host'?: string;
+    /**
+     * 
+     * @type {EntryScope}
+     * @memberof EntryEntry
+     */
+    'scope'?: EntryScope;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof EntryEntry
+     */
+    'routeIds'?: Array<string>;
+    /**
+     * 
+     * @type {KiaeOpStatus}
+     * @memberof EntryEntry
+     */
+    'status'?: KiaeOpStatus;
+    /**
+     * 
+     * @type {string}
+     * @memberof EntryEntry
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EntryEntry
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EntryListResponse
+ */
+export interface EntryListResponse {
+    /**
+     * 
+     * @type {Array<EntryEntry>}
+     * @memberof EntryListResponse
+     */
+    'items'?: Array<EntryEntry>;
+    /**
+     * 
+     * @type {string}
+     * @memberof EntryListResponse
+     */
+    'total'?: string;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const EntryScope = {
+    All: 'ALL',
+    Partial: 'PARTIAL'
+} as const;
+
+export type EntryScope = typeof EntryScope[keyof typeof EntryScope];
+
+
+/**
+ * 
+ * @export
  * @interface GooglerpcStatus
  */
 export interface GooglerpcStatus {
@@ -238,10 +332,52 @@ export interface GooglerpcStatus {
 export interface InlineObject {
     /**
      * 
-     * @type {ActionPayloadAction}
+     * @type {string}
      * @memberof InlineObject
      */
-    'action'?: ActionPayloadAction;
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject
+     */
+    'gateway'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject
+     */
+    'host'?: string;
+    /**
+     * 
+     * @type {EntryScope}
+     * @memberof InlineObject
+     */
+    'scope'?: EntryScope;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof InlineObject
+     */
+    'routeIds'?: Array<string>;
+    /**
+     * 
+     * @type {KiaeOpStatus}
+     * @memberof InlineObject
+     */
+    'status'?: KiaeOpStatus;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject
+     */
+    'updatedAt'?: string;
 }
 /**
  * 
@@ -254,79 +390,49 @@ export interface InlineObject1 {
      * @type {string}
      * @memberof InlineObject1
      */
-    'pid'?: string;
+    'id'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject1
      */
-    'env'?: string;
+    'path'?: string;
     /**
      * 
-     * @type {string}
+     * @type {Array<string>}
      * @memberof InlineObject1
      */
-    'name'?: string;
+    'methods'?: Array<string>;
     /**
      * 
-     * @type {string}
+     * @type {RouteRouteType}
      * @memberof InlineObject1
      */
-    'image'?: string;
+    'type'?: RouteRouteType;
     /**
      * 
-     * @type {Array<ProjectPort>}
+     * @type {RouteForward}
      * @memberof InlineObject1
      */
-    'ports'?: Array<ProjectPort>;
+    'forward'?: RouteForward;
     /**
      * 
-     * @type {AppStatus}
+     * @type {RouteRedirect}
      * @memberof InlineObject1
      */
-    'status'?: AppStatus;
+    'redirect'?: RouteRedirect;
     /**
      * 
-     * @type {AppSize}
+     * @type {RouteDirectResponse}
      * @memberof InlineObject1
      */
-    'size'?: AppSize;
+    'mock'?: RouteDirectResponse;
     /**
      * 
-     * @type {number}
+     * @type {KiaeOpStatus}
      * @memberof InlineObject1
      */
-    'replicas'?: number;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof InlineObject1
-     */
-    'annotations'?: { [key: string]: string; };
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineObject1
-     */
-    'livenessProbeEnabled'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineObject1
-     */
-    'readinessProbeEnabled'?: boolean;
-    /**
-     * 
-     * @type {Array<ProjectConfiguration>}
-     * @memberof InlineObject1
-     */
-    'configs'?: Array<ProjectConfiguration>;
-    /**
-     * 
-     * @type {Array<ProjectMiddleware>}
-     * @memberof InlineObject1
-     */
-    'middlewares'?: Array<ProjectMiddleware>;
+    'status'?: KiaeOpStatus;
     /**
      * 
      * @type {string}
@@ -355,111 +461,100 @@ export interface InlineObject1 {
 /**
  * 
  * @export
- * @interface InlineObject2
+ * @interface InlineObject10
  */
-export interface InlineObject2 {
+export interface InlineObject10 {
     /**
      * 
      * @type {string}
-     * @memberof InlineObject2
-     */
-    'pid'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject2
-     */
-    'env'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject2
+     * @memberof InlineObject10
      */
     'name'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject2
+     * @memberof InlineObject10
      */
-    'image'?: string;
+    'intro'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject10
+     */
+    'git'?: string;
+    /**
+     * 
+     * @type {Array<ProjectImage>}
+     * @memberof InlineObject10
+     */
+    'images'?: Array<ProjectImage>;
     /**
      * 
      * @type {Array<ProjectPort>}
-     * @memberof InlineObject2
+     * @memberof InlineObject10
      */
     'ports'?: Array<ProjectPort>;
     /**
      * 
-     * @type {AppStatus}
-     * @memberof InlineObject2
-     */
-    'status'?: AppStatus;
-    /**
-     * 
-     * @type {AppSize}
-     * @memberof InlineObject2
-     */
-    'size'?: AppSize;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineObject2
-     */
-    'replicas'?: number;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof InlineObject2
-     */
-    'annotations'?: { [key: string]: string; };
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineObject2
-     */
-    'livenessProbeEnabled'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof InlineObject2
-     */
-    'readinessProbeEnabled'?: boolean;
-    /**
-     * 
      * @type {Array<ProjectConfiguration>}
-     * @memberof InlineObject2
+     * @memberof InlineObject10
      */
     'configs'?: Array<ProjectConfiguration>;
     /**
      * 
      * @type {Array<ProjectMiddleware>}
-     * @memberof InlineObject2
+     * @memberof InlineObject10
      */
     'middlewares'?: Array<ProjectMiddleware>;
     /**
      * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject10
+     */
+    'livenessProbe'?: ProjectHealthProbe;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject10
+     */
+    'readinessProbe'?: ProjectHealthProbe;
+    /**
+     * 
      * @type {string}
-     * @memberof InlineObject2
+     * @memberof InlineObject10
      */
     'createdAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject2
+     * @memberof InlineObject10
      */
     'createdBy'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject2
+     * @memberof InlineObject10
      */
     'updatedAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject2
+     * @memberof InlineObject10
      */
     'updatedBy'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject2
+ */
+export interface InlineObject2 {
+    /**
+     * 
+     * @type {ActionPayloadAction}
+     * @memberof InlineObject2
+     */
+    'action'?: ActionPayloadAction;
 }
 /**
  * 
@@ -472,55 +567,31 @@ export interface InlineObject3 {
      * @type {string}
      * @memberof InlineObject3
      */
-    'name'?: string;
+    'gateway'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject3
      */
-    'intro'?: string;
+    'host'?: string;
     /**
      * 
-     * @type {string}
+     * @type {EntryScope}
      * @memberof InlineObject3
      */
-    'git'?: string;
+    'scope'?: EntryScope;
     /**
      * 
-     * @type {Array<ProjectImage>}
+     * @type {Array<string>}
      * @memberof InlineObject3
      */
-    'images'?: Array<ProjectImage>;
+    'routeIds'?: Array<string>;
     /**
      * 
-     * @type {Array<ProjectPort>}
+     * @type {KiaeOpStatus}
      * @memberof InlineObject3
      */
-    'ports'?: Array<ProjectPort>;
-    /**
-     * 
-     * @type {Array<ProjectConfiguration>}
-     * @memberof InlineObject3
-     */
-    'configs'?: Array<ProjectConfiguration>;
-    /**
-     * 
-     * @type {Array<ProjectMiddleware>}
-     * @memberof InlineObject3
-     */
-    'middlewares'?: Array<ProjectMiddleware>;
-    /**
-     * 
-     * @type {ProjectHealthProbe}
-     * @memberof InlineObject3
-     */
-    'livenessProbe'?: ProjectHealthProbe;
-    /**
-     * 
-     * @type {ProjectHealthProbe}
-     * @memberof InlineObject3
-     */
-    'readinessProbe'?: ProjectHealthProbe;
+    'status'?: KiaeOpStatus;
     /**
      * 
      * @type {string}
@@ -532,19 +603,7 @@ export interface InlineObject3 {
      * @type {string}
      * @memberof InlineObject3
      */
-    'createdBy'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject3
-     */
     'updatedAt'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject3
-     */
-    'updatedBy'?: string;
 }
 /**
  * 
@@ -557,55 +616,31 @@ export interface InlineObject4 {
      * @type {string}
      * @memberof InlineObject4
      */
-    'name'?: string;
+    'gateway'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject4
      */
-    'intro'?: string;
+    'host'?: string;
     /**
      * 
-     * @type {string}
+     * @type {EntryScope}
      * @memberof InlineObject4
      */
-    'git'?: string;
+    'scope'?: EntryScope;
     /**
      * 
-     * @type {Array<ProjectImage>}
+     * @type {Array<string>}
      * @memberof InlineObject4
      */
-    'images'?: Array<ProjectImage>;
+    'routeIds'?: Array<string>;
     /**
      * 
-     * @type {Array<ProjectPort>}
+     * @type {KiaeOpStatus}
      * @memberof InlineObject4
      */
-    'ports'?: Array<ProjectPort>;
-    /**
-     * 
-     * @type {Array<ProjectConfiguration>}
-     * @memberof InlineObject4
-     */
-    'configs'?: Array<ProjectConfiguration>;
-    /**
-     * 
-     * @type {Array<ProjectMiddleware>}
-     * @memberof InlineObject4
-     */
-    'middlewares'?: Array<ProjectMiddleware>;
-    /**
-     * 
-     * @type {ProjectHealthProbe}
-     * @memberof InlineObject4
-     */
-    'livenessProbe'?: ProjectHealthProbe;
-    /**
-     * 
-     * @type {ProjectHealthProbe}
-     * @memberof InlineObject4
-     */
-    'readinessProbe'?: ProjectHealthProbe;
+    'status'?: KiaeOpStatus;
     /**
      * 
      * @type {string}
@@ -617,20 +652,471 @@ export interface InlineObject4 {
      * @type {string}
      * @memberof InlineObject4
      */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject5
+ */
+export interface InlineObject5 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject5
+     */
+    'path'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof InlineObject5
+     */
+    'methods'?: Array<string>;
+    /**
+     * 
+     * @type {RouteRouteType}
+     * @memberof InlineObject5
+     */
+    'type'?: RouteRouteType;
+    /**
+     * 
+     * @type {RouteForward}
+     * @memberof InlineObject5
+     */
+    'forward'?: RouteForward;
+    /**
+     * 
+     * @type {RouteRedirect}
+     * @memberof InlineObject5
+     */
+    'redirect'?: RouteRedirect;
+    /**
+     * 
+     * @type {RouteDirectResponse}
+     * @memberof InlineObject5
+     */
+    'mock'?: RouteDirectResponse;
+    /**
+     * 
+     * @type {KiaeOpStatus}
+     * @memberof InlineObject5
+     */
+    'status'?: KiaeOpStatus;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject5
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject5
+     */
     'createdBy'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject4
+     * @memberof InlineObject5
      */
     'updatedAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject4
+     * @memberof InlineObject5
      */
     'updatedBy'?: string;
 }
+/**
+ * 
+ * @export
+ * @interface InlineObject6
+ */
+export interface InlineObject6 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject6
+     */
+    'path'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof InlineObject6
+     */
+    'methods'?: Array<string>;
+    /**
+     * 
+     * @type {RouteRouteType}
+     * @memberof InlineObject6
+     */
+    'type'?: RouteRouteType;
+    /**
+     * 
+     * @type {RouteForward}
+     * @memberof InlineObject6
+     */
+    'forward'?: RouteForward;
+    /**
+     * 
+     * @type {RouteRedirect}
+     * @memberof InlineObject6
+     */
+    'redirect'?: RouteRedirect;
+    /**
+     * 
+     * @type {RouteDirectResponse}
+     * @memberof InlineObject6
+     */
+    'mock'?: RouteDirectResponse;
+    /**
+     * 
+     * @type {KiaeOpStatus}
+     * @memberof InlineObject6
+     */
+    'status'?: KiaeOpStatus;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject6
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject6
+     */
+    'createdBy'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject6
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject6
+     */
+    'updatedBy'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject7
+ */
+export interface InlineObject7 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject7
+     */
+    'pid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject7
+     */
+    'env'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject7
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject7
+     */
+    'image'?: string;
+    /**
+     * 
+     * @type {Array<ProjectPort>}
+     * @memberof InlineObject7
+     */
+    'ports'?: Array<ProjectPort>;
+    /**
+     * 
+     * @type {AppStatus}
+     * @memberof InlineObject7
+     */
+    'status'?: AppStatus;
+    /**
+     * 
+     * @type {AppSize}
+     * @memberof InlineObject7
+     */
+    'size'?: AppSize;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineObject7
+     */
+    'replicas'?: number;
+    /**
+     * 
+     * @type {{ [key: string]: string; }}
+     * @memberof InlineObject7
+     */
+    'annotations'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineObject7
+     */
+    'livenessProbeEnabled'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineObject7
+     */
+    'readinessProbeEnabled'?: boolean;
+    /**
+     * 
+     * @type {Array<ProjectConfiguration>}
+     * @memberof InlineObject7
+     */
+    'configs'?: Array<ProjectConfiguration>;
+    /**
+     * 
+     * @type {Array<ProjectMiddleware>}
+     * @memberof InlineObject7
+     */
+    'middlewares'?: Array<ProjectMiddleware>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject7
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject7
+     */
+    'createdBy'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject7
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject7
+     */
+    'updatedBy'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject8
+ */
+export interface InlineObject8 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject8
+     */
+    'pid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject8
+     */
+    'env'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject8
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject8
+     */
+    'image'?: string;
+    /**
+     * 
+     * @type {Array<ProjectPort>}
+     * @memberof InlineObject8
+     */
+    'ports'?: Array<ProjectPort>;
+    /**
+     * 
+     * @type {AppStatus}
+     * @memberof InlineObject8
+     */
+    'status'?: AppStatus;
+    /**
+     * 
+     * @type {AppSize}
+     * @memberof InlineObject8
+     */
+    'size'?: AppSize;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineObject8
+     */
+    'replicas'?: number;
+    /**
+     * 
+     * @type {{ [key: string]: string; }}
+     * @memberof InlineObject8
+     */
+    'annotations'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineObject8
+     */
+    'livenessProbeEnabled'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineObject8
+     */
+    'readinessProbeEnabled'?: boolean;
+    /**
+     * 
+     * @type {Array<ProjectConfiguration>}
+     * @memberof InlineObject8
+     */
+    'configs'?: Array<ProjectConfiguration>;
+    /**
+     * 
+     * @type {Array<ProjectMiddleware>}
+     * @memberof InlineObject8
+     */
+    'middlewares'?: Array<ProjectMiddleware>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject8
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject8
+     */
+    'createdBy'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject8
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject8
+     */
+    'updatedBy'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject9
+ */
+export interface InlineObject9 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject9
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject9
+     */
+    'intro'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject9
+     */
+    'git'?: string;
+    /**
+     * 
+     * @type {Array<ProjectImage>}
+     * @memberof InlineObject9
+     */
+    'images'?: Array<ProjectImage>;
+    /**
+     * 
+     * @type {Array<ProjectPort>}
+     * @memberof InlineObject9
+     */
+    'ports'?: Array<ProjectPort>;
+    /**
+     * 
+     * @type {Array<ProjectConfiguration>}
+     * @memberof InlineObject9
+     */
+    'configs'?: Array<ProjectConfiguration>;
+    /**
+     * 
+     * @type {Array<ProjectMiddleware>}
+     * @memberof InlineObject9
+     */
+    'middlewares'?: Array<ProjectMiddleware>;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject9
+     */
+    'livenessProbe'?: ProjectHealthProbe;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject9
+     */
+    'readinessProbe'?: ProjectHealthProbe;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject9
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject9
+     */
+    'createdBy'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject9
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject9
+     */
+    'updatedBy'?: string;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const KiaeOpStatus = {
+    Disabled: 'OP_STATUS_DISABLED',
+    Enabled: 'OP_STATUS_ENABLED'
+} as const;
+
+export type KiaeOpStatus = typeof KiaeOpStatus[keyof typeof KiaeOpStatus];
+
+
 /**
  * 
  * @export
@@ -953,6 +1439,281 @@ export interface ProtobufAny {
 /**
  * 
  * @export
+ * @interface RouteCors
+ */
+export interface RouteCors {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof RouteCors
+     */
+    'allowOrigins'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof RouteCors
+     */
+    'allowMethods'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof RouteCors
+     */
+    'allowHeaders'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof RouteCors
+     */
+    'exposeHeaders'?: Array<string>;
+    /**
+     * 
+     * @type {number}
+     * @memberof RouteCors
+     */
+    'maxAge'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof RouteCors
+     */
+    'allowCredentials'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface RouteDirectResponse
+ */
+export interface RouteDirectResponse {
+    /**
+     * 
+     * @type {number}
+     * @memberof RouteDirectResponse
+     */
+    'code'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteDirectResponse
+     */
+    'body'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RouteForward
+ */
+export interface RouteForward {
+    /**
+     * 
+     * @type {RouteCors}
+     * @memberof RouteForward
+     */
+    'cors'?: RouteCors;
+    /**
+     * 
+     * @type {RouteRewrite}
+     * @memberof RouteForward
+     */
+    'rewrite'?: RouteRewrite;
+    /**
+     * 
+     * @type {RouteLimiter}
+     * @memberof RouteForward
+     */
+    'limiter'?: RouteLimiter;
+}
+/**
+ * 
+ * @export
+ * @interface RouteLimiter
+ */
+export interface RouteLimiter {
+    /**
+     * 
+     * @type {number}
+     * @memberof RouteLimiter
+     */
+    'qps'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof RouteLimiter
+     */
+    'fallbackStatus'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteLimiter
+     */
+    'fallbackUrl'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteLimiter
+     */
+    'fallbackBody'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RouteListResponse
+ */
+export interface RouteListResponse {
+    /**
+     * 
+     * @type {Array<RouteRoute>}
+     * @memberof RouteListResponse
+     */
+    'items'?: Array<RouteRoute>;
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteListResponse
+     */
+    'total'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RouteRedirect
+ */
+export interface RouteRedirect {
+    /**
+     * 
+     * @type {number}
+     * @memberof RouteRedirect
+     */
+    'code'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteRedirect
+     */
+    'url'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RouteRewrite
+ */
+export interface RouteRewrite {
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteRewrite
+     */
+    'uri'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteRewrite
+     */
+    'authority'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface RouteRoute
+ */
+export interface RouteRoute {
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteRoute
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteRoute
+     */
+    'appid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteRoute
+     */
+    'path'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof RouteRoute
+     */
+    'methods'?: Array<string>;
+    /**
+     * 
+     * @type {RouteRouteType}
+     * @memberof RouteRoute
+     */
+    'type'?: RouteRouteType;
+    /**
+     * 
+     * @type {RouteForward}
+     * @memberof RouteRoute
+     */
+    'forward'?: RouteForward;
+    /**
+     * 
+     * @type {RouteRedirect}
+     * @memberof RouteRoute
+     */
+    'redirect'?: RouteRedirect;
+    /**
+     * 
+     * @type {RouteDirectResponse}
+     * @memberof RouteRoute
+     */
+    'mock'?: RouteDirectResponse;
+    /**
+     * 
+     * @type {KiaeOpStatus}
+     * @memberof RouteRoute
+     */
+    'status'?: KiaeOpStatus;
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteRoute
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteRoute
+     */
+    'createdBy'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteRoute
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RouteRoute
+     */
+    'updatedBy'?: string;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const RouteRouteType = {
+    Forward: 'FORWARD',
+    Redirect: 'REDIRECT',
+    DirectResponse: 'DIRECT_RESPONSE'
+} as const;
+
+export type RouteRouteType = typeof RouteRouteType[keyof typeof RouteRouteType];
+
+
+/**
+ * 
+ * @export
  * @interface SettingsListReply
  */
 export interface SettingsListReply {
@@ -1054,11 +1815,11 @@ export const AppServiceApiAxiosParamCreator = function (configuration?: Configur
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject} body 
+         * @param {InlineObject2} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appServiceDoAction: async (id: string, body: InlineObject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        appServiceDoAction: async (id: string, body: InlineObject2, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('appServiceDoAction', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -1160,12 +1921,12 @@ export const AppServiceApiAxiosParamCreator = function (configuration?: Configur
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject1} payload 
+         * @param {InlineObject7} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appServiceUpdate: async (payloadId: string, payload: InlineObject1, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        appServiceUpdate: async (payloadId: string, payload: InlineObject7, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'payloadId' is not null or undefined
             assertParamExists('appServiceUpdate', 'payloadId', payloadId)
             // verify required parameter 'payload' is not null or undefined
@@ -1204,12 +1965,12 @@ export const AppServiceApiAxiosParamCreator = function (configuration?: Configur
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject2} payload 
+         * @param {InlineObject8} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appServiceUpdate2: async (payloadId: string, payload: InlineObject2, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        appServiceUpdate2: async (payloadId: string, payload: InlineObject8, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'payloadId' is not null or undefined
             assertParamExists('appServiceUpdate2', 'payloadId', payloadId)
             // verify required parameter 'payload' is not null or undefined
@@ -1278,11 +2039,11 @@ export const AppServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject} body 
+         * @param {InlineObject2} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async appServiceDoAction(id: string, body: InlineObject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppApplication>> {
+        async appServiceDoAction(id: string, body: InlineObject2, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppApplication>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.appServiceDoAction(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1309,24 +2070,24 @@ export const AppServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject1} payload 
+         * @param {InlineObject7} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async appServiceUpdate(payloadId: string, payload: InlineObject1, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppApplication>> {
+        async appServiceUpdate(payloadId: string, payload: InlineObject7, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppApplication>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.appServiceUpdate(payloadId, payload, updateMask, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject2} payload 
+         * @param {InlineObject8} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async appServiceUpdate2(payloadId: string, payload: InlineObject2, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppApplication>> {
+        async appServiceUpdate2(payloadId: string, payload: InlineObject8, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppApplication>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.appServiceUpdate2(payloadId, payload, updateMask, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1361,11 +2122,11 @@ export const AppServiceApiFactory = function (configuration?: Configuration, bas
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject} body 
+         * @param {InlineObject2} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appServiceDoAction(id: string, body: InlineObject, options?: any): AxiosPromise<AppApplication> {
+        appServiceDoAction(id: string, body: InlineObject2, options?: any): AxiosPromise<AppApplication> {
             return localVarFp.appServiceDoAction(id, body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1389,23 +2150,23 @@ export const AppServiceApiFactory = function (configuration?: Configuration, bas
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject1} payload 
+         * @param {InlineObject7} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appServiceUpdate(payloadId: string, payload: InlineObject1, updateMask?: string, options?: any): AxiosPromise<AppApplication> {
+        appServiceUpdate(payloadId: string, payload: InlineObject7, updateMask?: string, options?: any): AxiosPromise<AppApplication> {
             return localVarFp.appServiceUpdate(payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject2} payload 
+         * @param {InlineObject8} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        appServiceUpdate2(payloadId: string, payload: InlineObject2, updateMask?: string, options?: any): AxiosPromise<AppApplication> {
+        appServiceUpdate2(payloadId: string, payload: InlineObject8, updateMask?: string, options?: any): AxiosPromise<AppApplication> {
             return localVarFp.appServiceUpdate2(payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
         },
     };
@@ -1443,12 +2204,12 @@ export class AppServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject} body 
+     * @param {InlineObject2} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AppServiceApi
      */
-    public appServiceDoAction(id: string, body: InlineObject, options?: AxiosRequestConfig) {
+    public appServiceDoAction(id: string, body: InlineObject2, options?: AxiosRequestConfig) {
         return AppServiceApiFp(this.configuration).appServiceDoAction(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1477,27 +2238,444 @@ export class AppServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} payloadId 
-     * @param {InlineObject1} payload 
+     * @param {InlineObject7} payload 
      * @param {string} [updateMask] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AppServiceApi
      */
-    public appServiceUpdate(payloadId: string, payload: InlineObject1, updateMask?: string, options?: AxiosRequestConfig) {
+    public appServiceUpdate(payloadId: string, payload: InlineObject7, updateMask?: string, options?: AxiosRequestConfig) {
         return AppServiceApiFp(this.configuration).appServiceUpdate(payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} payloadId 
-     * @param {InlineObject2} payload 
+     * @param {InlineObject8} payload 
      * @param {string} [updateMask] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AppServiceApi
      */
-    public appServiceUpdate2(payloadId: string, payload: InlineObject2, updateMask?: string, options?: AxiosRequestConfig) {
+    public appServiceUpdate2(payloadId: string, payload: InlineObject8, updateMask?: string, options?: AxiosRequestConfig) {
         return AppServiceApiFp(this.configuration).appServiceUpdate2(payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * EntryServiceApi - axios parameter creator
+ * @export
+ */
+export const EntryServiceApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} appid 
+         * @param {InlineObject} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        entryServiceCreate: async (appid: string, body: InlineObject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'appid' is not null or undefined
+            assertParamExists('entryServiceCreate', 'appid', appid)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('entryServiceCreate', 'body', body)
+            const localVarPath = `/api/v1/apps/{appid}/entries`
+                .replace(`{${"appid"}}`, encodeURIComponent(String(appid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} id2 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        entryServiceDelete: async (id: string, id2: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('entryServiceDelete', 'id', id)
+            // verify required parameter 'id2' is not null or undefined
+            assertParamExists('entryServiceDelete', 'id2', id2)
+            const localVarPath = `/api/v1/apps/{id}/entries/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"id"}}`, encodeURIComponent(String(id2)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} appid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        entryServiceList: async (appid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'appid' is not null or undefined
+            assertParamExists('entryServiceList', 'appid', appid)
+            const localVarPath = `/api/v1/apps/{appid}/entries`
+                .replace(`{${"appid"}}`, encodeURIComponent(String(appid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} payloadAppid 
+         * @param {string} payloadId 
+         * @param {InlineObject3} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        entryServiceUpdate: async (payloadAppid: string, payloadId: string, payload: InlineObject3, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'payloadAppid' is not null or undefined
+            assertParamExists('entryServiceUpdate', 'payloadAppid', payloadAppid)
+            // verify required parameter 'payloadId' is not null or undefined
+            assertParamExists('entryServiceUpdate', 'payloadId', payloadId)
+            // verify required parameter 'payload' is not null or undefined
+            assertParamExists('entryServiceUpdate', 'payload', payload)
+            const localVarPath = `/api/v1/apps/{payload.appid}/entries/{payload.id}`
+                .replace(`{${"payload.appid"}}`, encodeURIComponent(String(payloadAppid)))
+                .replace(`{${"payload.id"}}`, encodeURIComponent(String(payloadId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (updateMask !== undefined) {
+                localVarQueryParameter['updateMask'] = updateMask;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(payload, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} payloadAppid 
+         * @param {string} payloadId 
+         * @param {InlineObject4} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        entryServiceUpdate2: async (payloadAppid: string, payloadId: string, payload: InlineObject4, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'payloadAppid' is not null or undefined
+            assertParamExists('entryServiceUpdate2', 'payloadAppid', payloadAppid)
+            // verify required parameter 'payloadId' is not null or undefined
+            assertParamExists('entryServiceUpdate2', 'payloadId', payloadId)
+            // verify required parameter 'payload' is not null or undefined
+            assertParamExists('entryServiceUpdate2', 'payload', payload)
+            const localVarPath = `/api/v1/apps/{payload.appid}/entries/{payload.id}`
+                .replace(`{${"payload.appid"}}`, encodeURIComponent(String(payloadAppid)))
+                .replace(`{${"payload.id"}}`, encodeURIComponent(String(payloadId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (updateMask !== undefined) {
+                localVarQueryParameter['updateMask'] = updateMask;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(payload, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EntryServiceApi - functional programming interface
+ * @export
+ */
+export const EntryServiceApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EntryServiceApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} appid 
+         * @param {InlineObject} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async entryServiceCreate(appid: string, body: InlineObject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EntryEntry>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.entryServiceCreate(appid, body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} id2 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async entryServiceDelete(id: string, id2: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.entryServiceDelete(id, id2, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} appid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async entryServiceList(appid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EntryListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.entryServiceList(appid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} payloadAppid 
+         * @param {string} payloadId 
+         * @param {InlineObject3} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async entryServiceUpdate(payloadAppid: string, payloadId: string, payload: InlineObject3, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EntryEntry>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.entryServiceUpdate(payloadAppid, payloadId, payload, updateMask, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} payloadAppid 
+         * @param {string} payloadId 
+         * @param {InlineObject4} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async entryServiceUpdate2(payloadAppid: string, payloadId: string, payload: InlineObject4, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EntryEntry>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.entryServiceUpdate2(payloadAppid, payloadId, payload, updateMask, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * EntryServiceApi - factory interface
+ * @export
+ */
+export const EntryServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EntryServiceApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} appid 
+         * @param {InlineObject} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        entryServiceCreate(appid: string, body: InlineObject, options?: any): AxiosPromise<EntryEntry> {
+            return localVarFp.entryServiceCreate(appid, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} id2 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        entryServiceDelete(id: string, id2: string, options?: any): AxiosPromise<object> {
+            return localVarFp.entryServiceDelete(id, id2, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} appid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        entryServiceList(appid: string, options?: any): AxiosPromise<EntryListResponse> {
+            return localVarFp.entryServiceList(appid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} payloadAppid 
+         * @param {string} payloadId 
+         * @param {InlineObject3} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        entryServiceUpdate(payloadAppid: string, payloadId: string, payload: InlineObject3, updateMask?: string, options?: any): AxiosPromise<EntryEntry> {
+            return localVarFp.entryServiceUpdate(payloadAppid, payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} payloadAppid 
+         * @param {string} payloadId 
+         * @param {InlineObject4} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        entryServiceUpdate2(payloadAppid: string, payloadId: string, payload: InlineObject4, updateMask?: string, options?: any): AxiosPromise<EntryEntry> {
+            return localVarFp.entryServiceUpdate2(payloadAppid, payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EntryServiceApi - object-oriented interface
+ * @export
+ * @class EntryServiceApi
+ * @extends {BaseAPI}
+ */
+export class EntryServiceApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} appid 
+     * @param {InlineObject} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EntryServiceApi
+     */
+    public entryServiceCreate(appid: string, body: InlineObject, options?: AxiosRequestConfig) {
+        return EntryServiceApiFp(this.configuration).entryServiceCreate(appid, body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} id2 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EntryServiceApi
+     */
+    public entryServiceDelete(id: string, id2: string, options?: AxiosRequestConfig) {
+        return EntryServiceApiFp(this.configuration).entryServiceDelete(id, id2, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} appid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EntryServiceApi
+     */
+    public entryServiceList(appid: string, options?: AxiosRequestConfig) {
+        return EntryServiceApiFp(this.configuration).entryServiceList(appid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} payloadAppid 
+     * @param {string} payloadId 
+     * @param {InlineObject3} payload 
+     * @param {string} [updateMask] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EntryServiceApi
+     */
+    public entryServiceUpdate(payloadAppid: string, payloadId: string, payload: InlineObject3, updateMask?: string, options?: AxiosRequestConfig) {
+        return EntryServiceApiFp(this.configuration).entryServiceUpdate(payloadAppid, payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} payloadAppid 
+     * @param {string} payloadId 
+     * @param {InlineObject4} payload 
+     * @param {string} [updateMask] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EntryServiceApi
+     */
+    public entryServiceUpdate2(payloadAppid: string, payloadId: string, payload: InlineObject4, updateMask?: string, options?: AxiosRequestConfig) {
+        return EntryServiceApiFp(this.configuration).entryServiceUpdate2(payloadAppid, payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -1646,11 +2824,11 @@ export const ProjectServiceApiAxiosParamCreator = function (configuration?: Conf
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject3} body 
+         * @param {InlineObject9} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate: async (id: string, body: InlineObject3, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectServiceUpdate: async (id: string, body: InlineObject9, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectServiceUpdate', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -1685,11 +2863,11 @@ export const ProjectServiceApiAxiosParamCreator = function (configuration?: Conf
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject4} body 
+         * @param {InlineObject10} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate2: async (id: string, body: InlineObject4, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectServiceUpdate2: async (id: string, body: InlineObject10, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectServiceUpdate2', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -1774,22 +2952,22 @@ export const ProjectServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject3} body 
+         * @param {InlineObject9} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectServiceUpdate(id: string, body: InlineObject3, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
+        async projectServiceUpdate(id: string, body: InlineObject9, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.projectServiceUpdate(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject4} body 
+         * @param {InlineObject10} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectServiceUpdate2(id: string, body: InlineObject4, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
+        async projectServiceUpdate2(id: string, body: InlineObject10, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.projectServiceUpdate2(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1842,21 +3020,21 @@ export const ProjectServiceApiFactory = function (configuration?: Configuration,
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject3} body 
+         * @param {InlineObject9} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate(id: string, body: InlineObject3, options?: any): AxiosPromise<ProjectProject> {
+        projectServiceUpdate(id: string, body: InlineObject9, options?: any): AxiosPromise<ProjectProject> {
             return localVarFp.projectServiceUpdate(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject4} body 
+         * @param {InlineObject10} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate2(id: string, body: InlineObject4, options?: any): AxiosPromise<ProjectProject> {
+        projectServiceUpdate2(id: string, body: InlineObject10, options?: any): AxiosPromise<ProjectProject> {
             return localVarFp.projectServiceUpdate2(id, body, options).then((request) => request(axios, basePath));
         },
     };
@@ -1916,25 +3094,442 @@ export class ProjectServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject3} body 
+     * @param {InlineObject9} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectServiceApi
      */
-    public projectServiceUpdate(id: string, body: InlineObject3, options?: AxiosRequestConfig) {
+    public projectServiceUpdate(id: string, body: InlineObject9, options?: AxiosRequestConfig) {
         return ProjectServiceApiFp(this.configuration).projectServiceUpdate(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject4} body 
+     * @param {InlineObject10} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectServiceApi
      */
-    public projectServiceUpdate2(id: string, body: InlineObject4, options?: AxiosRequestConfig) {
+    public projectServiceUpdate2(id: string, body: InlineObject10, options?: AxiosRequestConfig) {
         return ProjectServiceApiFp(this.configuration).projectServiceUpdate2(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * RouteServiceApi - axios parameter creator
+ * @export
+ */
+export const RouteServiceApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} appid 
+         * @param {InlineObject1} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        routeServiceCreate: async (appid: string, body: InlineObject1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'appid' is not null or undefined
+            assertParamExists('routeServiceCreate', 'appid', appid)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('routeServiceCreate', 'body', body)
+            const localVarPath = `/api/v1/apps/{appid}/routes`
+                .replace(`{${"appid"}}`, encodeURIComponent(String(appid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} id2 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        routeServiceDelete: async (id: string, id2: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('routeServiceDelete', 'id', id)
+            // verify required parameter 'id2' is not null or undefined
+            assertParamExists('routeServiceDelete', 'id2', id2)
+            const localVarPath = `/api/v1/apps/{id}/routes/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"id"}}`, encodeURIComponent(String(id2)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} appid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        routeServiceList: async (appid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'appid' is not null or undefined
+            assertParamExists('routeServiceList', 'appid', appid)
+            const localVarPath = `/api/v1/apps/{appid}/routes`
+                .replace(`{${"appid"}}`, encodeURIComponent(String(appid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} payloadAppid 
+         * @param {string} payloadId 
+         * @param {InlineObject5} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        routeServiceUpdate: async (payloadAppid: string, payloadId: string, payload: InlineObject5, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'payloadAppid' is not null or undefined
+            assertParamExists('routeServiceUpdate', 'payloadAppid', payloadAppid)
+            // verify required parameter 'payloadId' is not null or undefined
+            assertParamExists('routeServiceUpdate', 'payloadId', payloadId)
+            // verify required parameter 'payload' is not null or undefined
+            assertParamExists('routeServiceUpdate', 'payload', payload)
+            const localVarPath = `/api/v1/apps/{payload.appid}/routes/{payload.id}`
+                .replace(`{${"payload.appid"}}`, encodeURIComponent(String(payloadAppid)))
+                .replace(`{${"payload.id"}}`, encodeURIComponent(String(payloadId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (updateMask !== undefined) {
+                localVarQueryParameter['updateMask'] = updateMask;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(payload, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} payloadAppid 
+         * @param {string} payloadId 
+         * @param {InlineObject6} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        routeServiceUpdate2: async (payloadAppid: string, payloadId: string, payload: InlineObject6, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'payloadAppid' is not null or undefined
+            assertParamExists('routeServiceUpdate2', 'payloadAppid', payloadAppid)
+            // verify required parameter 'payloadId' is not null or undefined
+            assertParamExists('routeServiceUpdate2', 'payloadId', payloadId)
+            // verify required parameter 'payload' is not null or undefined
+            assertParamExists('routeServiceUpdate2', 'payload', payload)
+            const localVarPath = `/api/v1/apps/{payload.appid}/routes/{payload.id}`
+                .replace(`{${"payload.appid"}}`, encodeURIComponent(String(payloadAppid)))
+                .replace(`{${"payload.id"}}`, encodeURIComponent(String(payloadId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (updateMask !== undefined) {
+                localVarQueryParameter['updateMask'] = updateMask;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(payload, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * RouteServiceApi - functional programming interface
+ * @export
+ */
+export const RouteServiceApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RouteServiceApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} appid 
+         * @param {InlineObject1} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async routeServiceCreate(appid: string, body: InlineObject1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RouteRoute>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.routeServiceCreate(appid, body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} id2 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async routeServiceDelete(id: string, id2: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.routeServiceDelete(id, id2, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} appid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async routeServiceList(appid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RouteListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.routeServiceList(appid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} payloadAppid 
+         * @param {string} payloadId 
+         * @param {InlineObject5} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async routeServiceUpdate(payloadAppid: string, payloadId: string, payload: InlineObject5, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RouteRoute>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.routeServiceUpdate(payloadAppid, payloadId, payload, updateMask, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} payloadAppid 
+         * @param {string} payloadId 
+         * @param {InlineObject6} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async routeServiceUpdate2(payloadAppid: string, payloadId: string, payload: InlineObject6, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RouteRoute>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.routeServiceUpdate2(payloadAppid, payloadId, payload, updateMask, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * RouteServiceApi - factory interface
+ * @export
+ */
+export const RouteServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RouteServiceApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} appid 
+         * @param {InlineObject1} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        routeServiceCreate(appid: string, body: InlineObject1, options?: any): AxiosPromise<RouteRoute> {
+            return localVarFp.routeServiceCreate(appid, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} id2 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        routeServiceDelete(id: string, id2: string, options?: any): AxiosPromise<object> {
+            return localVarFp.routeServiceDelete(id, id2, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} appid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        routeServiceList(appid: string, options?: any): AxiosPromise<RouteListResponse> {
+            return localVarFp.routeServiceList(appid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} payloadAppid 
+         * @param {string} payloadId 
+         * @param {InlineObject5} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        routeServiceUpdate(payloadAppid: string, payloadId: string, payload: InlineObject5, updateMask?: string, options?: any): AxiosPromise<RouteRoute> {
+            return localVarFp.routeServiceUpdate(payloadAppid, payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} payloadAppid 
+         * @param {string} payloadId 
+         * @param {InlineObject6} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        routeServiceUpdate2(payloadAppid: string, payloadId: string, payload: InlineObject6, updateMask?: string, options?: any): AxiosPromise<RouteRoute> {
+            return localVarFp.routeServiceUpdate2(payloadAppid, payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * RouteServiceApi - object-oriented interface
+ * @export
+ * @class RouteServiceApi
+ * @extends {BaseAPI}
+ */
+export class RouteServiceApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} appid 
+     * @param {InlineObject1} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RouteServiceApi
+     */
+    public routeServiceCreate(appid: string, body: InlineObject1, options?: AxiosRequestConfig) {
+        return RouteServiceApiFp(this.configuration).routeServiceCreate(appid, body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} id2 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RouteServiceApi
+     */
+    public routeServiceDelete(id: string, id2: string, options?: AxiosRequestConfig) {
+        return RouteServiceApiFp(this.configuration).routeServiceDelete(id, id2, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} appid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RouteServiceApi
+     */
+    public routeServiceList(appid: string, options?: AxiosRequestConfig) {
+        return RouteServiceApiFp(this.configuration).routeServiceList(appid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} payloadAppid 
+     * @param {string} payloadId 
+     * @param {InlineObject5} payload 
+     * @param {string} [updateMask] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RouteServiceApi
+     */
+    public routeServiceUpdate(payloadAppid: string, payloadId: string, payload: InlineObject5, updateMask?: string, options?: AxiosRequestConfig) {
+        return RouteServiceApiFp(this.configuration).routeServiceUpdate(payloadAppid, payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} payloadAppid 
+     * @param {string} payloadId 
+     * @param {InlineObject6} payload 
+     * @param {string} [updateMask] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RouteServiceApi
+     */
+    public routeServiceUpdate2(payloadAppid: string, payloadId: string, payload: InlineObject6, updateMask?: string, options?: AxiosRequestConfig) {
+        return RouteServiceApiFp(this.configuration).routeServiceUpdate2(payloadAppid, payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

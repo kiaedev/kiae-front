@@ -55,9 +55,9 @@ export default defineComponent({
                     <a-tag>未启用</a-tag>
                 </a-descriptions-item>
                 <a-descriptions-item label="访问端点">
-                    <a href="">http://app1.dev.cluster.local</a>
-                    <br>
-                    <a href="">https://app1.dev.openae.dev</a>
+                    <a href="">http://{{info.name}}.{{info.env}}.svc.cluster.local</a>
+                    <!-- <br>
+                    <a href="">https://app1.dev.openae.dev</a> -->
                 </a-descriptions-item>
             </a-descriptions>
             <div>
@@ -79,6 +79,12 @@ export default defineComponent({
             </a-tab-pane>
             <a-tab-pane key="envs" tab="环境变量">
                 <Environments></Environments>
+            </a-tab-pane>
+            <a-tab-pane key="entries" tab="访问入口">
+                <Entries v-model:app="info"></Entries>
+            </a-tab-pane>
+            <a-tab-pane key="routes" tab="路由策略">
+                <Routes v-model:app="info"></Routes>
             </a-tab-pane>
             <a-tab-pane key="settings" tab="高级设置">
                 <Settings></Settings>

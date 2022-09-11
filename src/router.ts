@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import NotFound from "./pages/error/NotFound.vue";
+import HomeLayout from "./pages/Layout.vue";
 import ProjectLayout from "./pages/project/Layout.vue";
 import ProjectList from "./pages/project/Index.vue";
 // import ProjectInfo from "./pages/project/settings/Settings.vue";
@@ -9,20 +10,38 @@ import ProjectConfigs from "./pages/project/configs/Configs.vue";
 import ProjectDepends from "./pages/project/middlewares/Depends.vue";
 import ProjectSettings from "./pages/project/settings/Index.vue";
 
+import AdminLayout from "./pages/admin/Layout.vue";
+import AdminClusters from "./pages/admin/gateway/Index.vue";
+import AdminGateways from "./pages/admin/gateway/Index.vue";
+
 const routes = [
-  { path: "/", redirect: "/projects" },
-  { path: "/projects", component: ProjectList },
-  { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
   {
-    path: "/projects/:pid",
-    component: ProjectLayout,
+    path: "/",
+    component: HomeLayout,
     children: [
-    //   { path: "info", meta: {}, component: ProjectInfo },
-      { path: "apps", meta: {}, component: ProjectApps },
-      { path: "images", meta: {}, component: ProjectImages },
-      { path: "configs", meta: {}, component: ProjectConfigs },
-      { path: "middlewares", meta: {}, component: ProjectDepends },
-      { path: "settings", meta: {}, component: ProjectSettings },
+      { path: "/", redirect: "/projects" },
+      { path: "/projects", component: ProjectList },
+      { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
+      {
+        path: "/projects/:pid",
+        component: ProjectLayout,
+        children: [
+          //   { path: "info", meta: {}, component: ProjectInfo },
+          { path: "apps", meta: {}, component: ProjectApps },
+          { path: "images", meta: {}, component: ProjectImages },
+          { path: "configs", meta: {}, component: ProjectConfigs },
+          { path: "middlewares", meta: {}, component: ProjectDepends },
+          { path: "settings", meta: {}, component: ProjectSettings },
+        ],
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    component: AdminLayout,
+    children: [
+      { path: "clusters", meta: {}, component: AdminClusters },
+      { path: "gateways", meta: {}, component: AdminGateways },
     ],
   },
   //   {

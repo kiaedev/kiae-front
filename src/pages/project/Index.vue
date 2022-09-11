@@ -19,13 +19,13 @@ const listRefresh = async () => {
     projects.value = items
 }
 onMounted(listRefresh)
-const { showModal, visible, handleOk } = useModal()
+const { visible, modalOpen } = useModal()
 </script>
 <template>
     <div>
         <div style="height: 50px">
             <a-input type="search"></a-input>
-            <a-button type="primary" style="float: right" @click="showModal">创建项目</a-button>
+            <a-button type="primary" style="float: right" @click="modalOpen">创建项目</a-button>
         </div>
 
         <a-row :gutter="[16, 16]" style="padding: 0 20px">
@@ -41,7 +41,7 @@ const { showModal, visible, handleOk } = useModal()
         </a-row>
     </div>
 
-    <a-modal v-model:visible="visible" title="创建项目" @ok="handleOk" :footer="null">
+    <a-modal v-model:visible="visible" title="创建项目" :footer="null">
         <ProjectCreation @done="() => { visible = false; listRefresh(); }"></ProjectCreation>
     </a-modal>
 </template>

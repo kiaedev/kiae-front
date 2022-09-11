@@ -1,4 +1,4 @@
-import exp from "constants";
+import { Form } from "ant-design-vue";
 import { reactive, ref } from "vue";
 
 export const useModal = () => {
@@ -27,14 +27,15 @@ export const useLoading = () => {
   return { loading, loadStart, loadDone };
 };
 
+const useForm = Form.useForm;
 export const useFormSubmiter = (values: any, service: Function) => {
   const formState = reactive(values);
-  const formSubmit = () => {
-    service(formState);
-  };
+  const { resetFields } = useForm(formState);
+  const formSubmit = () => service(formState);
   return {
     formState,
     formSubmit,
+    resetFields,
   };
 };
 

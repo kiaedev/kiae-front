@@ -1053,10 +1053,17 @@ vite@^3.0.7:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vue-demi@^0.13.1:
+vue-demi@^0.13.1, vue-demi@latest:
   version "0.13.11"
   resolved "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.13.11.tgz#7d90369bdae8974d87b1973564ad390182410d99"
   integrity sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==
+
+vue-request@^2.0.0-rc.3:
+  version "2.0.0-rc.3"
+  resolved "https://registry.npmmirror.com/vue-request/-/vue-request-2.0.0-rc.3.tgz#b30e8d8f5964a255dfffa095a5bc1aa5ba64d19a"
+  integrity sha512-8ACVzScFWo7/rlUemRzti7J95ZtiH27/B/zaM6LnCOJwUoxE6zU8rRiuFIu40ZTbkHUSbNsvP1h6aY1a0Ig3Ew==
+  dependencies:
+    vue-demi latest
 
 vue-router@^4.1.5:
   version "4.1.5"

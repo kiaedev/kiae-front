@@ -1,16 +1,26 @@
 <script lang="ts" setup>
 import { ref } from "@vue/reactivity"
 
-const dataSource = ref()
+const formState = ref<any>({});
 
 </script>
 
 <template>
     <div>
         <div>
-            <a-input></a-input>
+            <!-- <a-input></a-input> -->
         </div>
-        <div>
-        </div>
+        <a-row :gutter="[16, 16]">
+            <a-col :span="12">
+                <a-card title="存活探测">
+                    <HealthProbe v-model:value="formState.livenessProbe"></HealthProbe>
+                </a-card>
+            </a-col>
+            <a-col :span="12">
+                <a-card title="就绪探测">
+                    <HealthProbe v-model:value="formState.readinessProbe"></HealthProbe>
+                </a-card>
+            </a-col>
+        </a-row>
     </div>
 </template>
