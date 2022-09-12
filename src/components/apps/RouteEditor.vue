@@ -65,7 +65,7 @@ export default defineComponent({
         return {
             title, visible, modalOpen,
             formState, formSubmit,
-            methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
+            methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
         };
     },
 });
@@ -123,7 +123,10 @@ export default defineComponent({
                         </a-select>
                     </a-form-item>
                     <a-form-item label="allowMethods" name="allowMethods">
-                        <a-select v-model:value="formState.forward.cors.allowMethods" mode="tags" size="small">
+                        <a-select v-model:value="formState.forward.cors.allowMethods" mode="multiple" size="small">
+                            <a-select-option v-for="method in methods" :key="method" :value="method">
+                                {{ method }}
+                            </a-select-option>
                         </a-select>
                     </a-form-item>
                     <a-form-item label="allowHeaders" name="allowHeaders">
