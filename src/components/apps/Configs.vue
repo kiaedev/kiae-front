@@ -43,7 +43,9 @@ const columns = [
             <a-input-search placeholder="请输入要查询的配置" style="width: 500px" />
         </a-col>
         <a-col flex="300px">
-            <a-button type="primary" style="float: right">添加配置文件</a-button>
+            <a-button type="primary" style="float: right">
+                <ConfigEditor>添加配置文件</ConfigEditor>
+            </a-button>
         </a-col>
     </a-row>
 
@@ -60,7 +62,7 @@ const columns = [
                 </template>
                 <template v-else-if="column.key === 'action'">
                     <span>
-                        <a @click="() => { handleSelect(record); modalOpen() }">编辑</a>
+                        <ConfigEditor :value="record" :config="record.content">编辑</ConfigEditor>
                         <a-divider type="vertical" />
                         <a class="ant-dropdown-link">
                             更多操作

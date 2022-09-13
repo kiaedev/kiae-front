@@ -30,9 +30,17 @@ onMounted(async () => {
 </script>
     
 <template>
-    <div>
-        <a-button type="primary">添加中间件</a-button>
-    </div>
+    <a-row type="flex">
+        <a-col flex="auto">
+            <a-input-search placeholder="请输入要查询的配置" style="width: 300px" />
+        </a-col>
+        <a-col flex="100px">
+            <a-button type="primary" style="float: right">
+                <ConfigEditor>添加中间件</ConfigEditor>
+            </a-button>
+        </a-col>
+    </a-row>
+
     <a-table :dataSource="dataSource" :columns="columns" />
 </template>
     
