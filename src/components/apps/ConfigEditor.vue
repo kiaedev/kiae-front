@@ -6,6 +6,7 @@ import { json } from '@codemirror/lang-json'
 import { xml } from '@codemirror/legacy-modes/mode/xml'
 import { yaml } from '@codemirror/legacy-modes/mode/yaml'
 import { toml } from '@codemirror/legacy-modes/mode/toml'
+import { textile } from '@codemirror/legacy-modes/mode/textile'
 import { properties } from '@codemirror/legacy-modes/mode/properties'
 import { useFormSubmiter, useModal } from "@/hooks/modal";
 import { ref } from "@vue/reactivity";
@@ -29,24 +30,20 @@ const { formState, formSubmit } = useFormSubmiter({ ext: 'yaml', mountPath: '/ka
     console.log(formState.value)
 })
 
-const lang_xml = () => StreamLanguage.define(xml)
-const lang_yaml = () => StreamLanguage.define(yaml)
-const lang_toml = () => StreamLanguage.define(toml)
-const lang_properties = () => StreamLanguage.define(properties)
 const cfg_lang = computed(() => {
     if (formState.ext === 'json') {
         return json
     } else if (formState.ext === 'xml') {
-        return lang_xml
+        return () => StreamLanguage.define(xml)
     } else if (formState.ext === 'yaml') {
-        return lang_yaml
+        return () => StreamLanguage.define(yaml)
     } else if (formState.ext === 'toml') {
-        return lang_toml
-    } else if (formState.ext === 'properties') {
-        return lang_properties
+        return () => StreamLanguage.define(toml)
+    } else if (formState.ext === 'properties' || formState.ext === 'ini') {
+        return () => StreamLanguage.define(properties)
     }
 
-    return json
+    return () => StreamLanguage.define(textile)
 })
 
 const extensions = computed(() => {
@@ -70,6 +67,7 @@ const extensions = computed(() => {
                             <a-select-option value="toml">.toml</a-select-option>
                             <a-select-option value="xml">.xml</a-select-option>
                             <a-select-option value="json">.json</a-select-option>
+                            <a-select-option value="ini">.ini</a-select-option>
                             <a-select-option value="properties">.properties</a-select-option>
                         </a-select>
                     </template>
