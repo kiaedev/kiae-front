@@ -25,8 +25,13 @@ const envs = ref([
 
 const { visible, modalOpen, modalClose } = useModal()
 let title = !props.config ? "添加配置文件" : "编辑配置文件"
+let filename;
+let ext = 'yaml'
+if (props.filename) {
+    [filename, ext] = props.filename.split('.')
+}
 
-const { formState, formSubmit } = useFormSubmiter({ ext: 'yaml', mountPath: '/kapp/etc/' }, () => {
+const { formState, formSubmit } = useFormSubmiter({ filename, ext, mountPath: '/kapp/etc/', content: props.config }, () => {
     console.log(formState.value)
 })
 

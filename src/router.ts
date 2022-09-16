@@ -6,8 +6,9 @@ import ProjectList from "./pages/project/Index.vue";
 // import ProjectInfo from "./pages/project/settings/Settings.vue";
 import ProjectApps from "./pages/project/apps/Index.vue";
 import ProjectImages from "./pages/project/images/Images.vue";
+import ProjectDeployments from "./pages/project/deployments/Deployments.vue";
 import ProjectConfigs from "./pages/project/configs/Configs.vue";
-import ProjectDepends from "./pages/project/middlewares/Depends.vue";
+import ProjectDepends from "./pages/project/depends/Depends.vue";
 import ProjectSettings from "./pages/project/settings/Index.vue";
 
 import AdminLayout from "./pages/admin/Layout.vue";
@@ -29,8 +30,9 @@ const routes = [
           //   { path: "info", meta: {}, component: ProjectInfo },
           { path: "apps", meta: {}, component: ProjectApps },
           { path: "images", meta: {}, component: ProjectImages },
+          { path: "deployments", meta: {}, component: ProjectDeployments },
           { path: "configs", meta: {}, component: ProjectConfigs },
-          { path: "middlewares", meta: {}, component: ProjectDepends },
+          { path: "depends", meta: {}, component: ProjectDepends },
           { path: "settings", meta: {}, component: ProjectSettings },
         ],
       },

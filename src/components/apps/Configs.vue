@@ -52,17 +52,12 @@ const columns = [
     <div>
         <a-table :columns="columns" :dataSource="configs">
             <template #bodyCell="{ column, record }">
-                <template v-if="column.dataIndex === 'name'">
-                    <a @click="handleAppClick(record)">
-                        {{ record.name }}
-                    </a>
-                </template>
                 <template v-if="column.dataIndex === 'createdAt'">
                     {{ $dayjs(record.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
                 </template>
                 <template v-else-if="column.key === 'action'">
                     <span>
-                        <ConfigEditor :value="record" :config="record.content">编辑</ConfigEditor>
+                        <ConfigEditor :filename="record.filename" :config="record.content">编辑</ConfigEditor>
                         <a-divider type="vertical" />
                         <a class="ant-dropdown-link">
                             更多操作

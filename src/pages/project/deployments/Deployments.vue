@@ -9,11 +9,11 @@ const columns = [
         dataIndex: 'name',
     },
     {
-        title: '完整地址',
+        title: '镜像地址',
         dataIndex: 'image',
     },
     {
-        title: '最近版本',
+        title: '镜像版本',
         dataIndex: 'latest',
     },
     {
@@ -44,7 +44,7 @@ onMounted(async () => {
         </a-col>
         <a-col flex="300px">
             <a-button type="primary" style="float: right">
-                添加镜像
+                部署
             </a-button>
         </a-col>
     </a-row>

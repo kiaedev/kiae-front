@@ -32,11 +32,11 @@ onMounted(async () => {
 <template>
     <a-row type="flex">
         <a-col flex="auto">
-            <a-input-search placeholder="请输入要查询的配置" style="width: 300px" />
+            <a-input-search placeholder="请输入要查询的依赖" style="width: 300px" />
         </a-col>
         <a-col flex="100px">
             <a-button type="primary" style="float: right">
-                <ConfigEditor>添加中间件</ConfigEditor>
+                <DependEditor>添加依赖</DependEditor>
             </a-button>
         </a-col>
     </a-row>

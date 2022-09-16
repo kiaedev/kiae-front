@@ -32,7 +32,9 @@ const columns = [
             <a-input-search placeholder="请输入要查询的中间件" style="width: 500px" />
         </a-col>
         <a-col flex="300px">
-            <a-button type="primary" style="float: right">添加中间件</a-button>
+            <a-button type="primary" style="float: right">
+                <DependEditor>添加依赖</DependEditor>
+            </a-button>
         </a-col>
     </a-row>
     <div>

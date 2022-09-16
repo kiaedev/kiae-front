@@ -6,9 +6,9 @@
         <a-menu-item key="apps">应用管理</a-menu-item>
         <a-menu-item key="deployments">部署管理</a-menu-item>
         <a-menu-item key="images">镜像管理</a-menu-item>
-        <a-menu-item key="configs">配置中心</a-menu-item>
-        <a-menu-item key="middlewares">中间件</a-menu-item>
-        <a-menu-item key="permissions">权限控制</a-menu-item>
+        <!-- <a-menu-item key="configs">配置中心</a-menu-item> -->
+        <!-- <a-menu-item key="depends">依赖管理</a-menu-item> -->
+        <!-- <a-menu-item key="permissions">权限控制</a-menu-item> -->
         <a-menu-item key="settings">项目设置</a-menu-item>
         <!-- <a-sub-menu key="sub2">
           <template #title>

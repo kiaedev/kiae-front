@@ -71,7 +71,7 @@ export default defineComponent({
             <a-tab-pane key="event" tab="事件">
                 <Events></Events>
             </a-tab-pane>
-            <a-tab-pane key="depends" tab="中间件">
+            <a-tab-pane key="depends" tab="依赖">
                 <Middlewares></Middlewares>
             </a-tab-pane>
             <a-tab-pane key="configs" tab="配置文件">
@@ -80,11 +80,14 @@ export default defineComponent({
             <a-tab-pane key="envs" tab="环境变量">
                 <Environments></Environments>
             </a-tab-pane>
+            <a-tab-pane key="routes" tab="路由策略">
+                <Routes v-model:app="info"></Routes>
+            </a-tab-pane>
             <a-tab-pane key="entries" tab="访问入口">
                 <Entries v-model:app="info"></Entries>
             </a-tab-pane>
-            <a-tab-pane key="routes" tab="路由策略">
-                <Routes v-model:app="info"></Routes>
+            <a-tab-pane key="accesses" tab="访问控制">
+                <Accesses v-model:app="info"></Accesses>
             </a-tab-pane>
             <a-tab-pane key="settings" tab="高级设置">
                 <Settings></Settings>
