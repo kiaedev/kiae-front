@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { useDependOperater } from "@/hooks/depend_op";
+import { useEgressOperater } from "@/hooks/egress_op";
 import { useKiaeApi } from "@/hooks/kiae"
+import { useMiddlewareOperater } from "@/hooks/middleware_op";
+import { computed, ref, watch } from "vue-demi";
 import { useRequest } from "vue-request"
 
 const props = defineProps({
@@ -10,11 +12,25 @@ const props = defineProps({
     },
 })
 
-const { dependSvc } = useKiaeApi()
-const { handleDelete } = useDependOperater()
-const { data, loading, error, run } = useRequest(() => dependSvc.dependServiceList(props.app.id));
+const { middlewareSvc, egressSvc } = useKiaeApi()
+const egressOp = useEgressOperater()
+const { handleClaimDelete } = useMiddlewareOperater()
 
-const columns = [
+const handleDelete = (row: any, run: Function) => {
+    type.value == 'middleware' ? handleClaimDelete(row, run) : egressOp.handleDelete(row, run)
+}
+
+const type = ref('middleware')
+let service: any = () => {
+    return type.value == 'middleware' ? middlewareSvc.middlewareServiceClaims(props.app.id) : egressSvc.egressServiceList(props.app.id)
+}
+const { data, loading, error, run } = useRequest(service)
+const columns = computed(() => {
+    return type.value == 'middleware' ? mwColumns : appColumns;
+})
+watch(type, run)
+
+const mwColumns = [
     {
         title: '类型',
         dataIndex: 'type',
@@ -24,8 +40,29 @@ const columns = [
         dataIndex: 'name',
     },
     {
-        title: '连接信息',
-        dataIndex: 'conn_info',
+        title: '状态',
+        dataIndex: 'status',
+    },
+    {
+        title: '所属实例',
+        dataIndex: 'instance',
+    },
+    {
+        title: '创建时间',
+        dataIndex: 'createdAt',
+    },
+    {
+        key: 'action',
+    },
+]
+const appColumns = [
+    {
+        title: '类型',
+        dataIndex: 'type',
+    },
+    {
+        title: '名称',
+        dataIndex: 'name',
     },
     {
         title: '状态',
@@ -44,7 +81,10 @@ const columns = [
 <template>
     <a-row type="flex">
         <a-col flex="auto">
-            <a-input-search placeholder="请输入要查询的依赖" style="width: 500px" />
+            <a-radio-group v-model:value="type">
+                <a-radio-button value="middleware">中间件</a-radio-button>
+                <a-radio-button value="default">其他应用</a-radio-button>
+            </a-radio-group>
         </a-col>
         <a-col flex="300px">
             <a-button type="primary" style="float: right">

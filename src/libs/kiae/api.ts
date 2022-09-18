@@ -122,12 +122,6 @@ export interface AppApplication {
     'configs'?: Array<ProjectConfiguration>;
     /**
      * 
-     * @type {Array<DependDepend>}
-     * @memberof AppApplication
-     */
-    'depends'?: Array<DependDepend>;
-    /**
-     * 
      * @type {string}
      * @memberof AppApplication
      */
@@ -208,67 +202,63 @@ export type AppStatus = typeof AppStatus[keyof typeof AppStatus];
 /**
  * 
  * @export
- * @interface DependDepend
+ * @enum {string}
  */
-export interface DependDepend {
+
+export const ClaimPolicy = {
+    Reuse: 'REUSE',
+    Create: 'CREATE'
+} as const;
+
+export type ClaimPolicy = typeof ClaimPolicy[keyof typeof ClaimPolicy];
+
+
+/**
+ * 
+ * @export
+ * @interface EgressEgress
+ */
+export interface EgressEgress {
     /**
      * 
      * @type {string}
-     * @memberof DependDepend
+     * @memberof EgressEgress
      */
     'id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof DependDepend
+     * @memberof EgressEgress
      */
     'appid'?: string;
     /**
      * 
-     * @type {DependDependType}
-     * @memberof DependDepend
+     * @type {EgressEgressType}
+     * @memberof EgressEgress
      */
-    'type'?: DependDependType;
+    'type'?: EgressEgressType;
     /**
      * 
      * @type {string}
-     * @memberof DependDepend
+     * @memberof EgressEgress
      */
     'name'?: string;
     /**
      * 
-     * @type {string}
-     * @memberof DependDepend
+     * @type {KiaeOpStatus}
+     * @memberof EgressEgress
      */
-    'mType'?: string;
-    /**
-     * 
-     * @type {DependPolicy}
-     * @memberof DependDepend
-     */
-    'mPolicy'?: DependPolicy;
+    'status'?: KiaeOpStatus;
     /**
      * 
      * @type {string}
-     * @memberof DependDepend
-     */
-    'mInstance'?: string;
-    /**
-     * 
-     * @type {DependDependStatus}
-     * @memberof DependDepend
-     */
-    'status'?: DependDependStatus;
-    /**
-     * 
-     * @type {string}
-     * @memberof DependDepend
+     * @memberof EgressEgress
      */
     'createdAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof DependDepend
+     * @memberof EgressEgress
      */
     'updatedAt'?: string;
 }
@@ -278,62 +268,33 @@ export interface DependDepend {
  * @enum {string}
  */
 
-export const DependDependStatus = {
-    Unbound: 'UNBOUND',
-    Bound: 'BOUND'
+export const EgressEgressType = {
+    Internal: 'INTERNAL',
+    Internet: 'INTERNET'
 } as const;
 
-export type DependDependStatus = typeof DependDependStatus[keyof typeof DependDependStatus];
+export type EgressEgressType = typeof EgressEgressType[keyof typeof EgressEgressType];
 
 
 /**
  * 
  * @export
- * @enum {string}
+ * @interface EgressListResponse
  */
-
-export const DependDependType = {
-    Middleware: 'MIDDLEWARE',
-    InternalApp: 'INTERNAL_APP',
-    InternetApp: 'INTERNET_APP'
-} as const;
-
-export type DependDependType = typeof DependDependType[keyof typeof DependDependType];
-
-
-/**
- * 
- * @export
- * @interface DependListResponse
- */
-export interface DependListResponse {
+export interface EgressListResponse {
     /**
      * 
-     * @type {Array<DependDepend>}
-     * @memberof DependListResponse
+     * @type {Array<EgressEgress>}
+     * @memberof EgressListResponse
      */
-    'items'?: Array<DependDepend>;
+    'items'?: Array<EgressEgress>;
     /**
      * 
      * @type {string}
-     * @memberof DependListResponse
+     * @memberof EgressListResponse
      */
     'total'?: string;
 }
-/**
- * 
- * @export
- * @enum {string}
- */
-
-export const DependPolicy = {
-    Reuse: 'REUSE',
-    Create: 'CREATE'
-} as const;
-
-export type DependPolicy = typeof DependPolicy[keyof typeof DependPolicy];
-
-
 /**
  * 
  * @export
@@ -467,10 +428,10 @@ export interface InlineObject {
     'id'?: string;
     /**
      * 
-     * @type {DependDependType}
+     * @type {EgressEgressType}
      * @memberof InlineObject
      */
-    'type'?: DependDependType;
+    'type'?: EgressEgressType;
     /**
      * 
      * @type {string}
@@ -479,28 +440,10 @@ export interface InlineObject {
     'name'?: string;
     /**
      * 
-     * @type {string}
+     * @type {KiaeOpStatus}
      * @memberof InlineObject
      */
-    'mType'?: string;
-    /**
-     * 
-     * @type {DependPolicy}
-     * @memberof InlineObject
-     */
-    'mPolicy'?: DependPolicy;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject
-     */
-    'mInstance'?: string;
-    /**
-     * 
-     * @type {DependDependStatus}
-     * @memberof InlineObject
-     */
-    'status'?: DependDependStatus;
+    'status'?: KiaeOpStatus;
     /**
      * 
      * @type {string}
@@ -522,10 +465,10 @@ export interface InlineObject {
 export interface InlineObject1 {
     /**
      * 
-     * @type {DependDependType}
+     * @type {EgressEgressType}
      * @memberof InlineObject1
      */
-    'type'?: DependDependType;
+    'type'?: EgressEgressType;
     /**
      * 
      * @type {string}
@@ -534,28 +477,10 @@ export interface InlineObject1 {
     'name'?: string;
     /**
      * 
-     * @type {string}
+     * @type {KiaeOpStatus}
      * @memberof InlineObject1
      */
-    'mType'?: string;
-    /**
-     * 
-     * @type {DependPolicy}
-     * @memberof InlineObject1
-     */
-    'mPolicy'?: DependPolicy;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject1
-     */
-    'mInstance'?: string;
-    /**
-     * 
-     * @type {DependDependStatus}
-     * @memberof InlineObject1
-     */
-    'status'?: DependDependStatus;
+    'status'?: KiaeOpStatus;
     /**
      * 
      * @type {string}
@@ -647,12 +572,6 @@ export interface InlineObject10 {
      * @memberof InlineObject10
      */
     'configs'?: Array<ProjectConfiguration>;
-    /**
-     * 
-     * @type {Array<DependDepend>}
-     * @memberof InlineObject10
-     */
-    'depends'?: Array<DependDepend>;
     /**
      * 
      * @type {string}
@@ -758,12 +677,6 @@ export interface InlineObject11 {
     'configs'?: Array<ProjectConfiguration>;
     /**
      * 
-     * @type {Array<DependDepend>}
-     * @memberof InlineObject11
-     */
-    'depends'?: Array<DependDepend>;
-    /**
-     * 
      * @type {string}
      * @memberof InlineObject11
      */
@@ -798,13 +711,7 @@ export interface InlineObject12 {
      * @type {string}
      * @memberof InlineObject12
      */
-    'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject12
-     */
-    'env'?: string;
+    'appid'?: string;
     /**
      * 
      * @type {string}
@@ -813,16 +720,28 @@ export interface InlineObject12 {
     'type'?: string;
     /**
      * 
-     * @type {{ [key: string]: string; }}
+     * @type {string}
      * @memberof InlineObject12
      */
-    'properties'?: { [key: string]: string; };
+    'name'?: string;
     /**
      * 
-     * @type {KiaeOpStatus}
+     * @type {ClaimPolicy}
      * @memberof InlineObject12
      */
-    'status'?: KiaeOpStatus;
+    'policy'?: ClaimPolicy;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject12
+     */
+    'instance'?: string;
+    /**
+     * 
+     * @type {MiddlewareClaimStatus}
+     * @memberof InlineObject12
+     */
+    'status'?: MiddlewareClaimStatus;
     /**
      * 
      * @type {string}
@@ -847,13 +766,7 @@ export interface InlineObject13 {
      * @type {string}
      * @memberof InlineObject13
      */
-    'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject13
-     */
-    'env'?: string;
+    'appid'?: string;
     /**
      * 
      * @type {string}
@@ -862,16 +775,28 @@ export interface InlineObject13 {
     'type'?: string;
     /**
      * 
-     * @type {{ [key: string]: string; }}
+     * @type {string}
      * @memberof InlineObject13
      */
-    'properties'?: { [key: string]: string; };
+    'name'?: string;
     /**
      * 
-     * @type {KiaeOpStatus}
+     * @type {ClaimPolicy}
      * @memberof InlineObject13
      */
-    'status'?: KiaeOpStatus;
+    'policy'?: ClaimPolicy;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject13
+     */
+    'instance'?: string;
+    /**
+     * 
+     * @type {MiddlewareClaimStatus}
+     * @memberof InlineObject13
+     */
+    'status'?: MiddlewareClaimStatus;
     /**
      * 
      * @type {string}
@@ -902,37 +827,25 @@ export interface InlineObject14 {
      * @type {string}
      * @memberof InlineObject14
      */
-    'intro'?: string;
+    'env'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject14
      */
-    'git'?: string;
+    'type'?: string;
     /**
      * 
-     * @type {Array<ProjectImage>}
+     * @type {{ [key: string]: string; }}
      * @memberof InlineObject14
      */
-    'images'?: Array<ProjectImage>;
+    'properties'?: { [key: string]: string; };
     /**
      * 
-     * @type {Array<ProjectPort>}
+     * @type {KiaeOpStatus}
      * @memberof InlineObject14
      */
-    'ports'?: Array<ProjectPort>;
-    /**
-     * 
-     * @type {ProjectHealthProbe}
-     * @memberof InlineObject14
-     */
-    'livenessProbe'?: ProjectHealthProbe;
-    /**
-     * 
-     * @type {ProjectHealthProbe}
-     * @memberof InlineObject14
-     */
-    'readinessProbe'?: ProjectHealthProbe;
+    'status'?: KiaeOpStatus;
     /**
      * 
      * @type {string}
@@ -944,19 +857,7 @@ export interface InlineObject14 {
      * @type {string}
      * @memberof InlineObject14
      */
-    'createdBy'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject14
-     */
     'updatedAt'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject14
-     */
-    'updatedBy'?: string;
 }
 /**
  * 
@@ -975,37 +876,25 @@ export interface InlineObject15 {
      * @type {string}
      * @memberof InlineObject15
      */
-    'intro'?: string;
+    'env'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject15
      */
-    'git'?: string;
+    'type'?: string;
     /**
      * 
-     * @type {Array<ProjectImage>}
+     * @type {{ [key: string]: string; }}
      * @memberof InlineObject15
      */
-    'images'?: Array<ProjectImage>;
+    'properties'?: { [key: string]: string; };
     /**
      * 
-     * @type {Array<ProjectPort>}
+     * @type {KiaeOpStatus}
      * @memberof InlineObject15
      */
-    'ports'?: Array<ProjectPort>;
-    /**
-     * 
-     * @type {ProjectHealthProbe}
-     * @memberof InlineObject15
-     */
-    'livenessProbe'?: ProjectHealthProbe;
-    /**
-     * 
-     * @type {ProjectHealthProbe}
-     * @memberof InlineObject15
-     */
-    'readinessProbe'?: ProjectHealthProbe;
+    'status'?: KiaeOpStatus;
     /**
      * 
      * @type {string}
@@ -1017,17 +906,151 @@ export interface InlineObject15 {
      * @type {string}
      * @memberof InlineObject15
      */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject16
+ */
+export interface InlineObject16 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject16
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject16
+     */
+    'intro'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject16
+     */
+    'git'?: string;
+    /**
+     * 
+     * @type {Array<ProjectImage>}
+     * @memberof InlineObject16
+     */
+    'images'?: Array<ProjectImage>;
+    /**
+     * 
+     * @type {Array<ProjectPort>}
+     * @memberof InlineObject16
+     */
+    'ports'?: Array<ProjectPort>;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject16
+     */
+    'livenessProbe'?: ProjectHealthProbe;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject16
+     */
+    'readinessProbe'?: ProjectHealthProbe;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject16
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject16
+     */
     'createdBy'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject15
+     * @memberof InlineObject16
      */
     'updatedAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof InlineObject15
+     * @memberof InlineObject16
+     */
+    'updatedBy'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject17
+ */
+export interface InlineObject17 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject17
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject17
+     */
+    'intro'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject17
+     */
+    'git'?: string;
+    /**
+     * 
+     * @type {Array<ProjectImage>}
+     * @memberof InlineObject17
+     */
+    'images'?: Array<ProjectImage>;
+    /**
+     * 
+     * @type {Array<ProjectPort>}
+     * @memberof InlineObject17
+     */
+    'ports'?: Array<ProjectPort>;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject17
+     */
+    'livenessProbe'?: ProjectHealthProbe;
+    /**
+     * 
+     * @type {ProjectHealthProbe}
+     * @memberof InlineObject17
+     */
+    'readinessProbe'?: ProjectHealthProbe;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject17
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject17
+     */
+    'createdBy'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject17
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject17
      */
     'updatedBy'?: string;
 }
@@ -1039,10 +1062,10 @@ export interface InlineObject15 {
 export interface InlineObject2 {
     /**
      * 
-     * @type {DependDependType}
+     * @type {EgressEgressType}
      * @memberof InlineObject2
      */
-    'type'?: DependDependType;
+    'type'?: EgressEgressType;
     /**
      * 
      * @type {string}
@@ -1051,28 +1074,10 @@ export interface InlineObject2 {
     'name'?: string;
     /**
      * 
-     * @type {string}
+     * @type {KiaeOpStatus}
      * @memberof InlineObject2
      */
-    'mType'?: string;
-    /**
-     * 
-     * @type {DependPolicy}
-     * @memberof InlineObject2
-     */
-    'mPolicy'?: DependPolicy;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject2
-     */
-    'mInstance'?: string;
-    /**
-     * 
-     * @type {DependDependStatus}
-     * @memberof InlineObject2
-     */
-    'status'?: DependDependStatus;
+    'status'?: KiaeOpStatus;
     /**
      * 
      * @type {string}
@@ -1491,6 +1496,100 @@ export const KiaeOpStatus = {
 export type KiaeOpStatus = typeof KiaeOpStatus[keyof typeof KiaeOpStatus];
 
 
+/**
+ * 
+ * @export
+ * @interface MiddlewareClaim
+ */
+export interface MiddlewareClaim {
+    /**
+     * 
+     * @type {string}
+     * @memberof MiddlewareClaim
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MiddlewareClaim
+     */
+    'appid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MiddlewareClaim
+     */
+    'type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MiddlewareClaim
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {ClaimPolicy}
+     * @memberof MiddlewareClaim
+     */
+    'policy'?: ClaimPolicy;
+    /**
+     * 
+     * @type {string}
+     * @memberof MiddlewareClaim
+     */
+    'instance'?: string;
+    /**
+     * 
+     * @type {MiddlewareClaimStatus}
+     * @memberof MiddlewareClaim
+     */
+    'status'?: MiddlewareClaimStatus;
+    /**
+     * 
+     * @type {string}
+     * @memberof MiddlewareClaim
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MiddlewareClaim
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const MiddlewareClaimStatus = {
+    Unbound: 'UNBOUND',
+    Bound: 'BOUND'
+} as const;
+
+export type MiddlewareClaimStatus = typeof MiddlewareClaimStatus[keyof typeof MiddlewareClaimStatus];
+
+
+/**
+ * 
+ * @export
+ * @interface MiddlewareClaimsResponse
+ */
+export interface MiddlewareClaimsResponse {
+    /**
+     * 
+     * @type {Array<MiddlewareClaim>}
+     * @memberof MiddlewareClaimsResponse
+     */
+    'items'?: Array<MiddlewareClaim>;
+    /**
+     * 
+     * @type {string}
+     * @memberof MiddlewareClaimsResponse
+     */
+    'total'?: string;
+}
 /**
  * 
  * @export
@@ -2675,10 +2774,10 @@ export class AppServiceApi extends BaseAPI {
 
 
 /**
- * DependServiceApi - axios parameter creator
+ * EgressServiceApi - axios parameter creator
  * @export
  */
-export const DependServiceApiAxiosParamCreator = function (configuration?: Configuration) {
+export const EgressServiceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
@@ -2687,12 +2786,12 @@ export const DependServiceApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dependServiceCreate: async (appid: string, body: InlineObject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        egressServiceCreate: async (appid: string, body: InlineObject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'appid' is not null or undefined
-            assertParamExists('dependServiceCreate', 'appid', appid)
+            assertParamExists('egressServiceCreate', 'appid', appid)
             // verify required parameter 'body' is not null or undefined
-            assertParamExists('dependServiceCreate', 'body', body)
-            const localVarPath = `/api/v1/apps/{appid}/depends`
+            assertParamExists('egressServiceCreate', 'body', body)
+            const localVarPath = `/api/v1/apps/{appid}/egress`
                 .replace(`{${"appid"}}`, encodeURIComponent(String(appid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2726,12 +2825,12 @@ export const DependServiceApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dependServiceDelete: async (id: string, id2: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        egressServiceDelete: async (id: string, id2: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('dependServiceDelete', 'id', id)
+            assertParamExists('egressServiceDelete', 'id', id)
             // verify required parameter 'id2' is not null or undefined
-            assertParamExists('dependServiceDelete', 'id2', id2)
-            const localVarPath = `/api/v1/apps/{id}/depends/{id}`
+            assertParamExists('egressServiceDelete', 'id2', id2)
+            const localVarPath = `/api/v1/apps/{id}/egress/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)))
                 .replace(`{${"id"}}`, encodeURIComponent(String(id2)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2763,10 +2862,10 @@ export const DependServiceApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dependServiceList: async (appid: string, name?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        egressServiceList: async (appid: string, name?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'appid' is not null or undefined
-            assertParamExists('dependServiceList', 'appid', appid)
-            const localVarPath = `/api/v1/apps/{appid}/depends`
+            assertParamExists('egressServiceList', 'appid', appid)
+            const localVarPath = `/api/v1/apps/{appid}/egress`
                 .replace(`{${"appid"}}`, encodeURIComponent(String(appid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2802,14 +2901,14 @@ export const DependServiceApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dependServiceUpdate: async (appid: string, id: string, body: InlineObject1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        egressServiceUpdate: async (appid: string, id: string, body: InlineObject1, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'appid' is not null or undefined
-            assertParamExists('dependServiceUpdate', 'appid', appid)
+            assertParamExists('egressServiceUpdate', 'appid', appid)
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('dependServiceUpdate', 'id', id)
+            assertParamExists('egressServiceUpdate', 'id', id)
             // verify required parameter 'body' is not null or undefined
-            assertParamExists('dependServiceUpdate', 'body', body)
-            const localVarPath = `/api/v1/apps/{appid}/depends/{id}`
+            assertParamExists('egressServiceUpdate', 'body', body)
+            const localVarPath = `/api/v1/apps/{appid}/egress/{id}`
                 .replace(`{${"appid"}}`, encodeURIComponent(String(appid)))
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2845,14 +2944,14 @@ export const DependServiceApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dependServiceUpdate2: async (appid: string, id: string, body: InlineObject2, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        egressServiceUpdate2: async (appid: string, id: string, body: InlineObject2, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'appid' is not null or undefined
-            assertParamExists('dependServiceUpdate2', 'appid', appid)
+            assertParamExists('egressServiceUpdate2', 'appid', appid)
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('dependServiceUpdate2', 'id', id)
+            assertParamExists('egressServiceUpdate2', 'id', id)
             // verify required parameter 'body' is not null or undefined
-            assertParamExists('dependServiceUpdate2', 'body', body)
-            const localVarPath = `/api/v1/apps/{appid}/depends/{id}`
+            assertParamExists('egressServiceUpdate2', 'body', body)
+            const localVarPath = `/api/v1/apps/{appid}/egress/{id}`
                 .replace(`{${"appid"}}`, encodeURIComponent(String(appid)))
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2884,11 +2983,11 @@ export const DependServiceApiAxiosParamCreator = function (configuration?: Confi
 };
 
 /**
- * DependServiceApi - functional programming interface
+ * EgressServiceApi - functional programming interface
  * @export
  */
-export const DependServiceApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = DependServiceApiAxiosParamCreator(configuration)
+export const EgressServiceApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EgressServiceApiAxiosParamCreator(configuration)
     return {
         /**
          * 
@@ -2897,8 +2996,8 @@ export const DependServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async dependServiceCreate(appid: string, body: InlineObject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DependDepend>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.dependServiceCreate(appid, body, options);
+        async egressServiceCreate(appid: string, body: InlineObject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EgressEgress>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.egressServiceCreate(appid, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2908,8 +3007,8 @@ export const DependServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async dependServiceDelete(id: string, id2: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.dependServiceDelete(id, id2, options);
+        async egressServiceDelete(id: string, id2: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.egressServiceDelete(id, id2, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2919,8 +3018,8 @@ export const DependServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async dependServiceList(appid: string, name?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DependListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.dependServiceList(appid, name, options);
+        async egressServiceList(appid: string, name?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EgressListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.egressServiceList(appid, name, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2931,8 +3030,8 @@ export const DependServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async dependServiceUpdate(appid: string, id: string, body: InlineObject1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DependDepend>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.dependServiceUpdate(appid, id, body, options);
+        async egressServiceUpdate(appid: string, id: string, body: InlineObject1, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EgressEgress>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.egressServiceUpdate(appid, id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2943,19 +3042,19 @@ export const DependServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async dependServiceUpdate2(appid: string, id: string, body: InlineObject2, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DependDepend>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.dependServiceUpdate2(appid, id, body, options);
+        async egressServiceUpdate2(appid: string, id: string, body: InlineObject2, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EgressEgress>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.egressServiceUpdate2(appid, id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * DependServiceApi - factory interface
+ * EgressServiceApi - factory interface
  * @export
  */
-export const DependServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = DependServiceApiFp(configuration)
+export const EgressServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EgressServiceApiFp(configuration)
     return {
         /**
          * 
@@ -2964,8 +3063,8 @@ export const DependServiceApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dependServiceCreate(appid: string, body: InlineObject, options?: any): AxiosPromise<DependDepend> {
-            return localVarFp.dependServiceCreate(appid, body, options).then((request) => request(axios, basePath));
+        egressServiceCreate(appid: string, body: InlineObject, options?: any): AxiosPromise<EgressEgress> {
+            return localVarFp.egressServiceCreate(appid, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2974,8 +3073,8 @@ export const DependServiceApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dependServiceDelete(id: string, id2: string, options?: any): AxiosPromise<object> {
-            return localVarFp.dependServiceDelete(id, id2, options).then((request) => request(axios, basePath));
+        egressServiceDelete(id: string, id2: string, options?: any): AxiosPromise<object> {
+            return localVarFp.egressServiceDelete(id, id2, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2984,8 +3083,8 @@ export const DependServiceApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dependServiceList(appid: string, name?: string, options?: any): AxiosPromise<DependListResponse> {
-            return localVarFp.dependServiceList(appid, name, options).then((request) => request(axios, basePath));
+        egressServiceList(appid: string, name?: string, options?: any): AxiosPromise<EgressListResponse> {
+            return localVarFp.egressServiceList(appid, name, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2995,8 +3094,8 @@ export const DependServiceApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dependServiceUpdate(appid: string, id: string, body: InlineObject1, options?: any): AxiosPromise<DependDepend> {
-            return localVarFp.dependServiceUpdate(appid, id, body, options).then((request) => request(axios, basePath));
+        egressServiceUpdate(appid: string, id: string, body: InlineObject1, options?: any): AxiosPromise<EgressEgress> {
+            return localVarFp.egressServiceUpdate(appid, id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3006,29 +3105,29 @@ export const DependServiceApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        dependServiceUpdate2(appid: string, id: string, body: InlineObject2, options?: any): AxiosPromise<DependDepend> {
-            return localVarFp.dependServiceUpdate2(appid, id, body, options).then((request) => request(axios, basePath));
+        egressServiceUpdate2(appid: string, id: string, body: InlineObject2, options?: any): AxiosPromise<EgressEgress> {
+            return localVarFp.egressServiceUpdate2(appid, id, body, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * DependServiceApi - object-oriented interface
+ * EgressServiceApi - object-oriented interface
  * @export
- * @class DependServiceApi
+ * @class EgressServiceApi
  * @extends {BaseAPI}
  */
-export class DependServiceApi extends BaseAPI {
+export class EgressServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} appid 
      * @param {InlineObject} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DependServiceApi
+     * @memberof EgressServiceApi
      */
-    public dependServiceCreate(appid: string, body: InlineObject, options?: AxiosRequestConfig) {
-        return DependServiceApiFp(this.configuration).dependServiceCreate(appid, body, options).then((request) => request(this.axios, this.basePath));
+    public egressServiceCreate(appid: string, body: InlineObject, options?: AxiosRequestConfig) {
+        return EgressServiceApiFp(this.configuration).egressServiceCreate(appid, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3037,10 +3136,10 @@ export class DependServiceApi extends BaseAPI {
      * @param {string} id2 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DependServiceApi
+     * @memberof EgressServiceApi
      */
-    public dependServiceDelete(id: string, id2: string, options?: AxiosRequestConfig) {
-        return DependServiceApiFp(this.configuration).dependServiceDelete(id, id2, options).then((request) => request(this.axios, this.basePath));
+    public egressServiceDelete(id: string, id2: string, options?: AxiosRequestConfig) {
+        return EgressServiceApiFp(this.configuration).egressServiceDelete(id, id2, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3049,10 +3148,10 @@ export class DependServiceApi extends BaseAPI {
      * @param {string} [name] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DependServiceApi
+     * @memberof EgressServiceApi
      */
-    public dependServiceList(appid: string, name?: string, options?: AxiosRequestConfig) {
-        return DependServiceApiFp(this.configuration).dependServiceList(appid, name, options).then((request) => request(this.axios, this.basePath));
+    public egressServiceList(appid: string, name?: string, options?: AxiosRequestConfig) {
+        return EgressServiceApiFp(this.configuration).egressServiceList(appid, name, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3062,10 +3161,10 @@ export class DependServiceApi extends BaseAPI {
      * @param {InlineObject1} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DependServiceApi
+     * @memberof EgressServiceApi
      */
-    public dependServiceUpdate(appid: string, id: string, body: InlineObject1, options?: AxiosRequestConfig) {
-        return DependServiceApiFp(this.configuration).dependServiceUpdate(appid, id, body, options).then((request) => request(this.axios, this.basePath));
+    public egressServiceUpdate(appid: string, id: string, body: InlineObject1, options?: AxiosRequestConfig) {
+        return EgressServiceApiFp(this.configuration).egressServiceUpdate(appid, id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3075,10 +3174,10 @@ export class DependServiceApi extends BaseAPI {
      * @param {InlineObject2} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DependServiceApi
+     * @memberof EgressServiceApi
      */
-    public dependServiceUpdate2(appid: string, id: string, body: InlineObject2, options?: AxiosRequestConfig) {
-        return DependServiceApiFp(this.configuration).dependServiceUpdate2(appid, id, body, options).then((request) => request(this.axios, this.basePath));
+    public egressServiceUpdate2(appid: string, id: string, body: InlineObject2, options?: AxiosRequestConfig) {
+        return EgressServiceApiFp(this.configuration).egressServiceUpdate2(appid, id, body, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -3508,6 +3607,186 @@ export const MiddlewareServiceApiAxiosParamCreator = function (configuration?: C
     return {
         /**
          * 
+         * @param {MiddlewareClaim} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        middlewareServiceClaimCreate: async (body: MiddlewareClaim, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('middlewareServiceClaimCreate', 'body', body)
+            const localVarPath = `/api/v1/middleware/claims`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        middlewareServiceClaimDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('middlewareServiceClaimDelete', 'id', id)
+            const localVarPath = `/api/v1/middleware/claims/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject12} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        middlewareServiceClaimUpdate: async (id: string, body: InlineObject12, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('middlewareServiceClaimUpdate', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('middlewareServiceClaimUpdate', 'body', body)
+            const localVarPath = `/api/v1/middleware/claims/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject13} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        middlewareServiceClaimUpdate2: async (id: string, body: InlineObject13, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('middlewareServiceClaimUpdate2', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('middlewareServiceClaimUpdate2', 'body', body)
+            const localVarPath = `/api/v1/middleware/claims/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} [type] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        middlewareServiceClaims: async (type?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/middleware/claims`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (type !== undefined) {
+                localVarQueryParameter['type'] = type;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {MiddlewareInstance} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3515,7 +3794,7 @@ export const MiddlewareServiceApiAxiosParamCreator = function (configuration?: C
         middlewareServiceCreate: async (body: MiddlewareInstance, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             assertParamExists('middlewareServiceCreate', 'body', body)
-            const localVarPath = `/api/v1/middleware/instances`;
+            const localVarPath = `/api/v1/middlewares`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -3550,7 +3829,7 @@ export const MiddlewareServiceApiAxiosParamCreator = function (configuration?: C
         middlewareServiceDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('middlewareServiceDelete', 'id', id)
-            const localVarPath = `/api/v1/middleware/instances/{id}`
+            const localVarPath = `/api/v1/middlewares/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3581,7 +3860,7 @@ export const MiddlewareServiceApiAxiosParamCreator = function (configuration?: C
          * @throws {RequiredError}
          */
         middlewareServiceList: async (type?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/middleware/instances`;
+            const localVarPath = `/api/v1/middlewares`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -3611,16 +3890,16 @@ export const MiddlewareServiceApiAxiosParamCreator = function (configuration?: C
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject12} body 
+         * @param {InlineObject14} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        middlewareServiceUpdate: async (id: string, body: InlineObject12, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        middlewareServiceUpdate: async (id: string, body: InlineObject14, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('middlewareServiceUpdate', 'id', id)
             // verify required parameter 'body' is not null or undefined
             assertParamExists('middlewareServiceUpdate', 'body', body)
-            const localVarPath = `/api/v1/middleware/instances/{id}`
+            const localVarPath = `/api/v1/middlewares/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3650,16 +3929,16 @@ export const MiddlewareServiceApiAxiosParamCreator = function (configuration?: C
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject13} body 
+         * @param {InlineObject15} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        middlewareServiceUpdate2: async (id: string, body: InlineObject13, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        middlewareServiceUpdate2: async (id: string, body: InlineObject15, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('middlewareServiceUpdate2', 'id', id)
             // verify required parameter 'body' is not null or undefined
             assertParamExists('middlewareServiceUpdate2', 'body', body)
-            const localVarPath = `/api/v1/middleware/instances/{id}`
+            const localVarPath = `/api/v1/middlewares/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3698,6 +3977,58 @@ export const MiddlewareServiceApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {MiddlewareClaim} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async middlewareServiceClaimCreate(body: MiddlewareClaim, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareClaim>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.middlewareServiceClaimCreate(body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async middlewareServiceClaimDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.middlewareServiceClaimDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject12} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async middlewareServiceClaimUpdate(id: string, body: InlineObject12, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareClaim>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.middlewareServiceClaimUpdate(id, body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject13} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async middlewareServiceClaimUpdate2(id: string, body: InlineObject13, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareClaim>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.middlewareServiceClaimUpdate2(id, body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} [type] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async middlewareServiceClaims(type?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareClaimsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.middlewareServiceClaims(type, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {MiddlewareInstance} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3729,22 +4060,22 @@ export const MiddlewareServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject12} body 
+         * @param {InlineObject14} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async middlewareServiceUpdate(id: string, body: InlineObject12, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareInstance>> {
+        async middlewareServiceUpdate(id: string, body: InlineObject14, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareInstance>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.middlewareServiceUpdate(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject13} body 
+         * @param {InlineObject15} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async middlewareServiceUpdate2(id: string, body: InlineObject13, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareInstance>> {
+        async middlewareServiceUpdate2(id: string, body: InlineObject15, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareInstance>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.middlewareServiceUpdate2(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3758,6 +4089,53 @@ export const MiddlewareServiceApiFp = function(configuration?: Configuration) {
 export const MiddlewareServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = MiddlewareServiceApiFp(configuration)
     return {
+        /**
+         * 
+         * @param {MiddlewareClaim} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        middlewareServiceClaimCreate(body: MiddlewareClaim, options?: any): AxiosPromise<MiddlewareClaim> {
+            return localVarFp.middlewareServiceClaimCreate(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        middlewareServiceClaimDelete(id: string, options?: any): AxiosPromise<object> {
+            return localVarFp.middlewareServiceClaimDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject12} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        middlewareServiceClaimUpdate(id: string, body: InlineObject12, options?: any): AxiosPromise<MiddlewareClaim> {
+            return localVarFp.middlewareServiceClaimUpdate(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject13} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        middlewareServiceClaimUpdate2(id: string, body: InlineObject13, options?: any): AxiosPromise<MiddlewareClaim> {
+            return localVarFp.middlewareServiceClaimUpdate2(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} [type] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        middlewareServiceClaims(type?: string, options?: any): AxiosPromise<MiddlewareClaimsResponse> {
+            return localVarFp.middlewareServiceClaims(type, options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @param {MiddlewareInstance} body 
@@ -3788,21 +4166,21 @@ export const MiddlewareServiceApiFactory = function (configuration?: Configurati
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject12} body 
+         * @param {InlineObject14} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        middlewareServiceUpdate(id: string, body: InlineObject12, options?: any): AxiosPromise<MiddlewareInstance> {
+        middlewareServiceUpdate(id: string, body: InlineObject14, options?: any): AxiosPromise<MiddlewareInstance> {
             return localVarFp.middlewareServiceUpdate(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject13} body 
+         * @param {InlineObject15} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        middlewareServiceUpdate2(id: string, body: InlineObject13, options?: any): AxiosPromise<MiddlewareInstance> {
+        middlewareServiceUpdate2(id: string, body: InlineObject15, options?: any): AxiosPromise<MiddlewareInstance> {
             return localVarFp.middlewareServiceUpdate2(id, body, options).then((request) => request(axios, basePath));
         },
     };
@@ -3815,6 +4193,63 @@ export const MiddlewareServiceApiFactory = function (configuration?: Configurati
  * @extends {BaseAPI}
  */
 export class MiddlewareServiceApi extends BaseAPI {
+    /**
+     * 
+     * @param {MiddlewareClaim} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MiddlewareServiceApi
+     */
+    public middlewareServiceClaimCreate(body: MiddlewareClaim, options?: AxiosRequestConfig) {
+        return MiddlewareServiceApiFp(this.configuration).middlewareServiceClaimCreate(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MiddlewareServiceApi
+     */
+    public middlewareServiceClaimDelete(id: string, options?: AxiosRequestConfig) {
+        return MiddlewareServiceApiFp(this.configuration).middlewareServiceClaimDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {InlineObject12} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MiddlewareServiceApi
+     */
+    public middlewareServiceClaimUpdate(id: string, body: InlineObject12, options?: AxiosRequestConfig) {
+        return MiddlewareServiceApiFp(this.configuration).middlewareServiceClaimUpdate(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {InlineObject13} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MiddlewareServiceApi
+     */
+    public middlewareServiceClaimUpdate2(id: string, body: InlineObject13, options?: AxiosRequestConfig) {
+        return MiddlewareServiceApiFp(this.configuration).middlewareServiceClaimUpdate2(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} [type] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MiddlewareServiceApi
+     */
+    public middlewareServiceClaims(type?: string, options?: AxiosRequestConfig) {
+        return MiddlewareServiceApiFp(this.configuration).middlewareServiceClaims(type, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {MiddlewareInstance} body 
@@ -3851,24 +4286,24 @@ export class MiddlewareServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject12} body 
+     * @param {InlineObject14} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MiddlewareServiceApi
      */
-    public middlewareServiceUpdate(id: string, body: InlineObject12, options?: AxiosRequestConfig) {
+    public middlewareServiceUpdate(id: string, body: InlineObject14, options?: AxiosRequestConfig) {
         return MiddlewareServiceApiFp(this.configuration).middlewareServiceUpdate(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject13} body 
+     * @param {InlineObject15} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MiddlewareServiceApi
      */
-    public middlewareServiceUpdate2(id: string, body: InlineObject13, options?: AxiosRequestConfig) {
+    public middlewareServiceUpdate2(id: string, body: InlineObject15, options?: AxiosRequestConfig) {
         return MiddlewareServiceApiFp(this.configuration).middlewareServiceUpdate2(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -4018,11 +4453,11 @@ export const ProjectServiceApiAxiosParamCreator = function (configuration?: Conf
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject14} body 
+         * @param {InlineObject16} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate: async (id: string, body: InlineObject14, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectServiceUpdate: async (id: string, body: InlineObject16, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectServiceUpdate', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -4057,11 +4492,11 @@ export const ProjectServiceApiAxiosParamCreator = function (configuration?: Conf
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject15} body 
+         * @param {InlineObject17} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate2: async (id: string, body: InlineObject15, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectServiceUpdate2: async (id: string, body: InlineObject17, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectServiceUpdate2', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -4146,22 +4581,22 @@ export const ProjectServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject14} body 
+         * @param {InlineObject16} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectServiceUpdate(id: string, body: InlineObject14, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
+        async projectServiceUpdate(id: string, body: InlineObject16, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.projectServiceUpdate(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject15} body 
+         * @param {InlineObject17} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectServiceUpdate2(id: string, body: InlineObject15, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
+        async projectServiceUpdate2(id: string, body: InlineObject17, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.projectServiceUpdate2(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4214,21 +4649,21 @@ export const ProjectServiceApiFactory = function (configuration?: Configuration,
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject14} body 
+         * @param {InlineObject16} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate(id: string, body: InlineObject14, options?: any): AxiosPromise<ProjectProject> {
+        projectServiceUpdate(id: string, body: InlineObject16, options?: any): AxiosPromise<ProjectProject> {
             return localVarFp.projectServiceUpdate(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject15} body 
+         * @param {InlineObject17} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate2(id: string, body: InlineObject15, options?: any): AxiosPromise<ProjectProject> {
+        projectServiceUpdate2(id: string, body: InlineObject17, options?: any): AxiosPromise<ProjectProject> {
             return localVarFp.projectServiceUpdate2(id, body, options).then((request) => request(axios, basePath));
         },
     };
@@ -4288,24 +4723,24 @@ export class ProjectServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject14} body 
+     * @param {InlineObject16} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectServiceApi
      */
-    public projectServiceUpdate(id: string, body: InlineObject14, options?: AxiosRequestConfig) {
+    public projectServiceUpdate(id: string, body: InlineObject16, options?: AxiosRequestConfig) {
         return ProjectServiceApiFp(this.configuration).projectServiceUpdate(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject15} body 
+     * @param {InlineObject17} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectServiceApi
      */
-    public projectServiceUpdate2(id: string, body: InlineObject15, options?: AxiosRequestConfig) {
+    public projectServiceUpdate2(id: string, body: InlineObject17, options?: AxiosRequestConfig) {
         return ProjectServiceApiFp(this.configuration).projectServiceUpdate2(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 }

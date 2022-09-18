@@ -1,6 +1,6 @@
 import {
   AppServiceApi,
-  DependServiceApi,
+  EgressServiceApi,
   EntryServiceApi,
   MiddlewareServiceApi,
   ProjectServiceApi,
@@ -13,11 +13,11 @@ export const useKiaeApi = () => {
   return {
     projSvc: new ProjectServiceApi(kiaeCfg),
     appSvc: new AppServiceApi(kiaeCfg),
-    dependSvc: new DependServiceApi(kiaeCfg),
+    egressSvc: new EgressServiceApi(kiaeCfg),
     entrySvc: new EntryServiceApi(kiaeCfg),
     routeSvc: new RouteServiceApi(kiaeCfg),
 
-    middlewareSvc: new MiddlewareServiceApi(kiaeCfg)
+    middlewareSvc: new MiddlewareServiceApi(kiaeCfg),
   };
 };
 

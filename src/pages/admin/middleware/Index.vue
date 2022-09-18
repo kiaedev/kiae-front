@@ -13,8 +13,8 @@ import { useRequest } from "vue-request";
 import Editor from "./Editor.vue";
 
 const { middlewareSvc } = useKiaeApi()
-const { handleDelete } = useMiddlewareOperater()
 const { data, loading, error, run } = useRequest(() => middlewareSvc.middlewareServiceList());
+const { handleDelete } = useMiddlewareOperater()
 
 const columns = [
     {
