@@ -34,7 +34,7 @@ const { visible, modalOpen } = useModal()
                     <h4>{{ proj.name }}</h4>
                     <a-space>
                         <span>应用数：3{{ proj.appNumber }}</span>
-                        <span>中间件：{{ proj.middlewares.length }}</span>
+                        <!-- <span>中间件：{{ proj.middlewares.length }}</span> -->
                     </a-space>
                 </a-card>
             </a-col>

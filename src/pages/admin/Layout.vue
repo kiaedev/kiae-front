@@ -1,16 +1,51 @@
+<script lang="ts" setup>
+import {
+    PieChartOutlined,
+    DesktopOutlined,
+    UserOutlined,
+    TeamOutlined,
+    FileOutlined,
+} from '@ant-design/icons-vue';
+import { defineComponent, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+
+const route = useRoute()
+const router = useRouter()
+const openKeys = ref<string[]>([]);
+const selectedKeys = ref<string[]>([])
+const collapsed = ref<boolean>(false)
+const handleClick = (e: any) => {
+    console.log(e.keyPath)
+    openKeys.value = e.keyPath;
+    router.push(`/admin/${e.keyPath.join('/')}`)
+};
+</script>
+
 <template>
     <a-layout style="min-height: 100vh">
         <a-layout-sider v-model:collapsed="collapsed" collapsible>
             <div class="logo" />
-            <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
+            <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline" @click="handleClick">
                 <a-menu-item key="1">
                     <pie-chart-outlined />
-                    <span>网关设置</span>
+                    <span>首页</span>
                 </a-menu-item>
                 <a-menu-item key="2">
                     <desktop-outlined />
                     <span>Option 2</span>
                 </a-menu-item>
+                <a-sub-menu key="middlewares">
+                    <template #title>
+                        <span>
+                            <user-outlined />
+                            <span>中间件管理</span>
+                        </span>
+                    </template>
+                    <a-menu-item key="">实例列表</a-menu-item>
+                    <!-- <a-menu-item key="4">访问入口</a-menu-item>
+                    <a-menu-item key="5">Alex</a-menu-item> -->
+                </a-sub-menu>
                 <a-sub-menu key="sub1">
                     <template #title>
                         <span>
@@ -55,44 +90,20 @@
         </a-layout>
     </a-layout>
 </template>
-  <script lang="ts">
-import {
-    PieChartOutlined,
-    DesktopOutlined,
-    UserOutlined,
-    TeamOutlined,
-    FileOutlined,
-} from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-    components: {
-        PieChartOutlined,
-        DesktopOutlined,
-        UserOutlined,
-        TeamOutlined,
-        FileOutlined,
-    },
-    data() {
-        return {
-            collapsed: ref<boolean>(false),
-            selectedKeys: ref<string[]>(['1']),
-        };
-    },
-});
-</script>
-  <style>
-  #components-layout-demo-side .logo {
-      height: 32px;
-      margin: 16px;
-      background: rgba(255, 255, 255, 0.3);
-  }
-  
-  .site-layout .site-layout-background {
-      background: #fff;
-  }
-  
-  [data-theme='dark'] .site-layout .site-layout-background {
-      background: #141414;
-  }
-  </style>
+
+<style>
+#components-layout-demo-side .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+    background: #fff;
+}
+
+[data-theme='dark'] .site-layout .site-layout-background {
+    background: #141414;
+}
+</style>
   

@@ -72,7 +72,7 @@ export default defineComponent({
                 <Events></Events>
             </a-tab-pane>
             <a-tab-pane key="depends" tab="依赖">
-                <Middlewares></Middlewares>
+                <Depends v-model:app="info"></Depends>
             </a-tab-pane>
             <a-tab-pane key="configs" tab="配置文件">
                 <Configs v-model:configs="info.configs"></Configs>
