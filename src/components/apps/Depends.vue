@@ -65,6 +65,10 @@ const appColumns = [
         dataIndex: 'name',
     },
     {
+        title: '地址',
+        dataIndex: 'host',
+    },
+    {
         title: '状态',
         dataIndex: 'status',
     },

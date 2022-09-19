@@ -25,7 +25,7 @@ const mwForm = useFormSubmiter({ appid: props.app?.id, policy: 'REUSE' }, (value
     })
 })
 
-const egressForm = useFormSubmiter({ appid: props.app?.id, type: 'INTERNAL' }, (values: any) => {
+const egressForm = useFormSubmiter({ appid: props.app?.id, type: 'INTERNAL', port: 80, protocol: 'http' }, (values: any) => {
     egressSvc.egressServiceCreate(props.app?.id, values).then(() => {
         modalClose()
         emit("done")
@@ -37,7 +37,7 @@ const { data, loading, error, run } = useRequest(() => middlewareSvc.middlewareS
 const mwInstances = computed(() => data.value?.data?.items?.map((item: any) => ({ value: item.name, label: item.name })))
 
 const appRequest = useRequest(() => appSvc.appServiceList());
-const appOptions = computed(()=> appRequest.data.value?.data?.items?.map((item: any) => ({ value: item.id, label: item.name })))
+const appOptions = computed(() => appRequest.data.value?.data?.items?.map((item: any) => ({ value: item.id, label: item.name })))
 
 </script>
 
@@ -88,17 +88,29 @@ const appOptions = computed(()=> appRequest.data.value?.data?.items?.map((item: 
                     <a-radio value="INTERNET">外部地址</a-radio>
                 </a-radio-group>
             </a-form-item>
-            <a-form-item label="目标应用" name="name" :rules="[{ required: true, message: '请选择目标应用!' }]"
+            <a-form-item label="目标应用" name="target" :rules="[{ required: true, message: '请选择目标应用!' }]"
                 v-if="egressForm.formState.type=='INTERNAL'">
                 <a-select v-model:value="egressForm.formState.target" :options="appOptions" />
             </a-form-item>
-            <a-form-item label="目标地址" name="address" :rules="[{ required: true, message: '请输入目标地址' }]"
-                v-if="egressForm.formState.type=='INTERNET'">
-                <a-input v-model:value="egressForm.formState.address" />
+            <a-form-item label="目标地址" name="host" :rules="[{ required: true, message: '请输入目标地址' }]">
+                <a-input v-model:value="egressForm.formState.host" :disabled="egressForm.formState.type=='INTERNAL'" />
             </a-form-item>
-                <a-form-item :wrapper-col="{ offset: 6, span: 16 }">
-                    <a-button type="primary" html-type="submit">保存</a-button>
-                </a-form-item>
+            <a-form-item label="目标端口" name="port" :rules="[{ required: true, message: 'Please input your password!' }]">
+                <a-input-number v-model:value="egressForm.formState.port" style="width: 230px"
+                    :disabled="egressForm.formState.type=='INTERNAL'">
+                    <template #addonAfter>
+                        <a-select v-model:value="egressForm.formState.protocol" style="width: 80px"
+                            :disabled="egressForm.formState.type=='INTERNAL'">
+                            <a-select-option value="http">http</a-select-option>
+                            <a-select-option value="http2">http2</a-select-option>
+                            <a-select-option value="tcp">tcp</a-select-option>
+                        </a-select>
+                    </template>
+                </a-input-number>
+            </a-form-item>
+            <a-form-item :wrapper-col="{ offset: 6, span: 16 }">
+                <a-button type="primary" html-type="submit">保存</a-button>
+            </a-form-item>
         </a-form>
     </a-modal>
 </template>
