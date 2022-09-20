@@ -4,6 +4,7 @@ import { useFormSubmiter, useModal } from "@/hooks/modal";
 import { useKiaeApi } from '@/hooks/kiae';
 import { message } from 'ant-design-vue/es';
 import { useRequest } from 'vue-request';
+import { SelectValue } from 'ant-design-vue/es/select';
 const props = defineProps<{
     app: Object,
     value?: Object,
@@ -25,7 +26,7 @@ const mwForm = useFormSubmiter({ appid: props.app?.id, policy: 'REUSE' }, (value
     })
 })
 
-const egressForm = useFormSubmiter({ appid: props.app?.id, type: 'INTERNAL', port: 80, protocol: 'http' }, (values: any) => {
+const egressForm = useFormSubmiter({ appid: props.app?.id, type: 'INTERNAL', ports: [{ number: 80, protocol: 'http' }] }, (values: any) => {
     egressSvc.egressServiceCreate(props.app?.id, values).then(() => {
         modalClose()
         emit("done")
@@ -33,12 +34,35 @@ const egressForm = useFormSubmiter({ appid: props.app?.id, type: 'INTERNAL', por
     })
 })
 
+const removePort = (item: any) => {
+    let index = egressForm.formState.ports.indexOf(item);
+    if (index !== -1) {
+        egressForm.formState.ports.splice(index, 1);
+    }
+};
+const addPort = () => {
+    egressForm.formState.ports.push({
+        number: 8000,
+        protocol: 'http',
+    });
+};
+
+const internalApp = computed(() => {
+    return egressForm.formState.type == 'INTERNAL'
+})
+
 const { data, loading, error, run } = useRequest(() => middlewareSvc.middlewareServiceList(mwForm.formState.type));
 const mwInstances = computed(() => data.value?.data?.items?.map((item: any) => ({ value: item.name, label: item.name })))
 
 const appRequest = useRequest(() => appSvc.appServiceList());
-const appOptions = computed(() => appRequest.data.value?.data?.items?.map((item: any) => ({ value: item.id, label: item.name })))
-
+const appOptions = computed(() => appRequest.data.value?.data?.items?.map((item: any) => ({ value: item.name, label: item.name, env: item.env, ports: item.ports })))
+const internalApplication = ref('')
+const internalApplicationChange = (v: SelectValue, opt: any) => {
+    console.log(v, opt);
+    egressForm.formState.host = `${v}.kiae-app-${opt.env}.svc.cluster.local`
+    egressForm.formState.ports = opt.ports.map((el: any) => { return { number: el.port, protocol: el.appProtocol } })
+    egressForm.formState.protocol = 'http'
+}
 </script>
 
 <template>
@@ -82,31 +106,39 @@ const appOptions = computed(() => appRequest.data.value?.data?.items?.map((item:
 
         <a-form :model="egressForm.formState" name="basic" :label-col="{ span: 6 }" :wrapper-col="{ span: 15 }"
             autocomplete="off" @finish="egressForm.formSubmit" v-if="depend_type=='APP'">
-            <a-form-item label="目标类型" name="policy">
+            <a-form-item label="目标类型" name="type">
                 <a-radio-group v-model:value="egressForm.formState.type">
                     <a-radio value="INTERNAL">内部应用</a-radio>
                     <a-radio value="INTERNET">外部地址</a-radio>
                 </a-radio-group>
             </a-form-item>
             <a-form-item label="目标应用" name="target" :rules="[{ required: true, message: '请选择目标应用!' }]"
-                v-if="egressForm.formState.type=='INTERNAL'">
-                <a-select v-model:value="egressForm.formState.target" :options="appOptions" />
+                v-if="internalApp">
+                <a-select v-model:value="egressForm.formState.target" :options="appOptions"
+                    @change="internalApplicationChange" />
             </a-form-item>
             <a-form-item label="目标地址" name="host" :rules="[{ required: true, message: '请输入目标地址' }]">
-                <a-input v-model:value="egressForm.formState.host" :disabled="egressForm.formState.type=='INTERNAL'" />
+                <a-input v-model:value="egressForm.formState.host" :disabled="internalApp" />
             </a-form-item>
-            <a-form-item label="目标端口" name="port" :rules="[{ required: true, message: 'Please input your password!' }]">
-                <a-input-number v-model:value="egressForm.formState.port" style="width: 230px"
-                    :disabled="egressForm.formState.type=='INTERNAL'">
+            <a-form-item :label="`端口${index + 1}`" name="ports" v-for="(port, index) in egressForm.formState.ports"
+                :key="index" :rules="[{ required: true, message: '请输入目标端口' }]">
+                <a-input-number v-model:value="port.number" style="width: 230px" :disabled="internalApp">
                     <template #addonAfter>
-                        <a-select v-model:value="egressForm.formState.protocol" style="width: 80px"
-                            :disabled="egressForm.formState.type=='INTERNAL'">
+                        <a-select v-model:value="port.protocol" style="width: 80px" :disabled="internalApp">
                             <a-select-option value="http">http</a-select-option>
                             <a-select-option value="http2">http2</a-select-option>
                             <a-select-option value="tcp">tcp</a-select-option>
                         </a-select>
                     </template>
                 </a-input-number>
+                <MinusCircleOutlined v-if="index != 0 && !internalApp" style="line-height: 35px; margin-left: 8px;"
+                    @click="removePort(port)" />
+            </a-form-item>
+            <a-form-item :wrapper-col="{ offset: 6, span: 16 }" v-if="!internalApp">
+                <a-button type="dashed" size="small" @click="addPort">
+                    <PlusOutlined />
+                    添加端口
+                </a-button>
             </a-form-item>
             <a-form-item :wrapper-col="{ offset: 6, span: 16 }">
                 <a-button type="primary" html-type="submit">保存</a-button>
