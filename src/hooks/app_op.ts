@@ -2,6 +2,8 @@ import { message } from "ant-design-vue";
 import {
   AppApplication,
   ActionPayloadAction,
+  AppEnvironment,
+  AppConfiguration,
 } from "@/libs/kiae";
 import { useKiaeApi, confirmDo } from "./kiae";
 
@@ -53,6 +55,34 @@ export const useApplication = () => {
     });
   };
 
+  const handleAppEnvDelete = async (
+    appid: string,
+    env: AppEnvironment,
+    callback: Function
+  ) => {
+    return confirmDo(
+      "环境变量删除",
+      `确定要删除环境变量 ${env.name} 吗？`,
+      () => {
+        appSvc.appServiceEnvDelete(appid, env.name).then(() => callback());
+      }
+    );
+  };
+
+  const handleAppCfgDelete = async (
+    appid: string,
+    cfg: AppConfiguration,
+    callback: Function
+  ) => {
+    return confirmDo(
+      "配置文件删除",
+      `确定要删除应用 ${cfg.filename} 吗？`,
+      () => {
+        appSvc.appServiceCfgDelete(appid, cfg.name).then(() => callback());
+      }
+    );
+  };
+
   const handleAppInstanceSettings = (values: any, callback: Function) => {
     appSvc.appServiceUpdate2(values.id, values).then(() => callback());
   };
@@ -66,5 +96,7 @@ export const useApplication = () => {
     handleAppRestart,
     handleAppDelete,
     handleAppInstanceSettings,
+    handleAppEnvDelete,
+    handleAppCfgDelete,
   };
 };

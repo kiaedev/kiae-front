@@ -1,31 +1,38 @@
 <script lang="ts" setup>
+import { useApplication } from "@/hooks/app_op"
 import { useModal } from "@/hooks/modal"
 import { ref } from "@vue/reactivity"
 
-const dataSource = ref()
+defineEmits(["refresh"])
+const props = defineProps<{
+    appid: string
+    envs: Array<any>,
+}>()
+
+const { handleAppEnvDelete } = useApplication()
+
 const columns = [
     {
         title: '类型',
-        dataIndex: 'created',
+        dataIndex: 'type',
     },
     {
         title: 'KEY',
-        dataIndex: 'level',
-    },
-    {
-        title: 'VALUE',
         dataIndex: 'name',
     },
     {
-        title: '状态',
-        dataIndex: 'version',
+        title: 'VALUE',
+        dataIndex: 'value',
     },
     {
         title: '创建时间',
-        dataIndex: 'reporter',
+        dataIndex: 'createdAt',
     },
+    {
+        title: '操作',
+        key: 'action'
+    }
 ]
-const { visible, modalOpen } = useModal()
 </script>
 
 <template>
@@ -34,14 +41,26 @@ const { visible, modalOpen } = useModal()
             <a-input-search placeholder="请输入要查询的环境变量" style="width: 500px" />
         </a-col>
         <a-col flex="300px">
-            <a-button type="primary" style="float: right" @click="modalOpen">添加环境变量</a-button>
-
-            <a-modal v-model:visible="visible" title="添加环境变量" width="800px" :footer="null">
-                <!-- <ConfigEditor v-model:config="currentSelect"></ConfigEditor> -->
-            </a-modal>
+            <a-button type="primary" style="float: right">
+                <EnvEditor :appid="props.appid" @done="$emit('refresh')">添加环境变量</EnvEditor>
+            </a-button>
         </a-col>
     </a-row>
     <div>
-        <a-table :columns="columns" :dataSource="dataSource"></a-table>
+        <a-table :columns="columns" :dataSource="props.envs">
+            <template #bodyCell="{ column, record }">
+                <template v-if="column.dataIndex === 'createdAt'">
+                    {{ $dayjs(record.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
+                </template>
+                <template v-else-if="column.key === 'action'">
+                    <span v-if="record.type == 'USER'">
+                        <EnvEditor :appid="props.appid" :env="record" @done="$emit('refresh')">编辑</EnvEditor>
+                        <a-divider type="vertical" />
+                        <a @click="handleAppEnvDelete(appid, record, ()=>$emit('refresh'))"> 删除 </a>
+                    </span>
+                    <span v-else>-</span>
+                </template>
+            </template>
+        </a-table>
     </div>
 </template>

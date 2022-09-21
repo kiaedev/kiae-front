@@ -11,28 +11,42 @@ import { properties } from '@codemirror/legacy-modes/mode/properties'
 import { useFormSubmiter, useModal } from "@/hooks/modal";
 import { ref } from "@vue/reactivity";
 import { computed } from 'vue'
-const props = defineProps<{
-    config?: string
-    filename?: string
-}>()
-const envs = ref([
-    "KIAE_RUN_ENV",
-    "KIAE_MW_MYSQL_DSN",
-    "KIAE_MW_MONGO_DSN",
-    "KIAE_MW_REDIS_DSN",
-])
+import { useKiaeApi } from '@/hooks/kiae'
+import { message } from 'ant-design-vue/es'
+import { AppConfiguration } from '@/libs/kiae'
 
+const emit = defineEmits(["done"])
+const props = defineProps<{
+    appid: string
+    config?: AppConfiguration
+}>()
 
 const { visible, modalOpen, modalClose } = useModal()
 let title = !props.config ? "添加配置文件" : "编辑配置文件"
 let filename;
 let ext = 'yaml'
-if (props.filename) {
-    [filename, ext] = props.filename.split('.')
+if (props.config?.filename) {
+    [filename, ext] = props.config.filename.split('.')
 }
 
-const { formState, formSubmit } = useFormSubmiter({ filename, ext, mountPath: '/kapp/etc/', content: props.config }, () => {
-    console.log(formState.value)
+const { mountPath, content } = props.config || { mountPath: '', content: '' }
+
+const { appSvc } = useKiaeApi()
+const { formState, formSubmit } = useFormSubmiter({ filename, ext, mountPath, content }, (values: any) => {
+    let cfg = Object.assign({}, values)
+    cfg.filename = `${values.filename}.${values.ext}`
+
+    const done = () => {
+        modalClose()
+        message.success("保存成功")
+        emit("done")
+    }
+
+    if (props.config?.name) {
+        appSvc.appServiceCfgUpdate(props.appid, props.config?.name, cfg).then(done)
+    } else {
+        appSvc.appServiceCfgCreate(props.appid, cfg).then(done)
+    }
 })
 
 const cfg_lang = computed(() => {

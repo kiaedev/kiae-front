@@ -63,6 +63,7 @@ declare module '@vue/runtime-core' {
     DownOutlined: typeof import('@ant-design/icons-vue')['DownOutlined']
     Entries: typeof import('./components/apps/Entries.vue')['default']
     EntryEditor: typeof import('./components/apps/EntryEditor.vue')['default']
+    EnvEditor: typeof import('./components/apps/EnvEditor.vue')['default']
     Environments: typeof import('./components/apps/Environments.vue')['default']
     Events: typeof import('./components/apps/Events.vue')['default']
     FileOutlined: typeof import('@ant-design/icons-vue')['FileOutlined']

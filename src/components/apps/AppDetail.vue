@@ -75,10 +75,10 @@ export default defineComponent({
                 <Depends v-model:app="info"></Depends>
             </a-tab-pane>
             <a-tab-pane key="configs" tab="配置文件">
-                <Configs v-model:configs="info.configs"></Configs>
+                <Configs v-model:appid="info.id" v-model:configs="info.configs" @refresh="refreshInfo"></Configs>
             </a-tab-pane>
             <a-tab-pane key="envs" tab="环境变量">
-                <Environments></Environments>
+                <Environments v-model:appid="info.id" v-model:envs="info.environments" @refresh="refreshInfo"></Environments>
             </a-tab-pane>
             <a-tab-pane key="routes" tab="路由策略">
                 <Routes v-model:app="info"></Routes>
