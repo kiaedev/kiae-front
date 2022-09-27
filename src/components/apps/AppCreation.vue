@@ -4,6 +4,7 @@ import { defineComponent, reactive, ref, defineEmits, onMounted } from 'vue';
 import { useEnvs, useImages, useProject } from '@/hooks/project';
 import { useApplication } from "@/hooks/app_op"
 import { useRoute } from 'vue-router';
+import { useKiaeApi } from '@/hooks/kiae';
 interface Port {
     port: number;
     protocol: string,
@@ -55,12 +56,12 @@ export default defineComponent({
             });
         };
         const images = ref<any>([])
-        const { currentPid, projectGet } = useProject()
+        const { imageSvc } = useKiaeApi()
+        const { currentPid } = useProject()
         onMounted(async () => {
-            const proj = await projectGet(currentPid())
-            console.log(proj);
-
-            images.value = proj?.images
+            imageSvc.imageServiceList(currentPid()).then((res) => {
+                images.value = res.data?.items
+            })
         })
         const { envs } = useEnvs()
         return {

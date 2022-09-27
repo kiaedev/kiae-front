@@ -2,6 +2,7 @@ import {
   AppServiceApi,
   EgressServiceApi,
   EntryServiceApi,
+  ImageServiceApi,
   MiddlewareServiceApi,
   ProjectServiceApi,
   RouteServiceApi,
@@ -12,6 +13,8 @@ import { Modal } from "ant-design-vue";
 export const useKiaeApi = () => {
   return {
     projSvc: new ProjectServiceApi(kiaeCfg),
+    imageSvc: new ImageServiceApi(kiaeCfg),
+
     appSvc: new AppServiceApi(kiaeCfg),
     egressSvc: new EgressServiceApi(kiaeCfg),
     entrySvc: new EntryServiceApi(kiaeCfg),
