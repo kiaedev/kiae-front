@@ -15,6 +15,7 @@ import AdminLayout from "./pages/admin/Layout.vue";
 import AdminMiddlewares from "./pages/admin/middleware/Index.vue";
 import AdminClusters from "./pages/admin/gateway/Index.vue";
 import AdminGateways from "./pages/admin/gateway/Index.vue";
+import AdminSystemGitProviders from "./pages/admin/system/git-provider/Index.vue";
 
 const routes = [
   {
@@ -47,6 +48,7 @@ const routes = [
       { path: "middlewares", meta: {}, component: AdminMiddlewares },
       { path: "clusters", meta: {}, component: AdminClusters },
       { path: "gateways", meta: {}, component: AdminGateways },
+      { path: "system/git-providers", meta: {}, component: AdminSystemGitProviders },
     ],
   },
   //   {

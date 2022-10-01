@@ -5,6 +5,7 @@ import {
   ImageServiceApi,
   MiddlewareServiceApi,
   ProjectServiceApi,
+  ProviderServiceApi,
   RouteServiceApi,
 } from "@/libs/kiae";
 import { kiaeCfg } from "@/libs/config/kiae";
@@ -20,6 +21,7 @@ export const useKiaeApi = () => {
     entrySvc: new EntryServiceApi(kiaeCfg),
     routeSvc: new RouteServiceApi(kiaeCfg),
 
+    providerSvc: new ProviderServiceApi(kiaeCfg),
     middlewareSvc: new MiddlewareServiceApi(kiaeCfg),
   };
 };

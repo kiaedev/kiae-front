@@ -67,10 +67,15 @@ const handleClick = (e: any) => {
                     <a-menu-item key="6">集群列表</a-menu-item>
                     <a-menu-item key="8">环境列表</a-menu-item>
                 </a-sub-menu>
-                <a-menu-item key="9">
-                    <file-outlined />
-                    <span>File</span>
-                </a-menu-item>
+                <a-sub-menu key="system">
+                    <template #title>
+                        <span>
+                            <team-outlined />
+                            <span>系统设置</span>
+                        </span>
+                    </template>
+                    <a-menu-item key="git-providers">代码仓库</a-menu-item>
+                </a-sub-menu>
             </a-menu>
         </a-layout-sider>
         <a-layout>
