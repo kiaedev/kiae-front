@@ -19,7 +19,10 @@ export default defineConfig({
       "/api": {
         target: "http://localhost:8081/",
         changeOrigin: true,
-        // rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+      "/oauth2": {
+        target: "http://localhost:8081/",
+        changeOrigin: true,
       },
     },
   },

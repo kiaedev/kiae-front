@@ -11,7 +11,7 @@ import { renderComponent } from "@/libs/helper/component";
 
 const route = useRoute()
 const apps = ref<any>([])
-const { visible, modalOpen,  } = useModal()
+const { visible, modalOpen, } = useModal()
 const { listApps } = useApplication()
 const listRefresh = () => {
     listApps({ pid: route.params.pid }).then((res) => {
@@ -56,8 +56,14 @@ const columns = [
 <template>
     <div>
         <div>
-            <a-input type="search"></a-input>
-            <a-button type="primary" style="float: right" @click="modalOpen">创建应用</a-button>
+            <a-row type="flex">
+                <a-col flex="100">
+                    <a-input-search placeholder="Search..." />
+                </a-col>
+                <a-col flex="auto">
+                    <a-button type="primary" style="float: right" @click="modalOpen">创建应用</a-button>
+                </a-col>
+            </a-row>
 
             <a-modal v-model:visible="visible" title="创建应用" :footer="null">
                 <AppCreation @done="listRefresh"></AppCreation>
@@ -95,4 +101,5 @@ const columns = [
 </template>
 
 <style>
+
 </style>

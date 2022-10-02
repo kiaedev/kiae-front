@@ -2,7 +2,7 @@
   <a-layout style="padding: 12px 0; background: #fff">
     <a-layout-sider width="200" style="background: #fff">
       <a-menu v-model:selectedKeys="selectedKeys" v-model:openKeys="openKeys" mode="inline" @click="handleClick"
-        style="height: 100%">
+        style="height: 100%;">
         <a-menu-item key="apps">应用管理</a-menu-item>
         <a-menu-item key="deployments">部署管理</a-menu-item>
         <a-menu-item key="images">镜像管理</a-menu-item>

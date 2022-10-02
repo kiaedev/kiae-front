@@ -1,31 +1,4 @@
-<template>
-  <a-layout class="layout">
-    <a-layout-header>
-      <div class="logo" />
-      <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
-        <a-menu-item key="1">首页</a-menu-item>
-        <a-menu-item key="2">后台</a-menu-item>
-        <!-- <a-menu-item key="3">nav 3</a-menu-item> -->
-      </a-menu>
-    </a-layout-header>
-    <a-layout-content style="padding: 0 50px">
-      <a-breadcrumb :routes="routes">
-        <template #itemRender="{ route, routes, paths }">
-          <span v-if="routes.indexOf(route) === routes.length - 1">{{ route.breadcrumbName }}</span>
-          <router-link v-else :to="`/`+paths.join('/')">{{ route.breadcrumbName }}</router-link>
-        </template>
-      </a-breadcrumb>
-      <div :style="{ background: '#fff', minHeight: '280px' }">
-        <router-view></router-view>
-      </div>
-    </a-layout-content>
-    <a-layout-footer style="text-align: center">
-      Ant Design ©2018 Created by Ant UED
-    </a-layout-footer>
-  </a-layout>
 
-
-</template>
 <script lang="ts">
 import { Route } from 'ant-design-vue/lib/breadcrumb/Breadcrumb';
 import { defineComponent, ref } from 'vue';
@@ -53,13 +26,42 @@ export default defineComponent({
   },
 });
 </script>
-<style>
-.site-layout-content {
-  min-height: 280px;
-  /* padding: 24px; */
-  background: #fff;
-}
+  
+<template>
+  <a-layout class="layout">
+    <a-layout-header style="height: 48px;line-height: 48px;">
+      <div class="logo" />
+      <div style="float: right">
 
+        <a-avatar style="background-color: #87d068">
+          <template #icon>
+            <UserOutlined />
+          </template>
+        </a-avatar>
+      </div>
+    </a-layout-header>
+
+    <a-layout-content style="padding: 0 100px">
+      <a-breadcrumb :routes="routes" style="margin: 15px 0">
+        <template #itemRender="{ route, routes, paths }">
+          <span v-if="routes.indexOf(route) === routes.length - 1">{{ route.breadcrumbName }}</span>
+          <router-link v-else :to="`/`+paths.join('/')">{{ route.breadcrumbName }}</router-link>
+        </template>
+      </a-breadcrumb>
+
+      <div :style="{ minHeight: '800px' }">
+        <router-view></router-view>
+      </div>
+    </a-layout-content>
+
+    <a-layout-footer style="text-align: center">
+      Ant Design ©2018 Created by Ant UED
+    </a-layout-footer>
+  </a-layout>
+
+
+</template>
+<style>
 #components-layout-demo-top .logo {
   float: left;
   width: 120px;

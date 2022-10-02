@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AAvatar: typeof import('ant-design-vue/es')['Avatar']
     ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
     ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
     AButton: typeof import('ant-design-vue/es')['Button']
@@ -56,6 +57,7 @@ declare module '@vue/runtime-core' {
     ATabs: typeof import('ant-design-vue/es')['Tabs']
     ATag: typeof import('ant-design-vue/es')['Tag']
     ATextarea: typeof import('ant-design-vue/es')['Textarea']
+    CodeOutlined: typeof import('@ant-design/icons-vue')['CodeOutlined']
     ConfigEditor: typeof import('./components/apps/ConfigEditor.vue')['default']
     Configs: typeof import('./components/apps/Configs.vue')['default']
     DependEditor: typeof import('./components/apps/DependEditor.vue')['default']
@@ -68,7 +70,12 @@ declare module '@vue/runtime-core' {
     Environments: typeof import('./components/apps/Environments.vue')['default']
     Events: typeof import('./components/apps/Events.vue')['default']
     FileOutlined: typeof import('@ant-design/icons-vue')['FileOutlined']
+    FolderOutlined: typeof import('@ant-design/icons-vue')['FolderOutlined']
     Gateways: typeof import('./components/apps/Gateways.vue')['default']
+    GithubFilled: typeof import('@ant-design/icons-vue')['GithubFilled']
+    GithubOutlined: typeof import('@ant-design/icons-vue')['GithubOutlined']
+    GitlabFilled: typeof import('@ant-design/icons-vue')['GitlabFilled']
+    GitlabOutlined: typeof import('@ant-design/icons-vue')['GitlabOutlined']
     HealthProbe: typeof import('./components/projects/HealthProbe.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     ImageEditor: typeof import('./components/projects/ImageEditor.vue')['default']
@@ -87,6 +94,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     Routes: typeof import('./components/apps/Routes.vue')['default']
     Settings: typeof import('./components/apps/Settings.vue')['default']
+    TagOutlined: typeof import('@ant-design/icons-vue')['TagOutlined']
     TeamOutlined: typeof import('@ant-design/icons-vue')['TeamOutlined']
     Test: typeof import('./components/Test.vue')['default']
     UserOutlined: typeof import('@ant-design/icons-vue')['UserOutlined']

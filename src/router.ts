@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import NotFound from "./pages/error/NotFound.vue";
+import NotFound from "./pages/system/NotFound.vue";
 import HomeLayout from "./pages/Layout.vue";
 import ProjectLayout from "./pages/project/Layout.vue";
 import ProjectList from "./pages/project/Index.vue";
@@ -16,6 +16,7 @@ import AdminMiddlewares from "./pages/admin/middleware/Index.vue";
 import AdminClusters from "./pages/admin/gateway/Index.vue";
 import AdminGateways from "./pages/admin/gateway/Index.vue";
 import AdminSystemGitProviders from "./pages/admin/system/git-provider/Index.vue";
+import ProjectCreation from "./components/projects/ProjectCreation.vue";
 
 const routes = [
   {
@@ -23,7 +24,9 @@ const routes = [
     component: HomeLayout,
     children: [
       { path: "/", redirect: "/projects" },
+      { path: "/done", component: () => import("./pages/system/Success.vue") },
       { path: "/projects", component: ProjectList },
+      { path: "/projects/new", component: ProjectCreation },
       { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
       {
         path: "/projects/:pid",
@@ -48,7 +51,11 @@ const routes = [
       { path: "middlewares", meta: {}, component: AdminMiddlewares },
       { path: "clusters", meta: {}, component: AdminClusters },
       { path: "gateways", meta: {}, component: AdminGateways },
-      { path: "system/git-providers", meta: {}, component: AdminSystemGitProviders },
+      {
+        path: "system/git-providers",
+        meta: {},
+        component: AdminSystemGitProviders,
+      },
     ],
   },
   //   {
