@@ -50,8 +50,8 @@ onMounted(listRefresh)
                     <div style="position: absolute; bottom: 25px;">
                         <span>{{$dayjs(proj.createdAt).fromNow()}}</span>
                         <span style="margin: 0 10px">via</span>
-                        <gitlab-filled style="color: #ed572a" v-if="proj.git.includes('gitlab')" />
-                        <github-filled v-else-if="proj.git.includes('github')" />
+                        <gitlab-filled style="color: #ed572a" v-if="proj.gitRepo.includes('gitlab')" />
+                        <github-filled v-else-if="proj.gitRepo.includes('github')" />
                         <TagOutlined v-else />
                     </div>
                 </a-card>

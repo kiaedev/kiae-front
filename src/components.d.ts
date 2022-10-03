@@ -81,6 +81,7 @@ declare module '@vue/runtime-core' {
     GitlabOutlined: typeof import('@ant-design/icons-vue')['GitlabOutlined']
     HealthProbe: typeof import('./components/projects/HealthProbe.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    ImageBuild: typeof import('./components/projects/ImageBuild.vue')['default']
     ImageEditor: typeof import('./components/projects/ImageEditor.vue')['default']
     Instances: typeof import('./components/apps/Instances.vue')['default']
     InstanceSettings: typeof import('./components/apps/InstanceSettings.vue')['default']

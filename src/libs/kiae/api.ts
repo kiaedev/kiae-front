@@ -651,10 +651,10 @@ export interface ImageImage {
     'url'?: string;
     /**
      * 
-     * @type {string}
+     * @type {ImageImageStatus}
      * @memberof ImageImage
      */
-    'status'?: string;
+    'status'?: ImageImageStatus;
     /**
      * 
      * @type {string}
@@ -687,6 +687,22 @@ export interface ImageImageListResponse {
      */
     'total'?: string;
 }
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const ImageImageStatus = {
+    Building: 'BUILDING',
+    Published: 'PUBLISHED',
+    Expired: 'EXPIRED',
+    Failed: 'FAILED'
+} as const;
+
+export type ImageImageStatus = typeof ImageImageStatus[keyof typeof ImageImageStatus];
+
+
 /**
  * 
  * @export
@@ -1181,10 +1197,10 @@ export interface InlineObject14 {
     'url'?: string;
     /**
      * 
-     * @type {string}
+     * @type {ImageImageStatus}
      * @memberof InlineObject14
      */
-    'status'?: string;
+    'status'?: ImageImageStatus;
     /**
      * 
      * @type {string}
@@ -1429,7 +1445,13 @@ export interface InlineObject19 {
      * @type {string}
      * @memberof InlineObject19
      */
-    'git'?: string;
+    'gitRepo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject19
+     */
+    'imageRepo'?: string;
     /**
      * 
      * @type {string}
@@ -1527,7 +1549,13 @@ export interface InlineObject20 {
      * @type {string}
      * @memberof InlineObject20
      */
-    'git'?: string;
+    'gitRepo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject20
+     */
+    'imageRepo'?: string;
     /**
      * 
      * @type {string}
@@ -1597,10 +1625,10 @@ export interface InlineObject21 {
     'url'?: string;
     /**
      * 
-     * @type {string}
+     * @type {ImageImageStatus}
      * @memberof InlineObject21
      */
-    'status'?: string;
+    'status'?: ImageImageStatus;
     /**
      * 
      * @type {string}
@@ -1652,10 +1680,10 @@ export interface InlineObject22 {
     'url'?: string;
     /**
      * 
-     * @type {string}
+     * @type {ImageImageStatus}
      * @memberof InlineObject22
      */
-    'status'?: string;
+    'status'?: ImageImageStatus;
     /**
      * 
      * @type {string}
@@ -2359,7 +2387,13 @@ export interface ProjectProject {
      * @type {string}
      * @memberof ProjectProject
      */
-    'git'?: string;
+    'gitRepo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectProject
+     */
+    'imageRepo'?: string;
     /**
      * 
      * @type {string}
@@ -2403,6 +2437,112 @@ export interface ProtobufAny {
 /**
  * 
  * @export
+ * @interface ProviderBranch
+ */
+export interface ProviderBranch {
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderBranch
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {ProviderCommit}
+     * @memberof ProviderBranch
+     */
+    'commit'?: ProviderCommit;
+}
+/**
+ * 
+ * @export
+ * @interface ProviderCommit
+ */
+export interface ProviderCommit {
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderCommit
+     */
+    'sha1'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderCommit
+     */
+    'shortId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderCommit
+     */
+    'message'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderCommit
+     */
+    'committerName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderCommit
+     */
+    'committerEmail'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderCommit
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderCommit
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ProviderListBranchesResponse
+ */
+export interface ProviderListBranchesResponse {
+    /**
+     * 
+     * @type {Array<ProviderBranch>}
+     * @memberof ProviderListBranchesResponse
+     */
+    'items'?: Array<ProviderBranch>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderListBranchesResponse
+     */
+    'total'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ProviderListReposResponse
+ */
+export interface ProviderListReposResponse {
+    /**
+     * 
+     * @type {Array<ProviderRepo>}
+     * @memberof ProviderListReposResponse
+     */
+    'items'?: Array<ProviderRepo>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderListReposResponse
+     */
+    'total'?: string;
+}
+/**
+ * 
+ * @export
  * @interface ProviderListResponse
  */
 export interface ProviderListResponse {
@@ -2416,6 +2556,25 @@ export interface ProviderListResponse {
      * 
      * @type {string}
      * @memberof ProviderListResponse
+     */
+    'total'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ProviderListTagsResponse
+ */
+export interface ProviderListTagsResponse {
+    /**
+     * 
+     * @type {Array<ProviderTag>}
+     * @memberof ProviderListTagsResponse
+     */
+    'items'?: Array<ProviderTag>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderListTagsResponse
      */
     'total'?: string;
 }
@@ -2541,6 +2700,12 @@ export interface ProviderRepo {
      * @type {string}
      * @memberof ProviderRepo
      */
+    'fullName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderRepo
+     */
     'intro'?: string;
     /**
      * 
@@ -2570,21 +2735,21 @@ export interface ProviderRepo {
 /**
  * 
  * @export
- * @interface ProviderRepoListResponse
+ * @interface ProviderTag
  */
-export interface ProviderRepoListResponse {
-    /**
-     * 
-     * @type {Array<ProviderRepo>}
-     * @memberof ProviderRepoListResponse
-     */
-    'items'?: Array<ProviderRepo>;
+export interface ProviderTag {
     /**
      * 
      * @type {string}
-     * @memberof ProviderRepoListResponse
+     * @memberof ProviderTag
      */
-    'total'?: string;
+    'name'?: string;
+    /**
+     * 
+     * @type {ProviderCommit}
+     * @memberof ProviderTag
+     */
+    'commit'?: ProviderCommit;
 }
 /**
  * 
@@ -6419,11 +6584,19 @@ export const ProviderServiceApiAxiosParamCreator = function (configuration?: Con
         },
         /**
          * 
+         * @param {string} provider 
+         * @param {string} repoName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        providerServicePrepare: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/provider/prepares`;
+        providerServiceListBranches: async (provider: string, repoName: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'provider' is not null or undefined
+            assertParamExists('providerServiceListBranches', 'provider', provider)
+            // verify required parameter 'repoName' is not null or undefined
+            assertParamExists('providerServiceListBranches', 'repoName', repoName)
+            const localVarPath = `/api/v1/providers/{provider}/repos/{repoName}/branches`
+                .replace(`{${"provider"}}`, encodeURIComponent(String(provider)))
+                .replace(`{${"repoName"}}`, encodeURIComponent(String(repoName)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6452,11 +6625,77 @@ export const ProviderServiceApiAxiosParamCreator = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        providerServiceRepoList: async (provider: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        providerServiceListRepos: async (provider: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'provider' is not null or undefined
-            assertParamExists('providerServiceRepoList', 'provider', provider)
-            const localVarPath = `/api/v1/providers/{provider}/repositories`
+            assertParamExists('providerServiceListRepos', 'provider', provider)
+            const localVarPath = `/api/v1/providers/{provider}/repos`
                 .replace(`{${"provider"}}`, encodeURIComponent(String(provider)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} provider 
+         * @param {string} repoName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        providerServiceListTags: async (provider: string, repoName: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'provider' is not null or undefined
+            assertParamExists('providerServiceListTags', 'provider', provider)
+            // verify required parameter 'repoName' is not null or undefined
+            assertParamExists('providerServiceListTags', 'repoName', repoName)
+            const localVarPath = `/api/v1/providers/{provider}/repos/{repoName}/commits`
+                .replace(`{${"provider"}}`, encodeURIComponent(String(provider)))
+                .replace(`{${"repoName"}}`, encodeURIComponent(String(repoName)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        providerServicePrepare: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/provider/prepares`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6609,11 +6848,13 @@ export const ProviderServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} provider 
+         * @param {string} repoName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async providerServicePrepare(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProviderPreparesResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.providerServicePrepare(options);
+        async providerServiceListBranches(provider: string, repoName: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProviderListBranchesResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.providerServiceListBranches(provider, repoName, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6622,8 +6863,28 @@ export const ProviderServiceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async providerServiceRepoList(provider: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProviderRepoListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.providerServiceRepoList(provider, options);
+        async providerServiceListRepos(provider: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProviderListReposResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.providerServiceListRepos(provider, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} provider 
+         * @param {string} repoName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async providerServiceListTags(provider: string, repoName: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProviderListTagsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.providerServiceListTags(provider, repoName, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async providerServicePrepare(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProviderPreparesResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.providerServicePrepare(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6689,11 +6950,13 @@ export const ProviderServiceApiFactory = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {string} provider 
+         * @param {string} repoName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        providerServicePrepare(options?: any): AxiosPromise<ProviderPreparesResponse> {
-            return localVarFp.providerServicePrepare(options).then((request) => request(axios, basePath));
+        providerServiceListBranches(provider: string, repoName: string, options?: any): AxiosPromise<ProviderListBranchesResponse> {
+            return localVarFp.providerServiceListBranches(provider, repoName, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6701,8 +6964,26 @@ export const ProviderServiceApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        providerServiceRepoList(provider: string, options?: any): AxiosPromise<ProviderRepoListResponse> {
-            return localVarFp.providerServiceRepoList(provider, options).then((request) => request(axios, basePath));
+        providerServiceListRepos(provider: string, options?: any): AxiosPromise<ProviderListReposResponse> {
+            return localVarFp.providerServiceListRepos(provider, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} provider 
+         * @param {string} repoName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        providerServiceListTags(provider: string, repoName: string, options?: any): AxiosPromise<ProviderListTagsResponse> {
+            return localVarFp.providerServiceListTags(provider, repoName, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        providerServicePrepare(options?: any): AxiosPromise<ProviderPreparesResponse> {
+            return localVarFp.providerServicePrepare(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6771,12 +7052,14 @@ export class ProviderServiceApi extends BaseAPI {
 
     /**
      * 
+     * @param {string} provider 
+     * @param {string} repoName 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProviderServiceApi
      */
-    public providerServicePrepare(options?: AxiosRequestConfig) {
-        return ProviderServiceApiFp(this.configuration).providerServicePrepare(options).then((request) => request(this.axios, this.basePath));
+    public providerServiceListBranches(provider: string, repoName: string, options?: AxiosRequestConfig) {
+        return ProviderServiceApiFp(this.configuration).providerServiceListBranches(provider, repoName, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6786,8 +7069,30 @@ export class ProviderServiceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ProviderServiceApi
      */
-    public providerServiceRepoList(provider: string, options?: AxiosRequestConfig) {
-        return ProviderServiceApiFp(this.configuration).providerServiceRepoList(provider, options).then((request) => request(this.axios, this.basePath));
+    public providerServiceListRepos(provider: string, options?: AxiosRequestConfig) {
+        return ProviderServiceApiFp(this.configuration).providerServiceListRepos(provider, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} provider 
+     * @param {string} repoName 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProviderServiceApi
+     */
+    public providerServiceListTags(provider: string, repoName: string, options?: AxiosRequestConfig) {
+        return ProviderServiceApiFp(this.configuration).providerServiceListTags(provider, repoName, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProviderServiceApi
+     */
+    public providerServicePrepare(options?: AxiosRequestConfig) {
+        return ProviderServiceApiFp(this.configuration).providerServicePrepare(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

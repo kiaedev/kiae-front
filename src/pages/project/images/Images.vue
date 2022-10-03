@@ -9,27 +9,19 @@ import { useImageOperater } from '@/hooks/image_op';
 const columns = [
     {
         title: '名称',
-        dataIndex: 'name',
+        dataIndex: 'image',
     },
     {
         title: '版本',
         dataIndex: 'tag',
     },
-    // {
-    //     title: '状态',
-    //     dataIndex: 'status',
-    // },
     {
-        title: '完整地址',
-        dataIndex: 'image',
+        title: '状态',
+        dataIndex: 'status',
     },
     {
         title: '最近更新',
         dataIndex: 'updatedAt',
-    },
-    {
-        title: '创建时间',
-        dataIndex: 'createdAt',
     },
     {
         title: '操作',
@@ -57,7 +49,7 @@ const { data, loading, error, run } = useRequest(() => imageSvc.imageServiceList
                         </a-menu-item>
                     </a-menu>
                 </template>
-                <a @click="message.warn('功能开发中，敬请期待')">构建新镜像</a>
+                <ImageBuild :pid="currentPid()" @done="run">构建新镜像</ImageBuild>
             </a-dropdown-button>
         </a-col>
     </a-row>

@@ -26,7 +26,7 @@ const { formState, formSubmit } = useFormSubmiter({ provider: '' }, (values: any
     })
 })
 
-const repo = useRequest(() => providerSvc.providerServiceRepoList(formState.provider), { manual: true })
+const repo = useRequest(() => providerSvc.providerServiceListRepos(formState.provider), { manual: true })
 const repos = computed(() => {
     return repo.data.value?.data.items?.map((item: any) => ({ label: item.fullName, value: item.fullName, repo: item }))
 })
@@ -46,7 +46,7 @@ const onRepoChange = (value: SelectValue, options: any) => {
     console.log(value, repo);
     formState.name = repo.fullName.replace("/", "-")
     formState.intro = repo.intro
-    formState.git = repo.gitUrl
+    formState.gitRepo = repo.gitUrl
 }
 
 const gotoAuthorize = (provider: string) => {

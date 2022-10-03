@@ -57,7 +57,7 @@ export default defineComponent({
 
     <a-card title="代码仓库">
         <a-form-item label="Address">
-            <a-input v-model:value="formState.git" placeholder="input placeholder" />
+            <a-input v-model:value="formState.gitRepo" placeholder="input placeholder" />
         </a-form-item>
 
         <div class="card-footer">
@@ -68,7 +68,7 @@ export default defineComponent({
 
     <a-card title="镜像仓库">
         <a-form-item label="ImageAddress">
-            <a-input v-model:value="formState.git" placeholder="input placeholder" />
+            <a-input v-model:value="formState.imageRepo" placeholder="input placeholder" />
         </a-form-item>
     </a-card>
     <br>
