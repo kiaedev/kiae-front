@@ -6,6 +6,12 @@ import { viteCommonjs } from "@originjs/vite-plugin-commonjs";
 import { resolve } from "path";
 const pathSrc = resolve(__dirname, "src");
 
+const backend = {
+  target: "http://localhost:8081/",
+  changeOrigin: false,
+  ws: true,
+};
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -16,14 +22,9 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/api": {
-        target: "http://localhost:8081/",
-        changeOrigin: true,
-      },
-      "/oauth2": {
-        target: "http://localhost:8081/",
-        changeOrigin: true,
-      },
+      "/api": backend,
+      "/oauth2": backend,
+      "/proxies": backend,
     },
   },
   build: {

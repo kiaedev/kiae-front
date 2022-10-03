@@ -1264,6 +1264,26 @@ webpack-virtual-modules@^0.4.4:
   resolved "https://registry.npmmirror.com/ws/-/ws-7.5.9.tgz#54fa7db29f4c7cec68b1ddd3a89de099942bb591"
   integrity sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==
 
+xterm-addon-attach@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmmirror.com/xterm-addon-attach/-/xterm-addon-attach-0.7.0.tgz#6775b3c5f1e9f91ae4cd9089f5ecb49fda8d2946"
+  integrity sha512-Yh3Kvq2e28onjnmGizQKZwlRMp9gmuZEHVX0BVZbo463YSjkqfhQS3T2wMLuO+j8AokccXsMa1z0bH1/+MMYuQ==
+
+xterm-addon-fit@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.npmmirror.com/xterm-addon-fit/-/xterm-addon-fit-0.6.0.tgz#142e1ce181da48763668332593fc440349c88c34"
+  integrity sha512-9/7A+1KEjkFam0yxTaHfuk9LEvvTSBi0PZmEkzJqgafXPEXL9pCMAVV7rB09sX6ATRDXAdBpQhZkhKj7CGvYeg==
+
+xterm-addon-serialize@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.npmmirror.com/xterm-addon-serialize/-/xterm-addon-serialize-0.8.0.tgz#715b510b91cc8e0d32844ca2a7de4d0fb5d49d9d"
+  integrity sha512-8N4RBaxM4TwlZRFXYz+xJwHUeFRXscRIM9O3wq26T0DrG7lM9JprSq1F4IGO1I5Et/CqXjiBFD50KwqkRKF0/w==
+
+xterm@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmmirror.com/xterm/-/xterm-5.0.0.tgz#0af50509b33d0dc62fde7a4ec17750b8e453cc5c"
+  integrity sha512-tmVsKzZovAYNDIaUinfz+VDclraQpPUnAME+JawosgWRMphInDded/PuY0xmU5dOhyeYZsI0nz5yd8dPYsdLTA==
+
 yallist@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmmirror.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"

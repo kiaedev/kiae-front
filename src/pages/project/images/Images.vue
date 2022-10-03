@@ -3,7 +3,6 @@
 import { useProject } from '@/hooks/project';
 import { useKiaeApi } from '@/hooks/kiae';
 import { useRequest } from 'vue-request';
-import { message } from 'ant-design-vue';
 import { useImageOperater } from '@/hooks/image_op';
 
 const columns = [
@@ -61,6 +60,8 @@ const { data, loading, error, run } = useRequest(() => imageSvc.imageServiceList
             </template>
             <template v-else-if="column.key === 'action'">
                 <span>
+                    <Terminal :image="record">构建日志</Terminal>
+                    <a-divider type="vertical"></a-divider>
                     <a @click="handleDelete(record, run)">删除</a>
                 </span>
             </template>

@@ -101,6 +101,7 @@ declare module '@vue/runtime-core' {
     Settings: typeof import('./components/apps/Settings.vue')['default']
     TagOutlined: typeof import('@ant-design/icons-vue')['TagOutlined']
     TeamOutlined: typeof import('@ant-design/icons-vue')['TeamOutlined']
+    Terminal: typeof import('./components/term/Terminal.vue')['default']
     Test: typeof import('./components/Test.vue')['default']
     UserOutlined: typeof import('@ant-design/icons-vue')['UserOutlined']
   }
