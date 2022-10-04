@@ -694,6 +694,7 @@ export interface ImageImageListResponse {
  */
 
 export const ImageImageStatus = {
+    Pending: 'PENDING',
     Building: 'BUILDING',
     Published: 'PUBLISHED',
     Expired: 'EXPIRED',

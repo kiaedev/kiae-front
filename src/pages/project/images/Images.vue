@@ -4,6 +4,9 @@ import { useProject } from '@/hooks/project';
 import { useKiaeApi } from '@/hooks/kiae';
 import { useRequest } from 'vue-request';
 import { useImageOperater } from '@/hooks/image_op';
+import { computed } from 'vue';
+import { ImageImageStatus } from '@/libs/kiae';
+import { invert } from 'lodash';
 
 const columns = [
     {
@@ -32,6 +35,17 @@ const { currentPid } = useProject()
 const { imageSvc } = useKiaeApi()
 const { handleDelete } = useImageOperater()
 const { data, loading, error, run } = useRequest(() => imageSvc.imageServiceList(currentPid()));
+const dataSource = computed(() => data.value?.data.items?.map((el: any) => {
+    const colors: any = {
+        [ImageImageStatus.Pending]: 'warning',
+        [ImageImageStatus.Building]: 'processing',
+        [ImageImageStatus.Failed]: 'red',
+        [ImageImageStatus.Published]: 'green',
+        [ImageImageStatus.Expired]: 'default',
+    }
+    el.extra = { statusColor: colors[el.status], statusText: invert(ImageImageStatus)[el.status] }
+    return el
+}))
 </script>
     
 <template>
@@ -53,10 +67,13 @@ const { data, loading, error, run } = useRequest(() => imageSvc.imageServiceList
         </a-col>
     </a-row>
 
-    <a-table :dataSource="data?.data.items" :columns="columns">
+    <a-table :dataSource="dataSource" :columns="columns">
         <template #bodyCell="{ column, record }">
             <template v-if="column.dataIndex?.endsWith('At')">
                 {{ $dayjs(record.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
+            </template>
+            <template v-else-if="column.dataIndex === 'status'">
+                <a-tag :color="record.extra.statusColor">{{ record.extra.statusText }}</a-tag>
             </template>
             <template v-else-if="column.key === 'action'">
                 <span>
