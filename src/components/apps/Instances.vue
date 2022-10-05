@@ -10,7 +10,7 @@ const props = defineProps({
 })
 
 const { env, name } = props.app || {}
-const { gql, variables } = useGraphPods(`kiae-app-${env}`, name)
+const { gql, variables } = useGraphPods(`kiae-app-${env}`, name, true)
 const { result, onError } = useSubscription(gql, variables)
 const pods = computed(() => result.value?.pods)
 const statusColor = (status: string) => {
@@ -53,8 +53,12 @@ const columns = [
     },
     {
         title: '启动时间',
-        dataIndex: 'created',
+        dataIndex: 'startedAt',
     },
+    {
+        key: 'action',
+        width: '150px'
+    }
 ]
 </script>
 
@@ -84,18 +88,20 @@ const columns = [
                             <span>{{record.restartCount}}</span>
                         </a-popover>
                     </template>
-                    <!-- <template v-if="column.dataIndex === 'createdAt'">
-                        {{ $dayjs(record.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
-                    </template> -->
+                    <template v-if="column.dataIndex === 'startedAt'">
+                        {{ $dayjs(record.startedAt).format("YYYY-MM-DD HH:mm:ss") }}
+                    </template>
                     <template v-else-if="column.key === 'action'">
-                        <span>
+                        <a-space>
                             <!-- <EntryEditor :value="record" v-model:app="app" @done="run">编辑</EntryEditor> -->
                             <!-- <a size="small" type="primary" v-if="record.status=='OP_STATUS_DISABLED'"
                                 @click="handleEnable(record, run)">启用</a>
                             <a size="small" v-else @click="handleDisable(record, run)">停用</a>
                             <a-divider type="vertical" />
                             <a @click="handleDelete(record, run)">删除</a> -->
-                        </span>
+                            <a>Shell</a>
+                            <a>Logs</a>
+                        </a-space>
                     </template>
                 </template>
             </a-table>

@@ -1,9 +1,11 @@
+import { StringStream } from "@codemirror/language";
 import gql from "graphql-tag";
 
-export const useGraphPods = (ns: string, app: string) => {
+export const useGraphPods = (ns: string, app: StringStream, sub: boolean) => {
+  const action = sub ? "subscription" : "query";
   return {
     gql: gql`
-      subscription ($ns: String!, $app: String!) {
+      ${action} ($ns: String!, $app: String!) {
         pods(ns: $ns, app: $app) {
           name
           namespace
@@ -19,6 +21,7 @@ export const useGraphPods = (ns: string, app: string) => {
             restartCount
             restartReason
             restartErrMsg
+            startedAt
           }
         }
       }

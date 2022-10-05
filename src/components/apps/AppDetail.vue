@@ -53,8 +53,11 @@ const info = computed(() => appStatusMapper(data?.value?.data || props.value))
             <a-tab-pane key="instance" tab="实例">
                 <Instances v-model:app="info"></Instances>
             </a-tab-pane>
-            <a-tab-pane key="event" tab="事件">
+            <a-tab-pane key="events" tab="事件">
                 <Events></Events>
+            </a-tab-pane>
+            <a-tab-pane key="logs" tab="日志">
+                <Logs v-model:app="info"></Logs>
             </a-tab-pane>
             <a-tab-pane key="depends" tab="依赖">
                 <Depends v-model:app="info"></Depends>

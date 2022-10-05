@@ -77,7 +77,7 @@ const dataSource = computed(() => data.value?.data.items?.map((el: any) => {
             </template>
             <template v-else-if="column.key === 'action'">
                 <span>
-                    <Terminal :image="record">构建日志</Terminal>
+                    <ImageBuildLogs :image="record">构建日志</ImageBuildLogs>
                     <a-divider type="vertical"></a-divider>
                     <a @click="handleDelete(record, run)">删除</a>
                 </span>
