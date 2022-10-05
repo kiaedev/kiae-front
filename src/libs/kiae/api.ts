@@ -349,7 +349,9 @@ export type AppSize = typeof AppSize[keyof typeof AppSize];
 export const AppStatus = {
     Created: 'STATUS_CREATED',
     Running: 'STATUS_RUNNING',
-    Stopped: 'STATUS_STOPPED'
+    Stopped: 'STATUS_STOPPED',
+    Deploying: 'STATUS_DEPLOYING',
+    Unhealthy: 'STATUS_UNHEALTHY'
 } as const;
 
 export type AppStatus = typeof AppStatus[keyof typeof AppStatus];

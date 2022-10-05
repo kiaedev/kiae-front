@@ -1,30 +1,21 @@
 
 <script lang="ts" setup>
-import { ref } from "@vue/reactivity";
-import { getCurrentInstance, onMounted, onUnmounted, watch } from "@vue/runtime-core";
-import { useRoute, useRouter } from "vue-router";
+import { computed, ref } from "@vue/reactivity";
 import { useModal } from '@/hooks/modal'
-import AppCreation from "@/components/apps/AppCreation.vue";
 import AppDetail from '@/components/apps/AppDetail.vue'
-import { useApplication } from "@/hooks/app_op";
 import { renderComponent } from "@/libs/helper/component";
+import { useRequest } from "vue-request";
+import { useKiaeApi, appStatusMapper } from "@/hooks/kiae";
+import { useProject } from "@/hooks/project";
 
-const route = useRoute()
-const apps = ref<any>([])
-const { visible, modalOpen, } = useModal()
-const { listApps } = useApplication()
-const listRefresh = () => {
-    listApps({ pid: route.params.pid }).then((res) => {
-        apps.value = res.items
-        visible.value = false
-        console.log(1111);
-    });
-}
+const { currentPid } = useProject()
+const { appSvc } = useKiaeApi()
+const { data, loading, error, run } = useRequest(() => appSvc.appServiceList(currentPid()));
+const dataSource = computed(() => data.value?.data.items?.map(appStatusMapper))
+
 const handleAppClick = async (app: any) => {
-    renderComponent(AppDetail, { value: app }, listRefresh)
+    renderComponent(AppDetail, { value: app }, run)
 }
-
-onMounted(listRefresh)
 
 const columns = [
     {
@@ -61,28 +52,22 @@ const columns = [
                     <a-input-search placeholder="Search..." />
                 </a-col>
                 <a-col flex="auto">
-                    <a-button type="primary" style="float: right" @click="modalOpen">创建应用</a-button>
+                    <a-button type="primary" style="float: right">
+                        <AppCreation @done="run">创建应用</AppCreation>
+                    </a-button>
                 </a-col>
             </a-row>
-
-            <a-modal v-model:visible="visible" title="创建应用" :footer="null">
-                <AppCreation @done="listRefresh"></AppCreation>
-            </a-modal>
         </div>
-        <a-table :dataSource="apps" :columns="columns">
+        <a-table :dataSource="dataSource" :columns="columns">
             <template #bodyCell="{ column, record }">
                 <template v-if="column.dataIndex === 'name'">
                     <a @click="handleAppClick(record)">
                         {{ record.name }}
                     </a>
                 </template>
-                <!-- <template v-else-if="column.key === 'status'">
-                    <span>
-                        <a-tag :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'">
-                            {{ tag.toUpperCase() }}
-                        </a-tag>
-                    </span>
-                </template> -->
+                <template v-else-if="column.dataIndex === 'status'">
+                    <a-tag :color="record.extra.statusColor">{{ record.extra.statusText }}</a-tag>
+                </template>
                 <template v-if="column.dataIndex === 'createdAt'">
                     {{ $dayjs(record.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
                 </template>
@@ -91,7 +76,7 @@ const columns = [
                         <a>编辑</a>
                         <a-divider type="vertical" />
                         <a class="ant-dropdown-link">
-                            <AppOp :value="record" @done="listRefresh" @deleted="listRefresh">更多操作</AppOp>
+                            <AppOp :value="record" @done="run" @deleted="run">更多操作</AppOp>
                         </a>
                     </span>
                 </template>

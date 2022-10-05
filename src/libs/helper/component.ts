@@ -16,17 +16,21 @@ export const renderComponent = (
   document.body.appendChild(el);
 
   let app: any = null;
+  const apolloClient = buildApolloClient();
   props.onClose = () => {
     callback();
     setTimeout(() => {
       app.unmount();
+      apolloClient.stop();
       document.body.removeChild(el);
+      console.log(11123);
+      
     }, 500);
   };
 
   app = createApp({
     setup() {
-      provide(DefaultApolloClient, buildApolloClient());
+      provide(DefaultApolloClient, apolloClient);
     },
 
     render: () => h(component, props),

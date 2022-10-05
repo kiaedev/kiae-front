@@ -1,5 +1,6 @@
 import {
   AppServiceApi,
+  AppStatus,
   EgressServiceApi,
   EntryServiceApi,
   ImageServiceApi,
@@ -10,6 +11,7 @@ import {
 } from "@/libs/kiae";
 import { kiaeCfg } from "@/libs/config/kiae";
 import { Modal } from "ant-design-vue";
+import { invert } from "lodash";
 
 export const useKiaeApi = () => {
   return {
@@ -34,4 +36,23 @@ export const confirmDo = (title: string, tips: string, opFn: Function) => {
     cancelText: "取消",
     onOk: () => opFn(),
   });
+};
+
+export const appStatusMapper = (el: any) => {
+  console.log(el);
+  
+  if (!el) return;
+
+  const colors: any = {
+    [AppStatus.Running]: "green",
+    [AppStatus.Created]: "default",
+    [AppStatus.Deploying]: "processing",
+    [AppStatus.Unhealthy]: "warning",
+    [AppStatus.Stopped]: "default",
+  };
+  el.extra = {
+    statusColor: colors[el.status],
+    statusText: invert(AppStatus)[el.status],
+  };
+  return el;
 };

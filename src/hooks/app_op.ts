@@ -9,21 +9,6 @@ import { useKiaeApi, confirmDo } from "./kiae";
 
 export const useApplication = () => {
   const { appSvc } = useKiaeApi();
-  const listApps = async (params: any) => {
-    const ret = await appSvc.appServiceList(params.pid);
-    const { items, total } = ret.data;
-    return { items, total };
-  };
-
-  const readApp = async (id: string) => {
-    return (await appSvc.appServiceRead(id)).data;
-  };
-
-  const handleAppCreate = async (app: AppApplication, callback: Function) => {
-    await appSvc.appServiceCreate(app);
-    message.success("创建成功");
-    callback();
-  };
 
   const handleAppRestart = (app: AppApplication, callback: Function) => {
     return confirmDo("应用重启", `确定要重启应用 ${app.name} 吗？`, () => {
@@ -88,9 +73,6 @@ export const useApplication = () => {
   };
 
   return {
-    listApps,
-    readApp,
-    handleAppCreate,
     handleAppStart,
     handleAppStop,
     handleAppRestart,

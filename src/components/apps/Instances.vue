@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, computed, onMounted, watch, onBeforeUnmount } from "vue";
 import { useSubscription } from '@vue/apollo-composable'
 import { useGraphPods } from "@/hooks/graphqls"
 
@@ -8,13 +8,13 @@ const props = defineProps({
     app: Object,
 })
 
-const { env,name} = props.app||{}
+const { env, name } = props.app || {}
 const { gql, variables } = useGraphPods(`kiae-app-${env}`, name)
 const { result, onError } = useSubscription(gql, variables)
 const pods = computed(() => result.value?.pods)
 
 onError(error => {
-  console.log(error);
+    console.log(error);
 })
 
 const columns = [

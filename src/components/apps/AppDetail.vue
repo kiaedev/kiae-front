@@ -1,51 +1,36 @@
 
-<script lang="ts">
-import { useApplication } from '@/hooks/app_op';
-import { AppApplication } from '@/libs/kiae';
-import { defineComponent, onMounted, ref } from 'vue'
+<script lang="ts" setup>
+import { appStatusMapper, useKiaeApi } from '@/hooks/kiae';
+import { computed } from '@vue/reactivity';
+import { onMounted, ref } from 'vue'
+import { useRequest } from 'vue-request';
 
-export default defineComponent({
-    props: {
-        value: Object,
-        onClose: Function,
-    },
-    setup(props) {
-        console.log(props);
-        const visible = ref(true)
-        const info = ref<any>(props.value)
-        const close = () => {
-            visible.value = false
-            props.onClose && props.onClose()
-        }
-
-        const { readApp } = useApplication()
-        const refreshInfo = async () => {
-            readApp(props.value?.id).then(ret => {
-                info.value = ret
-            })
-        }
-
-        onMounted(refreshInfo)
-        return {
-            visible,
-            close,
-            info,
-            refreshInfo,
-        }
-    },
+const props = defineProps({
+    value: Object,
+    onClose: Function,
 })
+
+const visible = ref(true)
+const close = () => {
+    visible.value = false
+    props.onClose && props.onClose()
+}
+
+const { appSvc } = useKiaeApi()
+const { data, loading, run } = useRequest(() => appSvc.appServiceRead(props.value?.id));
+const info = computed(() => appStatusMapper(data?.value?.data || props.value))
 </script>
 
 <template>
     <a-drawer v-model:visible="visible" @close="close" :destroyOnClose="true" class="custom-class"
         :title="`应用：${info?.name}`" placement="bottom" size="large">
         <template #extra>
-            <AppOp v-model:value="info" @deleted="close" @done="refreshInfo">操作</AppOp>
+            <AppOp v-model:value="info" @deleted="close" @done="run">操作</AppOp>
         </template>
         <div>
             <a-descriptions bordered size="small" :column="2" style="width: 60%">
                 <a-descriptions-item label="状态">
-                    <a-tag color="success">{{ info?.status }}</a-tag>
+                    <a-tag color="success">{{ info?.extra.statusText }}</a-tag>
                 </a-descriptions-item>
                 <a-descriptions-item label="当前版本">v1.0.0</a-descriptions-item>
                 <a-descriptions-item label="实例配置">{{ info?.size }}</a-descriptions-item>
@@ -55,7 +40,7 @@ export default defineComponent({
                     <a-tag>未启用</a-tag>
                 </a-descriptions-item>
                 <a-descriptions-item label="访问端点">
-                    <a href="">http://{{info.name}}.{{info.env}}.svc.cluster.local</a>
+                    <a href="">http://{{info?.name}}.{{info?.env}}.svc.cluster.local</a>
                     <!-- <br>
                     <a href="">https://app1.dev.openae.dev</a> -->
                 </a-descriptions-item>
@@ -75,10 +60,11 @@ export default defineComponent({
                 <Depends v-model:app="info"></Depends>
             </a-tab-pane>
             <a-tab-pane key="configs" tab="配置文件">
-                <Configs v-model:appid="info.id" v-model:configs="info.configs" @refresh="refreshInfo"></Configs>
+                <Configs v-model:appid="info.id" v-model:configs="info.configs" @refresh="run"></Configs>
             </a-tab-pane>
             <a-tab-pane key="envs" tab="环境变量">
-                <Environments v-model:appid="info.id" v-model:envs="info.environments" @refresh="refreshInfo"></Environments>
+                <Environments v-model:appid="info.id" v-model:envs="info.environments" @refresh="run">
+                </Environments>
             </a-tab-pane>
             <a-tab-pane key="routes" tab="路由策略">
                 <Routes v-model:app="info"></Routes>
