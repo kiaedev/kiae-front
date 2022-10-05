@@ -15,7 +15,10 @@ export const useGraphPods = (ns: string, app: string) => {
             name
             image
             status
+            errMsg
             restartCount
+            restartReason
+            restartErrMsg
           }
         }
       }

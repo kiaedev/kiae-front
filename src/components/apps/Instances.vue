@@ -2,6 +2,7 @@
 import { ref, computed, onMounted, watch, onBeforeUnmount } from "vue";
 import { useSubscription } from '@vue/apollo-composable'
 import { useGraphPods } from "@/hooks/graphqls"
+import { escape, unescape } from "lodash";
 
 const activeKey = ref('0')
 const props = defineProps({
@@ -12,6 +13,22 @@ const { env, name } = props.app || {}
 const { gql, variables } = useGraphPods(`kiae-app-${env}`, name)
 const { result, onError } = useSubscription(gql, variables)
 const pods = computed(() => result.value?.pods)
+const statusColor = (status: string) => {
+    const colors: any = {
+        "Running": "green",
+
+        "Waiting": "warning",
+        "ImagePullBackOff": "warning",
+        "FailedScheduling": "warning",
+
+        "Terminated": "red",
+        "CrashLoopBackOff": "red",
+        "OOMKilled": "red",
+        "Evicted": "red",
+        "Error": "red",
+    };
+    return colors[status]
+}
 
 onError(error => {
     console.log(error);
@@ -31,7 +48,7 @@ const columns = [
         dataIndex: 'status',
     },
     {
-        title: '重启次数',
+        title: '异常重启',
         dataIndex: 'restartCount',
     },
     {
@@ -51,7 +68,37 @@ const columns = [
                 <span style="padding: 0 50px">Age: 10d</span>
             </template>
 
-            <a-table size="small" :columns="columns" :dataSource="pod.containers" :pagination="false"></a-table>
+            <a-table size="small" :columns="columns" :dataSource="pod.containers" :pagination="false">
+                <template #bodyCell="{ column, record }">
+                    <template v-if="column.dataIndex === 'status'">
+                        <a-tooltip :title="record.errMsg" :color="statusColor(record.status)">
+                            <a-tag :color="statusColor(record.status)">{{ record.status }}</a-tag>
+                        </a-tooltip>
+                    </template>
+                    <template v-if="column.dataIndex === 'restartCount'">
+                        <a-popover :title="record.restartReason">
+                            <template #content>
+                                <pre>{{escape(record.restartErrMsg)}}</pre>
+                            </template>
+
+                            <span>{{record.restartCount}}</span>
+                        </a-popover>
+                    </template>
+                    <!-- <template v-if="column.dataIndex === 'createdAt'">
+                        {{ $dayjs(record.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
+                    </template> -->
+                    <template v-else-if="column.key === 'action'">
+                        <span>
+                            <!-- <EntryEditor :value="record" v-model:app="app" @done="run">编辑</EntryEditor> -->
+                            <!-- <a size="small" type="primary" v-if="record.status=='OP_STATUS_DISABLED'"
+                                @click="handleEnable(record, run)">启用</a>
+                            <a size="small" v-else @click="handleDisable(record, run)">停用</a>
+                            <a-divider type="vertical" />
+                            <a @click="handleDelete(record, run)">删除</a> -->
+                        </span>
+                    </template>
+                </template>
+            </a-table>
         </a-collapse-panel>
     </a-collapse>
 
