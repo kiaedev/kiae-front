@@ -3,6 +3,7 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from "vue";
 import { useSubscription } from '@vue/apollo-composable'
 import { useGraphPods } from "@/hooks/graphqls"
 import { escape, unescape } from "lodash";
+import { useRouter } from "vue-router";
 
 const activeKey = ref('0')
 const props = defineProps({
@@ -33,6 +34,10 @@ const statusColor = (status: string) => {
 onError(error => {
     console.log(error);
 })
+
+const openPodShell = (pod: any, container: string) => {
+    window.open(`/webshell/namespaces/${pod.namespace}/pods/${pod.name}?container=${container}`, '_blank');
+}
 
 const columns = [
     {
@@ -99,7 +104,7 @@ const columns = [
                             <a size="small" v-else @click="handleDisable(record, run)">停用</a>
                             <a-divider type="vertical" />
                             <a @click="handleDelete(record, run)">删除</a> -->
-                            <a>Shell</a>
+                            <a @click="openPodShell(pod, record.name)">Shell</a>
                             <a>Logs</a>
                         </a-space>
                     </template>

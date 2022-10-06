@@ -2,6 +2,7 @@
 import { createApp, h, provide } from "vue";
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
+import router from "@/router"
 import dayjs from "@/libs/dayjs";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { buildApolloClient } from "./graph";
@@ -38,5 +39,6 @@ export const renderComponent = (
 
   app.use(Antd);
   app.use(dayjs);
+  app.use(router);
   app.mount("#tmpcomponent");
 };

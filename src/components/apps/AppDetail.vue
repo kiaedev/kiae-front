@@ -57,7 +57,7 @@ const info = computed(() => appStatusMapper(data?.value?.data || props.value))
                 <Events></Events>
             </a-tab-pane>
             <a-tab-pane key="logs" tab="日志">
-                <Logs v-model:app="info"></Logs>
+                <PodLogs v-model:app="info"></PodLogs>
             </a-tab-pane>
             <a-tab-pane key="depends" tab="依赖">
                 <Depends v-model:app="info"></Depends>

@@ -95,6 +95,8 @@ declare module '@vue/runtime-core' {
     NotificationOutlined: typeof import('@ant-design/icons-vue')['NotificationOutlined']
     PieChartOutlined: typeof import('@ant-design/icons-vue')['PieChartOutlined']
     PlusOutlined: typeof import('@ant-design/icons-vue')['PlusOutlined']
+    PodLogs: typeof import('./components/apps/PodLogs.vue')['default']
+    PodShell: typeof import('./components/apps/PodShell.vue')['default']
     ProjectCreation: typeof import('./components/projects/ProjectCreation.vue')['default']
     RouteEditor: typeof import('./components/apps/RouteEditor.vue')['default']
     RouteEditor2: typeof import('./components/apps/RouteEditor2.vue')['default']
@@ -105,7 +107,7 @@ declare module '@vue/runtime-core' {
     Settings: typeof import('./components/apps/Settings.vue')['default']
     TagOutlined: typeof import('@ant-design/icons-vue')['TagOutlined']
     TeamOutlined: typeof import('@ant-design/icons-vue')['TeamOutlined']
-    Terminal: typeof import('./components/term/Terminal.vue')['default']
+    Terminal: typeof import('./components/xterm/Terminal.vue')['default']
     Test: typeof import('./components/Test.vue')['default']
     UserOutlined: typeof import('@ant-design/icons-vue')['UserOutlined']
   }

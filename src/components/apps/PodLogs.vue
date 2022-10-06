@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useGraphPods } from "@/hooks/graphqls";
+import useTerminal from "@/components/xterm";
 import { useQuery } from "@vue/apollo-composable";
 import { ref } from "@vue/reactivity"
 import { computed } from "vue";
@@ -9,7 +10,7 @@ const props = defineProps({
     app: Object,
 })
 
-const formState = ref({ pod: '', container: '' })
+const formState = ref({ pod: '', container: '', wsUrl: '' })
 const { env, name } = props.app || {}
 const { gql, variables } = useGraphPods(`kiae-app-${env}`, name, false)
 const { result, onResult } = useQuery(gql, variables)
@@ -23,6 +24,10 @@ const podContainerStartedAt = computed(() => podContainers.value?.find((containe
 onResult(() => {
     formState.value.pod = pods.value?.at(0).value
     formState.value.container = podContainers.value?.at(0).value
+
+    const { lokiTail } = useTerminal()
+    const { wsUrl } = lokiTail({ pod: formState.value.pod, container: formState.value.container }, podContainerStartedAt.value)
+    formState.value.wsUrl = wsUrl
 })
 
 </script>
@@ -47,7 +52,6 @@ onResult(() => {
     </a-row>
 
     <div style="margin-top:20px">
-        <Terminal :query="{pod: formState.pod, container: formState.container}" :start="podContainerStartedAt">
-        </Terminal>
+        <Terminal :wsUrl="formState.wsUrl"> </Terminal>
     </div>
 </template>

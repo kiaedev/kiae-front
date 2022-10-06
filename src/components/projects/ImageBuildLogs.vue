@@ -2,14 +2,16 @@
 import { watch } from 'vue';
 import { useModal } from '@/hooks/modal';
 import { ImageImage } from '@/libs/kiae';
+import useTerminal from '@/components/xterm';
 
-defineProps<{
+const props = defineProps<{
     image: ImageImage,
 }>()
 
 const { visible, modalOpen, modalClose } = useModal()
+const { lokiTail } = useTerminal()
+const { wsUrl } = lokiTail({ app: `${props.image.name}-build-1` }, props.image?.createdAt || '')
 </script>
-
 
 <template>
     <a @click="modalOpen">
@@ -19,7 +21,6 @@ const { visible, modalOpen, modalClose } = useModal()
     <a-drawer :visible="visible" :title="`构建日志: ${image.name}`" size="large" placement="bottom" @close="modalClose"
         :destroyOnClose="true">
 
-        <Terminal :query="{app: `${image.name}-build-1`}" :start="image.createdAt">
-        </Terminal>
+        <Terminal :wsUrl="wsUrl"></Terminal>
     </a-drawer>
 </template>
