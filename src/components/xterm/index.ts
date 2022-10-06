@@ -1,11 +1,18 @@
 import dayjs from "dayjs";
 
+let host = location.host;
+if (import.meta.env.DEV) {
+  host = import.meta.env.VITE_BACKEND_ADDR
+}
+
+const wsOrigin = `ws://${host}/proxies`;
+
 export const lokiTail = (query: Object, start: string) => {
   const queryStr = Object.entries(query)
     .map(([k, v]) => `${k}="${v}"`)
     .join(", ");
 
-  const wsUrl = `ws://localhost:5173/proxies/loki/api/v1/tail?query=${encodeURIComponent(
+  const wsUrl = `${wsOrigin}/loki/api/v1/tail?query=${encodeURIComponent(
     `{${queryStr}}`
   )}&start=${dayjs(start).unix()}`;
 
@@ -24,7 +31,7 @@ export const kubeShell = (ns: string, pod: string, optQuery?: any) => {
     query.set("command", "bash");
   }
 
-  let wsUrl = `ws://127.0.0.1:8081/proxies/k8s/api/v1/namespaces/${ns}/pods/${pod}/exec?${query.toString()}`;
+  let wsUrl = `${wsOrigin}/k8s/api/v1/namespaces/${ns}/pods/${pod}/exec?${query.toString()}`;
   return { wsUrl };
 };
 
