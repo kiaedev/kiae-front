@@ -23,6 +23,7 @@ export default defineConfig({
     proxy: {
       "/api": backend,
       "/oauth2": backend,
+      "/proxies": backend,
     },
   },
   build: {
