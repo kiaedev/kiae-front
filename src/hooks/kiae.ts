@@ -1,6 +1,7 @@
 import {
   AppServiceApi,
   AppStatus,
+  ClusterServiceApi,
   EgressServiceApi,
   EntryServiceApi,
   ImageServiceApi,
@@ -23,6 +24,7 @@ export const useKiaeApi = () => {
     entrySvc: new EntryServiceApi(kiaeCfg),
     routeSvc: new RouteServiceApi(kiaeCfg),
 
+    clusterSvc: new ClusterServiceApi(kiaeCfg),
     providerSvc: new ProviderServiceApi(kiaeCfg),
     middlewareSvc: new MiddlewareServiceApi(kiaeCfg),
   };

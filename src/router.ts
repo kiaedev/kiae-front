@@ -15,7 +15,7 @@ import ProjectSettings from "./pages/project/settings/Index.vue";
 
 import AdminLayout from "./pages/admin/Layout.vue";
 import AdminMiddlewares from "./pages/admin/middleware/Index.vue";
-import AdminClusters from "./pages/admin/gateway/Index.vue";
+import AdminClusters from "./pages/admin/cluster/Index.vue";
 import AdminGateways from "./pages/admin/gateway/Index.vue";
 import AdminSystemGitProviders from "./pages/admin/system/git-provider/Index.vue";
 import ProjectCreation from "./components/projects/ProjectCreation.vue";

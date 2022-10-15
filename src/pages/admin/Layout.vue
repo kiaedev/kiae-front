@@ -31,10 +31,16 @@ const handleClick = (e: any) => {
                     <pie-chart-outlined />
                     <span>首页</span>
                 </a-menu-item>
-                <a-menu-item key="2">
-                    <desktop-outlined />
-                    <span>Option 2</span>
-                </a-menu-item>
+                <a-sub-menu key="clusters">
+                    <template #title>
+                        <span>
+                            <team-outlined />
+                            <span>集群管理</span>
+                        </span>
+                    </template>
+                    <a-menu-item key="">集群列表</a-menu-item>
+                    <a-menu-item key="environments">环境列表</a-menu-item>
+                </a-sub-menu>
                 <a-sub-menu key="middlewares">
                     <template #title>
                         <span>
@@ -56,16 +62,6 @@ const handleClick = (e: any) => {
                     <a-menu-item key="3">实例控制</a-menu-item>
                     <a-menu-item key="4">访问入口</a-menu-item>
                     <a-menu-item key="5">Alex</a-menu-item>
-                </a-sub-menu>
-                <a-sub-menu key="sub2">
-                    <template #title>
-                        <span>
-                            <team-outlined />
-                            <span>集群管理</span>
-                        </span>
-                    </template>
-                    <a-menu-item key="6">集群列表</a-menu-item>
-                    <a-menu-item key="8">环境列表</a-menu-item>
                 </a-sub-menu>
                 <a-sub-menu key="system">
                     <template #title>
