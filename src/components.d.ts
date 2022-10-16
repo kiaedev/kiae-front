@@ -65,6 +65,7 @@ declare module '@vue/runtime-core' {
     Configs: typeof import('./components/apps/Configs.vue')['default']
     DependEditor: typeof import('./components/apps/DependEditor.vue')['default']
     Depends: typeof import('./components/apps/Depends.vue')['default']
+    Deploy: typeof import('./components/projects/Deploy.vue')['default']
     DesktopOutlined: typeof import('@ant-design/icons-vue')['DesktopOutlined']
     DownOutlined: typeof import('@ant-design/icons-vue')['DownOutlined']
     EditOutlined: typeof import('@ant-design/icons-vue')['EditOutlined']

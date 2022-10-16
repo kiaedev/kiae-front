@@ -34,7 +34,9 @@ const gitRefs = computed(() => {
 
 const onCommitChange = (value: SelectValue, options: any) => {
     const { commit } = options
-    formState.commit = commit.sha1
+    formState.commitId = commit.sha1
+    formState.commitMsg = commit.message
+    formState.commitAuthor = commit.committerName
 }
 
 const { formState, formSubmit } = useFormSubmiter({ type: 'branch' }, (values: any) => {

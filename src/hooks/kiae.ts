@@ -2,6 +2,7 @@ import {
   AppServiceApi,
   AppStatus,
   ClusterServiceApi,
+  DeploymentServiceApi,
   EgressServiceApi,
   EntryServiceApi,
   ImageServiceApi,
@@ -18,6 +19,7 @@ export const useKiaeApi = () => {
   return {
     projSvc: new ProjectServiceApi(kiaeCfg),
     imageSvc: new ImageServiceApi(kiaeCfg),
+    deploySvc: new DeploymentServiceApi(kiaeCfg),
 
     appSvc: new AppServiceApi(kiaeCfg),
     egressSvc: new EgressServiceApi(kiaeCfg),
@@ -42,7 +44,7 @@ export const confirmDo = (title: string, tips: string, opFn: Function) => {
 
 export const appStatusMapper = (el: any) => {
   console.log(el);
-  
+
   if (!el) return;
 
   const colors: any = {

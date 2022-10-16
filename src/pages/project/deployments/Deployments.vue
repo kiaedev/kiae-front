@@ -1,38 +1,45 @@
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useProject } from '@/hooks/project';
-const dataSource = ref<any>([]);
+import { useKiaeApi } from '@/hooks/kiae';
+import { useRequest } from 'vue-request';
+
 const columns = [
     {
-        title: '名称',
-        dataIndex: 'name',
-    },
-    {
         title: '镜像地址',
-        dataIndex: 'image',
+        dataIndex: 'imageUrl',
+        width: 250,
+        ellipsis: true,
     },
     {
-        title: '镜像版本',
-        dataIndex: 'latest',
+        title: '状态',
+        dataIndex: 'status',
+        width: 100,
+    },
+    {
+        title: '提交',
+        dataIndex: 'commitId',
+    },
+    {
+        title: '提交信息',
+        dataIndex: 'commitMsg',
+        width: 350,
+        ellipsis: true,
     },
     {
         title: '最近更新',
         dataIndex: 'updatedAt',
-    },
-    {
-        title: '创建时间',
-        dataIndex: 'createdAt',
+        width: 200,
     },
 ]
 
 const { currentPid, projectGet } = useProject()
-
-onMounted(async () => {
-    const proj = await projectGet(currentPid())
-    console.log(proj);
-
-    dataSource.value = proj?.images
+const { deploySvc } = useKiaeApi()
+// const { handleDelete } = useImageOperater()
+const { data, loading, error, run } = useRequest(() => deploySvc.deploymentServiceList(currentPid()));
+const deployments = computed(() => {
+    return data.value?.data.items?.map((el) => { el.commitId = el.commitId?.substring(0, 7); return el })
 })
 
 </script>
@@ -44,12 +51,12 @@ onMounted(async () => {
         </a-col>
         <a-col flex="300px">
             <a-button type="primary" style="float: right">
-                部署
+                <Deploy>部署</Deploy>
             </a-button>
         </a-col>
     </a-row>
 
-    <a-table :dataSource="dataSource" :columns="columns">
+    <a-table :dataSource="deployments" :columns="columns">
         <template #bodyCell="{ column, record }">
             <!-- <template v-if="column.dataIndex === 'name'">
                 <a @click="handleAppClick(record)">
