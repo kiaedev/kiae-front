@@ -71,6 +71,7 @@ const handleClick = (e: any) => {
                         </span>
                     </template>
                     <a-menu-item key="git-providers">代码仓库</a-menu-item>
+                    <a-menu-item key="builders">构建框架</a-menu-item>
                 </a-sub-menu>
             </a-menu>
         </a-layout-sider>

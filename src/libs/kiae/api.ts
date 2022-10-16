@@ -360,6 +360,215 @@ export type AppStatus = typeof AppStatus[keyof typeof AppStatus];
 /**
  * 
  * @export
+ * @interface BuilderBuilder
+ */
+export interface BuilderBuilder {
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderBuilder
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderBuilder
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderBuilder
+     */
+    'intro'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderBuilder
+     */
+    'imageRepo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderBuilder
+     */
+    'stackId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderBuilder
+     */
+    'buildImage'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderBuilder
+     */
+    'runImage'?: string;
+    /**
+     * 
+     * @type {Array<BuilderPack>}
+     * @memberof BuilderBuilder
+     */
+    'packs'?: Array<BuilderPack>;
+    /**
+     * 
+     * @type {BuilderBuilderStatus}
+     * @memberof BuilderBuilder
+     */
+    'status'?: BuilderBuilderStatus;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderBuilder
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderBuilder
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface BuilderBuilderListResponse
+ */
+export interface BuilderBuilderListResponse {
+    /**
+     * 
+     * @type {Array<BuilderBuilder>}
+     * @memberof BuilderBuilderListResponse
+     */
+    'items'?: Array<BuilderBuilder>;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderBuilderListResponse
+     */
+    'total'?: string;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const BuilderBuilderStatus = {
+    Pending: 'PENDING',
+    Building: 'BUILDING',
+    Published: 'PUBLISHED',
+    Expired: 'EXPIRED',
+    Failed: 'FAILED'
+} as const;
+
+export type BuilderBuilderStatus = typeof BuilderBuilderStatus[keyof typeof BuilderBuilderStatus];
+
+
+/**
+ * 
+ * @export
+ * @interface BuilderEnv
+ */
+export interface BuilderEnv {
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderEnv
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderEnv
+     */
+    'intro'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderEnv
+     */
+    'defaultValue'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface BuilderPack
+ */
+export interface BuilderPack {
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderPack
+     */
+    'lang'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderPack
+     */
+    'image'?: string;
+    /**
+     * 
+     * @type {Array<BuilderEnv>}
+     * @memberof BuilderPack
+     */
+    'envs'?: Array<BuilderEnv>;
+}
+/**
+ * 
+ * @export
+ * @interface BuilderSuggestedStack
+ */
+export interface BuilderSuggestedStack {
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderSuggestedStack
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderSuggestedStack
+     */
+    'intro'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderSuggestedStack
+     */
+    'stackId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderSuggestedStack
+     */
+    'buildImage'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BuilderSuggestedStack
+     */
+    'runImage'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface BuilderSuggestedStackListResponse
+ */
+export interface BuilderSuggestedStackListResponse {
+    /**
+     * 
+     * @type {Array<BuilderSuggestedStack>}
+     * @memberof BuilderSuggestedStackListResponse
+     */
+    'items'?: Array<BuilderSuggestedStack>;
+}
+/**
+ * 
+ * @export
  * @enum {string}
  */
 
@@ -1375,19 +1584,37 @@ export interface InlineObject14 {
      * @type {string}
      * @memberof InlineObject14
      */
-    'idc'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof InlineObject14
-     */
-    'tags'?: Array<string>;
+    'imageRepo'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject14
      */
-    'kubeconfig'?: string;
+    'stackId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject14
+     */
+    'buildImage'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject14
+     */
+    'runImage'?: string;
+    /**
+     * 
+     * @type {Array<BuilderPack>}
+     * @memberof InlineObject14
+     */
+    'packs'?: Array<BuilderPack>;
+    /**
+     * 
+     * @type {BuilderBuilderStatus}
+     * @memberof InlineObject14
+     */
+    'status'?: BuilderBuilderStatus;
     /**
      * 
      * @type {string}
@@ -1424,19 +1651,37 @@ export interface InlineObject15 {
      * @type {string}
      * @memberof InlineObject15
      */
-    'idc'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof InlineObject15
-     */
-    'tags'?: Array<string>;
+    'imageRepo'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject15
      */
-    'kubeconfig'?: string;
+    'stackId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject15
+     */
+    'buildImage'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject15
+     */
+    'runImage'?: string;
+    /**
+     * 
+     * @type {Array<BuilderPack>}
+     * @memberof InlineObject15
+     */
+    'packs'?: Array<BuilderPack>;
+    /**
+     * 
+     * @type {BuilderBuilderStatus}
+     * @memberof InlineObject15
+     */
+    'status'?: BuilderBuilderStatus;
     /**
      * 
      * @type {string}
@@ -1467,37 +1712,25 @@ export interface InlineObject16 {
      * @type {string}
      * @memberof InlineObject16
      */
-    'image'?: string;
+    'intro'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject16
      */
-    'tag'?: string;
+    'idc'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof InlineObject16
+     */
+    'tags'?: Array<string>;
     /**
      * 
      * @type {string}
      * @memberof InlineObject16
      */
-    'commitId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject16
-     */
-    'commitMsg'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject16
-     */
-    'commitAuthor'?: string;
-    /**
-     * 
-     * @type {ImageImageStatus}
-     * @memberof InlineObject16
-     */
-    'status'?: ImageImageStatus;
+    'kubeconfig'?: string;
     /**
      * 
      * @type {string}
@@ -1522,37 +1755,31 @@ export interface InlineObject17 {
      * @type {string}
      * @memberof InlineObject17
      */
-    'appid'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject17
-     */
-    'type'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject17
-     */
     'name'?: string;
     /**
      * 
-     * @type {ClaimPolicy}
+     * @type {string}
      * @memberof InlineObject17
      */
-    'policy'?: ClaimPolicy;
+    'intro'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject17
      */
-    'instance'?: string;
+    'idc'?: string;
     /**
      * 
-     * @type {MiddlewareClaimStatus}
+     * @type {Array<string>}
      * @memberof InlineObject17
      */
-    'status'?: MiddlewareClaimStatus;
+    'tags'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject17
+     */
+    'kubeconfig'?: string;
     /**
      * 
      * @type {string}
@@ -1577,37 +1804,43 @@ export interface InlineObject18 {
      * @type {string}
      * @memberof InlineObject18
      */
-    'appid'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject18
-     */
-    'type'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject18
-     */
     'name'?: string;
     /**
      * 
-     * @type {ClaimPolicy}
+     * @type {string}
      * @memberof InlineObject18
      */
-    'policy'?: ClaimPolicy;
+    'image'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject18
      */
-    'instance'?: string;
+    'tag'?: string;
     /**
      * 
-     * @type {MiddlewareClaimStatus}
+     * @type {string}
      * @memberof InlineObject18
      */
-    'status'?: MiddlewareClaimStatus;
+    'commitId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject18
+     */
+    'commitMsg'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject18
+     */
+    'commitAuthor'?: string;
+    /**
+     * 
+     * @type {ImageImageStatus}
+     * @memberof InlineObject18
+     */
+    'status'?: ImageImageStatus;
     /**
      * 
      * @type {string}
@@ -1632,13 +1865,7 @@ export interface InlineObject19 {
      * @type {string}
      * @memberof InlineObject19
      */
-    'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject19
-     */
-    'env'?: string;
+    'appid'?: string;
     /**
      * 
      * @type {string}
@@ -1647,16 +1874,28 @@ export interface InlineObject19 {
     'type'?: string;
     /**
      * 
-     * @type {{ [key: string]: string; }}
+     * @type {string}
      * @memberof InlineObject19
      */
-    'properties'?: { [key: string]: string; };
+    'name'?: string;
     /**
      * 
-     * @type {KiaeOpStatus}
+     * @type {ClaimPolicy}
      * @memberof InlineObject19
      */
-    'status'?: KiaeOpStatus;
+    'policy'?: ClaimPolicy;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject19
+     */
+    'instance'?: string;
+    /**
+     * 
+     * @type {MiddlewareClaimStatus}
+     * @memberof InlineObject19
+     */
+    'status'?: MiddlewareClaimStatus;
     /**
      * 
      * @type {string}
@@ -1730,13 +1969,7 @@ export interface InlineObject20 {
      * @type {string}
      * @memberof InlineObject20
      */
-    'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject20
-     */
-    'env'?: string;
+    'appid'?: string;
     /**
      * 
      * @type {string}
@@ -1745,16 +1978,28 @@ export interface InlineObject20 {
     'type'?: string;
     /**
      * 
-     * @type {{ [key: string]: string; }}
+     * @type {string}
      * @memberof InlineObject20
      */
-    'properties'?: { [key: string]: string; };
+    'name'?: string;
     /**
      * 
-     * @type {KiaeOpStatus}
+     * @type {ClaimPolicy}
      * @memberof InlineObject20
      */
-    'status'?: KiaeOpStatus;
+    'policy'?: ClaimPolicy;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject20
+     */
+    'instance'?: string;
+    /**
+     * 
+     * @type {MiddlewareClaimStatus}
+     * @memberof InlineObject20
+     */
+    'status'?: MiddlewareClaimStatus;
     /**
      * 
      * @type {string}
@@ -1785,19 +2030,25 @@ export interface InlineObject21 {
      * @type {string}
      * @memberof InlineObject21
      */
-    'intro'?: string;
+    'env'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject21
      */
-    'gitRepo'?: string;
+    'type'?: string;
     /**
      * 
-     * @type {string}
+     * @type {{ [key: string]: string; }}
      * @memberof InlineObject21
      */
-    'imageRepo'?: string;
+    'properties'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {KiaeOpStatus}
+     * @memberof InlineObject21
+     */
+    'status'?: KiaeOpStatus;
     /**
      * 
      * @type {string}
@@ -1809,19 +2060,7 @@ export interface InlineObject21 {
      * @type {string}
      * @memberof InlineObject21
      */
-    'createdBy'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject21
-     */
     'updatedAt'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject21
-     */
-    'updatedBy'?: string;
 }
 /**
  * 
@@ -1840,19 +2079,25 @@ export interface InlineObject22 {
      * @type {string}
      * @memberof InlineObject22
      */
-    'intro'?: string;
+    'env'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject22
      */
-    'gitRepo'?: string;
+    'type'?: string;
     /**
      * 
-     * @type {string}
+     * @type {{ [key: string]: string; }}
      * @memberof InlineObject22
      */
-    'imageRepo'?: string;
+    'properties'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {KiaeOpStatus}
+     * @memberof InlineObject22
+     */
+    'status'?: KiaeOpStatus;
     /**
      * 
      * @type {string}
@@ -1864,19 +2109,7 @@ export interface InlineObject22 {
      * @type {string}
      * @memberof InlineObject22
      */
-    'createdBy'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject22
-     */
     'updatedAt'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject22
-     */
-    'updatedBy'?: string;
 }
 /**
  * 
@@ -1889,49 +2122,49 @@ export interface InlineObject23 {
      * @type {string}
      * @memberof InlineObject23
      */
-    'id'?: string;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject23
      */
-    'appid'?: string;
+    'intro'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject23
      */
-    'imageId'?: string;
+    'gitRepo'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject23
      */
-    'imageUrl'?: string;
+    'imageRepo'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject23
      */
-    'commitId'?: string;
+    'builderId'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof InlineObject23
+     */
+    'buildEnvs'?: Array<string>;
     /**
      * 
      * @type {string}
      * @memberof InlineObject23
      */
-    'commitMsg'?: string;
+    'runCommand'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject23
      */
-    'commitAuthor'?: string;
-    /**
-     * 
-     * @type {DeploymentDeploymentStatus}
-     * @memberof InlineObject23
-     */
-    'status'?: DeploymentDeploymentStatus;
+    'runArgs'?: string;
     /**
      * 
      * @type {string}
@@ -1943,7 +2176,19 @@ export interface InlineObject23 {
      * @type {string}
      * @memberof InlineObject23
      */
+    'createdBy'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject23
+     */
     'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject23
+     */
+    'updatedBy'?: string;
 }
 /**
  * 
@@ -1956,43 +2201,49 @@ export interface InlineObject24 {
      * @type {string}
      * @memberof InlineObject24
      */
-    'appid'?: string;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject24
      */
-    'imageId'?: string;
+    'intro'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject24
      */
-    'imageUrl'?: string;
+    'gitRepo'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject24
      */
-    'commitId'?: string;
+    'imageRepo'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject24
      */
-    'commitMsg'?: string;
+    'builderId'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof InlineObject24
+     */
+    'buildEnvs'?: Array<string>;
     /**
      * 
      * @type {string}
      * @memberof InlineObject24
      */
-    'commitAuthor'?: string;
+    'runCommand'?: string;
     /**
      * 
-     * @type {DeploymentDeploymentStatus}
+     * @type {string}
      * @memberof InlineObject24
      */
-    'status'?: DeploymentDeploymentStatus;
+    'runArgs'?: string;
     /**
      * 
      * @type {string}
@@ -2004,7 +2255,19 @@ export interface InlineObject24 {
      * @type {string}
      * @memberof InlineObject24
      */
+    'createdBy'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject24
+     */
     'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject24
+     */
+    'updatedBy'?: string;
 }
 /**
  * 
@@ -2012,6 +2275,12 @@ export interface InlineObject24 {
  * @interface InlineObject25
  */
 export interface InlineObject25 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject25
+     */
+    'id'?: string;
     /**
      * 
      * @type {string}
@@ -2078,25 +2347,19 @@ export interface InlineObject26 {
      * @type {string}
      * @memberof InlineObject26
      */
-    'id'?: string;
+    'appid'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject26
      */
-    'name'?: string;
+    'imageId'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject26
      */
-    'image'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineObject26
-     */
-    'tag'?: string;
+    'imageUrl'?: string;
     /**
      * 
      * @type {string}
@@ -2117,10 +2380,10 @@ export interface InlineObject26 {
     'commitAuthor'?: string;
     /**
      * 
-     * @type {ImageImageStatus}
+     * @type {DeploymentDeploymentStatus}
      * @memberof InlineObject26
      */
-    'status'?: ImageImageStatus;
+    'status'?: DeploymentDeploymentStatus;
     /**
      * 
      * @type {string}
@@ -2145,19 +2408,19 @@ export interface InlineObject27 {
      * @type {string}
      * @memberof InlineObject27
      */
-    'name'?: string;
+    'appid'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject27
      */
-    'image'?: string;
+    'imageId'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject27
      */
-    'tag'?: string;
+    'imageUrl'?: string;
     /**
      * 
      * @type {string}
@@ -2178,10 +2441,10 @@ export interface InlineObject27 {
     'commitAuthor'?: string;
     /**
      * 
-     * @type {ImageImageStatus}
+     * @type {DeploymentDeploymentStatus}
      * @memberof InlineObject27
      */
-    'status'?: ImageImageStatus;
+    'status'?: DeploymentDeploymentStatus;
     /**
      * 
      * @type {string}
@@ -2206,37 +2469,49 @@ export interface InlineObject28 {
      * @type {string}
      * @memberof InlineObject28
      */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject28
+     */
     'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject28
      */
-    'clientId'?: string;
+    'image'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject28
      */
-    'clientSecret'?: string;
+    'tag'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject28
      */
-    'authorizeUrl'?: string;
+    'commitId'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject28
      */
-    'tokenUrl'?: string;
+    'commitMsg'?: string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {string}
      * @memberof InlineObject28
      */
-    'scopes'?: Array<string>;
+    'commitAuthor'?: string;
+    /**
+     * 
+     * @type {ImageImageStatus}
+     * @memberof InlineObject28
+     */
+    'status'?: ImageImageStatus;
     /**
      * 
      * @type {string}
@@ -2267,31 +2542,37 @@ export interface InlineObject29 {
      * @type {string}
      * @memberof InlineObject29
      */
-    'clientId'?: string;
+    'image'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject29
      */
-    'clientSecret'?: string;
+    'tag'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject29
      */
-    'authorizeUrl'?: string;
+    'commitId'?: string;
     /**
      * 
      * @type {string}
      * @memberof InlineObject29
      */
-    'tokenUrl'?: string;
+    'commitMsg'?: string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {string}
      * @memberof InlineObject29
      */
-    'scopes'?: Array<string>;
+    'commitAuthor'?: string;
+    /**
+     * 
+     * @type {ImageImageStatus}
+     * @memberof InlineObject29
+     */
+    'status'?: ImageImageStatus;
     /**
      * 
      * @type {string}
@@ -2351,6 +2632,116 @@ export interface InlineObject3 {
      * 
      * @type {string}
      * @memberof InlineObject3
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject30
+ */
+export interface InlineObject30 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject30
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject30
+     */
+    'clientId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject30
+     */
+    'clientSecret'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject30
+     */
+    'authorizeUrl'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject30
+     */
+    'tokenUrl'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof InlineObject30
+     */
+    'scopes'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject30
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject30
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject31
+ */
+export interface InlineObject31 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject31
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject31
+     */
+    'clientId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject31
+     */
+    'clientSecret'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject31
+     */
+    'authorizeUrl'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject31
+     */
+    'tokenUrl'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof InlineObject31
+     */
+    'scopes'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject31
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject31
      */
     'updatedAt'?: string;
 }
@@ -2892,6 +3283,30 @@ export interface ProjectProject {
      * @memberof ProjectProject
      */
     'imageRepo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectProject
+     */
+    'builderId'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ProjectProject
+     */
+    'buildEnvs'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectProject
+     */
+    'runCommand'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectProject
+     */
+    'runArgs'?: string;
     /**
      * 
      * @type {string}
@@ -4599,6 +5014,428 @@ export class AppServiceApi extends BaseAPI {
 
 
 /**
+ * BuilderServiceApi - axios parameter creator
+ * @export
+ */
+export const BuilderServiceApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {BuilderBuilder} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        builderServiceCreate: async (body: BuilderBuilder, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('builderServiceCreate', 'body', body)
+            const localVarPath = `/api/v1/builders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        builderServiceDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('builderServiceDelete', 'id', id)
+            const localVarPath = `/api/v1/builders/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        builderServiceList: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/builders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        builderServiceSuggestedStacks: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/builder-suggested-stacks`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject14} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        builderServiceUpdate: async (id: string, body: InlineObject14, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('builderServiceUpdate', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('builderServiceUpdate', 'body', body)
+            const localVarPath = `/api/v1/builders/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject15} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        builderServiceUpdate2: async (id: string, body: InlineObject15, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('builderServiceUpdate2', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('builderServiceUpdate2', 'body', body)
+            const localVarPath = `/api/v1/builders/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * BuilderServiceApi - functional programming interface
+ * @export
+ */
+export const BuilderServiceApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BuilderServiceApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {BuilderBuilder} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async builderServiceCreate(body: BuilderBuilder, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BuilderBuilder>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.builderServiceCreate(body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async builderServiceDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.builderServiceDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async builderServiceList(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BuilderBuilderListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.builderServiceList(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async builderServiceSuggestedStacks(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BuilderSuggestedStackListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.builderServiceSuggestedStacks(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject14} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async builderServiceUpdate(id: string, body: InlineObject14, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BuilderBuilder>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.builderServiceUpdate(id, body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject15} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async builderServiceUpdate2(id: string, body: InlineObject15, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BuilderBuilder>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.builderServiceUpdate2(id, body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * BuilderServiceApi - factory interface
+ * @export
+ */
+export const BuilderServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BuilderServiceApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {BuilderBuilder} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        builderServiceCreate(body: BuilderBuilder, options?: any): AxiosPromise<BuilderBuilder> {
+            return localVarFp.builderServiceCreate(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        builderServiceDelete(id: string, options?: any): AxiosPromise<object> {
+            return localVarFp.builderServiceDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        builderServiceList(options?: any): AxiosPromise<BuilderBuilderListResponse> {
+            return localVarFp.builderServiceList(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        builderServiceSuggestedStacks(options?: any): AxiosPromise<BuilderSuggestedStackListResponse> {
+            return localVarFp.builderServiceSuggestedStacks(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject14} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        builderServiceUpdate(id: string, body: InlineObject14, options?: any): AxiosPromise<BuilderBuilder> {
+            return localVarFp.builderServiceUpdate(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject15} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        builderServiceUpdate2(id: string, body: InlineObject15, options?: any): AxiosPromise<BuilderBuilder> {
+            return localVarFp.builderServiceUpdate2(id, body, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * BuilderServiceApi - object-oriented interface
+ * @export
+ * @class BuilderServiceApi
+ * @extends {BaseAPI}
+ */
+export class BuilderServiceApi extends BaseAPI {
+    /**
+     * 
+     * @param {BuilderBuilder} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BuilderServiceApi
+     */
+    public builderServiceCreate(body: BuilderBuilder, options?: AxiosRequestConfig) {
+        return BuilderServiceApiFp(this.configuration).builderServiceCreate(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BuilderServiceApi
+     */
+    public builderServiceDelete(id: string, options?: AxiosRequestConfig) {
+        return BuilderServiceApiFp(this.configuration).builderServiceDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BuilderServiceApi
+     */
+    public builderServiceList(options?: AxiosRequestConfig) {
+        return BuilderServiceApiFp(this.configuration).builderServiceList(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BuilderServiceApi
+     */
+    public builderServiceSuggestedStacks(options?: AxiosRequestConfig) {
+        return BuilderServiceApiFp(this.configuration).builderServiceSuggestedStacks(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {InlineObject14} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BuilderServiceApi
+     */
+    public builderServiceUpdate(id: string, body: InlineObject14, options?: AxiosRequestConfig) {
+        return BuilderServiceApiFp(this.configuration).builderServiceUpdate(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {InlineObject15} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BuilderServiceApi
+     */
+    public builderServiceUpdate2(id: string, body: InlineObject15, options?: AxiosRequestConfig) {
+        return BuilderServiceApiFp(this.configuration).builderServiceUpdate2(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * ClusterServiceApi - axios parameter creator
  * @export
  */
@@ -4709,12 +5546,12 @@ export const ClusterServiceApiAxiosParamCreator = function (configuration?: Conf
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject14} payload 
+         * @param {InlineObject16} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clusterServiceUpdate: async (payloadId: string, payload: InlineObject14, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        clusterServiceUpdate: async (payloadId: string, payload: InlineObject16, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'payloadId' is not null or undefined
             assertParamExists('clusterServiceUpdate', 'payloadId', payloadId)
             // verify required parameter 'payload' is not null or undefined
@@ -4753,12 +5590,12 @@ export const ClusterServiceApiAxiosParamCreator = function (configuration?: Conf
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject15} payload 
+         * @param {InlineObject17} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clusterServiceUpdate2: async (payloadId: string, payload: InlineObject15, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        clusterServiceUpdate2: async (payloadId: string, payload: InlineObject17, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'payloadId' is not null or undefined
             assertParamExists('clusterServiceUpdate2', 'payloadId', payloadId)
             // verify required parameter 'payload' is not null or undefined
@@ -4837,24 +5674,24 @@ export const ClusterServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject14} payload 
+         * @param {InlineObject16} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clusterServiceUpdate(payloadId: string, payload: InlineObject14, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClusterCluster>> {
+        async clusterServiceUpdate(payloadId: string, payload: InlineObject16, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClusterCluster>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clusterServiceUpdate(payloadId, payload, updateMask, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject15} payload 
+         * @param {InlineObject17} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clusterServiceUpdate2(payloadId: string, payload: InlineObject15, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClusterCluster>> {
+        async clusterServiceUpdate2(payloadId: string, payload: InlineObject17, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClusterCluster>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clusterServiceUpdate2(payloadId, payload, updateMask, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4898,23 +5735,23 @@ export const ClusterServiceApiFactory = function (configuration?: Configuration,
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject14} payload 
+         * @param {InlineObject16} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clusterServiceUpdate(payloadId: string, payload: InlineObject14, updateMask?: string, options?: any): AxiosPromise<ClusterCluster> {
+        clusterServiceUpdate(payloadId: string, payload: InlineObject16, updateMask?: string, options?: any): AxiosPromise<ClusterCluster> {
             return localVarFp.clusterServiceUpdate(payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject15} payload 
+         * @param {InlineObject17} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clusterServiceUpdate2(payloadId: string, payload: InlineObject15, updateMask?: string, options?: any): AxiosPromise<ClusterCluster> {
+        clusterServiceUpdate2(payloadId: string, payload: InlineObject17, updateMask?: string, options?: any): AxiosPromise<ClusterCluster> {
             return localVarFp.clusterServiceUpdate2(payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
         },
     };
@@ -4963,26 +5800,26 @@ export class ClusterServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} payloadId 
-     * @param {InlineObject14} payload 
+     * @param {InlineObject16} payload 
      * @param {string} [updateMask] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ClusterServiceApi
      */
-    public clusterServiceUpdate(payloadId: string, payload: InlineObject14, updateMask?: string, options?: AxiosRequestConfig) {
+    public clusterServiceUpdate(payloadId: string, payload: InlineObject16, updateMask?: string, options?: AxiosRequestConfig) {
         return ClusterServiceApiFp(this.configuration).clusterServiceUpdate(payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} payloadId 
-     * @param {InlineObject15} payload 
+     * @param {InlineObject17} payload 
      * @param {string} [updateMask] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ClusterServiceApi
      */
-    public clusterServiceUpdate2(payloadId: string, payload: InlineObject15, updateMask?: string, options?: AxiosRequestConfig) {
+    public clusterServiceUpdate2(payloadId: string, payload: InlineObject17, updateMask?: string, options?: AxiosRequestConfig) {
         return ClusterServiceApiFp(this.configuration).clusterServiceUpdate2(payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -4997,11 +5834,11 @@ export const DeploymentServiceApiAxiosParamCreator = function (configuration?: C
         /**
          * 
          * @param {string} pid 
-         * @param {InlineObject23} body 
+         * @param {InlineObject25} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deploymentServiceCreate: async (pid: string, body: InlineObject23, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deploymentServiceCreate: async (pid: string, body: InlineObject25, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'pid' is not null or undefined
             assertParamExists('deploymentServiceCreate', 'pid', pid)
             // verify required parameter 'body' is not null or undefined
@@ -5107,11 +5944,11 @@ export const DeploymentServiceApiAxiosParamCreator = function (configuration?: C
          * 
          * @param {string} pid 
          * @param {string} id 
-         * @param {InlineObject24} body 
+         * @param {InlineObject26} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deploymentServiceUpdate: async (pid: string, id: string, body: InlineObject24, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deploymentServiceUpdate: async (pid: string, id: string, body: InlineObject26, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'pid' is not null or undefined
             assertParamExists('deploymentServiceUpdate', 'pid', pid)
             // verify required parameter 'id' is not null or undefined
@@ -5150,11 +5987,11 @@ export const DeploymentServiceApiAxiosParamCreator = function (configuration?: C
          * 
          * @param {string} pid 
          * @param {string} id 
-         * @param {InlineObject25} body 
+         * @param {InlineObject27} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deploymentServiceUpdate2: async (pid: string, id: string, body: InlineObject25, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deploymentServiceUpdate2: async (pid: string, id: string, body: InlineObject27, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'pid' is not null or undefined
             assertParamExists('deploymentServiceUpdate2', 'pid', pid)
             // verify required parameter 'id' is not null or undefined
@@ -5202,11 +6039,11 @@ export const DeploymentServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} pid 
-         * @param {InlineObject23} body 
+         * @param {InlineObject25} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deploymentServiceCreate(pid: string, body: InlineObject23, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeploymentDeployment>> {
+        async deploymentServiceCreate(pid: string, body: InlineObject25, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeploymentDeployment>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deploymentServiceCreate(pid, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5235,11 +6072,11 @@ export const DeploymentServiceApiFp = function(configuration?: Configuration) {
          * 
          * @param {string} pid 
          * @param {string} id 
-         * @param {InlineObject24} body 
+         * @param {InlineObject26} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deploymentServiceUpdate(pid: string, id: string, body: InlineObject24, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeploymentDeployment>> {
+        async deploymentServiceUpdate(pid: string, id: string, body: InlineObject26, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeploymentDeployment>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deploymentServiceUpdate(pid, id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5247,11 +6084,11 @@ export const DeploymentServiceApiFp = function(configuration?: Configuration) {
          * 
          * @param {string} pid 
          * @param {string} id 
-         * @param {InlineObject25} body 
+         * @param {InlineObject27} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deploymentServiceUpdate2(pid: string, id: string, body: InlineObject25, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeploymentDeployment>> {
+        async deploymentServiceUpdate2(pid: string, id: string, body: InlineObject27, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeploymentDeployment>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deploymentServiceUpdate2(pid, id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5268,11 +6105,11 @@ export const DeploymentServiceApiFactory = function (configuration?: Configurati
         /**
          * 
          * @param {string} pid 
-         * @param {InlineObject23} body 
+         * @param {InlineObject25} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deploymentServiceCreate(pid: string, body: InlineObject23, options?: any): AxiosPromise<DeploymentDeployment> {
+        deploymentServiceCreate(pid: string, body: InlineObject25, options?: any): AxiosPromise<DeploymentDeployment> {
             return localVarFp.deploymentServiceCreate(pid, body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5298,22 +6135,22 @@ export const DeploymentServiceApiFactory = function (configuration?: Configurati
          * 
          * @param {string} pid 
          * @param {string} id 
-         * @param {InlineObject24} body 
+         * @param {InlineObject26} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deploymentServiceUpdate(pid: string, id: string, body: InlineObject24, options?: any): AxiosPromise<DeploymentDeployment> {
+        deploymentServiceUpdate(pid: string, id: string, body: InlineObject26, options?: any): AxiosPromise<DeploymentDeployment> {
             return localVarFp.deploymentServiceUpdate(pid, id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} pid 
          * @param {string} id 
-         * @param {InlineObject25} body 
+         * @param {InlineObject27} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deploymentServiceUpdate2(pid: string, id: string, body: InlineObject25, options?: any): AxiosPromise<DeploymentDeployment> {
+        deploymentServiceUpdate2(pid: string, id: string, body: InlineObject27, options?: any): AxiosPromise<DeploymentDeployment> {
             return localVarFp.deploymentServiceUpdate2(pid, id, body, options).then((request) => request(axios, basePath));
         },
     };
@@ -5329,12 +6166,12 @@ export class DeploymentServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} pid 
-     * @param {InlineObject23} body 
+     * @param {InlineObject25} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DeploymentServiceApi
      */
-    public deploymentServiceCreate(pid: string, body: InlineObject23, options?: AxiosRequestConfig) {
+    public deploymentServiceCreate(pid: string, body: InlineObject25, options?: AxiosRequestConfig) {
         return DeploymentServiceApiFp(this.configuration).deploymentServiceCreate(pid, body, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5365,12 +6202,12 @@ export class DeploymentServiceApi extends BaseAPI {
      * 
      * @param {string} pid 
      * @param {string} id 
-     * @param {InlineObject24} body 
+     * @param {InlineObject26} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DeploymentServiceApi
      */
-    public deploymentServiceUpdate(pid: string, id: string, body: InlineObject24, options?: AxiosRequestConfig) {
+    public deploymentServiceUpdate(pid: string, id: string, body: InlineObject26, options?: AxiosRequestConfig) {
         return DeploymentServiceApiFp(this.configuration).deploymentServiceUpdate(pid, id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5378,12 +6215,12 @@ export class DeploymentServiceApi extends BaseAPI {
      * 
      * @param {string} pid 
      * @param {string} id 
-     * @param {InlineObject25} body 
+     * @param {InlineObject27} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DeploymentServiceApi
      */
-    public deploymentServiceUpdate2(pid: string, id: string, body: InlineObject25, options?: AxiosRequestConfig) {
+    public deploymentServiceUpdate2(pid: string, id: string, body: InlineObject27, options?: AxiosRequestConfig) {
         return DeploymentServiceApiFp(this.configuration).deploymentServiceUpdate2(pid, id, body, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -6224,11 +7061,11 @@ export const ImageServiceApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @param {string} pid 
-         * @param {InlineObject26} body 
+         * @param {InlineObject28} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        imageServiceCreate: async (pid: string, body: InlineObject26, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        imageServiceCreate: async (pid: string, body: InlineObject28, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'pid' is not null or undefined
             assertParamExists('imageServiceCreate', 'pid', pid)
             // verify required parameter 'body' is not null or undefined
@@ -6339,11 +7176,11 @@ export const ImageServiceApiAxiosParamCreator = function (configuration?: Config
          * 
          * @param {string} pid 
          * @param {string} id 
-         * @param {InlineObject16} body 
+         * @param {InlineObject18} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        imageServiceUpdate: async (pid: string, id: string, body: InlineObject16, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        imageServiceUpdate: async (pid: string, id: string, body: InlineObject18, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'pid' is not null or undefined
             assertParamExists('imageServiceUpdate', 'pid', pid)
             // verify required parameter 'id' is not null or undefined
@@ -6382,11 +7219,11 @@ export const ImageServiceApiAxiosParamCreator = function (configuration?: Config
          * 
          * @param {string} pid 
          * @param {string} id 
-         * @param {InlineObject27} body 
+         * @param {InlineObject29} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        imageServiceUpdate2: async (pid: string, id: string, body: InlineObject27, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        imageServiceUpdate2: async (pid: string, id: string, body: InlineObject29, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'pid' is not null or undefined
             assertParamExists('imageServiceUpdate2', 'pid', pid)
             // verify required parameter 'id' is not null or undefined
@@ -6434,11 +7271,11 @@ export const ImageServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} pid 
-         * @param {InlineObject26} body 
+         * @param {InlineObject28} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async imageServiceCreate(pid: string, body: InlineObject26, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageImage>> {
+        async imageServiceCreate(pid: string, body: InlineObject28, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageImage>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.imageServiceCreate(pid, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6468,11 +7305,11 @@ export const ImageServiceApiFp = function(configuration?: Configuration) {
          * 
          * @param {string} pid 
          * @param {string} id 
-         * @param {InlineObject16} body 
+         * @param {InlineObject18} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async imageServiceUpdate(pid: string, id: string, body: InlineObject16, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageImage>> {
+        async imageServiceUpdate(pid: string, id: string, body: InlineObject18, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageImage>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.imageServiceUpdate(pid, id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6480,11 +7317,11 @@ export const ImageServiceApiFp = function(configuration?: Configuration) {
          * 
          * @param {string} pid 
          * @param {string} id 
-         * @param {InlineObject27} body 
+         * @param {InlineObject29} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async imageServiceUpdate2(pid: string, id: string, body: InlineObject27, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageImage>> {
+        async imageServiceUpdate2(pid: string, id: string, body: InlineObject29, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageImage>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.imageServiceUpdate2(pid, id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6501,11 +7338,11 @@ export const ImageServiceApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @param {string} pid 
-         * @param {InlineObject26} body 
+         * @param {InlineObject28} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        imageServiceCreate(pid: string, body: InlineObject26, options?: any): AxiosPromise<ImageImage> {
+        imageServiceCreate(pid: string, body: InlineObject28, options?: any): AxiosPromise<ImageImage> {
             return localVarFp.imageServiceCreate(pid, body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6532,22 +7369,22 @@ export const ImageServiceApiFactory = function (configuration?: Configuration, b
          * 
          * @param {string} pid 
          * @param {string} id 
-         * @param {InlineObject16} body 
+         * @param {InlineObject18} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        imageServiceUpdate(pid: string, id: string, body: InlineObject16, options?: any): AxiosPromise<ImageImage> {
+        imageServiceUpdate(pid: string, id: string, body: InlineObject18, options?: any): AxiosPromise<ImageImage> {
             return localVarFp.imageServiceUpdate(pid, id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} pid 
          * @param {string} id 
-         * @param {InlineObject27} body 
+         * @param {InlineObject29} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        imageServiceUpdate2(pid: string, id: string, body: InlineObject27, options?: any): AxiosPromise<ImageImage> {
+        imageServiceUpdate2(pid: string, id: string, body: InlineObject29, options?: any): AxiosPromise<ImageImage> {
             return localVarFp.imageServiceUpdate2(pid, id, body, options).then((request) => request(axios, basePath));
         },
     };
@@ -6563,12 +7400,12 @@ export class ImageServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} pid 
-     * @param {InlineObject26} body 
+     * @param {InlineObject28} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ImageServiceApi
      */
-    public imageServiceCreate(pid: string, body: InlineObject26, options?: AxiosRequestConfig) {
+    public imageServiceCreate(pid: string, body: InlineObject28, options?: AxiosRequestConfig) {
         return ImageServiceApiFp(this.configuration).imageServiceCreate(pid, body, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -6600,12 +7437,12 @@ export class ImageServiceApi extends BaseAPI {
      * 
      * @param {string} pid 
      * @param {string} id 
-     * @param {InlineObject16} body 
+     * @param {InlineObject18} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ImageServiceApi
      */
-    public imageServiceUpdate(pid: string, id: string, body: InlineObject16, options?: AxiosRequestConfig) {
+    public imageServiceUpdate(pid: string, id: string, body: InlineObject18, options?: AxiosRequestConfig) {
         return ImageServiceApiFp(this.configuration).imageServiceUpdate(pid, id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -6613,12 +7450,12 @@ export class ImageServiceApi extends BaseAPI {
      * 
      * @param {string} pid 
      * @param {string} id 
-     * @param {InlineObject27} body 
+     * @param {InlineObject29} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ImageServiceApi
      */
-    public imageServiceUpdate2(pid: string, id: string, body: InlineObject27, options?: AxiosRequestConfig) {
+    public imageServiceUpdate2(pid: string, id: string, body: InlineObject29, options?: AxiosRequestConfig) {
         return ImageServiceApiFp(this.configuration).imageServiceUpdate2(pid, id, body, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -6701,11 +7538,11 @@ export const MiddlewareServiceApiAxiosParamCreator = function (configuration?: C
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject17} body 
+         * @param {InlineObject19} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        middlewareServiceClaimUpdate: async (id: string, body: InlineObject17, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        middlewareServiceClaimUpdate: async (id: string, body: InlineObject19, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('middlewareServiceClaimUpdate', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -6740,11 +7577,11 @@ export const MiddlewareServiceApiAxiosParamCreator = function (configuration?: C
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject18} body 
+         * @param {InlineObject20} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        middlewareServiceClaimUpdate2: async (id: string, body: InlineObject18, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        middlewareServiceClaimUpdate2: async (id: string, body: InlineObject20, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('middlewareServiceClaimUpdate2', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -6915,11 +7752,11 @@ export const MiddlewareServiceApiAxiosParamCreator = function (configuration?: C
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject19} body 
+         * @param {InlineObject21} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        middlewareServiceUpdate: async (id: string, body: InlineObject19, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        middlewareServiceUpdate: async (id: string, body: InlineObject21, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('middlewareServiceUpdate', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -6954,11 +7791,11 @@ export const MiddlewareServiceApiAxiosParamCreator = function (configuration?: C
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject20} body 
+         * @param {InlineObject22} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        middlewareServiceUpdate2: async (id: string, body: InlineObject20, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        middlewareServiceUpdate2: async (id: string, body: InlineObject22, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('middlewareServiceUpdate2', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -7023,22 +7860,22 @@ export const MiddlewareServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject17} body 
+         * @param {InlineObject19} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async middlewareServiceClaimUpdate(id: string, body: InlineObject17, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareClaim>> {
+        async middlewareServiceClaimUpdate(id: string, body: InlineObject19, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareClaim>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.middlewareServiceClaimUpdate(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject18} body 
+         * @param {InlineObject20} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async middlewareServiceClaimUpdate2(id: string, body: InlineObject18, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareClaim>> {
+        async middlewareServiceClaimUpdate2(id: string, body: InlineObject20, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareClaim>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.middlewareServiceClaimUpdate2(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7085,22 +7922,22 @@ export const MiddlewareServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject19} body 
+         * @param {InlineObject21} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async middlewareServiceUpdate(id: string, body: InlineObject19, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareInstance>> {
+        async middlewareServiceUpdate(id: string, body: InlineObject21, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareInstance>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.middlewareServiceUpdate(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject20} body 
+         * @param {InlineObject22} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async middlewareServiceUpdate2(id: string, body: InlineObject20, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareInstance>> {
+        async middlewareServiceUpdate2(id: string, body: InlineObject22, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MiddlewareInstance>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.middlewareServiceUpdate2(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7135,21 +7972,21 @@ export const MiddlewareServiceApiFactory = function (configuration?: Configurati
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject17} body 
+         * @param {InlineObject19} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        middlewareServiceClaimUpdate(id: string, body: InlineObject17, options?: any): AxiosPromise<MiddlewareClaim> {
+        middlewareServiceClaimUpdate(id: string, body: InlineObject19, options?: any): AxiosPromise<MiddlewareClaim> {
             return localVarFp.middlewareServiceClaimUpdate(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject18} body 
+         * @param {InlineObject20} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        middlewareServiceClaimUpdate2(id: string, body: InlineObject18, options?: any): AxiosPromise<MiddlewareClaim> {
+        middlewareServiceClaimUpdate2(id: string, body: InlineObject20, options?: any): AxiosPromise<MiddlewareClaim> {
             return localVarFp.middlewareServiceClaimUpdate2(id, body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7191,21 +8028,21 @@ export const MiddlewareServiceApiFactory = function (configuration?: Configurati
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject19} body 
+         * @param {InlineObject21} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        middlewareServiceUpdate(id: string, body: InlineObject19, options?: any): AxiosPromise<MiddlewareInstance> {
+        middlewareServiceUpdate(id: string, body: InlineObject21, options?: any): AxiosPromise<MiddlewareInstance> {
             return localVarFp.middlewareServiceUpdate(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject20} body 
+         * @param {InlineObject22} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        middlewareServiceUpdate2(id: string, body: InlineObject20, options?: any): AxiosPromise<MiddlewareInstance> {
+        middlewareServiceUpdate2(id: string, body: InlineObject22, options?: any): AxiosPromise<MiddlewareInstance> {
             return localVarFp.middlewareServiceUpdate2(id, body, options).then((request) => request(axios, basePath));
         },
     };
@@ -7243,24 +8080,24 @@ export class MiddlewareServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject17} body 
+     * @param {InlineObject19} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MiddlewareServiceApi
      */
-    public middlewareServiceClaimUpdate(id: string, body: InlineObject17, options?: AxiosRequestConfig) {
+    public middlewareServiceClaimUpdate(id: string, body: InlineObject19, options?: AxiosRequestConfig) {
         return MiddlewareServiceApiFp(this.configuration).middlewareServiceClaimUpdate(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject18} body 
+     * @param {InlineObject20} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MiddlewareServiceApi
      */
-    public middlewareServiceClaimUpdate2(id: string, body: InlineObject18, options?: AxiosRequestConfig) {
+    public middlewareServiceClaimUpdate2(id: string, body: InlineObject20, options?: AxiosRequestConfig) {
         return MiddlewareServiceApiFp(this.configuration).middlewareServiceClaimUpdate2(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7311,24 +8148,24 @@ export class MiddlewareServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject19} body 
+     * @param {InlineObject21} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MiddlewareServiceApi
      */
-    public middlewareServiceUpdate(id: string, body: InlineObject19, options?: AxiosRequestConfig) {
+    public middlewareServiceUpdate(id: string, body: InlineObject21, options?: AxiosRequestConfig) {
         return MiddlewareServiceApiFp(this.configuration).middlewareServiceUpdate(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject20} body 
+     * @param {InlineObject22} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MiddlewareServiceApi
      */
-    public middlewareServiceUpdate2(id: string, body: InlineObject20, options?: AxiosRequestConfig) {
+    public middlewareServiceUpdate2(id: string, body: InlineObject22, options?: AxiosRequestConfig) {
         return MiddlewareServiceApiFp(this.configuration).middlewareServiceUpdate2(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -7478,11 +8315,11 @@ export const ProjectServiceApiAxiosParamCreator = function (configuration?: Conf
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject21} body 
+         * @param {InlineObject23} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate: async (id: string, body: InlineObject21, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectServiceUpdate: async (id: string, body: InlineObject23, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectServiceUpdate', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -7517,11 +8354,11 @@ export const ProjectServiceApiAxiosParamCreator = function (configuration?: Conf
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject22} body 
+         * @param {InlineObject24} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate2: async (id: string, body: InlineObject22, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectServiceUpdate2: async (id: string, body: InlineObject24, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('projectServiceUpdate2', 'id', id)
             // verify required parameter 'body' is not null or undefined
@@ -7606,22 +8443,22 @@ export const ProjectServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject21} body 
+         * @param {InlineObject23} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectServiceUpdate(id: string, body: InlineObject21, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
+        async projectServiceUpdate(id: string, body: InlineObject23, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.projectServiceUpdate(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject22} body 
+         * @param {InlineObject24} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectServiceUpdate2(id: string, body: InlineObject22, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
+        async projectServiceUpdate2(id: string, body: InlineObject24, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectProject>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.projectServiceUpdate2(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7674,21 +8511,21 @@ export const ProjectServiceApiFactory = function (configuration?: Configuration,
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject21} body 
+         * @param {InlineObject23} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate(id: string, body: InlineObject21, options?: any): AxiosPromise<ProjectProject> {
+        projectServiceUpdate(id: string, body: InlineObject23, options?: any): AxiosPromise<ProjectProject> {
             return localVarFp.projectServiceUpdate(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
-         * @param {InlineObject22} body 
+         * @param {InlineObject24} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectServiceUpdate2(id: string, body: InlineObject22, options?: any): AxiosPromise<ProjectProject> {
+        projectServiceUpdate2(id: string, body: InlineObject24, options?: any): AxiosPromise<ProjectProject> {
             return localVarFp.projectServiceUpdate2(id, body, options).then((request) => request(axios, basePath));
         },
     };
@@ -7748,24 +8585,24 @@ export class ProjectServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject21} body 
+     * @param {InlineObject23} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectServiceApi
      */
-    public projectServiceUpdate(id: string, body: InlineObject21, options?: AxiosRequestConfig) {
+    public projectServiceUpdate(id: string, body: InlineObject23, options?: AxiosRequestConfig) {
         return ProjectServiceApiFp(this.configuration).projectServiceUpdate(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} id 
-     * @param {InlineObject22} body 
+     * @param {InlineObject24} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectServiceApi
      */
-    public projectServiceUpdate2(id: string, body: InlineObject22, options?: AxiosRequestConfig) {
+    public projectServiceUpdate2(id: string, body: InlineObject24, options?: AxiosRequestConfig) {
         return ProjectServiceApiFp(this.configuration).projectServiceUpdate2(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -8018,12 +8855,12 @@ export const ProviderServiceApiAxiosParamCreator = function (configuration?: Con
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject28} payload 
+         * @param {InlineObject30} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        providerServiceUpdate: async (payloadId: string, payload: InlineObject28, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        providerServiceUpdate: async (payloadId: string, payload: InlineObject30, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'payloadId' is not null or undefined
             assertParamExists('providerServiceUpdate', 'payloadId', payloadId)
             // verify required parameter 'payload' is not null or undefined
@@ -8062,12 +8899,12 @@ export const ProviderServiceApiAxiosParamCreator = function (configuration?: Con
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject29} payload 
+         * @param {InlineObject31} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        providerServiceUpdate2: async (payloadId: string, payload: InlineObject29, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        providerServiceUpdate2: async (payloadId: string, payload: InlineObject31, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'payloadId' is not null or undefined
             assertParamExists('providerServiceUpdate2', 'payloadId', payloadId)
             // verify required parameter 'payload' is not null or undefined
@@ -8187,24 +9024,24 @@ export const ProviderServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject28} payload 
+         * @param {InlineObject30} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async providerServiceUpdate(payloadId: string, payload: InlineObject28, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProviderProvider>> {
+        async providerServiceUpdate(payloadId: string, payload: InlineObject30, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProviderProvider>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.providerServiceUpdate(payloadId, payload, updateMask, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject29} payload 
+         * @param {InlineObject31} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async providerServiceUpdate2(payloadId: string, payload: InlineObject29, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProviderProvider>> {
+        async providerServiceUpdate2(payloadId: string, payload: InlineObject31, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProviderProvider>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.providerServiceUpdate2(payloadId, payload, updateMask, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8285,23 +9122,23 @@ export const ProviderServiceApiFactory = function (configuration?: Configuration
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject28} payload 
+         * @param {InlineObject30} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        providerServiceUpdate(payloadId: string, payload: InlineObject28, updateMask?: string, options?: any): AxiosPromise<ProviderProvider> {
+        providerServiceUpdate(payloadId: string, payload: InlineObject30, updateMask?: string, options?: any): AxiosPromise<ProviderProvider> {
             return localVarFp.providerServiceUpdate(payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} payloadId 
-         * @param {InlineObject29} payload 
+         * @param {InlineObject31} payload 
          * @param {string} [updateMask] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        providerServiceUpdate2(payloadId: string, payload: InlineObject29, updateMask?: string, options?: any): AxiosPromise<ProviderProvider> {
+        providerServiceUpdate2(payloadId: string, payload: InlineObject31, updateMask?: string, options?: any): AxiosPromise<ProviderProvider> {
             return localVarFp.providerServiceUpdate2(payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
         },
     };
@@ -8395,26 +9232,26 @@ export class ProviderServiceApi extends BaseAPI {
     /**
      * 
      * @param {string} payloadId 
-     * @param {InlineObject28} payload 
+     * @param {InlineObject30} payload 
      * @param {string} [updateMask] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProviderServiceApi
      */
-    public providerServiceUpdate(payloadId: string, payload: InlineObject28, updateMask?: string, options?: AxiosRequestConfig) {
+    public providerServiceUpdate(payloadId: string, payload: InlineObject30, updateMask?: string, options?: AxiosRequestConfig) {
         return ProviderServiceApiFp(this.configuration).providerServiceUpdate(payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} payloadId 
-     * @param {InlineObject29} payload 
+     * @param {InlineObject31} payload 
      * @param {string} [updateMask] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProviderServiceApi
      */
-    public providerServiceUpdate2(payloadId: string, payload: InlineObject29, updateMask?: string, options?: AxiosRequestConfig) {
+    public providerServiceUpdate2(payloadId: string, payload: InlineObject31, updateMask?: string, options?: AxiosRequestConfig) {
         return ProviderServiceApiFp(this.configuration).providerServiceUpdate2(payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
     }
 }

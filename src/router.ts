@@ -1,7 +1,4 @@
-import {
-  createRouter,
-  createWebHistory,
-} from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import NotFound from "./pages/system/NotFound.vue";
 import HomeLayout from "./pages/Layout.vue";
 import ProjectLayout from "./pages/project/Layout.vue";
@@ -18,6 +15,7 @@ import AdminMiddlewares from "./pages/admin/middleware/Index.vue";
 import AdminClusters from "./pages/admin/cluster/Index.vue";
 import AdminGateways from "./pages/admin/gateway/Index.vue";
 import AdminSystemGitProviders from "./pages/admin/system/git-provider/Index.vue";
+import AdminSystemBuilders from "./pages/admin/system/builder/Index.vue";
 import ProjectCreation from "./components/projects/ProjectCreation.vue";
 import PodShell from "./components/apps/PodShell.vue";
 
@@ -58,6 +56,11 @@ const routes = [
         path: "system/git-providers",
         meta: {},
         component: AdminSystemGitProviders,
+      },
+      {
+        path: "system/builders",
+        meta: {},
+        component: AdminSystemBuilders,
       },
     ],
   },
