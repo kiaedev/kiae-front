@@ -30,7 +30,7 @@ const info = computed(() => appStatusMapper(data?.value?.data || props.value))
         <div>
             <a-descriptions bordered size="small" :column="2" style="width: 60%">
                 <a-descriptions-item label="状态">
-                    <a-tag color="success">{{ info?.extra.statusText }}</a-tag>
+                    <a-tag :color="info.extra.statusColor">{{ info.extra.statusText }}</a-tag>
                 </a-descriptions-item>
                 <a-descriptions-item label="当前版本">v1.0.0</a-descriptions-item>
                 <a-descriptions-item label="实例配置">{{ info?.size }}</a-descriptions-item>

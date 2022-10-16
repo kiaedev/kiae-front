@@ -31,7 +31,7 @@ export const kubeShell = (ns: string, pod: string, optQuery?: any) => {
     query.set("command", "bash");
   }
 
-  let wsUrl = `${wsOrigin}/k8s/api/v1/namespaces/${ns}/pods/${pod}/exec?${query.toString()}`;
+  let wsUrl = `${wsOrigin}/kube/api/v1/namespaces/${ns}/pods/${pod}/exec?${query.toString()}`;
   return { wsUrl };
 };
 
