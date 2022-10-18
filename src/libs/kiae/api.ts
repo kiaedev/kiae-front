@@ -386,7 +386,7 @@ export interface BuilderBuilder {
      * @type {string}
      * @memberof BuilderBuilder
      */
-    'imageRepo'?: string;
+    'registryId'?: string;
     /**
      * 
      * @type {string}
@@ -1108,6 +1108,100 @@ export type ImageImageStatus = typeof ImageImageStatus[keyof typeof ImageImageSt
 /**
  * 
  * @export
+ * @interface ImageRegistry
+ */
+export interface ImageRegistry {
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageRegistry
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageRegistry
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageRegistry
+     */
+    'intro'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageRegistry
+     */
+    'server'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageRegistry
+     */
+    'username'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageRegistry
+     */
+    'password'?: string;
+    /**
+     * 
+     * @type {ImageRegistryStatus}
+     * @memberof ImageRegistry
+     */
+    'status'?: ImageRegistryStatus;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageRegistry
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageRegistry
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ImageRegistryListResponse
+ */
+export interface ImageRegistryListResponse {
+    /**
+     * 
+     * @type {Array<ImageRegistry>}
+     * @memberof ImageRegistryListResponse
+     */
+    'items'?: Array<ImageRegistry>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImageRegistryListResponse
+     */
+    'total'?: string;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const ImageRegistryStatus = {
+    Pending: 'PENDING',
+    Ready: 'READY'
+} as const;
+
+export type ImageRegistryStatus = typeof ImageRegistryStatus[keyof typeof ImageRegistryStatus];
+
+
+/**
+ * 
+ * @export
  * @interface InlineObject
  */
 export interface InlineObject {
@@ -1584,7 +1678,7 @@ export interface InlineObject14 {
      * @type {string}
      * @memberof InlineObject14
      */
-    'imageRepo'?: string;
+    'registryId'?: string;
     /**
      * 
      * @type {string}
@@ -1651,7 +1745,7 @@ export interface InlineObject15 {
      * @type {string}
      * @memberof InlineObject15
      */
-    'imageRepo'?: string;
+    'registryId'?: string;
     /**
      * 
      * @type {string}
@@ -2742,6 +2836,116 @@ export interface InlineObject31 {
      * 
      * @type {string}
      * @memberof InlineObject31
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject32
+ */
+export interface InlineObject32 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject32
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject32
+     */
+    'intro'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject32
+     */
+    'server'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject32
+     */
+    'username'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject32
+     */
+    'password'?: string;
+    /**
+     * 
+     * @type {ImageRegistryStatus}
+     * @memberof InlineObject32
+     */
+    'status'?: ImageRegistryStatus;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject32
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject32
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface InlineObject33
+ */
+export interface InlineObject33 {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject33
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject33
+     */
+    'intro'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject33
+     */
+    'server'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject33
+     */
+    'username'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject33
+     */
+    'password'?: string;
+    /**
+     * 
+     * @type {ImageRegistryStatus}
+     * @memberof InlineObject33
+     */
+    'status'?: ImageRegistryStatus;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject33
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject33
      */
     'updatedAt'?: string;
 }
@@ -8798,7 +9002,7 @@ export const ProviderServiceApiAxiosParamCreator = function (configuration?: Con
             assertParamExists('providerServiceListTags', 'provider', provider)
             // verify required parameter 'repoName' is not null or undefined
             assertParamExists('providerServiceListTags', 'repoName', repoName)
-            const localVarPath = `/api/v1/providers/{provider}/repos/{repoName}/commits`
+            const localVarPath = `/api/v1/providers/{provider}/repos/{repoName}/tags`
                 .replace(`{${"provider"}}`, encodeURIComponent(String(provider)))
                 .replace(`{${"repoName"}}`, encodeURIComponent(String(repoName)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -9253,6 +9457,380 @@ export class ProviderServiceApi extends BaseAPI {
      */
     public providerServiceUpdate2(payloadId: string, payload: InlineObject31, updateMask?: string, options?: AxiosRequestConfig) {
         return ProviderServiceApiFp(this.configuration).providerServiceUpdate2(payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * RegistryServiceApi - axios parameter creator
+ * @export
+ */
+export const RegistryServiceApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {ImageRegistry} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        registryServiceCreate: async (body: ImageRegistry, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('registryServiceCreate', 'body', body)
+            const localVarPath = `/api/v1/registries`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        registryServiceDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('registryServiceDelete', 'id', id)
+            const localVarPath = `/api/v1/registries/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} [pid] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        registryServiceList: async (pid?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/registries`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (pid !== undefined) {
+                localVarQueryParameter['pid'] = pid;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject32} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        registryServiceUpdate: async (id: string, body: InlineObject32, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('registryServiceUpdate', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('registryServiceUpdate', 'body', body)
+            const localVarPath = `/api/v1/registries/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject33} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        registryServiceUpdate2: async (id: string, body: InlineObject33, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('registryServiceUpdate2', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('registryServiceUpdate2', 'body', body)
+            const localVarPath = `/api/v1/registries/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * RegistryServiceApi - functional programming interface
+ * @export
+ */
+export const RegistryServiceApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RegistryServiceApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {ImageRegistry} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async registryServiceCreate(body: ImageRegistry, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageRegistry>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.registryServiceCreate(body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async registryServiceDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.registryServiceDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} [pid] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async registryServiceList(pid?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageRegistryListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.registryServiceList(pid, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject32} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async registryServiceUpdate(id: string, body: InlineObject32, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageRegistry>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.registryServiceUpdate(id, body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject33} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async registryServiceUpdate2(id: string, body: InlineObject33, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageRegistry>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.registryServiceUpdate2(id, body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * RegistryServiceApi - factory interface
+ * @export
+ */
+export const RegistryServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RegistryServiceApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {ImageRegistry} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        registryServiceCreate(body: ImageRegistry, options?: any): AxiosPromise<ImageRegistry> {
+            return localVarFp.registryServiceCreate(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        registryServiceDelete(id: string, options?: any): AxiosPromise<object> {
+            return localVarFp.registryServiceDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} [pid] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        registryServiceList(pid?: string, options?: any): AxiosPromise<ImageRegistryListResponse> {
+            return localVarFp.registryServiceList(pid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject32} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        registryServiceUpdate(id: string, body: InlineObject32, options?: any): AxiosPromise<ImageRegistry> {
+            return localVarFp.registryServiceUpdate(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {InlineObject33} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        registryServiceUpdate2(id: string, body: InlineObject33, options?: any): AxiosPromise<ImageRegistry> {
+            return localVarFp.registryServiceUpdate2(id, body, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * RegistryServiceApi - object-oriented interface
+ * @export
+ * @class RegistryServiceApi
+ * @extends {BaseAPI}
+ */
+export class RegistryServiceApi extends BaseAPI {
+    /**
+     * 
+     * @param {ImageRegistry} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RegistryServiceApi
+     */
+    public registryServiceCreate(body: ImageRegistry, options?: AxiosRequestConfig) {
+        return RegistryServiceApiFp(this.configuration).registryServiceCreate(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RegistryServiceApi
+     */
+    public registryServiceDelete(id: string, options?: AxiosRequestConfig) {
+        return RegistryServiceApiFp(this.configuration).registryServiceDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} [pid] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RegistryServiceApi
+     */
+    public registryServiceList(pid?: string, options?: AxiosRequestConfig) {
+        return RegistryServiceApiFp(this.configuration).registryServiceList(pid, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {InlineObject32} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RegistryServiceApi
+     */
+    public registryServiceUpdate(id: string, body: InlineObject32, options?: AxiosRequestConfig) {
+        return RegistryServiceApiFp(this.configuration).registryServiceUpdate(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {InlineObject33} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RegistryServiceApi
+     */
+    public registryServiceUpdate2(id: string, body: InlineObject33, options?: AxiosRequestConfig) {
+        return RegistryServiceApiFp(this.configuration).registryServiceUpdate2(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -6,15 +6,15 @@ import { useRequest } from "vue-request";
 import Editor from "./Editor.vue";
 import { useBuilderOperater } from "@/hooks/op_builder";
 
-const { builderSvc } = useKiaeApi()
-const { data, loading, error, run } = useRequest(() => builderSvc.builderServiceList());
+const { registrySvc } = useKiaeApi()
+const { data, loading, error, run } = useRequest(() => registrySvc.registryServiceList());
 const { handleDelete } = useBuilderOperater()
 
 const columns = [
 
     {
         title: '名称',
-        width: 100,
+        width: 200,
         dataIndex: 'name',
     },
     {
@@ -24,14 +24,13 @@ const columns = [
         dataIndex: 'intro',
     },
     {
-        title: '镜像地址',
-        ellipsis: true,
-        dataIndex: 'artifact',
+        title: '地址',
+        dataIndex: 'server',
     },
     {
-        title: '创建时间',
+        title: '用户名',
         width: 190,
-        dataIndex: 'createdAt',
+        dataIndex: 'username',
     },
     {
         title: '操作',
@@ -43,11 +42,11 @@ const columns = [
 <template>
     <a-row type="flex">
         <a-col flex="auto">
-            <a-input-search placeholder="请输入要查询的构建器" style="width: 500px" />
+            <a-input-search placeholder="请输入要查询的镜像源" style="width: 500px" />
         </a-col>
         <a-col flex="300px">
             <a-button type="primary" style="float: right">
-                <Editor @done="run">创建构建器</Editor>
+                <Editor @done="run">添加镜像源</Editor>
             </a-button>
         </a-col>
     </a-row>

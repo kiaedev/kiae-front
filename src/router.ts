@@ -16,6 +16,7 @@ import AdminClusters from "./pages/admin/cluster/Index.vue";
 import AdminGateways from "./pages/admin/gateway/Index.vue";
 import AdminSystemGitProviders from "./pages/admin/system/git-provider/Index.vue";
 import AdminSystemBuilders from "./pages/admin/system/builder/Index.vue";
+import AdminSystemRegistries from "./pages/admin/system/registry/Index.vue";
 import ProjectCreation from "./components/projects/ProjectCreation.vue";
 import PodShell from "./components/apps/PodShell.vue";
 
@@ -56,6 +57,11 @@ const routes = [
         path: "system/git-providers",
         meta: {},
         component: AdminSystemGitProviders,
+      },
+      {
+        path: "system/registries",
+        meta: {},
+        component: AdminSystemRegistries,
       },
       {
         path: "system/builders",

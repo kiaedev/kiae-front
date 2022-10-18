@@ -14,13 +14,18 @@ const emit = defineEmits(["done"])
 let title = !props.value ? "创建构建器" : "编辑构建器"
 const { visible, modalOpen, modalClose } = useModal()
 
-const { builderSvc } = useKiaeApi()
+const { builderSvc, registrySvc } = useKiaeApi()
+const registryRequest = useRequest(() => registrySvc.registryServiceList());
+const registries = computed(() => {
+    return registryRequest.data.value?.data.items?.map(el => ({ label: el.name, value: el.id }))
+})
 const { data, loading, error, runAsync } = useRequest(() => builderSvc.builderServiceSuggestedStacks(), { manual: true });
 const suggestedStacks = computed(() => {
     let results = data.value?.data.items?.map((el: any) => ({ label: `${el.name} - ${el.intro}`, value: el.name }))
     results?.push({ label: 'Custom', value: '' })
     return results
 })
+
 const { formState, formSubmit } = useFormSubmiter({ cnb: 'Paketo Base', packs: [{ name: "", pack: "", envs: [] }] }, (values: any) => {
     builderSvc.builderServiceCreate(values).then(() => {
         message.success("保存成功")
@@ -66,6 +71,9 @@ const addDomain = () => {
             <a-form-item label="描述" name="intro" :rules="[{ required: true, message: '请输入描述!' }]">
                 <a-input v-model:value="formState.intro" />
             </a-form-item>
+            <a-form-item label="Registry" name="registry_id" :rules="[{ required: true, message: '请选择Registry!' }]">
+                <a-select v-model:value="formState.registry_id" :options="registries" />
+            </a-form-item>
 
             <a-form-item label="Stack源" name="cnb">
                 <a-select v-model:value="formState.cnb" @change="onProviderSwitch" :options="suggestedStacks" />
@@ -87,9 +95,10 @@ const addDomain = () => {
                                 <a-input v-model:value="pack.lang" placeholder="语言名称" />
                             </a-col>
                             <a-col :span="12" :offset="1">
-                                <a-input v-model:value="pack.image" placeholder="PackImage"></a-input>
+                                <a-input v-model:value="pack.id" placeholder="PackId"></a-input>
                             </a-col>
                         </a-row>
+                        <a-input v-model:value="pack.image" placeholder="PackImage"></a-input>
 
                         <a-row v-for="(env, index) in pack.envs" :key="index">
                             <a-col :span="5">

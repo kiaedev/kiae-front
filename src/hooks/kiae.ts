@@ -11,6 +11,7 @@ import {
   ProviderServiceApi,
   RouteServiceApi,
   BuilderServiceApi,
+  RegistryServiceApi,
 } from "@/libs/kiae";
 import { kiaeCfg } from "@/libs/config/kiae";
 import { Modal } from "ant-design-vue";
@@ -29,6 +30,7 @@ export const useKiaeApi = () => {
 
     clusterSvc: new ClusterServiceApi(kiaeCfg),
     providerSvc: new ProviderServiceApi(kiaeCfg),
+    registrySvc: new RegistryServiceApi(kiaeCfg),
     builderSvc: new BuilderServiceApi(kiaeCfg),
     middlewareSvc: new MiddlewareServiceApi(kiaeCfg),
   };
