@@ -126,13 +126,6 @@ const addDomain = () => {
     </a-card>
     <br>
 
-    <a-card title="镜像仓库">
-        <a-form-item label="ImageAddress">
-            <a-input v-model:value="formState.imageRepo" placeholder="input placeholder" />
-        </a-form-item>
-    </a-card>
-    <br>
-
     <a-card>
         <a-card-meta title="Delete Project"
             description="The project will be permanently deleted, including its deployments and domains. This action is irreversible and can not be undone.">

@@ -5,6 +5,7 @@ import { useEnvs, useProject } from '@/hooks/project';
 import { useKiaeApi } from '@/hooks/kiae';
 import { useFormSubmiter, useModal } from '@/hooks/modal';
 import { message } from 'ant-design-vue';
+import { ImageImageStatus } from '@/libs/kiae';
 interface Port {
     port: number;
     protocol: string,
@@ -25,7 +26,7 @@ const { appSvc, imageSvc } = useKiaeApi()
 
 const images = ref<any>([])
 onMounted(async () => {
-    imageSvc.imageServiceList(currentPid()).then((res) => {
+    imageSvc.imageServiceList(currentPid(), ImageImageStatus.Published).then((res) => {
         images.value = res.data?.items
     })
 })

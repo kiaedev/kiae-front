@@ -58,7 +58,7 @@ const columns = [
             </template>
             <template v-else-if="column.key === 'action'">
                 <span>
-                    <a>编辑</a>
+                    <a><Editor :value="record" @done="run">编辑</Editor></a>
                     <a-divider type="vertical" />
                     <a @click="handleDelete(record, run)">删除</a>
                 </span>

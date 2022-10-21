@@ -2,10 +2,10 @@
 import { ref, computed, onMounted } from 'vue'
 import { useFormSubmiter, useModal } from "@/hooks/modal";
 import { useKiaeApi } from '@/hooks/kiae';
+import useKubeApi from '@/hooks/kube';
 import { message } from 'ant-design-vue/es';
 import { useRequest } from 'vue-request';
 const props = defineProps<{
-    // app: Object,
     value?: Object,
 }>()
 
@@ -14,9 +14,17 @@ const emit = defineEmits(["done"])
 let title = !props.value ? "添加镜像源" : "编辑镜像源"
 const { visible, modalOpen, modalClose } = useModal()
 
+const { listNamespaces } = useKubeApi()
+const { data } = useRequest(() => listNamespaces())
+const namespaces = computed(() => {
+    return data.value?.data.items.filter((el: any) => el.metadata.name.startsWith("kiae-")).map((el: any) => ({ label: el.metadata.name, value: el.metadata.name }))
+})
+
 const { registrySvc } = useKiaeApi()
-const { formState, formSubmit } = useFormSubmiter({}, (values: any) => {
-    registrySvc.registryServiceCreate(values).then(() => {
+const { formState, formSubmit } = useFormSubmiter(props.value || {}, (values: any) => {
+    const submit = !props.value ? registrySvc.registryServiceCreate : () => registrySvc.registryServiceUpdate(values.id, values);
+
+    submit(values).then(() => {
         message.success("保存成功")
         modalClose()
         emit("done")
@@ -48,6 +56,10 @@ const { formState, formSubmit } = useFormSubmiter({}, (values: any) => {
             </a-form-item>
             <a-form-item label="描述" name="intro" :rules="[{ required: true, message: '请输入描述!' }]">
                 <a-textarea v-model:value="formState.intro" />
+            </a-form-item>
+
+            <a-form-item label="命名空间" name="namespaces" :rules="[{ required: true, message: '请选择命名空间!' }]">
+                <a-select v-model:value="formState.namespaces" :options="namespaces" mode="multiple" />
             </a-form-item>
 
             <a-form-item :wrapper-col="{ offset: 5, span: 16 }">

@@ -18,7 +18,7 @@ const providers = computed(() => {
     return data.value?.data.items?.map((item: any) => ({ label: item.name, value: item.name }))
 })
 
-const { formState, formSubmit } = useFormSubmiter({ provider: '' }, (values: any) => {
+const { formState, formSubmit } = useFormSubmiter({ gitProvider: '' }, (values: any) => {
     projSvc.projectServiceCreate(values).then(() => {
         message.success("保存成功")
         modalClose()
@@ -26,7 +26,7 @@ const { formState, formSubmit } = useFormSubmiter({ provider: '' }, (values: any
     })
 })
 
-const repo = useRequest(() => providerSvc.providerServiceListRepos(formState.provider), { manual: true })
+const repo = useRequest(() => providerSvc.providerServiceListRepos(formState.gitProvider), { manual: true })
 const repos = computed(() => {
     return repo.data.value?.data.items?.map((item: any) => ({ label: item.fullName, value: item.fullName, repo: item }))
 })
@@ -34,8 +34,8 @@ const reposLoading = computed(() => repo.loading.value);
 
 
 const onProviderSwitch = () => {
-    if (formState.provider == '') {
-        formState.provider = data.value?.data.items?.at(0)?.name
+    if (formState.gitProvider == '') {
+        formState.gitProvider = data.value?.data.items?.at(0)?.name
     }
 
     repo.run()
@@ -87,12 +87,12 @@ watch(visible, (val) => {
             @finish="formSubmit">
 
             <a-form-item label="Git源" name="type">
-                <a-radio-group v-model:value="formState.provider" :options="providers" @change="onProviderSwitch" />
+                <a-radio-group v-model:value="formState.gitProvider" :options="providers" @change="onProviderSwitch" />
             </a-form-item>
 
             <a-form-item label="仓库" name="repo">
                 <a-select v-if="!repo.error.value" :options="repos" :loading="reposLoading" @change="onRepoChange" />
-                <a-button v-if="!reposLoading && !repos" size="small" @click="gotoAuthorize(formState.provider)">
+                <a-button v-if="!reposLoading && !repos" size="small" @click="gotoAuthorize(formState.gitProvider)">
                     去授权
                 </a-button>
             </a-form-item>

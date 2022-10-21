@@ -4,13 +4,14 @@ import { useModal } from '@/hooks/modal';
 import { ImageImage } from '@/libs/kiae';
 import useTerminal from '@/components/xterm';
 
+defineEmits(["close"])
 const props = defineProps<{
     image: ImageImage,
 }>()
 
 const { visible, modalOpen, modalClose } = useModal()
 const { lokiTail } = useTerminal()
-const { wsUrl } = lokiTail({ app: `${props.image.name}-build-1` }, props.image?.createdAt || '')
+const { wsUrl } = lokiTail({ app: `kiae-image-${props.image.name}-build-1` }, props.image?.createdAt || '')
 </script>
 
 <template>
@@ -18,8 +19,8 @@ const { wsUrl } = lokiTail({ app: `${props.image.name}-build-1` }, props.image?.
         <slot></slot>
     </a>
 
-    <a-drawer :visible="visible" :title="`构建日志: ${image.name}`" size="large" placement="bottom" @close="modalClose"
-        :destroyOnClose="true">
+    <a-drawer :visible="visible" :title="`构建日志: ${image.name}`" size="large" placement="bottom"
+        @close="()=>{modalClose();$emit('close')}" :destroyOnClose="true">
 
         <Terminal :wsUrl="wsUrl"></Terminal>
     </a-drawer>
