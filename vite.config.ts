@@ -8,7 +8,7 @@ const pathSrc = resolve(__dirname, "src");
 
 const backend = {
   target: "http://localhost:8081/",
-  changeOrigin: true,
+  changeOrigin: false,
 };
 
 // https://vitejs.dev/config/
@@ -23,6 +23,7 @@ export default defineConfig({
     proxy: {
       "/api": backend,
       "/oauth2": backend,
+      "/provider": backend,
       "/proxies": backend,
     },
   },

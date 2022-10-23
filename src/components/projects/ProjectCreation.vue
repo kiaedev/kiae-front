@@ -55,7 +55,7 @@ const gotoAuthorize = (provider: string) => {
     const height = 500;
     var left = (screen.width / 2) - (width / 2);
     var top = (screen.height / 2) - (height / 2);
-    var myWindow = window.open(`/oauth2/authorize?provider=${provider}&callback=${callback}`, 'mywin', `width=${width},height=${height},left=${left},top=${top}`);
+    var myWindow = window.open(`/provider/oauth2/authorize?provider=${provider}&callback=${callback}`, 'mywin', `width=${width},height=${height},left=${left},top=${top}`);
     window.addEventListener('message', event => {
         if (event.origin === location.origin) {
             if (event.data === 'close') {
