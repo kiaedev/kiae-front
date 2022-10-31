@@ -50,7 +50,7 @@ const onRepoChange = (value: SelectValue, options: any) => {
 }
 
 const gotoAuthorize = (provider: string) => {
-    const callback = encodeURIComponent(`${location.origin}/#/done`)
+    const callback = encodeURIComponent(`${location.origin}/done`)
     const width = 800;
     const height = 500;
     var left = (screen.width / 2) - (width / 2);
@@ -92,7 +92,7 @@ watch(visible, (val) => {
 
             <a-form-item label="仓库" name="repo">
                 <a-select v-if="!repo.error.value" :options="repos" :loading="reposLoading" @change="onRepoChange" />
-                <a-button v-if="!reposLoading && !repos" size="small" @click="gotoAuthorize(formState.gitProvider)">
+                <a-button v-else size="small" @click="gotoAuthorize(formState.gitProvider)">
                     去授权
                 </a-button>
             </a-form-item>

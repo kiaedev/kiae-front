@@ -19,12 +19,12 @@ const columns = [
 ]
 
 const { currentPid, projectGet } = useProject()
-onMounted(async () => {
-    const proj = await projectGet(currentPid())
-    console.log(proj);
+// onMounted(async () => {
+//     const proj = await projectGet(currentPid())
+//     console.log(proj);
 
-    dataSource.value = proj?.configs
-})
+//     dataSource.value = proj?.configs
+// })
 
 
 </script>
@@ -36,7 +36,7 @@ onMounted(async () => {
         </a-col>
         <a-col flex="100px">
             <a-button type="primary" style="float: right">
-                <ConfigEditor>新增配置</ConfigEditor>
+                <!-- <ConfigEditor>新增配置</ConfigEditor> -->
             </a-button>
         </a-col>
     </a-row>

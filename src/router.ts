@@ -11,6 +11,7 @@ import ProjectDepends from "./pages/project/depends/Depends.vue";
 import ProjectSettings from "./pages/project/settings/Index.vue";
 
 import AdminLayout from "./pages/admin/Layout.vue";
+import AdminOverview from "./pages/admin/overview/Index.vue";
 import AdminMiddlewares from "./pages/admin/middleware/Index.vue";
 import AdminClusters from "./pages/admin/cluster/Index.vue";
 import AdminGateways from "./pages/admin/gateway/Index.vue";
@@ -49,7 +50,8 @@ const routes = [
     path: "/admin",
     component: AdminLayout,
     children: [
-      { path: "/", redirect: "/clusters" },
+      { path: "", redirect: "/admin/overview" },
+      { path: "overview", meta: {}, component: AdminOverview },
       { path: "middlewares", meta: {}, component: AdminMiddlewares },
       { path: "clusters", meta: {}, component: AdminClusters },
       { path: "gateways", meta: {}, component: AdminGateways },

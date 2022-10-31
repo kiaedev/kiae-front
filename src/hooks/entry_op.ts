@@ -5,7 +5,7 @@ import { useKiaeApi, confirmDo } from "./kiae";
 export const useEntryOperater = () => {
   const { entrySvc } = useKiaeApi();
 
-  const handleEnable = (entry: EntryEntry, callback: Function) => {
+  const handleEnable = (entry: any, callback: Function) => {
     return confirmDo("入口启动", `确定要启用入口 ${entry.gateway} 吗？`, () => {
       entrySvc
         .entryServiceUpdate2(entry.appid, entry.id, {
@@ -18,7 +18,7 @@ export const useEntryOperater = () => {
     });
   };
 
-  const handleDisable = (entry: EntryEntry, callback: Function) => {
+  const handleDisable = (entry: any, callback: Function) => {
     return confirmDo("入口停止", `确定要禁用入口 ${entry.gateway} 吗？`, () => {
       entrySvc
         .entryServiceUpdate2(entry.appid, entry.id, {
@@ -31,7 +31,7 @@ export const useEntryOperater = () => {
     });
   };
 
-  const handleDelete = async (entry: EntryEntry, callback: Function) => {
+  const handleDelete = async (entry: any, callback: Function) => {
     return confirmDo(
       "访问入口删除",
       `确定要删除访问入口 ${entry.host} 吗？`,

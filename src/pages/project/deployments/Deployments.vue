@@ -20,11 +20,11 @@ const columns = [
     {
         title: '提交',
         dataIndex: 'commitId',
+        width: 100,
     },
     {
         title: '提交信息',
         dataIndex: 'commitMsg',
-        width: 350,
         ellipsis: true,
     },
     {

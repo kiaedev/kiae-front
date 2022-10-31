@@ -10,7 +10,7 @@ const props = defineProps({
         required: true,
     },
 })
-const search = ref({})
+const search = ref({ route: '' })
 const { entrySvc } = useKiaeApi()
 const { handleEnable, handleDisable, handleDelete } = useEntryOperater()
 const { data, loading, error, run } = useRequest(() => entrySvc.entryServiceList(props.app.id));
@@ -70,7 +70,7 @@ const columns = [
                 <template v-else-if="column.key === 'action'">
                     <span>
                         <!-- <EntryEditor :value="record" v-model:app="app" @done="run">编辑</EntryEditor> -->
-                        <a size="small" type="primary" v-if="record.status=='OP_STATUS_DISABLED'"
+                        <a size="small" type="primary" v-if="record.status == 'OP_STATUS_DISABLED'"
                             @click="handleEnable(record, run)">启用</a>
                         <a size="small" v-else @click="handleDisable(record, run)">停用</a>
                         <a-divider type="vertical" />

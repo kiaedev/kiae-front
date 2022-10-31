@@ -20,12 +20,12 @@ const columns = [
 
 
 const { currentPid, projectGet } = useProject()
-onMounted(async () => {
-    const proj = await projectGet(currentPid())
-    console.log(proj);
+// onMounted(async () => {
+//     const proj = await projectGet(currentPid())
+//     console.log(proj);
 
-    dataSource.value = proj?.middlewares
-})
+//     dataSource.value = proj?.middlewares
+// })
 
 </script>
     
@@ -36,7 +36,7 @@ onMounted(async () => {
         </a-col>
         <a-col flex="100px">
             <a-button type="primary" style="float: right">
-                <DependEditor>添加依赖</DependEditor>
+                <!-- <DependEditor>添加依赖</DependEditor> -->
             </a-button>
         </a-col>
     </a-row>

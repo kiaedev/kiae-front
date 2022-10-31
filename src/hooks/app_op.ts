@@ -10,7 +10,7 @@ import { useKiaeApi, confirmDo } from "./kiae";
 export const useApplication = () => {
   const { appSvc } = useKiaeApi();
 
-  const handleAppRestart = (app: AppApplication, callback: Function) => {
+  const handleAppRestart = (app: any, callback: Function) => {
     return confirmDo("应用重启", `确定要重启应用 ${app.name} 吗？`, () => {
       appSvc.appServiceDoAction(app.id, {
         action: ActionPayloadAction.Restart,
@@ -18,7 +18,7 @@ export const useApplication = () => {
     });
   };
 
-  const handleAppStart = (app: AppApplication, callback: Function) => {
+  const handleAppStart = (app: any, callback: Function) => {
     return confirmDo("应用启动", `确定要启动应用 ${app.name} 吗？`, () => {
       appSvc
         .appServiceDoAction(app.id, { action: ActionPayloadAction.Start })
@@ -26,7 +26,7 @@ export const useApplication = () => {
     });
   };
 
-  const handleAppStop = (app: AppApplication, callback: Function) => {
+  const handleAppStop = (app: any, callback: Function) => {
     return confirmDo("应用停止", `确定要停止应用 ${app.name} 吗？`, () => {
       appSvc
         .appServiceDoAction(app.id, { action: ActionPayloadAction.Stop })
@@ -34,7 +34,7 @@ export const useApplication = () => {
     });
   };
 
-  const handleAppDelete = async (app: AppApplication, callback: Function) => {
+  const handleAppDelete = async (app: any, callback: Function) => {
     return confirmDo("应用删除", `确定要删除应用 ${app.name} 吗？`, () => {
       appSvc.appServiceDelete(app.id).then(() => callback());
     });
@@ -42,7 +42,7 @@ export const useApplication = () => {
 
   const handleAppEnvDelete = async (
     appid: string,
-    env: AppEnvironment,
+    env: any,
     callback: Function
   ) => {
     return confirmDo(
@@ -56,7 +56,7 @@ export const useApplication = () => {
 
   const handleAppCfgDelete = async (
     appid: string,
-    cfg: AppConfiguration,
+    cfg: any,
     callback: Function
   ) => {
     return confirmDo(

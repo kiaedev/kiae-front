@@ -27,7 +27,7 @@ const handleClick = (e: any) => {
         <a-layout-sider v-model:collapsed="collapsed" collapsible>
             <div class="logo" />
             <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline" @click="handleClick">
-                <a-menu-item key="1">
+                <a-menu-item key="overview">
                     <pie-chart-outlined />
                     <span>首页</span>
                 </a-menu-item>
@@ -39,9 +39,9 @@ const handleClick = (e: any) => {
                         </span>
                     </template>
                     <a-menu-item key="">集群列表</a-menu-item>
-                    <a-menu-item key="environments">环境列表</a-menu-item>
+                    <!-- <a-menu-item key="environments">环境列表</a-menu-item> -->
                 </a-sub-menu>
-                <a-sub-menu key="middlewares">
+                <!-- <a-sub-menu key="middlewares">
                     <template #title>
                         <span>
                             <user-outlined />
@@ -49,19 +49,16 @@ const handleClick = (e: any) => {
                         </span>
                     </template>
                     <a-menu-item key="">实例列表</a-menu-item>
-                    <!-- <a-menu-item key="4">访问入口</a-menu-item>
-                    <a-menu-item key="5">Alex</a-menu-item> -->
-                </a-sub-menu>
-                <a-sub-menu key="sub1">
+                </a-sub-menu> -->
+                <a-sub-menu key="gateway">
                     <template #title>
                         <span>
                             <user-outlined />
                             <span>网关</span>
                         </span>
                     </template>
-                    <a-menu-item key="3">实例控制</a-menu-item>
-                    <a-menu-item key="4">访问入口</a-menu-item>
-                    <a-menu-item key="5">Alex</a-menu-item>
+                    <a-menu-item key="instances">实例控制</a-menu-item>
+                    <a-menu-item key="entries">访问入口</a-menu-item>
                 </a-sub-menu>
                 <a-sub-menu key="system">
                     <template #title>
@@ -88,7 +85,7 @@ const handleClick = (e: any) => {
                 </div>
             </a-layout-content>
             <a-layout-footer style="text-align: center">
-                Ant Design ©2018 Created by Ant UED
+                Kiae ©2022 Created by saltbo
             </a-layout-footer>
         </a-layout>
     </a-layout>

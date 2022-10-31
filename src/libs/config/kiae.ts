@@ -8,9 +8,9 @@ globalAxios.interceptors.response.use(
   },
   function (error) {
     console.log(error);
-    if(error.response.status == 401){
-      location.href=error.response.headers.location
-      return
+    if (error.response.status == 401) {
+      location.href = error.response.headers.location;
+      return;
     }
 
     const title = error.name;
@@ -27,4 +27,4 @@ globalAxios.interceptors.response.use(
   }
 );
 
-export const kiaeCfg = new Configuration({ basePath: "//localhost:5173" });
+export const kiaeCfg = new Configuration({ basePath: location.origin });

@@ -5,7 +5,7 @@ import { useKiaeApi, confirmDo } from "./kiae";
 export const useProviderOperater = () => {
   const { providerSvc } = useKiaeApi();
 
-  const handleDelete = async (m: ProviderProvider, callback: Function) => {
+  const handleDelete = async (m: any, callback: Function) => {
     return confirmDo(
       "GitProvider删除",
       `确定要删除GitProvider ${m.name} 吗？`,

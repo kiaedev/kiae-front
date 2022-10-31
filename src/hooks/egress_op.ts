@@ -5,7 +5,7 @@ import { useKiaeApi, confirmDo } from "./kiae";
 export const useEgressOperater = () => {
   const { egressSvc } = useKiaeApi();
 
-  const handleDelete = async (egress: EgressEgress, callback: Function) => {
+  const handleDelete = async (egress: any, callback: Function) => {
     return confirmDo(
       "服务依赖删除",
       `确定要删除依赖服务 ${egress.name} 吗？`,

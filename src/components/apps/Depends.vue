@@ -2,6 +2,7 @@
 import { useEgressOperater } from "@/hooks/egress_op";
 import { useKiaeApi } from "@/hooks/kiae"
 import { useMiddlewareOperater } from "@/hooks/middleware_op";
+import { EgressListResponse, MiddlewareListResponse } from "@/libs/kiae";
 import { computed, ref, watch } from "vue-demi";
 import { useRequest } from "vue-request"
 
@@ -97,18 +98,18 @@ const appColumns = [
         </a-col>
     </a-row>
     <div>
-        <a-table :columns="columns" :dataSource="data?.data.items" size="small">
+        <!-- <a-table :columns="columns" :dataSource="data?.data.items" size="small">
             <template #bodyCell="{ column, record }">
                 <template v-if="column.dataIndex === 'createdAt'">
                     {{ $dayjs(record.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
                 </template>
                 <template v-else-if="column.key === 'action'">
                     <span>
-                        <!-- <EntryEditor :value="record" v-model:app="app" @done="run">编辑</EntryEditor> -->
+                        <EntryEditor :value="record" v-model:app="app" @done="run">编辑</EntryEditor>
                         <a @click="handleDelete(record, run)">删除</a>
                     </span>
                 </template>
             </template>
-        </a-table>
+        </a-table> -->
     </div>
 </template>

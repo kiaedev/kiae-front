@@ -12,17 +12,7 @@
     const route = useRoute()
     const apps = ref<any>([])
     const { visible, modalOpen,  } = useModal()
-    const { listApps } = useApplication()
-    const listRefresh = () => {
-        listApps({ pid: route.params.pid }).then((res) => {
-            apps.value = res.items
-            visible.value = false
-            console.log(1111);
-        });
-    }
-    const handleAppClick = async (app: any) => {
-        renderComponent(AppDetail, { value: app }, listRefresh)
-    }
+  
     
     const columns = [
         {
@@ -58,15 +48,15 @@
                 <a-button type="primary" style="float: right" @click="modalOpen">创建网关</a-button>
     
                 <a-modal v-model:visible="visible" title="创建应用" :footer="null">
-                    <AppCreation @done="listRefresh"></AppCreation>
+                    <!-- <AppCreation @done="listRefresh"></AppCreation> -->
                 </a-modal>
             </div>
             <a-table :dataSource="apps" :columns="columns">
                 <template #bodyCell="{ column, record }">
                     <template v-if="column.dataIndex === 'name'">
-                        <a @click="handleAppClick(record)">
+                        <!-- <a @click="handleAppClick(record)">
                             {{ record.name }}
-                        </a>
+                        </a> -->
                     </template>
                     <!-- <template v-else-if="column.key === 'status'">
                         <span>
@@ -83,7 +73,7 @@
                             <a>编辑</a>
                             <a-divider type="vertical" />
                             <a class="ant-dropdown-link">
-                                <AppOp :value="record" @done="listRefresh" @deleted="listRefresh">更多操作</AppOp>
+                                <!-- <AppOp :value="record" @done="listRefresh" @deleted="listRefresh">更多操作</AppOp> -->
                             </a>
                         </span>
                     </template>

@@ -5,7 +5,7 @@ import { useKiaeApi, confirmDo } from "./kiae";
 export const useMiddlewareOperater = () => {
   const { middlewareSvc } = useKiaeApi();
 
-  const handleDelete = async (m: MiddlewareInstance, callback: Function) => {
+  const handleDelete = async (m: any, callback: Function) => {
     return confirmDo("中间件实例删除", `确定要删除中间件实例 ${m.name} 吗？`, () => {
       middlewareSvc.middlewareServiceDelete(m.id).then(() => {
         message.success("删除成功");
@@ -14,7 +14,7 @@ export const useMiddlewareOperater = () => {
     });
   };
 
-  const handleClaimDelete = async (m: MiddlewareInstance, callback: Function) => {
+  const handleClaimDelete = async (m: any, callback: Function) => {
     return confirmDo("中间件删除", `确定要删除中间件 ${m.name} 吗？`, () => {
       middlewareSvc.middlewareServiceClaimDelete(m.id).then(() => {
         message.success("删除成功");

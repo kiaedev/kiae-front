@@ -11,7 +11,7 @@ const props = defineProps({
         required: true,
     },
 })
-const search = ref({})
+const search = ref({ route: '' })
 const { routeSvc } = useKiaeApi()
 const { handleEnable, handleDisable, handleDelete } = useRouteOperater()
 const { data, loading, error, run } = useRequest(() => routeSvc.routeServiceList(props.app.id));

@@ -6,8 +6,8 @@ import { message } from 'ant-design-vue/es';
 import { useRequest } from 'vue-request';
 import { SelectValue } from 'ant-design-vue/es/select';
 const props = defineProps<{
-    app: Object,
-    value?: Object,
+    app: any,
+    value?: any,
 }>()
 
 const emit = defineEmits(["done"])

@@ -15,7 +15,7 @@ export default defineComponent({
     setup(props, ctx) {
         const { visible, modalOpen, modalClose } = useModal()
         const { routeSvc } = useKiaeApi()
-        const initFormItem: RouteRoute = {
+        const initFormItem: any = {
             id: props.value?.id,
             appid: props.app?.id,
             path: '',

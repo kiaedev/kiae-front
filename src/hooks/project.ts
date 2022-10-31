@@ -1,23 +1,17 @@
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import {
-  Configuration,
-  AppServiceApi,
-  ProjectServiceApi,
-  ProjectProject,
-} from "@/libs/kiae";
+import { ProjectServiceApi, ProjectProject } from "@/libs/kiae";
 
-const cfg = new Configuration({ basePath: "//localhost:5173" });
-
+import { kiaeCfg } from "@/libs/config/kiae";
 export const useProject = () => {
   const route = useRoute();
-  const cli = new ProjectServiceApi(cfg);
+  const cli = new ProjectServiceApi(kiaeCfg);
   return {
     currentPid: () => {
       return route.params.pid.toString();
     },
     projectList: async () => {
-      const cli = new ProjectServiceApi(cfg);
+      const cli = new ProjectServiceApi(kiaeCfg);
       const ret = await cli.projectServiceList();
       const { items, total } = ret.data;
       return { items, total };
