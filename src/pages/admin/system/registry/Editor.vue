@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, defineEmits } from 'vue'
 import { useFormSubmiter, useModal } from "@/hooks/modal";
 import { useKiaeApi } from '@/hooks/kiae';
 import useKubeApi from '@/hooks/kube';
@@ -22,9 +22,9 @@ const namespaces = computed(() => {
 
 const { registrySvc } = useKiaeApi()
 const { formState, formSubmit } = useFormSubmiter(props.value || {}, (values: any) => {
-    const submit = !props.value ? registrySvc.registryServiceCreate : () => registrySvc.registryServiceUpdate(values.id, values);
+    const submit = !props.value ? () => registrySvc.registryServiceCreate(values) : () => registrySvc.registryServiceUpdate(values.id, values);
 
-    submit(values).then(() => {
+    submit().then(() => {
         message.success("保存成功")
         modalClose()
         emit("done")

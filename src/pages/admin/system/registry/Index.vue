@@ -4,11 +4,11 @@ import { ref } from "@vue/reactivity";
 import { useKiaeApi } from "@/hooks/kiae";
 import { useRequest } from "vue-request";
 import Editor from "./Editor.vue";
-import { useBuilderOperater } from "@/hooks/op_builder";
+import { useRegistryOperater } from "@/hooks/op_registry";
 
 const { registrySvc } = useKiaeApi()
 const { data, loading, error, run } = useRequest(() => registrySvc.registryServiceList());
-const { handleDelete } = useBuilderOperater()
+const { handleDelete } = useRegistryOperater()
 
 const columns = [
 
