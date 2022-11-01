@@ -1,0 +1,21 @@
+name: build
+on:
+  push:
+    branches:
+      - develop
+      - main
+  pull_request:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 14.x
+      - name: Check out code
+        uses: actions/checkout@v1
+      - name: Build
+        run: yarn && yarn build
