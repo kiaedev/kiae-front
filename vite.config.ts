@@ -9,6 +9,7 @@ const pathSrc = resolve(__dirname, "src");
 const backend = {
   target: "http://localhost:8081/",
   changeOrigin: false,
+  ws: true,
 };
 
 // https://vitejs.dev/config/
