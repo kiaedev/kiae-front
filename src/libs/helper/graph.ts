@@ -17,7 +17,7 @@ export const buildApolloClient = () => {
 
   // 创建一个 WebSocket 连接：
   const wsLink = new WebSocketLink({
-    uri: `ws://localhost:8081/api/graphql`,
+    uri: `ws://${location.host}/api/graphql`,
     options: {
       // reconnect: true,
     },
