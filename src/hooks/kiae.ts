@@ -12,13 +12,16 @@ import {
   RouteServiceApi,
   BuilderServiceApi,
   RegistryServiceApi,
+  UserServiceApi,
 } from "@/libs/kiae";
 import { kiaeCfg } from "@/libs/config/kiae";
 import { Modal } from "ant-design-vue";
 import { invert } from "lodash";
+import axios from "axios";
 
 export const useKiaeApi = () => {
   return {
+    userSvc: new UserServiceApi(kiaeCfg),
     projSvc: new ProjectServiceApi(kiaeCfg),
     imageSvc: new ImageServiceApi(kiaeCfg),
     deploySvc: new DeploymentServiceApi(kiaeCfg),
@@ -34,6 +37,12 @@ export const useKiaeApi = () => {
     builderSvc: new BuilderServiceApi(kiaeCfg),
     middlewareSvc: new MiddlewareServiceApi(kiaeCfg),
   };
+};
+
+export const logout = () => {
+  axios.get("/api/v1/session").then(() => {
+    location.href = "/";
+  });
 };
 
 export const confirmDo = (title: string, tips: string, opFn: Function) => {

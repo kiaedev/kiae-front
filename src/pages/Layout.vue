@@ -1,30 +1,33 @@
 
-<script lang="ts">
+<script lang="ts" setup>
+import { computed, defineComponent, onMounted, ref } from 'vue';
 import { Route } from 'ant-design-vue/lib/breadcrumb/Breadcrumb';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const routes = ref<Route[]>([
-      {
-        path: '',
-        breadcrumbName: '首页',
-      },
-      {
-        path: 'projects',
-        breadcrumbName: '项目',
-      },
-      // {
-      //   path: 'second',
-      //   breadcrumbName: 'second',
-      // },
-    ]);
+import { logout, useKiaeApi } from "@/hooks/kiae"
+import { useRequest } from 'vue-request';
 
-    return {
-      routes,
-      selectedKeys: ref<string[]>(['1']),
-    };
+const selectedKeys = ref<string[]>(['1'])
+const routes = ref<Route[]>([
+  {
+    path: '',
+    breadcrumbName: '首页',
   },
-});
+  {
+    path: 'projects',
+    breadcrumbName: '项目',
+  },
+  // {
+  //   path: 'second',
+  //   breadcrumbName: 'second',
+  // },
+]);
+
+const { userSvc } = useKiaeApi()
+const { data } = useRequest(() => userSvc.userServiceInfo())
+const userProfile = computed(() => {
+  return data.value?.data
+})
+
+
 </script>
   
 <template>
@@ -33,11 +36,26 @@ export default defineComponent({
       <div class="logo" />
       <div style="float: right">
 
-        <a-avatar style="background-color: #87d068">
-          <template #icon>
-            <UserOutlined />
+        <a-dropdown placement="bottomRight">
+          <a-avatar v-if="userProfile?.avatar" :src="userProfile?.avatar" />
+          <a-avatar v-else style="background-color: #87d068">
+            <template #icon>
+              <UserOutlined />
+            </template>
+          </a-avatar>
+          
+          <template #overlay>
+            <a-menu>
+              <a-menu-item>
+                <a href="javascript:;">Signed in as {{ userProfile?.nickname }}</a>
+              </a-menu-item>
+              <a-menu-divider />
+              <a-menu-item>
+                <a href="javascript:;" @click="logout">Logout</a>
+              </a-menu-item>
+            </a-menu>
           </template>
-        </a-avatar>
+        </a-dropdown>
       </div>
     </a-layout-header>
 
@@ -45,7 +63,7 @@ export default defineComponent({
       <a-breadcrumb :routes="routes" style="margin: 15px 0">
         <template #itemRender="{ route, routes, paths }">
           <span v-if="routes.indexOf(route) === routes.length - 1">{{ route.breadcrumbName }}</span>
-          <router-link v-else :to="`/`+paths.join('/')">{{ route.breadcrumbName }}</router-link>
+          <router-link v-else :to="`/` + paths.join('/')">{{ route.breadcrumbName }}</router-link>
         </template>
       </a-breadcrumb>
 
