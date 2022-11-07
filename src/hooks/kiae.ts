@@ -13,6 +13,7 @@ import {
   BuilderServiceApi,
   RegistryServiceApi,
   UserServiceApi,
+  GatewayServiceApi,
 } from "@/libs/kiae";
 import { kiaeCfg } from "@/libs/config/kiae";
 import { Modal } from "ant-design-vue";
@@ -35,6 +36,7 @@ export const useKiaeApi = () => {
     providerSvc: new ProviderServiceApi(kiaeCfg),
     registrySvc: new RegistryServiceApi(kiaeCfg),
     builderSvc: new BuilderServiceApi(kiaeCfg),
+    gatewaySvc: new GatewayServiceApi(kiaeCfg),
     middlewareSvc: new MiddlewareServiceApi(kiaeCfg),
   };
 };

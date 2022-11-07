@@ -14,7 +14,8 @@ import AdminLayout from "./pages/admin/Layout.vue";
 import AdminOverview from "./pages/admin/overview/Index.vue";
 import AdminMiddlewares from "./pages/admin/middleware/Index.vue";
 import AdminClusters from "./pages/admin/cluster/Index.vue";
-import AdminGateways from "./pages/admin/gateway/Index.vue";
+import AdminGatewayInstances from "./pages/admin/gateway/Index.vue";
+import AdminGatewayEntries from "./pages/admin/gateway/Gateway.vue";
 import AdminSystemGitProviders from "./pages/admin/system/git-provider/Index.vue";
 import AdminSystemBuilders from "./pages/admin/system/builder/Index.vue";
 import AdminSystemRegistries from "./pages/admin/system/registry/Index.vue";
@@ -54,7 +55,8 @@ const routes = [
       { path: "overview", meta: {}, component: AdminOverview },
       { path: "middlewares", meta: {}, component: AdminMiddlewares },
       { path: "clusters", meta: {}, component: AdminClusters },
-      { path: "gateways", meta: {}, component: AdminGateways },
+      { path: "gateway/instances", meta: {}, component: AdminGatewayInstances },
+      { path: "gateway/entries", meta: {}, component: AdminGatewayEntries },
       {
         path: "system/git-providers",
         meta: {},

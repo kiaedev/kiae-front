@@ -1633,6 +1633,172 @@ export interface EntryServiceUpdateRequest {
 /**
  * 
  * @export
+ * @interface GatewayGateway
+ */
+export interface GatewayGateway {
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayGateway
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayGateway
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayGateway
+     */
+    'intro'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GatewayGateway
+     */
+    'hosts'?: Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GatewayGateway
+     */
+    'httpsEnabled'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GatewayGateway
+     */
+    'httpsRedirect'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayGateway
+     */
+    'certIssuer'?: string;
+    /**
+     * 
+     * @type {GatewayPort}
+     * @memberof GatewayGateway
+     */
+    'customPorts'?: GatewayPort;
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayGateway
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayGateway
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GatewayListResponse
+ */
+export interface GatewayListResponse {
+    /**
+     * 
+     * @type {Array<GatewayGateway>}
+     * @memberof GatewayListResponse
+     */
+    'items'?: Array<GatewayGateway>;
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayListResponse
+     */
+    'total'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GatewayPort
+ */
+export interface GatewayPort {
+    /**
+     * 
+     * @type {number}
+     * @memberof GatewayPort
+     */
+    'port'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayPort
+     */
+    'protocol'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface GatewayServiceUpdateRequest
+ */
+export interface GatewayServiceUpdateRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayServiceUpdateRequest
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayServiceUpdateRequest
+     */
+    'intro'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof GatewayServiceUpdateRequest
+     */
+    'hosts'?: Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GatewayServiceUpdateRequest
+     */
+    'httpsEnabled'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GatewayServiceUpdateRequest
+     */
+    'httpsRedirect'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayServiceUpdateRequest
+     */
+    'certIssuer'?: string;
+    /**
+     * 
+     * @type {GatewayPort}
+     * @memberof GatewayServiceUpdateRequest
+     */
+    'customPorts'?: GatewayPort;
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayServiceUpdateRequest
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GatewayServiceUpdateRequest
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
  * @interface GooglerpcStatus
  */
 export interface GooglerpcStatus {
@@ -6592,6 +6758,396 @@ export class EntryServiceApi extends BaseAPI {
      */
     public entryServiceUpdate2(payloadAppid: string, payloadId: string, payload: EntryServiceUpdateRequest, updateMask?: string, options?: AxiosRequestConfig) {
         return EntryServiceApiFp(this.configuration).entryServiceUpdate2(payloadAppid, payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * GatewayServiceApi - axios parameter creator
+ * @export
+ */
+export const GatewayServiceApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {GatewayGateway} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gatewayServiceCreate: async (body: GatewayGateway, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('gatewayServiceCreate', 'body', body)
+            const localVarPath = `/api/v1/gateways`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gatewayServiceDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('gatewayServiceDelete', 'id', id)
+            const localVarPath = `/api/v1/gateways/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} [name] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gatewayServiceList: async (name?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/gateways`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} payloadId 
+         * @param {GatewayServiceUpdateRequest} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gatewayServiceUpdate: async (payloadId: string, payload: GatewayServiceUpdateRequest, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'payloadId' is not null or undefined
+            assertParamExists('gatewayServiceUpdate', 'payloadId', payloadId)
+            // verify required parameter 'payload' is not null or undefined
+            assertParamExists('gatewayServiceUpdate', 'payload', payload)
+            const localVarPath = `/api/v1/gateways/{payload.id}`
+                .replace(`{${"payload.id"}}`, encodeURIComponent(String(payloadId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (updateMask !== undefined) {
+                localVarQueryParameter['updateMask'] = updateMask;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(payload, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} payloadId 
+         * @param {GatewayServiceUpdateRequest} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gatewayServiceUpdate2: async (payloadId: string, payload: GatewayServiceUpdateRequest, updateMask?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'payloadId' is not null or undefined
+            assertParamExists('gatewayServiceUpdate2', 'payloadId', payloadId)
+            // verify required parameter 'payload' is not null or undefined
+            assertParamExists('gatewayServiceUpdate2', 'payload', payload)
+            const localVarPath = `/api/v1/gateways/{payload.id}`
+                .replace(`{${"payload.id"}}`, encodeURIComponent(String(payloadId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (updateMask !== undefined) {
+                localVarQueryParameter['updateMask'] = updateMask;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(payload, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * GatewayServiceApi - functional programming interface
+ * @export
+ */
+export const GatewayServiceApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = GatewayServiceApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {GatewayGateway} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async gatewayServiceCreate(body: GatewayGateway, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GatewayGateway>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.gatewayServiceCreate(body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async gatewayServiceDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.gatewayServiceDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} [name] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async gatewayServiceList(name?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GatewayListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.gatewayServiceList(name, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} payloadId 
+         * @param {GatewayServiceUpdateRequest} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async gatewayServiceUpdate(payloadId: string, payload: GatewayServiceUpdateRequest, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GatewayGateway>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.gatewayServiceUpdate(payloadId, payload, updateMask, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} payloadId 
+         * @param {GatewayServiceUpdateRequest} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async gatewayServiceUpdate2(payloadId: string, payload: GatewayServiceUpdateRequest, updateMask?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GatewayGateway>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.gatewayServiceUpdate2(payloadId, payload, updateMask, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * GatewayServiceApi - factory interface
+ * @export
+ */
+export const GatewayServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = GatewayServiceApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {GatewayGateway} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gatewayServiceCreate(body: GatewayGateway, options?: any): AxiosPromise<GatewayGateway> {
+            return localVarFp.gatewayServiceCreate(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gatewayServiceDelete(id: string, options?: any): AxiosPromise<object> {
+            return localVarFp.gatewayServiceDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} [name] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gatewayServiceList(name?: string, options?: any): AxiosPromise<GatewayListResponse> {
+            return localVarFp.gatewayServiceList(name, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} payloadId 
+         * @param {GatewayServiceUpdateRequest} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gatewayServiceUpdate(payloadId: string, payload: GatewayServiceUpdateRequest, updateMask?: string, options?: any): AxiosPromise<GatewayGateway> {
+            return localVarFp.gatewayServiceUpdate(payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} payloadId 
+         * @param {GatewayServiceUpdateRequest} payload 
+         * @param {string} [updateMask] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gatewayServiceUpdate2(payloadId: string, payload: GatewayServiceUpdateRequest, updateMask?: string, options?: any): AxiosPromise<GatewayGateway> {
+            return localVarFp.gatewayServiceUpdate2(payloadId, payload, updateMask, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * GatewayServiceApi - object-oriented interface
+ * @export
+ * @class GatewayServiceApi
+ * @extends {BaseAPI}
+ */
+export class GatewayServiceApi extends BaseAPI {
+    /**
+     * 
+     * @param {GatewayGateway} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GatewayServiceApi
+     */
+    public gatewayServiceCreate(body: GatewayGateway, options?: AxiosRequestConfig) {
+        return GatewayServiceApiFp(this.configuration).gatewayServiceCreate(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GatewayServiceApi
+     */
+    public gatewayServiceDelete(id: string, options?: AxiosRequestConfig) {
+        return GatewayServiceApiFp(this.configuration).gatewayServiceDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} [name] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GatewayServiceApi
+     */
+    public gatewayServiceList(name?: string, options?: AxiosRequestConfig) {
+        return GatewayServiceApiFp(this.configuration).gatewayServiceList(name, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} payloadId 
+     * @param {GatewayServiceUpdateRequest} payload 
+     * @param {string} [updateMask] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GatewayServiceApi
+     */
+    public gatewayServiceUpdate(payloadId: string, payload: GatewayServiceUpdateRequest, updateMask?: string, options?: AxiosRequestConfig) {
+        return GatewayServiceApiFp(this.configuration).gatewayServiceUpdate(payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} payloadId 
+     * @param {GatewayServiceUpdateRequest} payload 
+     * @param {string} [updateMask] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GatewayServiceApi
+     */
+    public gatewayServiceUpdate2(payloadId: string, payload: GatewayServiceUpdateRequest, updateMask?: string, options?: AxiosRequestConfig) {
+        return GatewayServiceApiFp(this.configuration).gatewayServiceUpdate2(payloadId, payload, updateMask, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
