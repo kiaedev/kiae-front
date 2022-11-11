@@ -1,18 +1,14 @@
 
 <script lang="ts" setup>
 import { ref } from "@vue/reactivity";
-import { getCurrentInstance, onMounted, onUnmounted, watch } from "@vue/runtime-core";
-import { useRoute, useRouter } from "vue-router";
-import { useModal } from '@/hooks/modal'
 import GatewayEditor from "./GatewayEditor.vue";
-import { useApplication } from "@/hooks/app_op";
-import { renderComponent } from "@/libs/helper/component";
+import { useGatewayOperater } from "@/hooks/op_gateway";
 import { useKiaeApi } from "@/hooks/kiae";
 import { useRequest } from "vue-request";
 
 const { gatewaySvc } = useKiaeApi()
 const { data, loading, error, run } = useRequest(() => gatewaySvc.gatewayServiceList());
-
+const { handleDelete } = useGatewayOperater()
 
 const columns = [
     {
@@ -64,9 +60,7 @@ const columns = [
                     <span>
                         <a>编辑</a>
                         <a-divider type="vertical" />
-                        <a class="ant-dropdown-link">
-                            <!-- <AppOp :value="record" @done="listRefresh" @deleted="listRefresh">更多操作</AppOp> -->
-                        </a>
+                        <a @click="handleDelete(record, run)">删除</a>
                     </span>
                 </template>
             </template>

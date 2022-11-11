@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { useEgressOperater } from "@/hooks/egress_op";
+import { useEgressOperater } from "@/hooks/op_egress";
 import { useKiaeApi } from "@/hooks/kiae"
-import { useMiddlewareOperater } from "@/hooks/middleware_op";
+import { useMiddlewareOperater } from "@/hooks/op_middleware";
 import { EgressListResponse, MiddlewareListResponse } from "@/libs/kiae";
 import { computed, ref, watch } from "vue-demi";
 import { useRequest } from "vue-request"

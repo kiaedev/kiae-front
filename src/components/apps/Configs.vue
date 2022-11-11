@@ -2,7 +2,7 @@
 import { ref } from "@vue/reactivity"
 import { useModal, useSelect } from "@/hooks/modal";
 import { AppConfiguration } from "@/libs/kiae";
-import { useApplication } from "@/hooks/app_op";
+import { useApplication } from "@/hooks/op_app";
 
 defineEmits(["refresh"])
 const props = defineProps<{

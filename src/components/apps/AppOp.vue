@@ -1,5 +1,5 @@
 <script lang="ts">
-import { useApplication } from '@/hooks/app_op'
+import { useApplication } from '@/hooks/op_app'
 import { defineComponent } from 'vue'
 import { AppApplication } from "@/libs/kiae"
 

@@ -6,7 +6,7 @@
     import { useModal } from '@/hooks/modal'
     import AppCreation from "@/components/apps/AppCreation.vue";
     import AppDetail from '@/components/apps/AppDetail.vue'
-    import { useApplication } from "@/hooks/app_op";
+    import { useApplication } from "@/hooks/op_app";
     import { renderComponent } from "@/libs/helper/component";
     
     const route = useRoute()

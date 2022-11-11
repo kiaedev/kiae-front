@@ -2,7 +2,7 @@
 import { ref } from "@vue/reactivity"
 import { useRequest } from "vue-request"
 import { useKiaeApi } from "@/hooks/kiae"
-import { useEntryOperater } from "@/hooks/entry_op"
+import { useEntryOperater } from "@/hooks/op_entry"
 
 const props = defineProps({
     app: {

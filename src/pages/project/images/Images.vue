@@ -3,7 +3,7 @@
 import { useProject } from '@/hooks/project';
 import { useKiaeApi } from '@/hooks/kiae';
 import { useRequest } from 'vue-request';
-import { useImageOperater } from '@/hooks/image_op';
+import { useImageOperater } from '@/hooks/op_image';
 import { computed } from 'vue';
 import { ImageImageStatus } from '@/libs/kiae';
 import { invert } from 'lodash';
