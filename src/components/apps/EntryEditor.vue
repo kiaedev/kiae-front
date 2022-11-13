@@ -9,7 +9,7 @@ import { useRequest } from 'vue-request';
 const emit = defineEmits(["done"])
 const props = defineProps<{
     app: any,
-    value: Object,
+    value?: Object,
 }>()
 
 const initFormItem = {
