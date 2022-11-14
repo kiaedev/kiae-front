@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, computed, defineEmits } from 'vue'
+import { ref, computed, defineEmits, watch } from 'vue'
 import { useFormSubmiter, useModal } from "@/hooks/modal";
 import { useKiaeApi } from '@/hooks/kiae';
 import useKubeApi from '@/hooks/kube';
@@ -21,7 +21,7 @@ const namespaces = computed(() => {
 })
 
 const { registrySvc } = useKiaeApi()
-const { formState, formSubmit } = useFormSubmiter(props.value || {}, (values: any) => {
+const { formState, formSubmit } = useFormSubmiter(props.value || { type: 'dockerhub', server: 'https://index.docker.io/v1/' }, (values: any) => {
     const submit = !props.value ? () => registrySvc.registryServiceCreate(values) : () => registrySvc.registryServiceUpdate(values.id, values);
 
     submit().then(() => {
@@ -30,6 +30,16 @@ const { formState, formSubmit } = useFormSubmiter(props.value || {}, (values: an
         emit("done")
     })
 })
+
+const onRegistrySwitch = () => {
+    const registries: any = {
+        dockerhub: 'https://index.docker.io/v1/',
+        ghcr: 'ghcr.io',
+        gcr: 'gcr.io',
+    }
+    formState.server = registries[formState.type]
+}
+
 </script>
     
 <template>
@@ -40,6 +50,14 @@ const { formState, formSubmit } = useFormSubmiter(props.value || {}, (values: an
     <a-modal v-model:visible="visible" :title="title" :footer="null" width="800px">
         <a-form :model="formState" name="basic" :label-col="{ span: 5 }" :wrapper-col="{ span: 15 }" autocomplete="off"
             @finish="formSubmit">
+            <a-form-item label="Registry" name="type">
+                <a-radio-group v-model:value="formState.type" @change="onRegistrySwitch">
+                    <a-radio value="dockerhub">Dockerhub</a-radio>
+                    <a-radio value="ghcr">GithubRegistry</a-radio>
+                    <a-radio value="gcr">GCR</a-radio>
+                    <a-radio value="">Other</a-radio>
+                </a-radio-group>
+            </a-form-item>
 
             <a-form-item label="服务地址" name="server" :rules="[{ required: true, message: '请输入客户端ID!' }]">
                 <a-input v-model:value="formState.server" />

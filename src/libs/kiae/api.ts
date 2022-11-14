@@ -3543,28 +3543,15 @@ export interface RouteServiceUpdateRequest {
 /**
  * 
  * @export
- * @interface SettingsListReply
+ * @interface SystemSystemStatus
  */
-export interface SettingsListReply {
+export interface SystemSystemStatus {
     /**
      * 
-     * @type {string}
-     * @memberof SettingsListReply
+     * @type {boolean}
+     * @memberof SystemSystemStatus
      */
-    'name'?: string;
-}
-/**
- * 
- * @export
- * @interface SettingsUpdateReply
- */
-export interface SettingsUpdateReply {
-    /**
-     * 
-     * @type {string}
-     * @memberof SettingsUpdateReply
-     */
-    'message'?: string;
+    'ready'?: boolean;
 }
 /**
  * 
@@ -10149,18 +10136,18 @@ export class RouteServiceApi extends BaseAPI {
 
 
 /**
- * SettingsServiceApi - axios parameter creator
+ * SystemServiceApi - axios parameter creator
  * @export
  */
-export const SettingsServiceApiAxiosParamCreator = function (configuration?: Configuration) {
+export const SystemServiceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        settingsServiceList: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/settings`;
+        systemServiceGetStatus: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/system/status`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10187,57 +10174,57 @@ export const SettingsServiceApiAxiosParamCreator = function (configuration?: Con
 };
 
 /**
- * SettingsServiceApi - functional programming interface
+ * SystemServiceApi - functional programming interface
  * @export
  */
-export const SettingsServiceApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = SettingsServiceApiAxiosParamCreator(configuration)
+export const SystemServiceApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SystemServiceApiAxiosParamCreator(configuration)
     return {
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async settingsServiceList(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SettingsListReply>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.settingsServiceList(options);
+        async systemServiceGetStatus(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemSystemStatus>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.systemServiceGetStatus(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * SettingsServiceApi - factory interface
+ * SystemServiceApi - factory interface
  * @export
  */
-export const SettingsServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = SettingsServiceApiFp(configuration)
+export const SystemServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SystemServiceApiFp(configuration)
     return {
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        settingsServiceList(options?: any): AxiosPromise<SettingsListReply> {
-            return localVarFp.settingsServiceList(options).then((request) => request(axios, basePath));
+        systemServiceGetStatus(options?: any): AxiosPromise<SystemSystemStatus> {
+            return localVarFp.systemServiceGetStatus(options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * SettingsServiceApi - object-oriented interface
+ * SystemServiceApi - object-oriented interface
  * @export
- * @class SettingsServiceApi
+ * @class SystemServiceApi
  * @extends {BaseAPI}
  */
-export class SettingsServiceApi extends BaseAPI {
+export class SystemServiceApi extends BaseAPI {
     /**
      * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SettingsServiceApi
+     * @memberof SystemServiceApi
      */
-    public settingsServiceList(options?: AxiosRequestConfig) {
-        return SettingsServiceApiFp(this.configuration).settingsServiceList(options).then((request) => request(this.axios, this.basePath));
+    public systemServiceGetStatus(options?: AxiosRequestConfig) {
+        return SystemServiceApiFp(this.configuration).systemServiceGetStatus(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
