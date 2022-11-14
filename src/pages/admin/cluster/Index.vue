@@ -45,7 +45,7 @@ const columns = [
                     <a-input-search placeholder="Search..." />
                 </a-col>
                 <a-col flex="auto">
-                    <a-button type="primary" style="float: right">
+                    <a-button type="primary" style="float: right" disabled>
                         <Editor @done="run">添加集群</Editor>
                     </a-button>
                 </a-col>
@@ -65,11 +65,12 @@ const columns = [
                     {{ $dayjs(record.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
                 </template>
                 <template v-else-if="column.key === 'action'">
-                    <span>
+                    <span v-if="record.name != 'local'">
                         <a>编辑</a>
                         <a-divider type="vertical" />
                         <a @click="handleDelete(record, run)">删除</a>
                     </span>
+                    <span v-else>-</span>
                 </template>
             </template>
         </a-table>

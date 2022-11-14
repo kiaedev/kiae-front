@@ -4,6 +4,8 @@ import { computed, defineComponent, onMounted, ref } from 'vue';
 import { Route } from 'ant-design-vue/lib/breadcrumb/Breadcrumb';
 import { logout, useKiaeApi } from "@/hooks/kiae"
 import { useRequest } from 'vue-request';
+import { Modal } from 'ant-design-vue';
+import { useRouter } from 'vue-router';
 
 const selectedKeys = ref<string[]>(['1'])
 const routes = ref<Route[]>([
@@ -21,10 +23,26 @@ const routes = ref<Route[]>([
   // },
 ]);
 
-const { userSvc } = useKiaeApi()
+const router = useRouter()
+const { userSvc, systemSvc } = useKiaeApi()
 const { data } = useRequest(() => userSvc.userServiceInfo())
 const userProfile = computed(() => {
   return data.value?.data
+})
+
+systemSvc.systemServiceGetStatus().then(ret => {
+  if (!ret.data.ready) {
+
+    // FIXME: only warning 'contact administrators to setup settings' for the member
+
+    Modal.warning({
+      title: 'System Not Ready',
+      content: "系统未就绪，请先到后台进行相关配置",
+      onOk: () => {
+        router.push('/admin')
+      }
+    })
+  }
 })
 
 
@@ -43,7 +61,7 @@ const userProfile = computed(() => {
               <UserOutlined />
             </template>
           </a-avatar>
-          
+
           <template #overlay>
             <a-menu>
               <a-menu-item>
@@ -73,7 +91,7 @@ const userProfile = computed(() => {
     </a-layout-content>
 
     <a-layout-footer style="text-align: center">
-      Ant Design ©2018 Created by Ant UED
+      Kiae ©2022 Created by saltbo
     </a-layout-footer>
   </a-layout>
 
