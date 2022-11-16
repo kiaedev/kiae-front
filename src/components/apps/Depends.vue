@@ -33,15 +33,15 @@ watch(type, run)
 
 const mwColumns = [
     {
-        title: '类型',
+        title: t('type'),
         dataIndex: 'type',
     },
     {
-        title: '名称',
+        title: t('name'),
         dataIndex: 'name',
     },
     {
-        title: '状态',
+        title: t('status'),
         dataIndex: 'status',
     },
     {
@@ -49,7 +49,7 @@ const mwColumns = [
         dataIndex: 'instance',
     },
     {
-        title: '创建时间',
+        title: t('createdAt'),
         dataIndex: 'createdAt',
     },
     {
@@ -58,11 +58,11 @@ const mwColumns = [
 ]
 const appColumns = [
     {
-        title: '类型',
+        title: t('type'),
         dataIndex: 'type',
     },
     {
-        title: '名称',
+        title: t('name'),
         dataIndex: 'name',
     },
     {
@@ -70,11 +70,11 @@ const appColumns = [
         dataIndex: 'host',
     },
     {
-        title: '状态',
+        title: t('status'),
         dataIndex: 'status',
     },
     {
-        title: '创建时间',
+        title: t('createdAt'),
         dataIndex: 'createdAt',
     },
     {
@@ -105,8 +105,8 @@ const appColumns = [
                 </template>
                 <template v-else-if="column.key === 'action'">
                     <span>
-                        <EntryEditor :value="record" v-model:app="app" @done="run">编辑</EntryEditor>
-                        <a @click="handleDelete(record, run)">删除</a>
+                        <EntryEditor :value="record" v-model:app="app" @done="run">{{ $t('btn.edit') }}</EntryEditor>
+                        <a @click="handleDelete(record, run)">{{ $t('btn.delete') }}</a>
                     </span>
                 </template>
             </template>

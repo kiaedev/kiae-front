@@ -13,7 +13,7 @@ const { handleAppEnvDelete } = useApplication()
 
 const columns = [
     {
-        title: '类型',
+        title: t('type'),
         dataIndex: 'type',
     },
     {
@@ -25,11 +25,11 @@ const columns = [
         dataIndex: 'value',
     },
     {
-        title: '创建时间',
+        title: t('createdAt'),
         dataIndex: 'createdAt',
     },
     {
-        title: '操作',
+        title: t('action'),
         key: 'action'
     }
 ]
@@ -54,9 +54,9 @@ const columns = [
                 </template>
                 <template v-else-if="column.key === 'action'">
                     <span v-if="record.type == 'USER'">
-                        <EnvEditor :appid="props.appid" :env="record" @done="$emit('refresh')">编辑</EnvEditor>
+                        <EnvEditor :appid="props.appid" :env="record" @done="$emit('refresh')">{{ $t('btn.edit') }}</EnvEditor>
                         <a-divider type="vertical" />
-                        <a @click="handleAppEnvDelete(appid, record, ()=>$emit('refresh'))"> 删除 </a>
+                        <a @click="handleAppEnvDelete(appid, record, ()=>$emit('refresh'))">{{ $t('btn.delete') }}</a>
                     </span>
                     <span v-else>-</span>
                 </template>

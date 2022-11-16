@@ -7,10 +7,12 @@ import { useImageOperater } from '@/hooks/op_image';
 import { computed } from 'vue';
 import { ImageImageStatus } from '@/libs/kiae';
 import { invert } from 'lodash';
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 const columns = [
     {
-        title: '名称',
+        title: t('name'),
         dataIndex: 'image',
     },
     {
@@ -18,7 +20,7 @@ const columns = [
         dataIndex: 'tag',
     },
     {
-        title: '状态',
+        title: t('status'),
         dataIndex: 'status',
     },
     {
@@ -26,7 +28,7 @@ const columns = [
         dataIndex: 'updatedAt',
     },
     {
-        title: '操作',
+        title: t('action'),
         key: 'action'
     }
 ]
@@ -79,7 +81,7 @@ const dataSource = computed(() => data.value?.data.items?.map((el: any) => {
                 <span>
                     <ImageBuildLogs :image="record" @close="run">构建日志</ImageBuildLogs>
                     <a-divider type="vertical"></a-divider>
-                    <a @click="handleDelete(record, run)">删除</a>
+                    <a @click="handleDelete(record, run)">{{ $t('btn.delete') }}</a>
                 </span>
             </template>
         </template>

@@ -10,7 +10,6 @@ import { defineComponent, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 
-const route = useRoute()
 const router = useRouter()
 const openKeys = ref<string[]>([]);
 const selectedKeys = ref<string[]>([])
@@ -29,47 +28,37 @@ const handleClick = (e: any) => {
             <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline" @click="handleClick">
                 <a-menu-item key="overview">
                     <pie-chart-outlined />
-                    <span>首页</span>
+                    <span>{{ $t('admin.menu.home') }}</span>
                 </a-menu-item>
                 <a-sub-menu key="clusters">
                     <template #title>
                         <span>
                             <team-outlined />
-                            <span>集群管理</span>
+                            <span>{{ $t('admin.menu.clusterManager') }}</span>
                         </span>
                     </template>
-                    <a-menu-item key="">集群列表</a-menu-item>
-                    <!-- <a-menu-item key="environments">环境列表</a-menu-item> -->
+                    <a-menu-item key="">{{ $t('admin.menu.clusters') }}</a-menu-item>
                 </a-sub-menu>
-                <!-- <a-sub-menu key="middlewares">
-                    <template #title>
-                        <span>
-                            <user-outlined />
-                            <span>中间件管理</span>
-                        </span>
-                    </template>
-                    <a-menu-item key="">实例列表</a-menu-item>
-                </a-sub-menu> -->
                 <a-sub-menu key="gateway">
                     <template #title>
                         <span>
                             <user-outlined />
-                            <span>网关</span>
+                            <span>{{ $t('admin.menu.gateway') }}</span>
                         </span>
                     </template>
-                    <a-menu-item key="instances">实例控制</a-menu-item>
-                    <a-menu-item key="entries">访问入口</a-menu-item>
+                    <a-menu-item key="instances">{{ $t('admin.menu.instance') }}</a-menu-item>
+                    <a-menu-item key="entries">{{ $t('admin.menu.entry') }}</a-menu-item>
                 </a-sub-menu>
                 <a-sub-menu key="system">
                     <template #title>
                         <span>
                             <team-outlined />
-                            <span>系统设置</span>
+                            <span>{{ $t('admin.menu.system') }}</span>
                         </span>
                     </template>
-                    <a-menu-item key="git-providers">代码源</a-menu-item>
-                    <a-menu-item key="registries">镜像源</a-menu-item>
-                    <a-menu-item key="builders">构建器</a-menu-item>
+                    <a-menu-item key="git-providers">{{ $t('admin.menu.gitProvider') }}</a-menu-item>
+                    <a-menu-item key="registries">{{ $t('admin.menu.registry') }}</a-menu-item>
+                    <a-menu-item key="builders">{{ $t('admin.menu.builder') }}</a-menu-item>
                 </a-sub-menu>
             </a-menu>
         </a-layout-sider>

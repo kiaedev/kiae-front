@@ -1,0 +1,26 @@
+name: 名称
+intro: 描述
+tags: 标签
+status: 状态
+action: 操作
+createdAt: 创建时间
+updatedAt: 更新时间
+
+btn:
+  save: 保存
+
+tips:
+  saveSuccess: 保存成功
+
+admin:
+  menu:
+    home: 首页
+    clusterManager: 集群管理
+    clusters: 集群列表
+    gateway: 网关
+    instance: 网关实例
+    entry: 网关入口
+    system: 系统设置
+    gitProvider: Git提供商
+    registry: 镜像仓库
+    builder: 镜像构建器

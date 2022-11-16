@@ -60,7 +60,7 @@ const { formState, formSubmit } = useFormSubmiter({ port: 80, portProtocol: 'HTT
             </a-form-item> -->
 
             <a-form-item :wrapper-col="{ offset: 6, span: 16 }">
-                <a-button type="primary" html-type="submit">保存</a-button>
+                <a-button type="primary" html-type="submit">{{ $t('btn.save') }}</a-button>
             </a-form-item>
         </a-form>
     </a-modal>

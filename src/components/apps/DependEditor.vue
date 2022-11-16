@@ -99,7 +99,7 @@ const internalApplicationChange = (v: SelectValue, opt: any) => {
                     <a-select v-model:value="mwForm.formState.size" placeholder="请选择实例规格"></a-select>
                 </a-form-item>
                 <a-form-item :wrapper-col="{ offset: 6, span: 16 }">
-                    <a-button type="primary" html-type="submit">保存</a-button>
+                    <a-button type="primary" html-type="submit">{{ $t('btn.save') }}</a-button>
                 </a-form-item>
             </template>
         </a-form>
@@ -141,7 +141,7 @@ const internalApplicationChange = (v: SelectValue, opt: any) => {
                 </a-button>
             </a-form-item>
             <a-form-item :wrapper-col="{ offset: 6, span: 16 }">
-                <a-button type="primary" html-type="submit">保存</a-button>
+                <a-button type="primary" html-type="submit">{{ $t('btn.save') }}</a-button>
             </a-form-item>
         </a-form>
     </a-modal>

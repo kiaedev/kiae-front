@@ -121,7 +121,7 @@ const addPort = () => {
             </a-form-item>
 
             <a-form-item :wrapper-col="{ offset: 5, span: 16 }">
-                <a-button type="primary" html-type="submit">保存</a-button>
+                <a-button type="primary" html-type="submit">{{ $t('btn.save') }}</a-button>
             </a-form-item>
         </a-form>
     </a-modal>

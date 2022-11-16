@@ -25,15 +25,15 @@ const columns = [
         dataIndex: 'path',
     },
     {
-        title: '状态',
+        title: t('status'),
         dataIndex: 'status',
     },
     {
-        title: '创建时间',
+        title: t('createdAt'),
         dataIndex: 'createdAt',
     },
     {
-        title: '操作',
+        title: t('action'),
         key: 'action',
     },
 ]
@@ -69,7 +69,7 @@ const columns = [
                             @click="handleEnable(record, run)">启用</a-button>
                         <a-button size="small" v-else @click="handleDisable(record, run)">停用</a-button>
                         <a-divider type="vertical" />
-                        <a-button size="small" @click="handleDelete(record, run)" danger>删除</a-button>
+                        <a-button size="small" @click="handleDelete(record, run)" danger>{{ $t('btn.delete') }}</a-button>
                     </span>
                 </template>
             </template>

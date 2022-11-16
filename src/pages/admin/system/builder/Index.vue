@@ -5,7 +5,9 @@ import { useKiaeApi } from "@/hooks/kiae";
 import { useRequest } from "vue-request";
 import Editor from "./Editor.vue";
 import { useBuilderOperater } from "@/hooks/op_builder";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 const { builderSvc } = useKiaeApi()
 const { data, loading, error, run } = useRequest(() => builderSvc.builderServiceList());
 const { handleDelete } = useBuilderOperater()
@@ -13,28 +15,28 @@ const { handleDelete } = useBuilderOperater()
 const columns = [
 
     {
-        title: '名称',
+        title: t('name'),
         width: 100,
         dataIndex: 'name',
     },
     {
-        title: '描述',
+        title: t('intro'),
         width: 300,
         ellipsis: true,
         dataIndex: 'intro',
     },
     {
-        title: '镜像地址',
+        title: t('imageAddr'),
         ellipsis: true,
         dataIndex: 'artifact',
     },
     {
-        title: '创建时间',
+        title: t('createdAt'),
         width: 190,
         dataIndex: 'createdAt',
     },
     {
-        title: '操作',
+        title: t('action'),
         width: 120,
         key: 'action',
     },
@@ -59,9 +61,9 @@ const columns = [
             </template>
             <template v-else-if="column.key === 'action'">
                 <span>
-                    <a>编辑</a>
+                    <a>{{ $t('btn.edit') }}</a>
                     <a-divider type="vertical" />
-                    <a @click="handleDelete(record, run)">删除</a>
+                    <a @click="handleDelete(record, run)">{{ $t('btn.delete') }}</a>
                 </span>
             </template>
         </template>

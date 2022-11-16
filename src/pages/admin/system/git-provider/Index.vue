@@ -4,7 +4,9 @@ import { useProviderOperater } from "@/hooks/op_provider";
 import { useKiaeApi } from "@/hooks/kiae";
 import { useRequest } from "vue-request";
 import Editor from "./Editor.vue";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 const { providerSvc } = useKiaeApi()
 const { data, loading, error, run } = useRequest(() => providerSvc.providerServiceList());
 const { handleDelete } = useProviderOperater()
@@ -12,28 +14,28 @@ const { handleDelete } = useProviderOperater()
 const columns = [
 
     {
-        title: '名称',
+        title: t('name'),
         width: 100,
         dataIndex: 'name',
     },
     {
-        title: '授权地址',
+        title: t('authorizeUrl'),
         width: 300,
         ellipsis: true,
         dataIndex: 'authorizeUrl',
     },
     {
-        title: '客户端ID',
+        title: t('clientId'),
         ellipsis: true,
         dataIndex: 'clientId',
     },
     {
-        title: '创建时间',
+        title: t('createdAt'),
         width: 190,
         dataIndex: 'createdAt',
     },
     {
-        title: '操作',
+        title: t('action'),
         width: 120,
         key: 'action',
     },
@@ -58,9 +60,9 @@ const columns = [
             </template>
             <template v-else-if="column.key === 'action'">
                 <span>
-                    <a>编辑</a>
+                    <a>{{ $t('btn.edit') }}</a>
                     <a-divider type="vertical" />
-                    <a @click="handleDelete(record, run)">删除</a>
+                    <a @click="handleDelete(record, run)">{{ $t('btn.delete') }}</a>
                 </span>
             </template>
         </template>

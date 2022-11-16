@@ -2,14 +2,17 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { useProject } from '@/hooks/project';
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n()
 const dataSource = ref<any>([]);
 const columns = [
     {
-        title: '名称',
+        title: t('name'),
         dataIndex: 'name',
     },
     {
-        title: '类型',
+        title: t('type'),
         dataIndex: 'type',
     },
     {

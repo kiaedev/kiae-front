@@ -43,7 +43,7 @@ export default defineComponent({
                     <a href="javascript:;" @click="handleAppRestart(value, () => $emit('done'))">重启</a>
                 </a-menu-item>
                 <a-menu-item>
-                    <a href="javascript:;" @click="handleAppDelete(value, () => $emit('deleted'))">删除</a>
+                    <a href="javascript:;" @click="handleAppDelete(value, () => $emit('deleted'))">{{ $t('btn.delete') }}</a>
                 </a-menu-item>
             </a-menu>
         </template>

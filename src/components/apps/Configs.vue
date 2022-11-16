@@ -14,7 +14,7 @@ const { handleAppCfgDelete } = useApplication()
 
 const columns = [
     {
-        title: '名称',
+        title: t('name'),
         dataIndex: 'filename',
     },
     {
@@ -26,7 +26,7 @@ const columns = [
         dataIndex: 'content',
     },
     {
-        title: '创建时间',
+        title: t('createdAt'),
         dataIndex: 'createdAt',
     },
     {
@@ -34,7 +34,7 @@ const columns = [
         dataIndex: 'updatedAt',
     },
     {
-        title: '操作',
+        title: t('action'),
         key: 'action',
     },
 ]
@@ -59,9 +59,9 @@ const columns = [
             </template>
             <template v-else-if="column.key === 'action'">
                 <span>
-                    <ConfigEditor :appid="appid" :config="record" @done="$emit('refresh')">编辑</ConfigEditor>
+                    <ConfigEditor :appid="appid" :config="record" @done="$emit('refresh')">{{ $t('btn.edit') }}</ConfigEditor>
                     <a-divider type="vertical" />
-                    <a @click="handleAppCfgDelete(appid, record, ()=>$emit('refresh'))"> 删除 </a>
+                    <a @click="handleAppCfgDelete(appid, record, ()=>$emit('refresh'))">{{ $t('btn.delete') }}</a>
                 </span>
             </template>
         </template>

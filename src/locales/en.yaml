@@ -1,0 +1,27 @@
+
+name: Name
+intro: Intro
+tags: Tags
+status: Status
+action: Action
+createdAt: CreatedAt
+updatedAt: UpdatedAt
+
+btn:
+  save: Save
+
+tips:
+  saveSuccess: Saved
+
+admin:
+  menu:
+    home: Home
+    clusterManager: ClusterManager
+    clusters: Clusters
+    gateway: Gateway
+    instance: Instances
+    entry: Entries
+    system: System
+    gitProvider: GitProvider
+    registry: Registries
+    builder: Builders

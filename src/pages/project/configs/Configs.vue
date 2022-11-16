@@ -2,10 +2,13 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { useProject } from '@/hooks/project';
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n()
 const dataSource = ref<any>([]);
 const columns = [
     {
-        title: '名称',
+        title: t('name'),
         dataIndex: 'filename',
     },
     {
@@ -13,7 +16,7 @@ const columns = [
         dataIndex: 'mountPath',
     },
     {
-        title: '创建时间',
+        title: t('createdAt'),
         dataIndex: 'createdAt',
     },
 ]

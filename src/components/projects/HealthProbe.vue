@@ -63,7 +63,7 @@ export default defineComponent({
             </a-col>
         </a-row>
         <a-form-item>
-            <a-button type="primary">保存</a-button>
+            <a-button type="primary">{{ $t('btn.save') }}</a-button>
         </a-form-item>
     </a-form>
 </template>

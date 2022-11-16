@@ -4,7 +4,9 @@ import { computed, onMounted, ref } from 'vue';
 import { useProject } from '@/hooks/project';
 import { useKiaeApi } from '@/hooks/kiae';
 import { useRequest } from 'vue-request';
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 const columns = [
     {
         title: '镜像地址',
@@ -13,7 +15,7 @@ const columns = [
         ellipsis: true,
     },
     {
-        title: '状态',
+        title: t('status'),
         dataIndex: 'status',
         width: 100,
     },
@@ -68,7 +70,7 @@ const deployments = computed(() => {
             </template>
             <!-- <template v-else-if="column.key === 'action'">
                 <span>
-                    <a @click="() => { handleSelect(record); showModal() }">编辑</a>
+                    <a @click="() => { handleSelect(record); showModal() }">{{ $t('btn.edit') }}</a>
                     <a-divider type="vertical" />
                     <a class="ant-dropdown-link">
                         更多操作

@@ -7,7 +7,9 @@ import { renderComponent } from "@/libs/helper/component";
 import { useRequest } from "vue-request";
 import { useKiaeApi, appStatusMapper } from "@/hooks/kiae";
 import { useProject } from "@/hooks/project";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 const { currentPid } = useProject()
 const { appSvc } = useKiaeApi()
 const { data, loading, error, run } = useRequest(() => appSvc.appServiceList(currentPid()));
@@ -19,7 +21,7 @@ const handleAppClick = async (app: any) => {
 
 const columns = [
     {
-        title: '名称',
+        title: t('name'),
         dataIndex: 'name',
     },
     {
@@ -31,15 +33,15 @@ const columns = [
         dataIndex: 'size',
     },
     {
-        title: '状态',
+        title: t('status'),
         dataIndex: 'status',
     },
     {
-        title: '创建时间',
+        title: t('createdAt'),
         dataIndex: 'createdAt',
     },
     {
-        title: '操作',
+        title: t('action'),
         key: 'action',
     },
 ]
@@ -73,7 +75,7 @@ const columns = [
                 </template>
                 <template v-else-if="column.key === 'action'">
                     <span>
-                        <a>编辑</a>
+                        <a>{{ $t('btn.edit') }}</a>
                         <a-divider type="vertical" />
                         <a class="ant-dropdown-link">
                             <AppOp :value="record" @done="run" @deleted="run">更多操作</AppOp>

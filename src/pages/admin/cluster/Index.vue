@@ -5,34 +5,36 @@ import { ref } from "@vue/reactivity";
 import { useKiaeApi } from "@/hooks/kiae";
 import { useRequest } from "vue-request";
 import { useClusterOperater } from "@/hooks/op_cluster";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 const { clusterSvc } = useKiaeApi()
 const { data, loading, error, run } = useRequest(() => clusterSvc.clusterServiceList());
 const { handleDelete } = useClusterOperater()
 
 const columns = [
     {
-        title: '名称',
+        title: t('name'),
         dataIndex: 'name',
     },
     {
-        title: '描述',
+        title: t('intro'),
         dataIndex: 'intro',
     },
     {
-        title: '标签',
+        title: t('tags'),
         dataIndex: 'tags',
     },
     {
-        title: '状态',
+        title: t('status'),
         dataIndex: 'status',
     },
     {
-        title: '创建时间',
+        title: t('createdAt'),
         dataIndex: 'createdAt',
     },
     {
-        title: '操作',
+        title: t('action'),
         key: 'action',
     },
 ]
@@ -46,7 +48,7 @@ const columns = [
                 </a-col>
                 <a-col flex="auto">
                     <a-button type="primary" style="float: right" disabled>
-                        <Editor @done="run">添加集群</Editor>
+                        <Editor @done="run">{{ $t('btn.addCluster') }}</Editor>
                     </a-button>
                 </a-col>
             </a-row>
@@ -66,9 +68,9 @@ const columns = [
                 </template>
                 <template v-else-if="column.key === 'action'">
                     <span v-if="record.name != 'local'">
-                        <a>编辑</a>
+                        <a>{{ $t('btn.edit') }}</a>
                         <a-divider type="vertical" />
-                        <a @click="handleDelete(record, run)">删除</a>
+                        <a @click="handleDelete(record, run)">{{ $t('btn.delete') }}</a>
                     </span>
                     <span v-else>-</span>
                 </template>

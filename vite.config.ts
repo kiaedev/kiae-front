@@ -1,9 +1,10 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 import { viteCommonjs } from "@originjs/vite-plugin-commonjs";
-import { resolve } from "path";
+import path, { dirname, resolve } from "path";
 const pathSrc = resolve(__dirname, "src");
 
 const backend = {
@@ -33,6 +34,11 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    VueI18nPlugin({
+      /* options */
+      // locale messages resource pre-compile option
+      include: path.resolve(__dirname, "./src/locales/**"),
+    }),
     viteCommonjs(),
     Components({
       dts: "src/components.d.ts",

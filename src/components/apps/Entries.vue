@@ -32,15 +32,15 @@ const columns = [
         dataIndex: 'scope',
     },
     {
-        title: '状态',
+        title: t('status'),
         dataIndex: 'status',
     },
     {
-        title: '创建时间',
+        title: t('createdAt'),
         dataIndex: 'createdAt',
     },
     {
-        title: '操作',
+        title: t('action'),
         key: 'action',
     },
 ]
@@ -69,12 +69,12 @@ const columns = [
                 </template>
                 <template v-else-if="column.key === 'action'">
                     <span>
-                        <!-- <EntryEditor :value="record" v-model:app="app" @done="run">编辑</EntryEditor> -->
+                        <!-- <EntryEditor :value="record" v-model:app="app" @done="run">{{ $t('btn.edit') }}</EntryEditor> -->
                         <a size="small" type="primary" v-if="record.status == 'OP_STATUS_DISABLED'"
                             @click="handleEnable(record, run)">启用</a>
                         <a size="small" v-else @click="handleDisable(record, run)">停用</a>
                         <a-divider type="vertical" />
-                        <a @click="handleDelete(record, run)">删除</a>
+                        <a @click="handleDelete(record, run)">{{ $t('btn.delete') }}</a>
                     </span>
                 </template>
             </template>
