@@ -46,7 +46,7 @@ const handleClick = (e: any) => {
                             <span>{{ $t('admin.menu.gateway') }}</span>
                         </span>
                     </template>
-                    <a-menu-item key="instances">{{ $t('admin.menu.instance') }}</a-menu-item>
+                    <!-- <a-menu-item key="instances">{{ $t('admin.menu.instance') }}</a-menu-item> -->
                     <a-menu-item key="entries">{{ $t('admin.menu.entry') }}</a-menu-item>
                 </a-sub-menu>
                 <a-sub-menu key="system">

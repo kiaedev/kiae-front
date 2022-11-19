@@ -44,11 +44,11 @@ const columns = [
 <template>
     <a-row type="flex">
         <a-col flex="auto">
-            <a-input-search placeholder="请输入要查询的实例" style="width: 500px" />
+            <a-input-search placeholder="Searching..." style="width: 500px" />
         </a-col>
         <a-col flex="300px">
             <a-button type="primary" style="float: right">
-                <Editor @done="run">添加仓库源</Editor>
+                <Editor @done="run">{{ $t('btn.addGitProvider') }}</Editor>
             </a-button>
         </a-col>
     </a-row>

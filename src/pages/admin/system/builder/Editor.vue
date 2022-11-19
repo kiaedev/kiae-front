@@ -11,7 +11,7 @@ const props = defineProps<{
 
 const emit = defineEmits(["done"])
 
-let title = !props.value ? "创建构建器" : "编辑构建器"
+let title = !props.value ? "New Builder" : "Edit Builder"
 const { visible, modalOpen, modalClose } = useModal()
 
 const { builderSvc, registrySvc } = useKiaeApi()
@@ -28,7 +28,7 @@ const suggestedStacks = computed(() => {
 
 const { formState, formSubmit } = useFormSubmiter({ cnb: 'Paketo Base', packs: [{ name: "", pack: "", envs: [] }] }, (values: any) => {
     builderSvc.builderServiceCreate(values).then(() => {
-        message.success("保存成功")
+        message.success("Succeed")
         modalClose()
         emit("done")
     })
@@ -65,26 +65,27 @@ const addDomain = () => {
         <a-form :model="formState" name="basic" :label-col="{ span: 5 }" :wrapper-col="{ span: 15 }" autocomplete="off"
             @finish="formSubmit">
 
-            <a-form-item label="名称" name="name" :rules="[{ required: true, message: '请输入名称!' }]">
+            <a-form-item :label="$t('name')" name="name" :rules="[{ required: true, message: 'Please input the name!' }]">
                 <a-input v-model:value="formState.name" />
             </a-form-item>
-            <a-form-item label="描述" name="intro" :rules="[{ required: true, message: '请输入描述!' }]">
+            <a-form-item :label="$t('intro')" name="intro" :rules="[{ required: true, message: 'Please input the intro!' }]">
                 <a-input v-model:value="formState.intro" />
             </a-form-item>
-            <a-form-item label="Registry" name="registry_id" :rules="[{ required: true, message: '请选择Registry!' }]">
+            <a-form-item label="Registry" name="registry_id" :rules="[{ required: true, message: 'Please select the registry!' }]">
                 <a-select v-model:value="formState.registry_id" :options="registries" />
             </a-form-item>
 
-            <a-form-item label="Stack源" name="cnb">
+            <a-form-item label="Stack" name="cnb">
                 <a-select v-model:value="formState.cnb" @change="onProviderSwitch" :options="suggestedStacks" />
             </a-form-item>
-            <a-form-item label="StackID" name="stack_id" :rules="[{ required: true, message: '请输入客户端ID!' }]">
+            <a-form-item label="StackID" name="stack_id" :rules="[{ required: true, message: 'Please input the stackId!' }]">
                 <a-input v-model:value="formState.stack_id" />
             </a-form-item>
-            <a-form-item label="构建镜像" name="build_image" :rules="[{ required: true, message: '请输入构建镜像!' }]">
+            <a-form-item :label="$t('buildImage')" name="build_image"
+                :rules="[{ required: true, message: 'Please input the build image!' }]">
                 <a-input v-model:value="formState.build_image" />
             </a-form-item>
-            <a-form-item label="运行镜像" name="run_image" :rules="[{ required: true, message: '请输入运行镜像!' }]">
+            <a-form-item :label="$t('runImage')" name="run_image" :rules="[{ required: true, message: 'Please input the run image!' }]">
                 <a-input v-model:value="formState.run_image" />
             </a-form-item>
             <a-form-item label="Buildpacks">
@@ -92,7 +93,7 @@ const addDomain = () => {
                     <a-col>
                         <a-row>
                             <a-col :span="6">
-                                <a-input v-model:value="pack.lang" placeholder="语言名称" />
+                                <a-input v-model:value="pack.lang" placeholder="Language" />
                             </a-col>
                             <a-col :span="12" :offset="1">
                                 <a-input v-model:value="pack.id" placeholder="PackId"></a-input>
@@ -102,10 +103,10 @@ const addDomain = () => {
 
                         <a-row v-for="(env, index) in pack.envs" :key="index">
                             <a-col :span="5">
-                                <a-input v-model:value="env.name" placeholder="名称" />
+                                <a-input v-model:value="env.name" placeholder="Environment Name" />
                             </a-col>
                             <a-col :span="13" :offset="1">
-                                <a-input v-model:value="env.intro" placeholder="描述"></a-input>
+                                <a-input v-model:value="env.intro" placeholder="Introduction"></a-input>
                             </a-col>
                             <a-col :span="4" :offset="1">
                                 <MinusCircleOutlined class="dynamic-delete-button"
@@ -115,7 +116,7 @@ const addDomain = () => {
 
                         <a-button type="dashed" style="width: 50%" @click="pack.envs.push({})">
                             <PlusOutlined />
-                            添加环境变量
+                            Add Environment
                         </a-button>
                     </a-col>
                     <a-col :span="4" :offset="1">
@@ -125,7 +126,7 @@ const addDomain = () => {
                 </a-row>
                 <a-button type="dashed" style="width: 60%" @click="addDomain">
                     <PlusOutlined />
-                    添加Buildpack
+                    Add Buildpack
                 </a-button>
             </a-form-item>
 

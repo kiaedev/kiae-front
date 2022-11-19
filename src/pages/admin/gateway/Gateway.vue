@@ -22,7 +22,7 @@ const columns = [
         dataIndex: 'intro',
     },
     {
-        title: t('hosts'),
+        title: 'Hosts',
         dataIndex: 'hosts',
     },
     {
@@ -44,7 +44,7 @@ const columns = [
                 </a-col>
                 <a-col flex="auto">
                     <a-button type="primary" style="float: right">
-                        <GatewayEditor @done="run">添加网关</GatewayEditor>
+                        <GatewayEditor @done="run">{{ $t('btn.addGateway') }}</GatewayEditor>
                     </a-button>
                 </a-col>
             </a-row>

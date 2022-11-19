@@ -11,17 +11,17 @@ const props = defineProps<{
 
 const emit = defineEmits(["done"])
 
-let title = !props.value ? "添加仓库源" : "编辑仓库源"
+let title = !props.value ? "Add GitRegistry" : "Edit GitRegistry"
 const { visible, modalOpen, modalClose } = useModal()
 
 const { providerSvc } = useKiaeApi()
-const { data, loading, error, runAsync } = useRequest(() => providerSvc.providerServicePrepare(), {manual: true});
+const { data, loading, error, runAsync } = useRequest(() => providerSvc.providerServicePrepare(), { manual: true });
 const { formState, formSubmit } = useFormSubmiter({ type: 'github' }, () => {
     console.log(formState)
     providerSvc.providerServiceCreate(formState).then(() => {
+        message.success("Succeed")
         modalClose()
         emit("done")
-        message.success("保存成功")
     })
 })
 const onProviderSwitch = () => {
@@ -43,7 +43,7 @@ runAsync().then(onProviderSwitch)
     <a-modal v-model:visible="visible" :title="title" :footer="null" width="800px">
         <a-form :model="formState" name="basic" :label-col="{ span: 5 }" :wrapper-col="{ span: 15 }" autocomplete="off"
             @finish="formSubmit">
-            <a-form-item label="类型" name="type">
+            <a-form-item label="Type" name="type">
                 <a-radio-group v-model:value="formState.type" @change="onProviderSwitch">
                     <a-radio value="github">Github</a-radio>
                     <a-radio value="gitlab">Gitlab</a-radio>
@@ -52,22 +52,26 @@ runAsync().then(onProviderSwitch)
                 </a-radio-group>
             </a-form-item>
 
-            <a-form-item label="名称" name="name" :rules="[{ required: true, message: '请输入名称!' }]">
-                <a-input v-model:value="formState.name" :disabled="formState.type!=''" />
+            <a-form-item label="Name" name="name" :rules="[{ required: true, message: 'Please input the name!' }]">
+                <a-input v-model:value="formState.name" :disabled="formState.type != ''" />
             </a-form-item>
-            <a-form-item label="授权地址" name="authorize_url" :rules="[{ required: true, message: '请输入授权地址!' }]">
+            <a-form-item label="AuthorizeURL" name="authorize_url"
+                :rules="[{ required: true, message: 'Please input the authorize url!' }]">
                 <a-input v-model:value="formState.authorize_url" />
             </a-form-item>
-            <a-form-item label="令牌地址" name="token_url" :rules="[{ required: true, message: '请输入令牌地址!' }]">
+            <a-form-item label="TokenURL" name="token_url"
+                :rules="[{ required: true, message: 'Please input the token url!' }]">
                 <a-input v-model:value="formState.token_url" />
             </a-form-item>
-            <a-form-item label="授权范围" name="scopes">
+            <a-form-item label="Scopes" name="scopes">
                 <a-select v-model:value="formState.scopes" mode="tags" />
             </a-form-item>
-            <a-form-item label="客户端ID" name="client_id" :rules="[{ required: true, message: '请输入客户端ID!' }]">
+            <a-form-item label="ClientID" name="client_id"
+                :rules="[{ required: true, message: 'Please input the client id!' }]">
                 <a-input v-model:value="formState.client_id" />
             </a-form-item>
-            <a-form-item label="客户端秘钥" name="client_secret" :rules="[{ required: true, message: '请输入客户端秘钥!' }]">
+            <a-form-item label="ClientSecret" name="client_secret"
+                :rules="[{ required: true, message: 'Please input the client secret!' }]">
                 <a-input-password v-model:value="formState.client_secret" />
             </a-form-item>
 

@@ -44,11 +44,11 @@ const columns = [
 <template>
     <a-row type="flex">
         <a-col flex="auto">
-            <a-input-search placeholder="请输入要查询的镜像源" style="width: 500px" />
+            <a-input-search placeholder="Searching..." style="width: 500px" />
         </a-col>
         <a-col flex="300px">
             <a-button type="primary" style="float: right">
-                <Editor @done="run">添加镜像源</Editor>
+                <Editor @done="run">{{ $t('btn.addRegistry') }}</Editor>
             </a-button>
         </a-col>
     </a-row>
@@ -60,7 +60,9 @@ const columns = [
             </template>
             <template v-else-if="column.key === 'action'">
                 <span>
-                    <a><Editor :value="record" @done="run">{{ $t('btn.edit') }}</Editor></a>
+                    <a>
+                        <Editor :value="record" @done="run">{{ $t('btn.edit') }}</Editor>
+                    </a>
                     <a-divider type="vertical" />
                     <a @click="handleDelete(record, run)">{{ $t('btn.delete') }}</a>
                 </span>

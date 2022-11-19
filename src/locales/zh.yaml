@@ -8,6 +8,10 @@ updatedAt: 更新时间
 
 btn:
   save: 保存
+  addGateway: 添加网关
+  addGitProvider: 添加Git仓库源
+  addRegistry: 添加镜像仓库
+  addBuilder: 新建镜像构建器
 
 tips:
   saveSuccess: 保存成功
@@ -24,3 +28,16 @@ admin:
     gitProvider: Git提供商
     registry: 镜像仓库
     builder: 镜像构建器
+
+  page:
+    overview:
+      notReady: 系统未就绪
+      notReadyMsg: 请先到系统设置中完成必要的配置。代码源、镜像源和镜像构建器各最少一项配置。
+      ready: "系统已就绪"
+      readyMsg: "配置完成了，感谢您的使用~"
+      contribution: 招募贡献者
+      contributionMsg: 项目积极开发中，欢迎有兴趣的朋友加入一起完善
+
+  officialDocs: 官方文档
+  issueFeedback: 问题反馈
+  projectSource: 项目源码

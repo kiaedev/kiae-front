@@ -1,4 +1,3 @@
-
 name: Name
 intro: Intro
 tags: Tags
@@ -6,9 +5,15 @@ status: Status
 action: Action
 createdAt: CreatedAt
 updatedAt: UpdatedAt
+runImage: RunImage
+
 
 btn:
   save: Save
+  addGateway: New Gateway
+  addGitProvider: New GitProvider
+  addRegistry: New Registry
+  addBuilder: New Builder
 
 tips:
   saveSuccess: Saved
@@ -25,3 +30,16 @@ admin:
     gitProvider: GitProvider
     registry: Registries
     builder: Builders
+
+  page:
+    overview:
+      notReady: System NotReady
+      notReadyMsg: Please go to the system setup first to complete the necessary configuration. At least one configuration each for code source, mirror source, and image builder.
+      ready: "Ready"
+      readyMsg: "The configuration is complete, thank you for using ~"
+      contribution: Contribution
+      contributionMsg: The project is under active development. Interested friends are welcome to join us to improve it.
+
+  officialDocs: Docs
+  issueFeedback: Issues
+  projectSource: Repository
