@@ -5,9 +5,9 @@ export const useRegistryOperater = () => {
   const { registrySvc } = useKiaeApi();
 
   const handleDelete = async (m: any, callback: Function) => {
-    return confirmDo("镜像源删除", `确定要删除镜像源 ${m.name} 吗？`, () => {
+    return confirmDo("Confirm", `Delete the Registry ${m.name} ?`, () => {
       registrySvc.registryServiceDelete(m.id).then(() => {
-        message.success("删除成功");
+        message.success("succeed!");
         callback();
       });
     });

@@ -102,12 +102,12 @@ const columns = [
                         <a-space>
                             <!-- <EntryEditor :value="record" v-model:app="app" @done="run">{{ $t('btn.edit') }}</EntryEditor> -->
                             <!-- <a size="small" type="primary" v-if="record.status=='OP_STATUS_DISABLED'"
-                                @click="handleEnable(record, run)">$t('btn.enable')</a>
-                            <a size="small" v-else @click="handleDisable(record, run)">$t('btn.disable')</a>
+                                @click="handleEnable(record, run)">{{ $t('btn.enable') }}</a>
+                            <a size="small" v-else @click="handleDisable(record, run)">{{ $t('btn.disable') }}</a>
                             <a-divider type="vertical" />
                             <a @click="handleDelete(record, run)">{{ $t('btn.delete') }}</a> -->
                             <a @click="openPodShell(pod, record.name)">Shell</a>
-                            <a>Logs</a>
+                            <!-- <a>Logs</a> -->
                         </a-space>
                     </template>
                 </template>

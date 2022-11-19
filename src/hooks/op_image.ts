@@ -5,9 +5,9 @@ export const useImageOperater = () => {
   const { imageSvc } = useKiaeApi();
 
   const handleDelete = async (m: any, callback: Function) => {
-    return confirmDo("镜像删除", `确定要删除镜像实例 ${m.image} 吗？`, () => {
+    return confirmDo("Confirm", `Delete the Image ${m.image} ?`, () => {
       imageSvc.imageServiceDelete(m.pid, m.id).then(() => {
-        message.success("删除成功");
+        message.success("succeed!");
         callback();
       });
     });

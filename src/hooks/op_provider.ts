@@ -6,16 +6,12 @@ export const useProviderOperater = () => {
   const { providerSvc } = useKiaeApi();
 
   const handleDelete = async (m: any, callback: Function) => {
-    return confirmDo(
-      "GitProvider删除",
-      `确定要删除GitProvider ${m.name} 吗？`,
-      () => {
-        providerSvc.providerServiceDelete(m.id).then(() => {
-          message.success("删除成功");
-          callback();
-        });
-      }
-    );
+    return confirmDo("Confirm", `Delete the GitProvider ${m.name} ?`, () => {
+      providerSvc.providerServiceDelete(m.id).then(() => {
+        message.success("succeed!");
+        callback();
+      });
+    });
   };
 
   return {

@@ -6,9 +6,9 @@ export const useBuilderOperater = () => {
   const { builderSvc } = useKiaeApi();
 
   const handleDelete = async (m: any, callback: Function) => {
-    return confirmDo("构建器删除", `确定要删除构建器 ${m.name} 吗？`, () => {
+    return confirmDo("Confirm", `Delete the Builder ${m.name} ?`, () => {
       builderSvc.builderServiceDelete(m.id).then(() => {
-        message.success("删除成功");
+        message.success("succeed!");
         callback();
       });
     });

@@ -11,7 +11,7 @@ export const useApplication = () => {
   const { appSvc } = useKiaeApi();
 
   const handleAppRestart = (app: any, callback: Function) => {
-    return confirmDo("应用重启", `确定要重启应用 ${app.name} 吗？`, () => {
+    return confirmDo("Confirm", `Restart the APP ${app.name} ?`, () => {
       appSvc.appServiceDoAction(app.id, {
         action: ActionPayloadAction.Restart,
       });
@@ -19,7 +19,7 @@ export const useApplication = () => {
   };
 
   const handleAppStart = (app: any, callback: Function) => {
-    return confirmDo("应用启动", `确定要启动应用 ${app.name} 吗？`, () => {
+    return confirmDo("Confirm", `Start the APP ${app.name} ?`, () => {
       appSvc
         .appServiceDoAction(app.id, { action: ActionPayloadAction.Start })
         .then(() => callback());
@@ -27,7 +27,7 @@ export const useApplication = () => {
   };
 
   const handleAppStop = (app: any, callback: Function) => {
-    return confirmDo("应用停止", `确定要停止应用 ${app.name} 吗？`, () => {
+    return confirmDo("Confirm", `Stop the APP ${app.name} ?`, () => {
       appSvc
         .appServiceDoAction(app.id, { action: ActionPayloadAction.Stop })
         .then(() => callback());
@@ -35,7 +35,7 @@ export const useApplication = () => {
   };
 
   const handleAppDelete = async (app: any, callback: Function) => {
-    return confirmDo("应用删除", `确定要删除应用 ${app.name} 吗？`, () => {
+    return confirmDo("Confirm", `Delete the APP ${app.name} ?`, () => {
       appSvc.appServiceDelete(app.id).then(() => callback());
     });
   };
@@ -45,13 +45,9 @@ export const useApplication = () => {
     env: any,
     callback: Function
   ) => {
-    return confirmDo(
-      "环境变量删除",
-      `确定要删除环境变量 ${env.name} 吗？`,
-      () => {
-        appSvc.appServiceEnvDelete(appid, env.name).then(() => callback());
-      }
-    );
+    return confirmDo("Confirm", `Delete the Environment ${env.name} ?`, () => {
+      appSvc.appServiceEnvDelete(appid, env.name).then(() => callback());
+    });
   };
 
   const handleAppCfgDelete = async (
@@ -59,13 +55,9 @@ export const useApplication = () => {
     cfg: any,
     callback: Function
   ) => {
-    return confirmDo(
-      "配置文件删除",
-      `确定要删除应用 ${cfg.filename} 吗？`,
-      () => {
-        appSvc.appServiceCfgDelete(appid, cfg.name).then(() => callback());
-      }
-    );
+    return confirmDo("Confirm", `Delete the Config ${cfg.filename} ?`, () => {
+      appSvc.appServiceCfgDelete(appid, cfg.name).then(() => callback());
+    });
   };
 
   const handleAppInstanceSettings = (values: any, callback: Function) => {

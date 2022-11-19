@@ -72,8 +72,8 @@ const columns = [
                 <template v-else-if="column.key === 'action'">
                     <span>
                         <a-button size="small" type="primary" v-if="record.status=='OP_STATUS_DISABLED'"
-                            @click="handleEnable(record, run)">$t('btn.enable')</a-button>
-                        <a-button size="small" v-else @click="handleDisable(record, run)">$t('btn.disable')</a-button>
+                            @click="handleEnable(record, run)">{{ $t('btn.enable') }}</a-button>
+                        <a-button size="small" v-else @click="handleDisable(record, run)">{{ $t('btn.disable') }}</a-button>
                         <a-divider type="vertical" />
                         <a-button size="small" @click="handleDelete(record, run)" danger>{{ $t('btn.delete') }}</a-button>
                     </span>

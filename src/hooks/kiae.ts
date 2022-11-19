@@ -53,8 +53,8 @@ export const confirmDo = (title: string, tips: string, opFn: Function) => {
   Modal.confirm({
     title: title,
     content: tips,
-    okText: "Confirm",
-    cancelText: "Cancel",
+    // okText: "Confirm",
+    // cancelText: "Cancel",
     onOk: () => opFn(),
   });
 };
