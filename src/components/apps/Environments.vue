@@ -2,7 +2,9 @@
 import { useApplication } from "@/hooks/op_app"
 import { useModal } from "@/hooks/modal"
 import { ref } from "@vue/reactivity"
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 defineEmits(["refresh"])
 const props = defineProps<{
     appid: string
@@ -38,11 +40,11 @@ const columns = [
 <template>
     <a-row type="flex">
         <a-col flex="auto">
-            <a-input-search placeholder="请输入要查询的环境变量" style="width: 500px" />
+            <a-input-search placeholder="Searching..." style="width: 500px" />
         </a-col>
         <a-col flex="300px">
             <a-button type="primary" style="float: right">
-                <EnvEditor :appid="props.appid" @done="$emit('refresh')">添加环境变量</EnvEditor>
+                <EnvEditor :appid="props.appid" @done="$emit('refresh')">New Environment</EnvEditor>
             </a-button>
         </a-col>
     </a-row>
@@ -54,9 +56,10 @@ const columns = [
                 </template>
                 <template v-else-if="column.key === 'action'">
                     <span v-if="record.type == 'USER'">
-                        <EnvEditor :appid="props.appid" :env="record" @done="$emit('refresh')">{{ $t('btn.edit') }}</EnvEditor>
+                        <EnvEditor :appid="props.appid" :env="record" @done="$emit('refresh')">{{ $t('btn.edit') }}
+                        </EnvEditor>
                         <a-divider type="vertical" />
-                        <a @click="handleAppEnvDelete(appid, record, ()=>$emit('refresh'))">{{ $t('btn.delete') }}</a>
+                        <a @click="handleAppEnvDelete(appid, record, () => $emit('refresh'))">{{ $t('btn.delete') }}</a>
                     </span>
                     <span v-else>-</span>
                 </template>

@@ -4,6 +4,7 @@ import { defineComponent, reactive, ref, defineEmits, onMounted } from 'vue';
 import { useApplication } from "@/hooks/op_app"
 import { useFormSubmiter, useModal } from '@/hooks/modal';
 import { AppSize } from '@/libs/kiae';
+import { message } from 'ant-design-vue';
 
 interface FormState {
     id: string;
@@ -23,8 +24,8 @@ export default defineComponent({
             size: props.value?.size,
             replicas: props.value?.replicas,
         }, (values: any) => {
-            console.log("111", values);
             handleAppInstanceSettings(values, () => {
+                message.success("succeed!");
                 ctx.emit("done")
                 modalClose()
             })
@@ -44,16 +45,18 @@ export default defineComponent({
         <slot></slot>
     </div>
 
-    <a-modal v-model:visible="visible" title="实例调整" @ok="formSubmit">
+    <a-modal v-model:visible="visible" title="Instance Settings" @ok="formSubmit">
         <a-form :model="formState" name="size" :label-col="{ span: 5 }" :wrapper-col="{ span: 16 }" autocomplete="off">
-            <a-form-item label="实例规格" name="size" :rules="[{ required: true, message: '请选择实例配置' }]">
-                <a-select v-model:value="formState.size" placeholder="请选择您的应用镜像">
+            <a-form-item label="Size" name="size"
+                :rules="[{ required: true, message: 'Please select the instance size' }]">
+                <a-select v-model:value="formState.size" placeholder="Select the instance size">
                     <a-select-option v-for="(key, value) in AppSize" :key="value" :value="key">
                         {{ value }}
                     </a-select-option>
                 </a-select>
             </a-form-item>
-            <a-form-item label="实例数" name="replicas" :rules="[{ required: true, message: '请设置实例数' }]">
+            <a-form-item label="Replicas" name="replicas"
+                :rules="[{ required: true, message: 'Please input the replicas' }]">
                 <a-input-number v-model:value="formState.replicas"></a-input-number>
             </a-form-item>
         </a-form>

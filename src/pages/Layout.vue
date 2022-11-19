@@ -11,11 +11,11 @@ const selectedKeys = ref<string[]>(['1'])
 const routes = ref<Route[]>([
   {
     path: '',
-    breadcrumbName: '首页',
+    breadcrumbName: 'Home',
   },
   {
     path: 'projects',
-    breadcrumbName: '项目',
+    breadcrumbName: 'Projects',
   },
   // {
   //   path: 'second',

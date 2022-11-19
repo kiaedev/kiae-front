@@ -3,15 +3,16 @@ import { ref, computed, onMounted, watch, onBeforeUnmount } from "vue";
 import { useSubscription } from '@vue/apollo-composable'
 import { useGraphPods } from "@/hooks/graphqls"
 import { escape, unescape } from "lodash";
-import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 const activeKey = ref('0')
 const props = defineProps({
     app: Object,
 })
 
 const { env, name } = props.app || {}
-const { gql, variables } = useGraphPods(`kiae-app-${env}`, name, true)
+const { gql, variables } = useGraphPods(`kiae-app${env}`, name, true)
 const { result, onError } = useSubscription(gql, variables)
 const pods = computed(() => result.value?.pods)
 const statusColor = (status: string) => {
@@ -41,11 +42,11 @@ const openPodShell = (pod: any, container: string) => {
 
 const columns = [
     {
-        title: '容器名称',
+        title: 'Container',
         dataIndex: 'name',
     },
     {
-        title: '镜像',
+        title: 'Image',
         dataIndex: 'image',
     },
     {
@@ -53,28 +54,29 @@ const columns = [
         dataIndex: 'status',
     },
     {
-        title: '异常重启',
+        title: 'Restart',
         dataIndex: 'restartCount',
     },
     {
-        title: '启动时间',
+        title: 'StartedAt',
         dataIndex: 'startedAt',
     },
     {
         key: 'action',
+        title: 'Operation',
         width: '150px'
     }
 ]
 </script>
 
 <template>
-    <a-collapse v-if="pods?.length>0" v-model:activeKey="activeKey">
+    <a-collapse v-if="pods?.length > 0" v-model:activeKey="activeKey">
         <a-collapse-panel v-for="(pod, idx) in pods" :key="idx" :header="pod.name">
             <template #extra>
-                <span style="padding: 0 50px">版本：v1.0.0</span>
-                <span style="padding: 0 50px">{{pod.status}}</span>
-                <span style="padding: 0 50px">{{pod.podIP}}</span>
-                <span style="padding: 0 50px">Age: 10d</span>
+                <span style="padding: 0 50px">Version: v1.0.0</span>
+                <span style="padding: 0 50px">{{ pod.status }}</span>
+                <span style="padding: 0 50px">{{ pod.podIP }}</span>
+                <span style="padding: 0 50px">Age: {{ $dayjs(pod.createdAt).fromNow(true) }}</span>
             </template>
 
             <a-table size="small" :columns="columns" :dataSource="pod.containers" :pagination="false">
@@ -87,10 +89,10 @@ const columns = [
                     <template v-if="column.dataIndex === 'restartCount'">
                         <a-popover :title="record.restartReason">
                             <template #content>
-                                <pre>{{escape(record.restartErrMsg)}}</pre>
+                                <pre>{{ escape(record.restartErrMsg) }}</pre>
                             </template>
 
-                            <span>{{record.restartCount}}</span>
+                            <span>{{ record.restartCount }}</span>
                         </a-popover>
                     </template>
                     <template v-if="column.dataIndex === 'startedAt'">
@@ -100,8 +102,8 @@ const columns = [
                         <a-space>
                             <!-- <EntryEditor :value="record" v-model:app="app" @done="run">{{ $t('btn.edit') }}</EntryEditor> -->
                             <!-- <a size="small" type="primary" v-if="record.status=='OP_STATUS_DISABLED'"
-                                @click="handleEnable(record, run)">启用</a>
-                            <a size="small" v-else @click="handleDisable(record, run)">停用</a>
+                                @click="handleEnable(record, run)">$t('btn.enable')</a>
+                            <a size="small" v-else @click="handleDisable(record, run)">$t('btn.disable')</a>
                             <a-divider type="vertical" />
                             <a @click="handleDelete(record, run)">{{ $t('btn.delete') }}</a> -->
                             <a @click="openPodShell(pod, record.name)">Shell</a>

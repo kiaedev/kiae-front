@@ -12,12 +12,12 @@ const formState = ref<any>({});
         </div>
         <a-row :gutter="[16, 16]">
             <a-col :span="12">
-                <a-card title="存活探测">
+                <a-card title="LivenessProbe">
                     <HealthProbe v-model:value="formState.livenessProbe"></HealthProbe>
                 </a-card>
             </a-col>
             <a-col :span="12">
-                <a-card title="就绪探测">
+                <a-card title="ReadinessProbe">
                     <HealthProbe v-model:value="formState.readinessProbe"></HealthProbe>
                 </a-card>
             </a-col>

@@ -20,7 +20,7 @@ const providers = computed(() => {
 
 const { formState, formSubmit } = useFormSubmiter({ gitProvider: '' }, (values: any) => {
     projSvc.projectServiceCreate(values).then(() => {
-        message.success("保存成功")
+        message.success("succeed!");
         modalClose()
         emit('done')
     })
@@ -81,7 +81,7 @@ watch(visible, (val) => {
         <slot></slot>
     </a>
 
-    <a-modal v-model:visible="visible" title="创建项目" :footer="null" width="800px">
+    <a-modal v-model:visible="visible" title="New Project" :footer="null" width="800px">
 
         <a-form :model="formState" name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }" autocomplete="off"
             @finish="formSubmit">
@@ -93,14 +93,16 @@ watch(visible, (val) => {
             <a-form-item label="仓库" name="repo">
                 <a-select v-if="!repo.error.value" :options="repos" :loading="reposLoading" @change="onRepoChange" />
                 <a-button v-else size="small" @click="gotoAuthorize(formState.gitProvider)">
-                    去授权
+                    Authorize
                 </a-button>
             </a-form-item>
 
-            <a-form-item label="名称" name="name" :rules="[{ required: true, message: '请给项目起一个名字!' }]">
+            <a-form-item :label="$t('name')" name="name"
+                :rules="[{ required: true, message: 'Please input the project name!' }]">
                 <a-input v-model:value="formState.name" />
             </a-form-item>
-            <a-form-item label="描述" name="intro" :rules="[{ required: true, message: '请给项目一个描述信息!' }]">
+            <a-form-item :label="$t('intro')" name="intro"
+                :rules="[{ required: true, message: 'Please input the project intro!' }]">
                 <a-textarea v-model:value="formState.intro" />
             </a-form-item>
 

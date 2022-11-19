@@ -16,7 +16,7 @@ const columns = [
         dataIndex: 'image',
     },
     {
-        title: '版本',
+        title: 'Tag',
         dataIndex: 'tag',
     },
     {
@@ -24,7 +24,7 @@ const columns = [
         dataIndex: 'status',
     },
     {
-        title: '最近更新',
+        title: t('updatedAt'),
         dataIndex: 'updatedAt',
     },
     {
@@ -53,18 +53,18 @@ const dataSource = computed(() => data.value?.data.items?.map((el: any) => {
 <template>
     <a-row type="flex">
         <a-col flex="auto">
-            <a-input-search placeholder="请输入要查询的镜像" style="width: 300px" />
+            <a-input-search placeholder="Searching..." style="width: 300px" />
         </a-col>
         <a-col flex="300px">
             <a-dropdown-button type="primary" style="float: right">
                 <template #overlay>
                     <a-menu>
                         <a-menu-item key="1">
-                            <ImageEditor :pid="currentPid()" @done="run">添加镜像</ImageEditor>
+                            <ImageEditor :pid="currentPid()" @done="run">Add Image</ImageEditor>
                         </a-menu-item>
                     </a-menu>
                 </template>
-                <ImageBuild :pid="currentPid()" @done="run">构建新镜像</ImageBuild>
+                <ImageBuild :pid="currentPid()" @done="run">New Image</ImageBuild>
             </a-dropdown-button>
         </a-col>
     </a-row>
@@ -78,9 +78,12 @@ const dataSource = computed(() => data.value?.data.items?.map((el: any) => {
                 <a-tag :color="record.extra.statusColor">{{ record.extra.statusText }}</a-tag>
             </template>
             <template v-else-if="column.key === 'action'">
-                <span>
-                    <ImageBuildLogs :image="record" @close="run">构建日志</ImageBuildLogs>
+                <span v-if="record.builderId">
+                    <ImageBuildLogs :image="record" @close="run">BuildLogs</ImageBuildLogs>
                     <a-divider type="vertical"></a-divider>
+                    <a @click="handleDelete(record, run)">{{ $t('btn.delete') }}</a>
+                </span>
+                <span v-else>
                     <a @click="handleDelete(record, run)">{{ $t('btn.delete') }}</a>
                 </span>
             </template>

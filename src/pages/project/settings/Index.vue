@@ -43,12 +43,12 @@ const addDomain = () => {
     
 
 <template>
-    <a-card title="基本信息">
+    <a-card title="Project Settings">
         <a-form layout="vertical" :model="formState" style="width: 500px">
-            <a-form-item label="名称">
+            <a-form-item :label="$t('name')">
                 <a-input v-model:value="formState.name" placeholder="input placeholder" />
             </a-form-item>
-            <a-form-item label="介绍">
+            <a-form-item :label="$t('intro')">
                 <a-textarea v-model:value="formState.intro" placeholder="input placeholder" />
             </a-form-item>
         </a-form>
@@ -61,14 +61,14 @@ const addDomain = () => {
 
     <a-card title="Build & Development Settings">
         <a-form layout="vertical" :model="formState" style="width: 500px">
-            <a-form-item label="构建框架">
+            <a-form-item label="Builder">
                 <a-select v-model:value="formState.builderId" :options="builders" />
             </a-form-item>
 
-            <a-form-item label="构建变量">
+            <a-form-item label="Build Args">
                 <a-row v-for="(env, index) in formState.buildEnvs" :key="index">
                     <a-col :span="10">
-                        <a-select v-model:value="env.name" placeholder="请选择构建时环境变量" :options="packEnvs" />
+                        <a-select v-model:value="env.name" placeholder="select the build arg" :options="packEnvs" />
                     </a-col>
                     <a-col :span="8" :offset="1">
                         <a-input v-model:value="formState.buildEnvs[env.name]"></a-input>
@@ -79,12 +79,12 @@ const addDomain = () => {
                 </a-row>
                 <a-button type="dashed" style="width: 60%" @click="addDomain">
                     <PlusOutlined />
-                    添加构建变量
+                    Add BuildArg
                 </a-button>
             </a-form-item>
             <a-row>
                 <a-col :span="16">
-                    <a-form-item label="启动参数">
+                    <a-form-item label="Run Args">
                         <a-input v-model:value="formState.runArgs" :disabled="!formState.runArgsOveride"
                             placeholder="None">
                         </a-input>
@@ -99,12 +99,12 @@ const addDomain = () => {
 
             <!-- 控制哪个分支触发构建 -->
             <a-form-item label="CI">
-                <a-switch v-model:checked="formState.ci" />
+                <a-switch v-model:checked="formState.ci" disabled />
             </a-form-item>
 
             <!-- 控制哪个镜像部署到哪个环境 -->
             <a-form-item label="CD">
-                <a-switch v-model:checked="formState.cd" />
+                <a-switch v-model:checked="formState.cd" disabled />
             </a-form-item>
         </a-form>
 
@@ -115,7 +115,7 @@ const addDomain = () => {
     </a-card>
     <br>
 
-    <a-card title="代码仓库">
+    <a-card title="GitRepository">
         <a-form-item label="Address">
             <a-input v-model:value="formState.gitRepo" placeholder="input placeholder" />
         </a-form-item>

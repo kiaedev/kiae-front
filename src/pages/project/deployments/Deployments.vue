@@ -9,7 +9,7 @@ import { useI18n } from "vue-i18n";
 const { t } = useI18n()
 const columns = [
     {
-        title: '镜像地址',
+        title: 'ImageURL',
         dataIndex: 'imageUrl',
         width: 250,
         ellipsis: true,
@@ -20,17 +20,17 @@ const columns = [
         width: 100,
     },
     {
-        title: '提交',
+        title: 'Commit',
         dataIndex: 'commitId',
         width: 100,
     },
     {
-        title: '提交信息',
+        title: 'Message',
         dataIndex: 'commitMsg',
         ellipsis: true,
     },
     {
-        title: '最近更新',
+        title: t('updatedAt'),
         dataIndex: 'updatedAt',
         width: 200,
     },
@@ -49,11 +49,11 @@ const deployments = computed(() => {
 <template>
     <a-row type="flex">
         <a-col flex="auto">
-            <a-input-search placeholder="请输入要查询的镜像" style="width: 500px" />
+            <a-input-search placeholder="Searching..." style="width: 500px" />
         </a-col>
         <a-col flex="300px">
             <a-button type="primary" style="float: right">
-                <Deploy>部署</Deploy>
+                <Deploy>New Deployment</Deploy>
             </a-button>
         </a-col>
     </a-row>

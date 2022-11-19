@@ -7,19 +7,18 @@ const props = defineProps<{
 }>()
 
 const { visible, modalOpen, modalClose } = useModal()
-let title = !props.config ? "添加访问授权" : "编辑访问授权"
+let title = !props.config ? "New AccessRule" : "Edit AccessRule"
 
 const { formState, formSubmit } = useFormSubmiter({ scope: 'ALL' }, () => {
     console.log(formState)
 })
 
 const components = ref([{ value: "mysql", label: "mysql" }, { value: "redis", label: "redis" }])
-
 const selectedRowKeys = ref([])
 const routes = ref()
 const routeColumns = [
     {
-        title: '路由',
+        title: 'Path',
         dataIndex: 'path',
     },
 ]
@@ -33,13 +32,13 @@ const routeColumns = [
     <a-modal v-model:visible="visible" :title="title" :footer="null">
         <a-form :model="formState" name="basic" :label-col="{ span: 6 }" :wrapper-col="{ span: 15 }" autocomplete="off"
             @finish="formSubmit">
-            <a-form-item label="应用名称" name="component" :rules="[{ required: true, message: '请选择您的依赖!' }]">
+            <a-form-item label="Name" name="component" :rules="[{ required: true, message: 'Please select the app!' }]">
                 <a-select v-model:value="formState.component" :options="components" />
             </a-form-item>
-            <a-form-item label="路由范围">
+            <a-form-item label="Scopes">
                 <a-radio-group v-model:value="formState.scope">
-                    <a-radio value="ALL">全部路由</a-radio>
-                    <a-radio value="PARTIAL" disabled>部分路由</a-radio>
+                    <a-radio value="ALL">All</a-radio>
+                    <a-radio value="PARTIAL" disabled>Partial</a-radio>
                 </a-radio-group>
             </a-form-item>
             <a-form-item :wrapper-col="{ offset: 5, span: 16 }" v-if="formState.scoped == 'part'">

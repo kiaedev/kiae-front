@@ -25,11 +25,11 @@ const columns = [
         dataIndex: 'name',
     },
     {
-        title: '环境',
+        title: 'Env',
         dataIndex: 'env',
     },
     {
-        title: '配置',
+        title: 'Specification',
         dataIndex: 'size',
     },
     {
@@ -55,7 +55,7 @@ const columns = [
                 </a-col>
                 <a-col flex="auto">
                     <a-button type="primary" style="float: right">
-                        <AppCreation @done="run">创建应用</AppCreation>
+                        <AppCreation @done="run">New Application</AppCreation>
                     </a-button>
                 </a-col>
             </a-row>
@@ -78,7 +78,7 @@ const columns = [
                         <a>{{ $t('btn.edit') }}</a>
                         <a-divider type="vertical" />
                         <a class="ant-dropdown-link">
-                            <AppOp :value="record" @done="run" @deleted="run">更多操作</AppOp>
+                            <AppOp :value="record" @done="run" @deleted="run">More</AppOp>
                         </a>
                     </span>
                 </template>

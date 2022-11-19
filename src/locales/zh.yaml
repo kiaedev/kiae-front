@@ -8,6 +8,10 @@ updatedAt: 更新时间
 
 btn:
   save: 保存
+  edit: 编辑
+  delete: 删除
+  enable: 启用
+  disable: 停用
   addGateway: 添加网关
   addGitProvider: 添加Git仓库源
   addRegistry: 添加镜像仓库

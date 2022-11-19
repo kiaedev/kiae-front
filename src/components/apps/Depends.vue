@@ -5,7 +5,9 @@ import { useMiddlewareOperater } from "@/hooks/op_middleware";
 import { EgressListResponse, MiddlewareListResponse } from "@/libs/kiae";
 import { computed, ref, watch } from "vue-demi";
 import { useRequest } from "vue-request"
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 const props = defineProps({
     app: {
         type: Object,
@@ -87,13 +89,13 @@ const appColumns = [
     <a-row type="flex">
         <a-col flex="auto">
             <a-radio-group v-model:value="type">
-                <a-radio-button value="middleware">中间件</a-radio-button>
-                <a-radio-button value="default">其他应用</a-radio-button>
+                <a-radio-button value="middleware">Middleware</a-radio-button>
+                <a-radio-button value="default">Application</a-radio-button>
             </a-radio-group>
         </a-col>
         <a-col flex="300px">
-            <a-button type="primary" style="float: right">
-                <DependEditor v-model:app="app" @done="run">添加依赖</DependEditor>
+            <a-button type="primary" style="float: right" disabled>
+                <DependEditor v-model:app="app" @done="run">New Dependent</DependEditor>
             </a-button>
         </a-col>
     </a-row>

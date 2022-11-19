@@ -58,7 +58,7 @@ watch(visible, (v) => {
         <slot></slot>
     </a>
 
-    <a-modal v-model:visible="visible" title="镜像构建" :footer="null">
+    <a-modal v-model:visible="visible" title="Image Build" :footer="null">
         <a-form :model="formState" name="basic" :label-col="{ span: 6 }" :wrapper-col="{ span: 15 }" autocomplete="off"
             @finish="formSubmit">
             <a-form-item label="SourceRef" name="type">
@@ -67,12 +67,12 @@ watch(visible, (v) => {
                     <a-radio value="tag">Tag</a-radio>
                 </a-radio-group>
             </a-form-item>
-            <a-form-item label="Commit" name="ref" :rules="[{ required: true, message: '请选择代码!' }]">
+            <a-form-item label="Commit" name="ref" :rules="[{ required: true, message: 'Please select the commit!' }]">
                 <a-select v-model:value="formState.ref" :options="gitRefs" :loading="loading" :disabled="loading"
                     @change="onCommitChange" />
             </a-form-item>
             <a-form-item :wrapper-col="{ offset: 6, span: 16 }">
-                <a-button type="primary" html-type="submit">构建</a-button>
+                <a-button type="primary" html-type="submit">Build</a-button>
             </a-form-item>
         </a-form>
     </a-modal>

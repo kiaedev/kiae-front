@@ -19,7 +19,7 @@ const { wsUrl } = lokiTail({ app: `kiae-image-${props.image.name}-build-1` }, pr
         <slot></slot>
     </a>
 
-    <a-drawer :visible="visible" :title="`构建日志: ${image.name}`" size="large" placement="bottom"
+    <a-drawer :visible="visible" :title="`BuildLogs: ${image.name}`" size="large" placement="bottom"
         @close="()=>{modalClose();$emit('close')}" :destroyOnClose="true">
 
         <Terminal :wsUrl="wsUrl"></Terminal>

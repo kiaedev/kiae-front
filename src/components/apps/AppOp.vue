@@ -27,20 +27,20 @@ export default defineComponent({
         <template #overlay>
             <a-menu>
                 <a-menu-item>
-                    <a href="javascript:;">版本发布</a>
+                    <a href="javascript:;">Deploy</a>
                 </a-menu-item>
                 <a-menu-item>
                     <InstanceSettings v-model:value="value" @done="$emit('done')">
-                        实例调整
+                        Instances
                     </InstanceSettings>
                 </a-menu-item>
                 <a-menu-item>
                     <a v-if="value?.status == 'STATUS_STOPPED'" href="javascript:;"
-                        @click="handleAppStart(value, () => $emit('done'))">启动</a>
-                    <a v-else href="javascript:;" @click="handleAppStop(value, () => $emit('done'))">停止</a>
+                        @click="handleAppStart(value, () => $emit('done'))">Start</a>
+                    <a v-else href="javascript:;" @click="handleAppStop(value, () => $emit('done'))">Stop</a>
                 </a-menu-item>
                 <a-menu-item>
-                    <a href="javascript:;" @click="handleAppRestart(value, () => $emit('done'))">重启</a>
+                    <a href="javascript:;" @click="handleAppRestart(value, () => $emit('done'))">Restart</a>
                 </a-menu-item>
                 <a-menu-item>
                     <a href="javascript:;" @click="handleAppDelete(value, () => $emit('deleted'))">{{ $t('btn.delete') }}</a>

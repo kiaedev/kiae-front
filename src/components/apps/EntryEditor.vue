@@ -18,11 +18,11 @@ const initFormItem = {
     gateway: '',
     host: '',
 }
-let title = "添加访问入口"
+let title = "New Endpoint"
 let formItem: any = initFormItem
 if (props.value) {
     formItem = props.value
-    title = "编辑访问入口"
+    title = "Edit Endpoint"
 }
 
 const { visible, modalOpen, modalClose } = useModal()
@@ -39,10 +39,10 @@ const gatewayHosts = computed(() => {
 const { formState, formSubmit, resetFields } = useFormSubmiter(formItem, (values: any) => {
     console.log("111", values);
     const done = () => {
-        modalClose()
+        message.success("succeed!");
         resetFields({})
+        modalClose()
         emit("done")
-        message.success("保存成功")
     }
 
     if (values.id) {
@@ -56,7 +56,7 @@ const selectedRowKeys = ref([])
 const routes = ref()
 const routeColumns = [
     {
-        title: '路由',
+        title: 'Path',
         dataIndex: 'path',
     },
 ]
@@ -70,16 +70,16 @@ const routeColumns = [
     <a-modal v-model:visible="visible" :title="title" :footer="null">
         <a-form :model="formState" @finish="formSubmit" :label-col="{ span: 5 }" :wrapper-col="{ span: 16 }"
             autocomplete="off">
-            <a-form-item label="网关" name="gateway" :rules="[{ required: true, message: '请选择您需要的网关' }]">
-                <a-select v-model:value="formState.gateway" placeholder="请选择您需要的网关" :options="gateways" />
+            <a-form-item label="Gateway" name="gateway" :rules="[{ required: true, message: 'Please select the gateway' }]">
+                <a-select v-model:value="formState.gateway" placeholder="Please select the gateway" :options="gateways" />
             </a-form-item>
-            <a-form-item label="域名" name="host" :rules="[{ required: true, message: '请选择您需要的域名' }]">
-                <a-select v-model:value="formState.host" placeholder="请选择您需要的域名" :options="gatewayHosts" />
+            <a-form-item label="Host" name="host" :rules="[{ required: true, message: 'Please select the hosts' }]">
+                <a-select v-model:value="formState.host" placeholder="Please select the hosts" :options="gatewayHosts" />
             </a-form-item>
-            <a-form-item label="路由范围">
+            <a-form-item label="Scopes">
                 <a-radio-group v-model:value="formState.scope">
-                    <a-radio value="ALL">全部路由</a-radio>
-                    <a-radio value="PARTIAL" disabled>部分路由</a-radio>
+                    <a-radio value="ALL">All</a-radio>
+                    <a-radio value="PARTIAL" disabled>Partial</a-radio>
                 </a-radio-group>
             </a-form-item>
             <a-form-item :wrapper-col="{ offset: 5, span: 16 }" v-if="formState.scoped == 'part'">

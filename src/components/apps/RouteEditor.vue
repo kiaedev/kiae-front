@@ -40,19 +40,18 @@ export default defineComponent({
             },
         }
 
-        let title = "添加路由"
+        let title = "New Route"
         let formItem = initFormItem
         if (props.value) {
             formItem = props.value
-            title = "编辑路由"
+            title = "Edit Route"
         }
         const { formState, formSubmit, resetFields } = useFormSubmiter(formItem, (values: any) => {
-            console.log("111", values);
             const done = () => {
-                modalClose()
+                message.success("succeed!");
                 resetFields({})
+                modalClose()
                 ctx.emit("done")
-                message.success("保存成功")
             }
 
             if (values.id) {
@@ -78,43 +77,40 @@ export default defineComponent({
 
     <a-modal v-model:visible="visible" width="650px" :title="title" :footer="null">
         <a-form :model="formState" :label-col="{ span: 5 }" :wrapper-col="{ span: 16 }" @finish="formSubmit">
-            <a-form-item label="Path" name="path" :rules="[{ required: true, message: '请输入Path' }]">
-                <a-input v-model:value="formState.path" placeholder="请输入Path"></a-input>
+            <a-form-item label="Path" name="path" :rules="[{ required: true, message: 'Please input the path' }]">
+                <a-input v-model:value="formState.path" placeholder="Please input the path"></a-input>
             </a-form-item>
-            <a-form-item label="Methods" name="methods" :rules="[{ required: true, message: '请选择Methods' }]">
-                <a-select v-model:value="formState.methods" mode="multiple" placeholder="请选择Methods">
+            <a-form-item label="Methods" name="methods"
+                :rules="[{ required: true, message: 'Please select the methods' }]">
+                <a-select v-model:value="formState.methods" mode="multiple" placeholder="Please select the methods">
                     <a-select-option v-for="method in methods" :key="method" :value="method">
                         {{ method }}
                     </a-select-option>
                 </a-select>
             </a-form-item>
 
-            <a-form-item label="路由类型" name="type">
+            <a-form-item label="Type" name="type">
                 <a-radio-group v-model:value="formState.type">
-                    <a-radio-button value="FORWARD">转发</a-radio-button>
-                    <a-radio-button value="REDIRECT">重定向</a-radio-button>
-                    <a-radio-button value="DIRECT_RESPONSE">Mock</a-radio-button>
+                    <a-radio-button value="FORWARD">Forward</a-radio-button>
+                    <a-radio-button value="REDIRECT">Redirect</a-radio-button>
+                    <a-radio-button value="DIRECT_RESPONSE">DirectResponse</a-radio-button>
                 </a-radio-group>
             </a-form-item>
             <template v-if="formState.type == 'FORWARD'">
-                <a-form-item label="限流">
+                <a-form-item label="Limiter">
                     <a-switch v-model:checked="formState.forward.limiter.enabled" />
                 </a-form-item>
-                <div v-if="formState.forward.limiter.enabled">
-                    <a-form-item label="单实例限流QPS" :name="['forward', 'limiter', 'qps']"
-                        :rules="[{ required: true, message: '请输入一个限流值' }]">
-                        <a-input-number v-model:value="formState.forward.limiter.qps"></a-input-number>
+                <div v-if="formState.forward.limiter.enabled" class="inner-form">
+                    <a-form-item label="LimitQPS" :name="['forward', 'limiter', 'qps']"
+                        :rules="[{ required: true, message: 'Please input the limit QPS' }]">
+                        <a-input-number v-model:value="formState.forward.limiter.qps" size="small"></a-input-number>
                     </a-form-item>
-                    <a-form-item label="限流降级策略" name="fallback">
-                        <a-select v-model:value="formState.forward.limiter.fallback" placeholder="请选择限流时的降级策略"
-                            style="width: 260px">
-                            <!-- <a-select-option v-for="(key, value) in AppSize" :key="value" :value="key">
-                                {{ value }}
-                            </a-select-option> -->
-                        </a-select>
+                    <a-form-item label="Fallback" name="fallback">
+                        <a-select v-model:value="formState.forward.limiter.fallback" size="small"
+                            placeholder="select the fallback policy" style="width: 260px"></a-select>
                     </a-form-item>
                 </div>
-                <a-form-item label="跨域">
+                <a-form-item label="CORS">
                     <a-switch v-model:checked="formState.forward.cors.enabled" />
                 </a-form-item>
                 <div v-if="formState.forward.cors.enabled" class="inner-form">
@@ -147,7 +143,7 @@ export default defineComponent({
                 </div>
             </template>
             <template v-if="formState.type == 'REDIRECT' || formState.failback == 'redirect'">
-                <a-form-item label="重定向状态码" :name="['redirect', 'code']">
+                <a-form-item label="StatusCode" :name="['redirect', 'code']">
                     <a-radio-group v-model:value="formState.redirect.code">
                         <a-radio :value="301">301</a-radio>
                         <a-radio :value="302">302</a-radio>
@@ -155,18 +151,18 @@ export default defineComponent({
                         <a-radio :value="308">308</a-radio>
                     </a-radio-group>
                 </a-form-item>
-                <a-form-item label="重定向地址" :name="['redirect', 'url']"
-                    :rules="[{ required: true, message: '请填写重定向地址' }]">
+                <a-form-item label="RedirectURL" :name="['redirect', 'url']"
+                    :rules="[{ required: true, message: 'Please input the redirect url' }]">
                     <a-input v-model:value="formState.redirect.url"></a-input>
                 </a-form-item>
             </template>
             <template v-if="formState.type == 'DIRECT_RESPONSE'">
-                <a-form-item label="Mock响应码" :name="['mock', 'code']"
-                    :rules="[{ required: true, message: '请填写HTTPCode' }]">
+                <a-form-item label="ResponseCode" :name="['mock', 'code']"
+                    :rules="[{ required: true, message: 'Please input the response code' }]">
                     <a-input-number v-model:value="formState.mock.code"></a-input-number>
                 </a-form-item>
-                <a-form-item label="Mock响应体" :name="['mock', 'body']"
-                    :rules="[{ required: true, message: '请填写HTTPBody' }]">
+                <a-form-item label="ResponseBody" :name="['mock', 'body']"
+                    :rules="[{ required: true, message: 'Please input the response body' }]">
                     <a-textarea v-model:value="formState.mock.body"></a-textarea>
                 </a-form-item>
             </template>

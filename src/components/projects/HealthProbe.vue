@@ -22,42 +22,42 @@ export default defineComponent({
 <template>
     <a-form v-if="formState" v-model:value="formState">
         <a-row>
-            <a-form-item label="路径" style="width:100%">
+            <a-form-item label="Path" style="width:100%">
                 <a-input v-model:value="formState.path" style="width:100%"></a-input>
             </a-form-item>
         </a-row>
         <a-row>
             <a-col :span="8">
-                <a-form-item label="探测端口">
+                <a-form-item label="ProbePort">
                     <a-input-number v-model:value="formState.port"></a-input-number>
                 </a-form-item>
             </a-col>
             <a-col :span="10" :offset="4">
-                <a-form-item label="探测间隔">
+                <a-form-item label="PeriodSeconds">
                     <a-input-number v-model:value="formState.periodSeconds"></a-input-number>
                 </a-form-item>
             </a-col>
         </a-row>
         <a-row>
             <a-col :span="8">
-                <a-form-item label="成功阈值">
+                <a-form-item label="SuccessThreshold">
                     <a-input-number v-model:value="formState.successThreshold"></a-input-number>
                 </a-form-item>
             </a-col>
             <a-col :span="10" :offset="4">
-                <a-form-item label="失败阈值">
+                <a-form-item label="FailureThreshold">
                     <a-input-number v-model:value="formState.failureThreshold"></a-input-number>
                 </a-form-item>
             </a-col>
         </a-row>
         <a-row>
             <a-col :span="8">
-                <a-form-item label="超时时间">
+                <a-form-item label="TimeoutSeconds">
                     <a-input-number v-model:value="formState.timeoutSeconds"></a-input-number>
                 </a-form-item>
             </a-col>
             <a-col :span="10" :offset="4">
-                <a-form-item label="延迟探测">
+                <a-form-item label="InitialDelaySeconds">
                     <a-input-number v-model:value="formState.initialDelaySeconds"></a-input-number>
                 </a-form-item>
             </a-col>

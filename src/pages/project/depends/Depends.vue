@@ -16,7 +16,7 @@ const columns = [
         dataIndex: 'type',
     },
     {
-        title: '参数',
+        title: 'Properties',
         dataIndex: 'properties',
     },
 ]
@@ -35,7 +35,7 @@ const { currentPid, projectGet } = useProject()
 <template>
     <a-row type="flex">
         <a-col flex="auto">
-            <a-input-search placeholder="请输入要查询的依赖" style="width: 300px" />
+            <a-input-search placeholder="Searching..." style="width: 300px" />
         </a-col>
         <a-col flex="100px">
             <a-button type="primary" style="float: right">

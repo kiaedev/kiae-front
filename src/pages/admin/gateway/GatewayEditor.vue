@@ -24,7 +24,7 @@ const { formState, formSubmit } = useFormSubmiter({ port: 80, portProtocol: 'HTT
     <a-modal v-model:visible="visible" title="添加网关" :footer="null">
         <a-form :model="formState" name="basic" :label-col="{ span: 6 }" :wrapper-col="{ span: 15 }" autocomplete="off"
             @finish="formSubmit">
-            <a-form-item label="名称" name="name" :rules="[{ required: true, message: '请输入名称!' }]">
+            <a-form-item :label="$t('name')" name="name" :rules="[{ required: true, message: '请输入名称!' }]">
                 <a-input v-model:value="formState.name" />
             </a-form-item>
             <a-form-item label="描述" name="intro" :rules="[{ required: true, message: '请输入描述!' }]">

@@ -23,24 +23,24 @@ const info = computed(() => appStatusMapper(data?.value?.data || props.value))
 
 <template>
     <a-drawer v-model:visible="visible" @close="close" :destroyOnClose="true" class="custom-class"
-        :title="`应用：${info?.name}`" placement="bottom" size="large">
+        :title="`App: ${info?.name}, Env: ${info?.env}`" placement="bottom" size="large">
         <template #extra>
-            <AppOp v-model:value="info" @deleted="close" @done="run">操作</AppOp>
+            <AppOp v-model:value="info" @deleted="close" @done="run">Operation</AppOp>
         </template>
         <div>
             <a-descriptions bordered size="small" :column="2" style="width: 60%">
-                <a-descriptions-item label="状态">
+                <a-descriptions-item label="Status">
                     <a-tag :color="info.extra.statusColor">{{ info.extra.statusText }}</a-tag>
                 </a-descriptions-item>
-                <a-descriptions-item label="当前版本">v1.0.0</a-descriptions-item>
-                <a-descriptions-item label="实例配置">{{ info?.size }}</a-descriptions-item>
-                <a-descriptions-item label="实例数量">{{ info?.replicas }}</a-descriptions-item>
-                <a-descriptions-item label="负载均衡">轮询</a-descriptions-item>
-                <a-descriptions-item label="访问控制">
-                    <a-tag>未启用</a-tag>
+                <a-descriptions-item label="Version">v1.0.0</a-descriptions-item>
+                <a-descriptions-item label="Instace">{{ info?.size }}</a-descriptions-item>
+                <a-descriptions-item label="Replicas">{{ info?.replicas }}</a-descriptions-item>
+                <a-descriptions-item label="Loadbalance">Round robin</a-descriptions-item>
+                <a-descriptions-item label="AccessControl">
+                    <a-tag>Not Enabled</a-tag>
                 </a-descriptions-item>
-                <a-descriptions-item label="访问端点">
-                    <a href="">http://{{info?.name}}.{{info?.env}}.svc.cluster.local</a>
+                <a-descriptions-item label="Endpoint">
+                    <a href="">http://{{ info?.name }}.{{ info?.env }}.svc.cluster.local</a>
                     <!-- <br>
                     <a href="">https://app1.dev.openae.dev</a> -->
                 </a-descriptions-item>
@@ -50,35 +50,35 @@ const info = computed(() => appStatusMapper(data?.value?.data || props.value))
             </div>
         </div>
         <a-tabs default-active-key="1">
-            <a-tab-pane key="instance" tab="实例">
+            <a-tab-pane key="instance" tab="Instances">
                 <Instances v-model:app="info"></Instances>
             </a-tab-pane>
-            <a-tab-pane key="events" tab="事件">
+            <a-tab-pane key="events" tab="Events">
                 <Events v-model:app="info"></Events>
             </a-tab-pane>
-            <a-tab-pane key="logs" tab="日志">
+            <a-tab-pane key="logs" tab="Logs">
                 <PodLogs v-model:app="info"></PodLogs>
             </a-tab-pane>
-            <a-tab-pane key="depends" tab="依赖">
+            <a-tab-pane key="depends" tab="Dependents">
                 <Depends v-model:app="info"></Depends>
             </a-tab-pane>
-            <a-tab-pane key="configs" tab="配置文件">
+            <a-tab-pane key="configs" tab="Configs">
                 <Configs v-model:appid="info.id" v-model:configs="info.configs" @refresh="run"></Configs>
             </a-tab-pane>
-            <a-tab-pane key="envs" tab="环境变量">
+            <a-tab-pane key="envs" tab="Environments">
                 <Environments v-model:appid="info.id" v-model:envs="info.environments" @refresh="run">
                 </Environments>
             </a-tab-pane>
-            <a-tab-pane key="routes" tab="路由策略">
+            <a-tab-pane key="routes" tab="Routes">
                 <Routes v-model:app="info"></Routes>
             </a-tab-pane>
-            <a-tab-pane key="entries" tab="访问入口">
+            <a-tab-pane key="entries" tab="Endpoints">
                 <Entries v-model:app="info"></Entries>
             </a-tab-pane>
-            <a-tab-pane key="accesses" tab="访问控制">
+            <a-tab-pane key="accesses" tab="AccessControls">
                 <Accesses v-model:app="info"></Accesses>
             </a-tab-pane>
-            <a-tab-pane key="settings" tab="高级设置">
+            <a-tab-pane key="settings" tab="More Settings">
                 <Settings></Settings>
             </a-tab-pane>
         </a-tabs>

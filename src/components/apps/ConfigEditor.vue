@@ -9,7 +9,6 @@ import { toml } from '@codemirror/legacy-modes/mode/toml'
 import { textile } from '@codemirror/legacy-modes/mode/textile'
 import { properties } from '@codemirror/legacy-modes/mode/properties'
 import { useFormSubmiter, useModal } from "@/hooks/modal";
-import { ref } from "@vue/reactivity";
 import { computed } from 'vue'
 import { useKiaeApi } from '@/hooks/kiae'
 import { message } from 'ant-design-vue/es'
@@ -22,7 +21,7 @@ const props = defineProps<{
 }>()
 
 const { visible, modalOpen, modalClose } = useModal()
-let title = !props.config ? "添加配置文件" : "编辑配置文件"
+let title = !props.config ? "New Config" : "Edit Config"
 let filename;
 let ext = 'yaml'
 if (props.config?.filename) {
@@ -37,8 +36,8 @@ const { formState, formSubmit } = useFormSubmiter({ filename, ext, mountPath, co
     cfg.filename = `${values.filename}.${values.ext}`
 
     const done = () => {
+        message.success("succeed")
         modalClose()
-        message.success("保存成功")
         emit("done")
     }
 
@@ -78,7 +77,8 @@ const extensions = computed(() => {
     <a-modal v-model:visible="visible" :title="title" width="800px" :footer="null">
         <a-form :model="formState" name="basic" :label-col="{ span: 3 }" :wrapper-col="{ span: 20 }" autocomplete="off"
             @finish="formSubmit">
-            <a-form-item label="文件名" name="filename" :rules="[{ required: true, message: '请输入文件名!' }]">
+            <a-form-item label="Filename" name="filename"
+                :rules="[{ required: true, message: 'Please input the filename!' }]">
                 <a-input v-model:value="formState.filename">
                     <template #addonAfter>
                         <a-select v-model:value="formState.ext" style="width: 120px; text-align: left;">
@@ -92,10 +92,12 @@ const extensions = computed(() => {
                     </template>
                 </a-input>
             </a-form-item>
-            <a-form-item label="挂载目录" name="mountPath" :rules="[{ required: true, message: '请输入要挂载的目录!' }]">
+            <a-form-item label="MountPath" name="mountPath"
+                :rules="[{ required: true, message: 'Please input the mount path!' }]">
                 <a-input v-model:value="formState.mountPath"></a-input>
             </a-form-item>
-            <a-form-item label="文件内容" name="content" :rules="[{ required: true, message: '请输入文件内容!' }]">
+            <a-form-item label="Content" name="content"
+                :rules="[{ required: true, message: 'Please input the config content!' }]">
                 <codemirror v-model="formState.content" :style="{ height: '500px' }" :indent-with-tab="true"
                     :tab-size="2" :extensions="extensions" />
             </a-form-item>

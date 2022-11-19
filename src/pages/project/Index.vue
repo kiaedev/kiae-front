@@ -32,7 +32,7 @@ onMounted(listRefresh)
                 </a-col>
                 <a-col flex="auto">
                     <a-button type="primary" style="float: right">
-                        <ProjectCreation @done="listRefresh">创建项目</ProjectCreation>
+                        <ProjectCreation @done="listRefresh">New Project</ProjectCreation>
                     </a-button>
                 </a-col>
             </a-row>

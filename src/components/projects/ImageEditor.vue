@@ -13,7 +13,7 @@ const { visible, modalOpen, modalClose } = useModal()
 const { imageSvc } = useKiaeApi()
 const { formState, formSubmit } = useFormSubmiter({}, (values: any) => {
     imageSvc.imageServiceCreate(props.pid, values).then(() => {
-        message.success("保存成功")
+        message.success("succeed")
         modalClose()
         emit('done')
     })
@@ -26,10 +26,10 @@ const { formState, formSubmit } = useFormSubmiter({}, (values: any) => {
         <slot></slot>
     </a>
 
-    <a-modal v-model:visible="visible" title="添加镜像" :footer="null">
+    <a-modal v-model:visible="visible" title="Add Image" :footer="null">
         <a-form :model="formState" name="basic" :label-col="{ span: 6 }" :wrapper-col="{ span: 15 }" autocomplete="off"
             @finish="formSubmit">
-            <a-form-item label="镜像地址" name="image" :rules="[{ required: true, message: '请输入您的镜像地址!' }]">
+            <a-form-item label="Image" name="image" :rules="[{ required: true, message: 'Please input the image!' }]">
                 <a-input v-model:value="formState.image" />
             </a-form-item>
             <a-form-item :wrapper-col="{ offset: 6, span: 16 }">

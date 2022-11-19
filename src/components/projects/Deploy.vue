@@ -24,7 +24,7 @@ const images = computed(() => {
 
 const { formState, formSubmit } = useFormSubmiter({ mode: 'rolling' }, (values: any) => {
     deploySvc.deploymentServiceCreate(currentPid(), values).then(() => {
-        message.success("开始部署...")
+        message.success("Deploying...")
         modalClose()
         emit("done")
     })
@@ -36,24 +36,25 @@ const { formState, formSubmit } = useFormSubmiter({ mode: 'rolling' }, (values: 
         <slot></slot>
     </a>
 
-    <a-modal v-model:visible="visible" title="版本发布" :footer="null">
+    <a-modal v-model:visible="visible" title="New Deployment" :footer="null">
         <a-form :model="formState" name="basic" :label-col="{ span: 6 }" :wrapper-col="{ span: 15 }" autocomplete="off"
             @finish="formSubmit">
-            <a-form-item label="目标应用" name="appid" :rules="[{ required: true, message: '请选择目标镜像!' }]">
+            <a-form-item label="App" name="appid" :rules="[{ required: true, message: 'Please input the app!' }]">
                 <a-select v-model:value="formState.appid" :options="apps" />
             </a-form-item>
-            <a-form-item label="镜像" name="imageId" :rules="[{ required: true, message: '请选择目标镜像!' }]">
+            <a-form-item label="Image" name="imageId"
+                :rules="[{ required: true, message: 'Please select the image!' }]">
                 <a-select v-model:value="formState.imageId" :options="images" />
             </a-form-item>
-            <a-form-item label="部署方式" name="mode">
+            <a-form-item label="Mode" name="mode">
                 <a-radio-group v-model:value="formState.mode">
-                    <a-radio value="rolling">滚动</a-radio>
-                    <a-radio value="blueGreen" disabled>蓝绿</a-radio>
-                    <a-radio value="canary" disabled>金丝雀</a-radio>
+                    <a-radio value="rolling">Rolling</a-radio>
+                    <a-radio value="blueGreen" disabled>BlueGreen</a-radio>
+                    <a-radio value="canary" disabled>Canary</a-radio>
                 </a-radio-group>
             </a-form-item>
             <a-form-item :wrapper-col="{ offset: 6, span: 16 }">
-                <a-button type="primary" html-type="submit">部署</a-button>
+                <a-button type="primary" html-type="submit">Deploy</a-button>
             </a-form-item>
         </a-form>
     </a-modal>

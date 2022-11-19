@@ -14,35 +14,35 @@ const events = computed(() => result.value?.events)
 
 const columns = [
     {
-        title: '时间',
+        title: 'Time',
         dataIndex: 'startedAt',
         width: 150
     },
     {
-        title: '级别',
+        title: 'Level',
         dataIndex: 'type',
         width: 100
     },
     {
-        title: '原因',
+        title: 'Reason',
         dataIndex: 'reason',
         width: 150,
         ellipsis: true,
     },
     {
-        title: '详情',
+        title: 'Message',
         dataIndex: 'message',
         ellipsis: true,
     },
     {
-        title: '触发者',
+        title: 'InvolvedObject',
         key: 'involvedObject',
         dataIndex: ['involvedObject', 'kind'],
         ellipsis: true,
         width: 150
     },
     {
-        title: '触发次数',
+        title: 'Count',
         dataIndex: 'count',
         width: 100
     },
@@ -52,7 +52,7 @@ const columns = [
 <template>
     <a-row type="flex">
         <a-col flex="auto">
-            <a-input-search placeholder="请输入要查询的事件" style="width: 500px" />
+            <a-input-search placeholder="Searching..." style="width: 500px" />
         </a-col>
         <a-col flex="300px">
         </a-col>

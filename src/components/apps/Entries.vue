@@ -3,7 +3,9 @@ import { ref } from "@vue/reactivity"
 import { useRequest } from "vue-request"
 import { useKiaeApi } from "@/hooks/kiae"
 import { useEntryOperater } from "@/hooks/op_entry"
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 const props = defineProps({
     app: {
         type: Object,
@@ -16,19 +18,15 @@ const { handleEnable, handleDisable, handleDelete } = useEntryOperater()
 const { data, loading, error, run } = useRequest(() => entrySvc.entryServiceList(props.app.id));
 const columns = [
     {
-        title: '网关',
+        title: 'Gateway',
         dataIndex: 'gateway',
     },
     {
-        title: '域名',
+        title: 'Host',
         dataIndex: 'host',
     },
-    // {
-    //     title: '限流值',
-    //     dataIndex: 'limit',
-    // },
     {
-        title: '路由范围',
+        title: 'RouteScope',
         dataIndex: 'scope',
     },
     {
@@ -49,11 +47,11 @@ const columns = [
 <template>
     <a-row type="flex">
         <a-col flex="auto">
-            <a-input-search v-model:value="search.route" placeholder="请输入要查询的域名" style="width: 500px" />
+            <a-input-search v-model:value="search.route" placeholder="Searching..." style="width: 500px" />
         </a-col>
         <a-col flex="300px">
             <a-button type="primary" style="float: right">
-                <EntryEditor v-model:app="app" @done="run">添加入口</EntryEditor>
+                <EntryEditor v-model:app="app" @done="run">New Endpoint</EntryEditor>
             </a-button>
         </a-col>
     </a-row>
@@ -71,8 +69,8 @@ const columns = [
                     <span>
                         <!-- <EntryEditor :value="record" v-model:app="app" @done="run">{{ $t('btn.edit') }}</EntryEditor> -->
                         <a size="small" type="primary" v-if="record.status == 'OP_STATUS_DISABLED'"
-                            @click="handleEnable(record, run)">启用</a>
-                        <a size="small" v-else @click="handleDisable(record, run)">停用</a>
+                            @click="handleEnable(record, run)">$t('btn.enable')</a>
+                        <a size="small" v-else @click="handleDisable(record, run)">$t('btn.disable')</a>
                         <a-divider type="vertical" />
                         <a @click="handleDelete(record, run)">{{ $t('btn.delete') }}</a>
                     </span>

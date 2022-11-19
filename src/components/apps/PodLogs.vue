@@ -12,7 +12,7 @@ const props = defineProps({
 
 const formState = ref({ pod: '', container: '', wsUrl: '' })
 const { env, name } = props.app || {}
-const { gql, variables } = useGraphPods(`kiae-app-${env}`, name, false)
+const { gql, variables } = useGraphPods(`kiae-app${env}`, name, false)
 const { result, onResult } = useQuery(gql, variables)
 const pods = computed(() => result.value?.pods.map((pod: any) => ({
     label: pod.name, value: pod.name,

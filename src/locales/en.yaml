@@ -10,6 +10,10 @@ runImage: RunImage
 
 btn:
   save: Save
+  edit: Edit
+  delete: Delete
+  enable: Enable
+  disable: Disable
   addGateway: New Gateway
   addGitProvider: New GitProvider
   addRegistry: New Registry
