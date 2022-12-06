@@ -16,8 +16,12 @@ export const buildApolloClient = () => {
   });
 
   // 创建一个 WebSocket 连接：
+  let scheme = "ws";
+  if (location.protocol === "https:") {
+    scheme = "wss";
+  }
   const wsLink = new WebSocketLink({
-    uri: `ws://${location.host}/api/graphql`,
+    uri: `${scheme}://${location.host}/api/graphql`,
     options: {
       // reconnect: true,
     },

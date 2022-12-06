@@ -1,6 +1,10 @@
 import dayjs from "dayjs";
 
-const wsOrigin = `ws://${location.host}/proxies`;
+let scheme = "ws";
+if (location.protocol === "https:") {
+  scheme = "wss";
+}
+const wsOrigin = `${scheme}://${location.host}/proxies`;
 
 export const lokiTail = (query: Object, start: string) => {
   const queryStr = Object.entries(query)
